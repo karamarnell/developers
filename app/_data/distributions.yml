@@ -1,0 +1,47 @@
+- id: javascript-sdk-i18n
+  name: javascript sdk i18n
+  type: cloud
+
+- id: github-i18n
+  name: Qordoba with github i18n
+  type: cloud
+
+- id: qordoba-cli-jenkins-i18n
+  name: qordoba cli jenkins i18n
+  type: package
+
+- id: websocket-i18n
+  name: websocket i18n
+  type: package
+
+- id: zendesk-i18n
+  name: zendesk i18n
+  type: cloud
+
+- id: wordpress-wpml-i18n
+  name: wordpress wpml i18n
+  type: package
+
+- id: wordpress-polylang-i18n
+  name: wordpress polylang i18n
+  type: package
+
+- id: magento-1-i18n
+  name: magento 1 i18n
+  type: package
+
+- id: magento-2-i18n
+  name: magento 2 i18n
+  type: package
+
+- id: sketch-i18n
+  name: sketch i18n
+  type: package
+
+- id: adobe-design-i18n
+  name: adobe design i18n
+  type: package
+
+- id: braze-appboy-i18n
+  name: braze appboy i18n
+  type: cloud

@@ -1,0 +1,39 @@
+---
+id: null
+title: Integrations for i18n
+layout: default
+header_title: Ecosystem
+header_icon: /assets/images/icons/icn-plugins.svg
+header_caption: Extend your stack with powerful integrations configurable per Service.
+---
+
+<div class="page page-plugins">
+  {% include header.html %}
+
+  <div class="container">
+    <div class="plugins-list">
+      {% for group in site.data.plugins %}
+        <div class="page-plugins-title">
+          <h2 id="{{ group.name | slugify }}">{{ group.name }}</h2>
+          <p>{{ group.info }}:</p>
+        </div>
+
+        <div class="plugins-container">
+          {% for plugin in group.plugins %}
+            {% capture id %}{% if plugin.id %}{{ plugin.id }}{% else %}{{ plugin.name | slugify }}{% endif %}{% endcapture %}
+            <div class="plugin-plate {% if plugin.enterprise == true %} enterprise {% endif %}">
+              <div class="plugin-plate-header">
+                <h3>{{ plugin.name }}</h3>
+                <img class="plugin-icon" src="/assets/images/icons/plugins/{% if plugin.enterprise == true %}ee-{% endif %}{{ id }}.png" width="60" height="60" alt="{{ plugin.name }}"/>
+              </div>
+              <div class="plugin-plate-content">
+                <p>{{ plugin.info }}</p>
+                <a class="plugin-plate-link" href="/ecosystem/{% if plugin.enterprise == true %}ee-{% endif %}{{ id }}"></a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

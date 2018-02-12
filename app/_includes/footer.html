@@ -1,0 +1,75 @@
+{% if page.hide_subscribe == null %}
+  {% include subscribe.html %}
+{% endif %}
+
+<footer class="marketing-footer--light-gray">
+  <section>
+    <ul>
+      <li class="logo-wrapper">
+        <div class="logo">
+          <img src="/assets/images/qordobalogoblue.png" alt="Qordoba" >
+        </div>
+      </li>
+      <li>
+        <nav>
+          <h4>Products</h4>
+          <ul>
+            <li><a href="https://qordoba.com/extract/">String Extractor</a></li>
+            <li><a href="https://qordoba.com/global-insights/">Global Insights</a></li>
+            <li><a href="https://qordoba.com/global-strings-repository/">Global Strings Repository</a></li>
+            <li><a href="https://qordoba.com/text-intelligence/">Text Intelligence</a></li>
+            <li><a href="https://qordoba.com/github-integration/">Qordoba for GitHub</a></li>
+            <li><a href="#">Qordoba CLI</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>CMS localization</h4>
+          <ul>
+            <li><a href="#">Wordpress Polylang</a></li>
+            <li><a href="#">Wordpress WPML</a></li>
+            <li><a href="#">Drupal 7</a></li>
+            <li><a href="#">Drupal 8</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Ecommerce localization</h4>
+          <ul>
+            <li><a href="#">Magento 1.x.x</a></li>
+            <li><a href="#">Magento 2.x.x</a></li>
+            <li><a href="#">Shopify</a></li>
+            <li><a href="#">BigCommercee</a></li>
+            <li><a href="#">Demandware</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </section>
+
+  <section class="legal">
+    <ul>
+      <li>
+        <span class="mashape-footer-content">&copy; Qordoba. {{ site.time | date: '%Y' }}</span>
+      </li>
+      <li>
+        <div class="social-link">
+          <a href="https://github.com/Qordobacode" title="Github"><i aria-label="Github" class="fa fa-github" aria-hidden="true"></i></a></div>
+        <div class="social-link">
+          <a href="https://twitter.com/qordoba" title="Twitter"><i aria-label="Twitter" class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</footer>
