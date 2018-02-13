@@ -7,9 +7,9 @@
 
 
     - name: GitHub Enterprise 
-      id:  GitHub-enterprise -i18n-integration
+      id: GitHub-enterprise-i18n-integration
       info: Qordoba's GitHub Enterprise integration supports the same powerful integration available for repositories hosted on GitHub.com.
-      enterprise: true      
+            
               	  	  
     - name: Zendesk  
       id: Zendesk-i18n-integration
@@ -18,12 +18,12 @@
     - name: Desk.com
       id: desk.com-i18n-integration
       info: Qordoba can consume and fetch data from Apache Kafka, We can also send content from the Qordoba workflow as a message to Apache Kafka.  
-      enterprise: true
+      
       
     - name: Service cloud (salesforce)
-      id: jms-i18n-integration
+      id: service-cloud-salesforce-i18n-integration
       info: The Qordoba platform can receive or pull JMS message content, and after l10n, this content can be sent back and published to the same or different topics. 
-      enterprise: true      
+            
 
 
 - name: WebSocket & i18next plugin plugin
@@ -34,7 +34,7 @@
       info: The Qordoba i18next plugin makes it easy to sync locales files between any i18next project and Qordoba.
            
     - name: WebSocket
-      id: mqtt-i18n-integration
+      id: WebSocket-i18n-integration
       info: The Qordoba connector acts as stand-alone service and can will Subscribers/Publishes to any configurable MQTT topic. 
 
       
@@ -43,63 +43,63 @@
   info: Visualize, inspect and monitor APIs and microservices traffic
   plugins:
     - name: Braze (formerly Appboy)  
-      id: amazon-simple-queue-service-SQS-i18n-integration
+      id: Braze-Appboy-translation-i18n-integration
       info: Qordoba's Amazon SQS i18n Integration retrieves the content from message based on key.
-      enterprise: true
+      
 
     - name: HubSpot
-      id: kafka-i18n-integration
+      id: HubSpot-i18n-integration
       info: Qordoba can consume and fetch data from Apache Kafka, We can also send content from the Qordoba workflow as a message to Apache Kafka.  
-      enterprise: true
+      
       
     - name: Eloqua
-      id: jms-i18n-integration
+      id: Eloqua-i18n-integration
       info: The Qordoba platform can receive or pull JMS message content, and after l10n, this content can be sent back and published to the same or different topics. 
-      enterprise: true      
+            
       
     - name: Marketo
-      id: windows-azure-event-hub-i18n-integration
+      id: Marketo-i18n-integration
       info: Receives messages from a Microsoft Azure Event Hub, writing the contents of the Azure message to Qordoba content Editor. 
-      enterprise: true
+      
       
       
 - name: CMS & Ecommerce platforms
   info: Visualize, inspect and monitor APIs and microservices traffic
   plugins:
     - name: Wordpress Polylang  
-      id: amazon-simple-queue-service-SQS-i18n-integration
+      id: wordpress-polylang-i18n-integration
       info: Qordoba's Amazon SQS i18n Integration retrieves the content from message based on key.
-      enterprise: true
+      
 
     - name: Wordpress WPML
-      id: kafka-i18n-integration
+      id: wpml-i18n-integration
       info: Qordoba can consume and fetch data from Apache Kafka, We can also send content from the Qordoba workflow as a message to Apache Kafka.  
-      enterprise: true
+      
       
     - name: Magento 1.x.x
-      id: jms-i18n-integration
+      id: magento-1-i18n-integration
       info: The Qordoba platform can receive or pull JMS message content, and after l10n, this content can be sent back and published to the same or different topics. 
-      enterprise: true      
+            
       
     - name: Magento 2.x.x
-      id: windows-azure-event-hub-i18n-integration
+      id: magento-2-i18n-integration
       info: Receives messages from a Microsoft Azure Event Hub, writing the contents of the Azure message to Qordoba content Editor. 
-      enterprise: true
+      
       
     - name: Drupal 8
-      id: mqtt-i18n-integration
+      id: drupal-8-i18n-integration
       info: The Qordoba connector acts as stand-alone service and can will Subscribers/Publishes to any configurable MQTT topic. 
-      enterprise: true 
+       
       
     - name: Drupal 7
-      id: amqp-i18n-integration
+      id: drupal-7-i18n-integration
       info: Qordoba provides a typical AMQP exchange integration in two ways, the message that is sent to the AMQP Exchange will be routed based on the 'Routing Key' to its final destination in the l10n workflow (the binding). 
-      enterprise: true            
+                  
       
     - name: Eommerce cloud salesforce (Demandware)
-      id: smtp-i18n-integration
+      id: demandware-i18n-integration
       info: Qordoba implements a lightweight SMTP server to an arbitrary port, allowing Qordoba to listen for incoming email. Note this server does not perform any email validation. 
-      enterprise: true      
+            
       
 
 - name: Messages/Queue protocols
@@ -108,42 +108,42 @@
     - name: Amazon Simple Queue Service (SQS)  
       id: amazon-simple-queue-service-SQS-i18n-integration
       info: Qordoba's Amazon SQS i18n Integration retrieves the content from message based on key.
-      enterprise: true
+      
 
     - name: Kafka
       id: kafka-i18n-integration
       info: Qordoba can consume and fetch data from Apache Kafka, We can also send content from the Qordoba workflow as a message to Apache Kafka.  
-      enterprise: true
+      
       
     - name: Java Message Service
       id: jms-i18n-integration
       info: The Qordoba platform can receive or pull JMS message content, and after l10n, this content can be sent back and published to the same or different topics. 
-      enterprise: true      
+            
       
     - name: Windows Azure Event Hub
       id: windows-azure-event-hub-i18n-integration
       info: Receives messages from a Microsoft Azure Event Hub, writing the contents of the Azure message to Qordoba content Editor. 
-      enterprise: true
+      
       
     - name: MQTT
       id: mqtt-i18n-integration
       info: The Qordoba connector acts as stand-alone service and can will Subscribers/Publishes to any configurable MQTT topic. 
-      enterprise: true 
+       
       
     - name: AMQP
       id: amqp-i18n-integration
       info: Qordoba provides a typical AMQP exchange integration in two ways, the message that is sent to the AMQP Exchange will be routed based on the 'Routing Key' to its final destination in the l10n workflow (the binding). 
-      enterprise: true            
+                  
       
     - name: SMTP
       id: smtp-i18n-integration
       info: Qordoba implements a lightweight SMTP server to an arbitrary port, allowing Qordoba to listen for incoming email. Note this server does not perform any email validation. 
-      enterprise: true      
+            
       
     - name: IMAP
       id: imap-i18n-integration
       info: The Qordoba platform can consume messages from email servers using the IMAP protocol. The raw-bytes of each received email message are written as content. You can send or forward the email direct to your dedicated IPs. 
-      enterprise: true       
+             
       
       
 - name: Search Engineg
@@ -152,12 +152,12 @@
     - name: Apache Solr
       id: apache-Solr-i18n-integration
       info: Qordoba can retrieve a document from Solr using the specified connection properties and the identifier of the document to retrieve.
-      enterprise: true
+      
 
     - name: Elasticsearch | Elastic
       id: elasticsearch-elastic-i18n-integration
       info: Qordoba can retrieve documents from Elasticsearch using your specified connection properties and the identifier of the documents. 
-      enterprise: true
+      
       
 
 - name: Data Storage
@@ -166,57 +166,57 @@
     - name: JDBC connecter
       id: jdbc-i18n-integration
       info: Qordoba can work with MySQL, MariaDB, and other SQL databases to get data and can send it back using the JDBC connector.
-      enterprise: true
+      
 
     - name: Amazon S3
       id: s3-i18n-integration
       info: Qordoba can sync S3 buckets. For each object that is listed, Qordoba creates a FlowFile that represents the object so that it can be fetched in conjunction with the FetchS3Object.
-      enterprise: true
+      
       
     - name: Amazon DynamoDB
       id: dynamodb-i18n-integration
       info: Qordoba's Amazon DynamoDB connector retrieves JSON documents from DynamoDB, including all attributes and content. It reads documents based on hash and range keys, which can be strings or numbers. 
-      enterprise: true
+      
 
 
     - name: MongoDB
       id: mongodb-i18n-integration
       info: Qordoba can play nicely with MongoDB - you can translate all you content with just a config update!
-      enterprise: true
+      
       
 
     - name: Couchbase
       id: couchbase-i18n-integration
       info: The Qordoba connector can pull and push data to Couchbase Server directly and in an automated way.
-      enterprise: true  
+        
       
     - name: Cassandra
       id: cassandra-i18n-integration
       info: Qordoba can execute provided Cassandra Query Language (CQL) select query on a Cassandra. Query result can be converted to Avro or JSON format.  
-      enterprise: true
+      
       
     - name: HBase
       id: hbase-i18n-integration
       info: Qordoba provides a hosted connector to get and put content on HBase with an easy configuration. 
-      enterprise: true      
+            
                 
     - name: HDFS
       id: hdfs-i18n-integration
       info: Qordoba provides a hosted connector to fetch and put file content from HDFS with an easy configuration. When you run the the hosted Qordoba connector, you can add the below configs to get from and put data on HDFS.
-      enterprise: true
+      
       
     - name: FTP / SFTP
       id: ftp-ftps-i18n-integration
       info: Qordoba can fetch files from an SFTP or FTP server remotely and overwrite the contents of the files with content coming from Qordoba l10n workflow.
-      enterprise: true       
+             
             
 - name: Proxy (legacy solutions)
   info: Log requests and response data using the best transport for your infrastructure
   plugins:
     - name: Hosted Proxy
-      id: tcp-log
+      id: hosted-proxy-i18n
       info: Qordoba delivers the localized versions of your website or webapp to your local users via a fast and reliable CDN.
 
     - name: SecureProxy
-      id: udp-log
+      id: secure-proxy-i18n
       info: SecureProxy, Qordoba's on-premise proxy solution, is for dynamic websites and webapps that require a highly secure environment. 
