@@ -1,7 +1,7 @@
 ---
 id: page-install-method
-title: Install - OS X
-header_title: OS X Installation
+title: Qordoba CLI Installation
+header_title: Qordoba CLI Installation
 header_icon: /assets/images/icons/icn-installation.svg
 breadcrumbs:
   Installation: /install
@@ -15,30 +15,44 @@ breadcrumbs:
 
 ### Installation
 
-1. **Install Kong**
+1. **Install Qordoba Command Line Integration (Q-CLI)**
 
-    Use the [Homebrew](https://brew.sh/) package manager to add Kong as a tap and install it:
+    The client uses pip commands for housekeeping. Please have both [python](https://www.python.org/) and [pip](https://pip.pypa.io/en/stable/installing/#) installed and available in the system PATH. Run the following command on your command line:
 
     ```
-    $ brew tap kong/kong
-    $ brew install kong
+    pip install qordoba
+    ```
+    If you are instead updating an existing Q-CLI, run this command:
+
+    ```
+    pip install qordoba -U
     ```
 
-2. **Prepare your database**
+2. **Configure Q-CLI to Project**
 
-    [Configure][configuration] Kong so it can connect to your database. Kong supports both [PostgreSQL {{site.data.kong_latest.dependencies.postgres}}](http://www.postgresql.org/) and [Cassandra {{site.data.kong_latest.dependencies.cassandra}}](http://cassandra.apache.org/) as its datastore.
+    Connecting to a Qordoba project from your command line needs authentication. The required parameters are: 
+    - Organization ID
+    - Project ID
+    - Access Token
 
-    If you are using Postgres, please provision a database and a user before starting Kong, ie:
+    There are two ways to include these parameters in the C-CLI:
+    
+    **Recommended:** Download Configuration File.
 
-    ```sql
-    CREATE USER kong; CREATE DATABASE kong OWNER kong;
-    ```
+    The configuration file saves you from re-entering your option-value pairs on the command line each time you want to send content to Qordoba.
+    
+    To download the configuration file, go to your project's settings in Qordoba, and click on CLI config. Click on Download
+        
 
-    Now, run the Kong migrations:
 
-    ```bash
-    $ kong migrations up [-c /path/to/kong.conf]
-    ```
+    B.  Connecting via config.yml  - *recommended*
+
+
+
+
+
+    Go to your desired project within Qordoba that you want to link the Q-CLI to.
+    In Project settings, go to CLI config and download the configuration file.
 
     **Note**: migrations should never be run concurrently; only
     one Kong nodes should be performing migrations at a time.
