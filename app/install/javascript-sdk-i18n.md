@@ -14,24 +14,17 @@ links:
     kong-postgres-pv: "https://s3.amazonaws.com/kong-cf-templates/latest/kong-elb-postgres-optional-vpc-optional-pv.template "
 ---
 
-### Templates
+### Installation
 
-#### Kong with Cassandra
+1. **Create Project in Qordoba**
 
-This template will provision Kong instances in a new or existing VPC. You will
-need to provide the contact points of your Cassandra cluster during the
-deployment process.
+    To use Qordoba's SDK integration, you need to first create a SDK project in Qordoba. In Qordoba's UI, select the Projects dropdown menu, and select "+ Create new project" at the bottom of the list. Select a JS SDK project, add the url that the integration will be watching, and complete the steps selecting your languages and translation memories. On the final step of project creation, copy the code snippet provided and paste it somewhere for temporary storage.
 
-##### HVM AMI
+2. **Add Snippet to HTML of Page**
 
-- [us-east-1]({{ page.links.aws }}?region=us-east-1#/stacks/new?stackName=kong-elb-hvm&templateURL={{ page.links.templates.kong-hvm }})
-- [us-west-1]({{ page.links.aws }}?region=us-west-1#/stacks/new?stackName=kong-elb-hvm&templateURL={{ page.links.templates.kong-hvm }})
-- [us-west-2]({{ page.links.aws }}?region=us-west-2#/stacks/new?stackName=kong-elb-hvm&templateURL={{ page.links.templates.kong-hvm }})
-- [eu-west-1]({{ page.links.aws }}?region=eu-west-1#/stacks/new?stackName=kong-elb-hvm&templateURL={{ page.links.templates.kong-hvm }})
-- [ap-northeast-1]({{ page.links.aws }}?region=ap-northeast-1#/stacks/new?stackName=kong-elb-hvm&templateURL={{ page.links.templates.kong-hvm }})
-- [ap-southeast-1]({{ page.links.aws }}?region=ap-southeast-1#/stacks/new?stackName=kong-elb-hvm&templateURL={{ page.links.templates.kong-hvm }})
-- [ap-southeast-2]({{ page.links.aws }}?region=ap-southeast-2#/stacks/new?stackName=kong-elb-hvm&templateURL={{ page.links.templates.kong-hvm }})
-- [sa-east-1]({{ page.links.aws }}?region=sa-east-1#/stacks/new?stackName=kong-elb-hvm&templateURL={{ page.links.templates.kong-hvm }})
+    Next, add the provided snippet to the <head> of all html pages that you will want the SDK to have access to. If you have individual pages or urls that you do not want the SDK to work with, you can set up this and other customizations in the SDK settings at a later point.
+
+
 
 ##### PV AMI
 
