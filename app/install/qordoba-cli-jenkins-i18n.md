@@ -7,15 +7,10 @@ breadcrumbs:
   Installation: /install
 ---
 
-### Packages
-
-- [Homebrew Formula]({{ site.repos.homebrew }})
-
-----
 
 ### Installation
 
-1. **Install Qordoba Command Line Integration (Q-CLI)**
+1. **Install Qordoba Command Line Integration (Q-CLI) Package**
 
     The client uses pip commands for housekeeping. Please have both [python](https://www.python.org/) and [pip](https://pip.pypa.io/en/stable/installing/#) installed and available in the system PATH. Run the following command on your command line:
 
@@ -36,7 +31,8 @@ breadcrumbs:
     - Access Token
 
     There are two ways to include these parameters in the Q-CLI:
-    
+
+    <br/>
     **Recommended:** Download Configuration File.
 
     The configuration file saves you from re-entering your option-value pairs on the command line each time you want to send content to Qordoba.
@@ -49,7 +45,7 @@ breadcrumbs:
     Once this is done, make sure to rename `config.yaml` to `.qordoba.yml`.<br/>
     **Note**: _Notice that **.yaml** changes to **.yml**_
 
-    Once this is done, edit the file to add your source paths and optionally your output paths:
+    Edit the file to add your source paths and optionally your output paths:
 
     ```yaml
      #Example .qordoba.yml file after adding push and pull edits.
@@ -66,7 +62,8 @@ breadcrumbs:
         targets:
           - "./<language_code>/<filename>.<extension>" 
     ```
-
+    <br/>
+    <br/>
     **Not Recommended:** Manual addition of parameters.
 
     The other option is to manually add parameters to each call to Qordoba. If you do this, you will also have to identify which source files you want to push with each call, and where you want each output file to be stored.
@@ -94,4 +91,10 @@ breadcrumbs:
 
     And all finished content will be pulled down and added to the location you defined in `.qordoba.yml`.
 
-[configuration]: /docs/{{site.data.kong_latest.release}}/configuration#database
+5. **Next Steps/Help**
+    You can type:
+
+    ```bash
+    $ qor -h
+    ```
+    To get basic help and instructions for the Q-CLI. If you cannot find what you are looking for there, Please look at our FAQ **INSERT LINKS** and documentation **INSERT LINKS** pages.
