@@ -22,7 +22,7 @@ links:
 
 2. **Add Snippet to HTML of Pages**
 
-    Next, add the provided snippet within the <head> of all html pages that you will want the SDK to have access to. If you have individual pages or urls that you do not want the SDK to work with, you can set up this and other customizations in the SDK settings at a later point.
+    Next, add the provided snippet within the `<head><head/>` of all html pages that you will want the SDK to have access to. If you have individual pages or urls that you do not want the SDK to work with, you can set up this and other customizations in the SDK settings at a later point.
 
 3. **Collect Strings From Your Site**
 
@@ -45,7 +45,7 @@ links:
 
 5. **View Translated Material on Your Website**
 
-    The final step is to tell the SDK integration to display the translated text in place of the source language text. You can configure this command in a number of ways in the url, by setting up your desired url pathing in the SDK settings. This is best done with support from Qordoba's Customer Success team, so for the purposes of this quick install there is a parameter you can add to the url to see Qordoba's translations. In your address bar, add the desired url followed by the parameter `?lang=<locale>`, where `<locale>` is the language code of your desired target language. For example: for Spanish - Mexico is `?lang=es-mx`. A full list of language codes can be found [here](https://dev.qordoba.com/docs/language-resource-dev). When you add the parameter and execute the url, if you have translated material Qordoba will automatically replace all source language strings on your page with the translated material.
+    The final step is to tell the SDK integration to display the translated text in place of the source language text. You can configure this command in a number of ways in the url, by setting up your desired url pathing in the SDK settings. This is best done with support from Qordoba's Customer Success team, so for the purposes of this quick install there is a parameter you can add to the url to see Qordoba's translations. In your address bar, add the desired url followed by the parameter `?lang=<locale>`, where `<locale>` is the language code of your desired target language. For example: Spanish - Mexico is `?lang=es-mx`. A full list of language codes can be found [here](https://dev.qordoba.com/docs/language-resource-dev). When you add the parameter and execute the url, if you have translated material Qordoba will automatically replace all source language strings on your page with the translated material.
 
 ##### PV AMI
 
