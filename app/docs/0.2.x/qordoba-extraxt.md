@@ -1,231 +1,249 @@
 ---
-title: CLI Reference
+title: Qordoba Extraxt
 ---
 
-# CLI Reference
+# Qordoba Extraxt
 
-The provided CLI (*Command Line Interface*) allows you to start, stop, and
-manage your Kong instances. The CLI manages your local node (as in, on the
-current machine).
+The Qordoba String Extractor is AI that reads your code, extracts strings and replaces them with keys. It’s smart enough to understand what frameworks and programming languages you are using, and learns from your coding patterns.
 
-If you haven't yet, we recommend you read the [configuration reference][configuration-reference].
+Download latest version
 
-### Table of Contents
+```
+pip install qordoba==0.2.0a1
+```
 
-- [Global flags](#global-flags)
-- [Available commands](#available-commands)
-  - [kong check](#kong-check)
-  - [kong prepare](#kong-prepare)
-  - [kong health](#kong-health)
-  - [kong migrations](#kong-migrations)
-  - [kong quit](#kong-quit)
-  - [kong reload](#kong-reload)
-  - [kong restart](#kong-restart)
-  - [kong start](#kong-start)
-  - [kong stop](#kong-stop)
-  - [kong version](#kong-version)
+##Extract
 
-### Global flags
+Use the Qordoba ‘extract’ command to identify the local directory path where you have files that need to be localized.
 
-All commands take a set of special, optional flags as arguments:
+`qor i18n-extract -i input_dir -r report_dir -l customized_lexer`
 
-* `--help`: print the command's help message
-* `--v`: enable verbose mode
-* `--vv`: enable debug mode (noisy)
+The extract command pulls all the files from the given directory path and its subdirectories. 
+Our lexer will parse your files and extract all the strings. The strings are saved in a generated JSON report.
+
+report elements:
+  * filename
+  * string
+  * start_line
+  * end_line
+  * code_snippet
+    <div class="alert alert-warning">
+      <div class="text-center">
+        <strong>Note</strong>: The report can be edited (delete values, add) at this step. Not later.
+      </div>
+    </div>
+
+
+##Generate
+
+Use the Qordoba ‘generate’ command to generate the keys (QUIDs) for the content that was extracted. The extraction can be modifed to exclude content that you don’t want in your resource file.
+
+`qor i18n-generate -r report_dir -e report_key_dir`
+
+The generate command will pick up your reports in the report_dir and generate new keys for every string by calling our API.
+Keys are added to a new report which is stored in a new directory. The reason: while processing many reports there may occur connectivity issues. This way you know which reports have been processed.
+
+Optional:
+Flag `--existing_i18nfiles directory_path`. 
+The generate command will look for JSON localization files in the directory_path and scan for existing keys or values.
+
+report elements:
+  * filename
+  * string
+  * start_line
+  * end_line
+  * code_snippet
+  * generated_key
+  * existing_key
+
+
+
+##Execute
+
+Use the Qordoba ‘execute’ command to replace the strings in your source code with the generated keys.
+
+
+`qor i18n-execute -i input_dir -r report_key_dir -k key_format`
+
+key format:
+if keys should be replaced with a custom format, add it as a flag or within the configuration file.
+
+The "KEY" characters will be replaced by the generated key within your report:
+
+**Option 1: **
+
+add a custom key flag to execute the command: -k {{KEY}}
+
+**Option 2: **
+
+add a custom key format in your configuration file **.i18n-ml.yml**
+
+
+```
+key_format:
+  html: '$KEY' #file extension: format
+```
+ 
+ 
+ **Example**
+
+ ```
+ "/Users/Qordoba/Desktop/demo/deep/translate.html": {
+         "0": {
+             "end_line": 5,
+             "generated_key": {
+                 "key": "qor_5A8DDC25_example_domain"
+             },
+             "snippet": "    <title>Example Domain</title>",
+             "start_line": 5,
+             "value": "Example Domain"
+         },
+ ```
+ 
+ status        | snippet
+ ---         | ---    
+not localized        |   &lt;title&gt;`Example Domain`&lt;/title&gt;    
+execution - default|      &lt;title&gt;`qor_5A8DDC25_example_domain`&lt;/title&gt;
+execution - custom key format |        &lt;title&gt; `$qor_5A8DDC25_example_domain`&lt;/title&gt;
+
+ ----
+ 
+ [Back to TOC](#table-of-contents)
+##Supported languages
+
+####Programming languages
+
+  * ActionScript
+  * Ada
+  * ANTLR
+  * AppleScript
+  * Assembly (various)
+  * Asymptote
+  * Awk
+  * Befunge
+  * Boo
+  * BrainFuck
+  * C, C++
+  * C#
+  * Clojure
+  * CoffeeScript
+  * ColdFusion
+  * Common Lisp
+  * Coq
+  * Cryptol (incl. Literate Cryptol)
+  * Crystal
+  * Cython
+  * D
+  * Dart
+  * Delphi
+  * Dylan
+  * Elm
+  * Erlang
+  * Ezhil Ezhil - A Tamil programming language
+  * Factor
+  * Fancy
+  * Fortran
+  * F#
+  * GAP
+  * Gherkin (Cucumber)
+  * GL shaders
+  * Groovy
+  * Haskell (incl. Literate Haskell)
+  * IDL
+  * Io
+  * Java
+  * JavaScript
+  * Lasso
+  * LLVM
+  * Logtalk
+  * Lua
+  * Matlab
+  * MiniD
+  * Modelica
+  * Modula-2
+  * MuPad
+  * Nemerle
+  * Nimrod
+  * Objective-C
+  * Objective-J
+  * Octave
+  * OCaml
+  * PHP
+  * Perl
+  * PovRay
+  * PostScript
+  * PowerShell
+  * Prolog
+  * Python 2.x and 3.x (incl. console sessions and tracebacks)
+  * REBOL
+  * Red
+  * Redcode
+  * Ruby (incl. irb sessions)
+  * Rust
+  * S, S-Plus, R
+  * Scala
+  * Scheme
+  * Scilab
+  * Smalltalk
+  * SNOBOL
+  * Tcl
+  * Vala
+  * Verilog
+  * VHDL
+  * Visual Basic.NET
+  * Visual FoxPro
+  * XQuery
+  * Zephir
 
 [Back to TOC](#table-of-contents)
+####Template languages
 
-### Available commands
-
-#### **kong check**
-
-```
-Usage: kong check <conf>
-
-Check the validity of a given Kong configuration file.
-
-<conf> (default /etc/kong.conf or /etc/kong/kong.conf) configuration file
-```
-
-[Back to TOC](#table-of-contents)
-
----
-
-#### **kong prepare**
-
-This command prepares the Kong prefix folder, with its sub-folders and files.
-
-```
-Usage: kong prepare [OPTIONS]
-
-Prepare the Kong prefix in the configured prefix directory. This command can
-be used to start Kong from the nginx binary without using the 'kong start'
-command.
-
-Example usage:
-  kong prepare -p /usr/local/kong -c kong.conf && kong migrations up &&
-    nginx -p /usr/local/kong -c /usr/local/kong/nginx.conf
-
-Options:
- -c,--conf    (optional string) configuration file
- -p,--prefix  (optional string) override prefix directory
- --nginx-conf (optional string) custom Nginx configuration template
-```
+  * Cheetah templates
+  * Django / Jinja templates
+  * ERB (Ruby templating)
+  * Genshi (the Trac template language)
+  * JSP (Java Server Pages)
+  * Myghty (the HTML::Mason based framework)
+  * Mako (the Myghty successor)
+  * Smarty templates (PHP templating)
+  * Tea
 
 [Back to TOC](#table-of-contents)
+###Other markup
 
----
-
-#### **kong health**
-
-```
-Usage: kong health [OPTIONS]
-
-Check if the necessary services are running for this node.
-
-Options:
-  -p,--prefix (optional string) prefix at which Kong should be running
-```
-
+  * Apache config files
+  * Bash shell scripts
+  * BBCode
+  * CMake
+  * CSS
+  * Debian control files
+  * Diff files
+  * DTD
+  * Gettext catalogs
+  * Gnuplot script
+  * Groff markup
+  * HTML
+  * HTTP sessions
+  * INI-style config files
+  * IRC logs (irssi style)
+  * Lighttpd config files
+  * Makefiles
+  * MoinMoin/Trac Wiki markup
+  * MySQL
+  * Nginx config files
+  * POV-Ray scenes
+  * Ragel
+  * Redcode
+  * ReST
+  * Robot Framework
+  * RPM spec files
+  * SQL, also MySQL, SQLite
+  * Squid configuration
+  * TeX
+  * tcsh
+  * Vim Script
+  * Windows batch files
+  * XML
+  * XSLT
+  * YAML
 [Back to TOC](#table-of-contents)
-
----
-
-#### **kong migrations**
-
-```
-Usage: kong migrations COMMAND [OPTIONS]
-
-Manage Kong's database migrations.
-
-The available commands are:
-  list   List migrations currently executed.
-  up     Execute all missing migrations up to the latest available.
-  reset  Reset the configured database (irreversible).
-
-Options:
-  -c,--conf (optional string) configuration file
-```
-
-[Back to TOC](#table-of-contents)
-
----
-
-#### **kong quit**
-
-```
-Usage: kong quit [OPTIONS]
-
-Gracefully quit a running Kong node (Nginx and other
-configured services) in given prefix directory.
-
-This command sends a SIGQUIT signal to Nginx, meaning all
-requests will finish processing before shutting down.
-If the timeout delay is reached, the node will be forcefully
-stopped (SIGTERM).
-
-Options:
-  -p,--prefix  (optional string) prefix Kong is running at
-  -t,--timeout (default 10) timeout before forced shutdown
-```
-
-[Back to TOC](#table-of-contents)
-
----
-
-#### **kong reload**
-
-```
-Usage: kong reload [OPTIONS]
-
-Reload a Kong node (and start other configured services
-if necessary) in given prefix directory.
-
-This command sends a HUP signal to Nginx, which will spawn
-new workers (taking configuration changes into account),
-and stop the old ones when they have finished processing
-current requests.
-
-Options:
-  -c,--conf    (optional string) configuration file
-  -p,--prefix  (optional string) prefix Kong is running at
-  --nginx-conf (optional string) custom Nginx configuration template
-```
-
-[Back to TOC](#table-of-contents)
-
----
-
-#### **kong restart**
-
-```
-Usage: kong restart [OPTIONS]
-
-Restart a Kong node in the given prefix directory.
-
-This command is equivalent to doing both 'kong stop' and
-'kong start'.
-
-Options:
-  -c,--conf        (optional string)   configuration file
-  -p,--prefix      (optional string)   prefix at which Kong should be running
-  --nginx-conf     (optional string)   custom Nginx configuration template
-  --run-migrations (optional boolean)  optionally run migrations on the DB
-```
-
-[Back to TOC](#table-of-contents)
-
----
-
-#### **kong start**
-
-```
-Usage: kong start [OPTIONS]
-
-Start Kong (Nginx and other configured services) in the configured
-prefix directory.
-
-Options:
-  -c,--conf        (optional string)   configuration file
-  -p,--prefix      (optional string)   prefix at which Kong should be running
-  --nginx-conf     (optional string)   custom Nginx configuration template
-  --run-migrations (optional boolean)  optionally run migrations on the DB
-```
-
-[Back to TOC](#table-of-contents)
-
----
-
-#### **kong stop**
-
-```
-Usage: kong stop [OPTIONS]
-
-Stop a running Kong node (Nginx and other configured services) in given
-prefix directory.
-
-This command sends a SIGTERM signal to Nginx.
-
-Options:
-  -p,--prefix (optional string) prefix Kong is running at
-```
-
-[Back to TOC](#table-of-contents)
-
----
-
-#### **kong version**
-
-```
-Usage: kong version [OPTIONS]
-
-Print Kong's version. With the -a option, will print
-the version of all underlying dependencies.
-
-Options:
-  -a,--all    get version of all dependencies
-```
-
-[Back to TOC](#table-of-contents)
-
-[configuration-reference]: /docs/{{page.kong_version}}/configuration

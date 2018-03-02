@@ -52,9 +52,9 @@ title: Documentation for Kong
   </div>
 
   <div class="docs-grid-block">
-    <h3><img src="/assets/images/icons/documentation/icn-clustering.svg" /><a href="/docs/{{page.kong_version}}/clustering">Qordoba Extraxt</a></h3>
+    <h3><img src="/assets/images/icons/documentation/icn-clustering.svg" /><a href="/docs/{{page.kong_version}}/qordoba-extraxt">Qordoba Extraxt</a></h3>
     <p>If you are starting localization, you need to use Qordoba Extraxt to make sure all the srtings has keys</p>
-    <a href="/docs/{{page.kong_version}}/clustering">Read Qordoba Extraxt reference &rarr;</a>
+    <a href="/docs/{{page.kong_version}}/qordoba-extraxt">Read Qordoba Extraxt reference &rarr;</a>
   </div>
 
   <div class="docs-grid-block">

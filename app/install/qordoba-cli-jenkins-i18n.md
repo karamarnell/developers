@@ -7,7 +7,6 @@ breadcrumbs:
   Installation: /install
 ---
 
-
 ### Installation
 
 1. **Install Qordoba Command Line Integration (Q-CLI) Package**

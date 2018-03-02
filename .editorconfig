@@ -5,8 +5,9 @@ root = true
 charset = utf-8
 end_of_line = lf
 indent_size = 2
-insert_final_newline = true
+insert_final_newline = false
 
 [*.md]
 trim_trailing_whitespace = false
 indent_size = unset
+insert_final_newline = false
