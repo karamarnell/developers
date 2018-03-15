@@ -18,7 +18,7 @@ links:
 
 1. **Create Project in Qordoba**
 
-    To use Qordoba's SDK integration, you need to first create a SDK project in Qordoba. In Qordoba's UI, select the Projects dropdown menu, and select "+ Create new project" at the bottom of the list. Select a JS SDK project, add the url that the integration will be watching, and complete the steps selecting your languages and translation memories. On the final step of project creation, copy the code snippet provided and paste it somewhere for temporary storage.
+    To use Qordoba's SDK integration, you need to first create a SDK project in Qordoba. In Qordoba's UI, select the Projects tab, and select the "+ New project" option. Select a JS SDK project, add the url that the integration will be watching, and complete the steps selecting your languages and translation memories. On the final step of project creation, copy the code snippet provided and paste it somewhere for temporary storage.
 
 2. **Add Snippet to HTML of Pages**
 
@@ -37,6 +37,15 @@ links:
     _This option is easier to use than the manual selection, but you lose some control over what pages get sent to Qordoba. If there are a few specific pages that you do not want translated, you can always tag them as "disabled" within Qordoba which will prevent any work on them. If you change or update your website, the very first time anyone visits each updated page, the new strings will be sent to Qordoba._
 
 
+    ```javascript
+    //Example SDK setting
+
+    Qordoba.init({
+      	 siteKey: "6575",
+      	 liveSyncPages: true
+         });
+    ```
+
     _**Note:** Qordoba's SDK integration is able to collect from dynamic content, however the elements must exist in the html for the SDK to collect them. If you have dynamic content that you want Qordoba to translate, simply complete the actions necessary on your page to have that content appear in the html. Once it does, Qordoba will collect it and will replace it if there are completed translations._
 
 4. **Complete Translations in Qordoba**
@@ -46,5 +55,3 @@ links:
 5. **View Translated Material on Your Website**
 
     The final step is to tell the SDK integration to display the translated text in place of the source language text. You can configure this command in a number of ways in the url, by setting up your desired url pathing in the SDK settings. This is best done with support from Qordoba's Customer Success team, so for the purposes of this quick install there is a parameter you can add to the url to see Qordoba's translations. In your address bar, add the desired url followed by the parameter `?lang=<locale>`, where `<locale>` is the language code of your desired target language. For example: Spanish - Mexico is `?lang=es-mx`. A full list of language codes can be found [here](https://dev.qordoba.com/docs/language-resource-dev). When you add the parameter and execute the url, if you have translated material Qordoba will automatically replace all source language strings on your page with the translated material.
-
-
