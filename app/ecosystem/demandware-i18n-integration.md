@@ -5,80 +5,222 @@ header_title: LDAP Authentication
 header_icon: /assets/images/icons/plugins/ldap-authentication.png
 breadcrumbs:
   Plugins: /plugins
-nav:
-  - label: Getting Started
-    items:
-      - label: Configuration
-  - label: Usage
-    items:
-      - label: Upstream Headers
 ---
 
-Add LDAP Bind Authentication to your APIs, with username and password protection. The plugin will check for valid credentials in the `Proxy-Authorization` and `Authorization` header (in this order).
+1. Introduction
+This document gives the Technical Specifications for the Qordoba Demandware Link cartridge as well
+as the LINK implementation guide for setting up Qordoba on standard SiteGenesis 2.0.
+The Cartridge allows you to use Qordoba to translate products, categories and content assets from
+your Demandware catalogues.
 
-----
+2. Cartridge Installation
+To install the Qordoba cartridge, go to Administration –> Sites –> Manage Sites –> Sites-Site -
+Settings and add the cartridge `qordoba_integration` to the beginning of your cartridge path.
+Be sure to also add the cartridge to the Business Manager cartridge path by selecting 'Manage
+the Business Manager Site'.
 
-## Configuration
+System and Custom Object Extensions
 
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] by executing the following request on your Kong server:
+There are several metadata files that need to be imported into the site for the integration to function
+properly. Import the provided system object type extensions in file
+“metadata/system-objecttype-extensions.xml” by navigating to Site Development/Import &
+Export/Metadata
+This will extend the SitePreferences object to include an attribute for the Qordoba configuration
+preferences.
+Upload the file from your local workspace via 'Upload', then select 'Import' and choose your newly
+uploaded file.
+Follow the same process for the file 'metadata/custom-objecttypedefinitions.xml'.
 
-```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
-    --data "name=ldap-auth" \
-    --data "config.hide_credentials=true" \
-    --data "config.ldap_host=ldap.example.com" \
-    --data "config.ldap_port=398" \
-    --data "config.base_dn=dc=example,dc=com" \
-    --data "config.attribute=cn" \
-    --data "config.cache_ttl=60" \
-    --data "config.header_type=ldap"
-```
+This file creates two new system object definitions:
 
-`api`: The `id` or `name` of the API that this plugin configuration will target
+1. QORDOBA_SUBMISSION – an object that stores the state of a translation submission. The
+scheduled jobs will use this object to query, send, and update batch information.
+2. QORDOBA_LOCALES – A custom object to store the relevant locales for this instance.
+Custom Object Data
+To populate the locales custom object, navigate to: Merchant Tools / Custom Objects / Import &
+Export
+Select 'upload' and choose the local file 'metadata/QORDOBA_LOCALES.xml' from the cartridge
+installation package.
+Once this file is imported, all the locales supported by Qordoba will be loaded into the
+QORDOBA_LOCALE custom object definition.
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+Job Schedule Definitions
 
-form parameter                           | default | description
----                                      | ---     | ---
-`name`                                   |         | The name of the plugin to use, in this case: `ldap-auth`.
-`config.hide_credentials`<br>*optional*  | `false` | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request.
-`config.ldap_host`                       |         | Host on which the LDAP server is running.
-`config.ldap_port`                       |         | TCP port where the LDAP server is listening.
-`config.start_tls`                       | `false` | Set it to `true` to issue StartTLS (Transport Layer Security) extended operation over `ldap` connection.
-`config.base_dn`                         |         | Base DN as the starting point for the search.
-`config.verify_ldap_host`                | `false` | Set it to `true` to authenticate LDAP server. The server certificate will be verified according to the CA certificates specified by the `lua_ssl_trusted_certificate` directive.
-`config.attribute`                       |         | Attribute to be used to search the user.
-`config.cache_ttl`                       | `60`    | Cache expiry time in seconds.
-`config.timeout`<br>*optional*           | `10000` | An optional timeout in milliseconds when waiting for connection with LDAP server.
-`config.keepalive`<br>*optional*         | `60000` | An optional value in milliseconds that defines for how long an idle connection to LDAP server will live before being closed.
-`config.anonymous`<br>*optional*         | ``      | An optional string (consumer uuid) value to use as an "anonymous" consumer if authentication fails. If empty (default), the request will fail with an authentication failure `4xx`. Please note that this value must refer to the Consumer `id` attribute which is internal to Kong, and **not** its `custom_id`.
-`config.header_type`<br>*optional*       | `"ldap"`| An optional string to use as part of the Authorization header. By default, a valid Authorization header looks like this: `Authorization: ldap base64(username:password)`. If `header_type` is set to "basic" then the Authorization header would be `Authorization: basic base64(username:password)`. Note that `header_type` can take any string, not just `"ldap"` and `"basic"`.
+The Qordoba integration utilizes two scheduled jobs to send and receive batch communications to
+the Qordoba platform. Import the provided definitions by navigating to: Administration / Operations /
+Import & Export
+Choose 'upload' and upload the provided schedule definition file 'metadata/schedules.xml'. After
+uploading, choose 'Import' and select the newly uploaded file.
+This will result in two job configurations that will be discussed in detail below.
 
-----
+Site Preferences
 
-<div class="alert alert-warning">
-    <strong>Note:</strong> The <code>config.header_type</code> option was introduced in Kong 0.12.0. Previous versions of this plugin behave as if <code>ldap</code> was set for this value.
-</div>
+The integration comes with a seeded set of base configurations for integration with Qordoba. These
+will need to be updated based on your integration specifics but are included here for ease of setup.
+Navigate to Site Preferences / Custom Preferences / QORDOBA
 
-## Usage
 
-In order to authenticate the user, client must set credentials in `Proxy-Authorization` or `Authorization` header in following format
+In the Qordoba configuration, paste the following JSON:
 
-credentials := [ldap | LDAP] base64(username:password)
+{
+"api_url" : "https://app.qordoba.com/api/" ,
+"project_id" : "{your_project_id" ,
+"api_key" : "{your_api_key}" ,
+"time_out" : "4500" ,
+"retrival_type" : "published" ,
+"source_locale" : "default" ,
+"auto_authorize_content" : "true" ,
+"target_locale" : "{\"target_locale\": [{ \"demandware\":\"fr_FR\" , \"qordoba\":\"fr-FR\"
+},{ \"demandware\":\"de_DE\" , \"qordoba\":\"de-DE\" }]}" ,
+"product_attribute_json" : "{\"product_attribute\":[{ \"id\":\"name\" , \"type\":\"string\" ,
+\"custom\":\"false\" },{ \"id\":\"shortDescription\" , \"type\":\"html\" ,
+\"custom\":\"false\"},{ \"id\":\"longDescription\" , \"type\":\"html\" ,
+\"custom\":\"false\"},{ \"id\":\"pageDescription\" , \"type\":\"string\" ,
+\"custom\":\"false\"},{ \"id\":\"pageTitle\" , \"type\":\"string\" , \"custom\":\"false\"
+},{\"id\":\"pageKeywords\" , \"type\":\"string\" , \"custom\":\"false\" }]}" ,
+"content_attribute_json" : "{\"content_attribute\":[{ \"id\":\"name\" , \"type\":\"string\" ,
+\"custom\":\"false\" },{ \"id\":\"description\" , \"type\":\"string\" , \"custom\":\"false\"
+},{\"id\":\"pageDescription\" , \"type\":\"string\" , \"custom\":\"false\" },{
+\"id\":\"pageTitle\" , \"type\":\"string\" , \"custom\":\"false\" },{ \"id\":\"pageKeywords\"
+, \"type\":\"string\" , \"custom\":\"false\" },{ \"id\":\"body\" , \"type\":\"html\" ,
+\"custom\":\"true\" }]}" ,
+"category_attribute_json" : "{\"category_attribute\":[{ \"id\":\"displayName\" ,
+\"type\":\"string\" , \"custom\":\"false\" },{ \"id\":\"description\" , \"type\":\"string\" ,
+\"custom\":\"false\" },{\"id\":\"pageDescription\" , \"type\":\"string\" ,
+\"custom\":\"false\" },{ \"id\":\"pageTitle\" , \"type\":\"string\" , \"custom\":\"false\" },{
+\"id\":\"pageKeywords\" , \"type\":\"string\" , \"custom\":\"false\" }]}" ,
+"catalog_ids" : "apparel-catalog, electronics-catalog"
+}
 
-The plugin will validate the user against the LDAP server and cache the credential for future requests for the duration specified in `config.cache_ttl`.
+3. External APIs List
 
-### Upstream Headers
+Name
+Endpoint
+Response 
+list languages
+https://api.qordoba.com/v2/languages
+{
+  "languages": [
+    {
+      "id": 94,
+      "name": "English - United States",
+      "code": "en-us",
+      "direction": "ltr",
+      "override_order": "aaa - aaa - English - United States"
+    },
+    
 
-When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream API/Microservice, so that you can identify the consumer in your code:
 
-* `X-Credential-Username`, the `username` of the Credential (only if the consumer is not the 'anonymous' consumer)
-* `X-Anonymous-Consumer`, will be set to `true` when authentication failed, and the 'anonymous' consumer was set instead.
-* `X-Consumer-ID`, the ID of the 'anonymous' consumer on Kong (only if authentication failed and 'anonymous' was set)
-* `X-Consumer-Custom-ID`, the `custom_id` of the 'anonymous' consumer (only if authentication failed and 'anonymous' was set)
-* `X-Consumer-Username`, the `username` of the 'anonymous' consumer (only if authentication failed and 'anonymous' was set)
+list projects
+https://api.qordoba.com/v2/projects/list
+{
+  projectCount: 999,
+  projects [
+    {
+      "id": 000,
+      "name": "Product Test",
+	    "creator": "John Doe",
+	    "created": 1485366552000,
+	    "sourceCode": "en-us",
+	    "sourceId": 94,
+	    "status": 1
+		},...
+	]
+}
+show project status
+https://api.qordoba.com/v2/projects/status
+{
+  "languages": [
+    {
+      "id": 234,
+      "code": "es-es",
+      "name": "Spanish - Spain",
+      "segments": 285,
+      "words": 1052,
+      "total": 285,
+      "total_words": 1052,
+      "milestones": [
+        {
+          "id": -100,
+          "name": "Completed",
+          "order": 1000,
+          "count": 76,
+          "words_count": 258,
+          "percent": 26.67
+        },...
+      ]
+   ]
+}
 
-[api-object]: /docs/latest/admin-api/#api-object
-[configuration]: /docs/latest/configuration
-[consumer-object]: /docs/latest/admin-api/#consumer-object
-[faq-authentication]: /about/faq/#how-can-i-add-an-authentication-layer-on-a-microservice/api?
+
+list files
+https://api.qordoba.com/v2/files/list
+
+
+[
+  {
+    "id": 000000,
+    "fileId": 000000,
+    "enabled": true,
+    "completed": false,
+    "fileName": "sample.json",
+    "segmentCount": 2,
+    "updated": 1485473148000,
+    "preparing": false,
+    "deleted": false,
+    "versionTag": "0.0"
+  },
+  
+
+
+upload file
+https://api.qordoba.com/v2/files/upload
+{
+    "result": "success",
+    "files_ids":[
+      000000
+    ]
+  }
+  
+  export files
+https://api.qordoba.com/v2/files/export
+{
+    "downloadLink": "https://app.qordoba.com/api/file/download?token=abc123def456&filename=sample.zip"
+  }
+
+
+update file
+https://api.qordoba.com/v2/files/update
+{
+    "result": "success",
+  }
+ value by key
+https://api.qordoba.com/v2/files/value_by_key
+{
+    "resultCount": 6,
+    "sourceId": 94,
+    "sourceCode": "en-us",
+    "targetId": 124,
+    "targetCode": "de-de",
+    "segments":[
+      {
+        "segmentId": 00000000,
+        "segment": "Cookie Cam!",
+        "reference": null,
+        "plurals": null,
+        "translationId": 000000000,
+        "translation": "Keks Kam!",
+        "pluralRule": null,
+        "order": null,
+        "stringKey": ""
+      },
+    {"segmentId": 0000001, "segment": "sample.org", "reference": null,…},…
+    ]
+  }
+
+
+
+4. Data Storage
+Qordoba using two types of custom object for saving data:
+● QORDOBA_SUBMISSION
+● QORDOBA_LOCALES

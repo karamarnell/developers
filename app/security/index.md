@@ -11,7 +11,7 @@ header_title: Security
              <div class="plugin-plate ">
                <div class="plugin-plate-header">
                  <h3>Reporting a Bug</h3>
-                 <img class="plugin-icon" src="/assets/images/icons/plugins/GitHub-i18n-integration.png" width="60" height="60" alt="Qordoba Reporting a bug">
+                 <img class="plugin-icon" src="/assets/images/icons/plugins/Reporting-a-bug.png" width="60" height="60" alt="Qordoba Reporting a bug">
                </div>
                <div class="plugin-plate-content">
                  <p>Security controls for every infrastructure component include management, detection, and response capabilities</p>
@@ -23,7 +23,7 @@ header_title: Security
              <div class="plugin-plate ">
                <div class="plugin-plate-header">
                  <h3>Qordoba DLP</h3>
-                 <img class="plugin-icon" src="/assets/images/icons/plugins/GitHub-enterprise-i18n-integration.png" width="60" height="60" alt="Qordoba redact sensitive data">
+                 <img class="plugin-icon" src="/assets/images/icons/plugins/qordoba-DLP.png" width="60" height="60" alt="Qordoba redact sensitive data">
                </div>
                <div class="plugin-plate-content">
                  <p>Qordoba DLP built-in integration allows the customers to scan the data before we add it to the work flow and make sure all this data is hidden or deleted. The DLP system support big list types</p>
@@ -35,11 +35,11 @@ header_title: Security
              <div class="plugin-plate ">
                <div class="plugin-plate-header">
                  <h3>SOC 2</h3>
-                 <img class="plugin-icon" src="/assets/images/icons/plugins/Zendesk-i18n-integration.png" width="60" height="60" alt="Zendesk">
+                 <img class="plugin-icon" src="/assets/images/icons/plugins/SOC-compliance.png" width="60" height="60" alt="Qordoba SOC 2 compliance">
                </div>
                <div class="plugin-plate-content">
                  <p>Qordoba’s SOC 2 compliance is proof of our commitment to security and data integrity throughout our operations and services.</p>
-                 <a class="plugin-plate-link" href="/ecosystem/Zendesk-i18n-integration"></a>
+                 <a class="plugin-plate-link" href="/security/soc-2"></a>
                </div>
              </div>
 	</div>
