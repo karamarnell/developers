@@ -1,45 +1,46 @@
 ---
 id: page-plugin
-title: Plugins - Request Size Limiting
-header_title: Request Size Limiting
+title: Qordoba - Couchbase i18n integration
+header_title: Couchbase integration
 header_icon: /assets/images/icons/plugins/request-size-limiting.png
 breadcrumbs:
   Plugins: /plugins
-nav:
-  - label: Getting Started
-    items:
-      - label: Configuration
 ---
 
-<div class="alert alert-warning">
-  For security reasons we suggest enabling this plugin for any API you add to Kong to prevent a DOS (Denial of Service) attack.
-</div>
+The Qordoba connector can pull and push data to Couchbase Server directly and in an automated way.
 
-Block incoming requests whose body is greater than a specific size in megabytes.
+You can get a document from the Couchbase Server via Key/Value access. The ID of the document to fetch may be supplied by setting the *<Document Id>* property.
 
----
+In the table below, you can view which parameters you can use to customize your configuration with this particular system:
 
-## Configuration
 
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Kong server:
+```javascript
+'Couchbase Cluster Controller Service'	A Couchbase Cluster Controller Service which manages connections to a Couchbase cluster.
+'Bucket Name' The name of bucket to access.
+'Document Type'	The Json type of contents.
+'Document ID'	A static, fixed Couchbase document id, or an expression to construct the Couchbase document id.
 
-```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
-    --data "name=request-size-limiting" \
-    --data "config.allowed_payload_size=128"
 ```
 
-`api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
-form parameter                | default    | description
----                           | ---        | ---
-`name`                        |            | The name of the plugin to use, in this case: `request-size-limiting`
-`consumer_id`<br>*optional*   |            | The CONSUMER ID that this plugin configuration will target. This value can only be used if [authentication has been enabled][faq-authentication] so that the system can identify the user making the request.
-`config.allowed_payload_size`<br>*optional* | `128` | Allowed request payload size in megabytes, default is `128` (128000000 Bytes)
+Push a document to Couchbase Server via Key/Value access.
 
-[api-object]: /docs/latest/admin-api/#api-object
-[configuration]: /docs/latest/configuration
-[consumer-object]: /docs/latest/admin-api/#consumer-object
-[faq-authentication]: /about/faq/#how-can-i-add-an-authentication-layer-on-a-microservice/api?
+
+```javascript
+
+'Couchbase Cluster Controller Service'	A Couchbase Cluster Controller Service which manages connections to a Couchbase cluster.
+'Bucket Name' The name of bucket to access.
+'Document Type'	The Json type of contents.
+'Document ID'	A static, fixed Couchbase document id, or an expression to construct the Couchbase document id.
+'Persist To'	Durability constraint about disk persistence. #the default is NONE
+'Replicate To'	Durability constraint about replication. #the default is NONE
+
+```
+
+## Requesting Access
+
+This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
+
+If you are not a Qordoba Enterprise customer, you can inquire about our
+Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).

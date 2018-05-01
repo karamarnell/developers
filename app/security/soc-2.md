@@ -1,29 +1,30 @@
 ---
-title: PCI DSS Compliance
+title: SOC 2 Compliance
 header_icon: /assets/images/icons/icn-documentation.svg
-header_title: PCI DSS Compliance
+header_title: SOC 2 Compliance
+breadcrumbs:
+  Security: /security
 ---
-
-The Payment Card Industry Data Security Standard (PCI DSS) is a set of industry-mandated requirements that apply to any business that handles, processes, or stores credit cards, regardless of the business's size or location.
 
 <div class="alert alert-success">
-  <center><stromg>Kong does NOT store any secure financial data by default</stromg></center>
+  <center><stromg>Qordoba’s SOC 2 Type IIcompliance is proof of our commitment to security and data integrity throughout our operations and services.</stromg></center>
 </div>
 
-With a payment processing API served through Kong, depending on your setup, you should consider the following scenarios:
+As companies increasingly use outside vendors to perform activities that are core to their business operations and strategy, there is a need for more trust and transparency into cloud software providers’ operations, processes and results.
 
-- **Proxying Payment Data:** Falls under the criterion of *"processing"*.
+The Service Organization Control (SOC) 2 verifies that Qordoba passed a rigorous audit of its internal controls, meeting the security, availability, confidentiality, and privacy standards set by American Institute of CPAs (AICPA). And beyond Type I compliance, Type II compliance means Qordoba passed an audit of our procedures/ controls over a period of 6 months.
 
-- **Logging & Analytics:** A logging plugin might store credit card data on disk or a remote location *(given your API configuration)*; this would trigger the *"storage"* criterion.
 
-<div class="alert alert-warning">
-  <center>PCI DSS compliance is dependent on the configuration and usage of your Kong installation</center>
-</div>
+#### What does this mean for your business? 
 
-You will still need to complete an annual [Self-Assessment Questionnaire (SAQ)](https://www.pcisecuritystandards.org/merchants/self_assessment_form.php) in order to be PCI compliant. There are several different types of SAQs, and a Qualified Security Assessor (QSA) can help you choose the right one for your business and achieve compliance. 
+Along with the added rigor that SOC 2 requires, our SOC 2 Type I compliance means that you can communicate to your customers that your realtime app is built on a SOC 2 compliant infrastructure.
 
----
+In addition to SOC 2 compliance, Qordoba has developed and maintains a suite of audited processes that reinforce the security of our service delivery environment:
 
-<div class="help">
-  <img align="left" src="/assets/images/icons/icn-lifesaver.svg"/> We are always willing to help and assist in answering specific questions about your scope of compliance. <a href="mailto:sales@mashape.com">We're Here to Help!</a>
-</div>
+- Data Encryption (in transit and at rest)
+- HIPAA Compliance
+- EU and US only Storage when required for PII data
+- Intelligent Data Routing to lock and/or block data streams to specific regions
+- US-EU Privacy Shield Framework Certified
+- Compliance with the EU Standard Contractual Clauses (aka ‘Model Clauses’)
+
