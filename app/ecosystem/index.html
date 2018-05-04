@@ -23,8 +23,8 @@ header_caption: Extend your stack with powerful integrations configurable per Se
             {% capture id %}{% if plugin.id %}{{ plugin.id }}{% else %}{{ plugin.name | slugify }}{% endif %}{% endcapture %}
             <div class="plugin-plate {% if plugin.enterprise == true %} enterprise {% endif %}">
               <div class="plugin-plate-header">
+                <img class="plugin-icon" src="/assets/images/icons/plugins/{% if plugin.enterprise == true %}ee-{% endif %}{{ id }}.png" alt="{{ plugin.name }}"/>
                 <h3>{{ plugin.name }}</h3>
-                <img class="plugin-icon" src="/assets/images/icons/plugins/{% if plugin.enterprise == true %}ee-{% endif %}{{ id }}.png" width="60" height="60" alt="{{ plugin.name }}"/>
               </div>
               <div class="plugin-plate-content">
                 <p>{{ plugin.info }}</p>
