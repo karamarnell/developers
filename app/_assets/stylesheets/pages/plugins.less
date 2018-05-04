@@ -95,6 +95,19 @@
     display: flex;
     align-items: center;
     justify-content: left;
+    @media (max-width: 768px) {
+      display: block;
+      min-height: 90px;
+      text-align: center;
+    }
+    img {
+      @media (max-width: 768px) {
+        margin-right: 0;
+      }
+    }
+    @media (max-width: 550px) {
+      min-height: auto;
+    }
 
     h3 {
       font-size: 16px;
@@ -103,7 +116,7 @@
     }
 
     @media (max-width: 900px) {
-      padding: 95px 16px 16px;
+      padding: 16px;
     }
   }
 
