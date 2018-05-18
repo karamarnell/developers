@@ -23,10 +23,10 @@ this plugin.
 
 Configuring the plugin is as simple as a single API call, you can configure and
 enable it for your [API][api-object] by executing the following request on your
-Kong server:
+Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=cors" \
     --data "config.origins=http://mockbin.com" \
     --data "config.methods=GET, POST" \
@@ -38,14 +38,14 @@ $ curl -X POST http://kong:8001/apis/{api}/plugins \
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/`
+You can also apply it for every API using the `http://qordoba:8001/plugins/`
 endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for
 more information.
 
 form parameter                             | default | description
 ---:                                       | ---     | ---
 `name`                                     |         | Name of the plugin to use, in this case: `cors`
-`config.origins`<br>*optional*             |         | A comma-separated list of allowed domains for the `Access-Control-Allow-Origin` header. If you wish to allow all origins, add `*` as a single value to this configuration field. The accepted values can either be flat strings or PCRE regexes. **NOTE**: Prior to Kong 0.10.x, this parameter was `config.origin` (note the change in trailing `s`), and only accepted a single value, or the `*` special value.
+`config.origins`<br>*optional*             |         | A comma-separated list of allowed domains for the `Access-Control-Allow-Origin` header. If you wish to allow all origins, add `*` as a single value to this configuration field. The accepted values can either be flat strings or PCRE regexes. **NOTE**: Prior to Qordoba 0.10.x, this parameter was `config.origin` (note the change in trailing `s`), and only accepted a single value, or the `*` special value.
 `config.methods`<br>*optional*             | `GET,HEAD,PUT,PATCH,POST,DELETE` | Value for the `Access-Control-Allow-Methods` header, expects a comma delimited string (e.g. `GET,POST`).
 `config.headers`<br>*optional*             | Value of the `Access-Control-Request-Headers`<br>request header | Value for the `Access-Control-Allow-Headers` header, expects a comma delimited string (e.g. `Origin, Authorization`).
 `config.exposed_headers`<br>*optional*     |         | Value for the `Access-Control-Expose-Headers` header, expects a comma delimited string (e.g. `Origin, Authorization`). If not specified, no custom headers are exposed.

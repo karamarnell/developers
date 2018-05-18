@@ -91,9 +91,9 @@ Note:  command line option-value pairs will override the configuration file opti
 
 ## Next Steps
 
-Now that you've added your API to Kong, let's learn how to enable plugins.
+Now that you've added your API to Qordoba, let's learn how to enable plugins.
 
 Go to [Enabling Plugins &rsaquo;][cli-configuration]
 
-[cli-configuration]: /docs/{{page.kong_version}}/qordoba-cli/cli-configuration
+[cli-configuration]: /docs/{{page.qordoba_version}}/qordoba-cli/cli-configuration
 

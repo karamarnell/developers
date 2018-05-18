@@ -12,7 +12,7 @@ nav:
   - label: Usage
     items:
       - label: Log Format
-      - label: Kong Process Errors
+      - label: Qordoba Process Errors
 ---
 
 Log request and response data over UDP to [Loggly](https://www.loggly.com).
@@ -21,17 +21,17 @@ Log request and response data over UDP to [Loggly](https://www.loggly.com).
 
 ## Configuration
 
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Kong server:
+Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=loggly" \
     --data "config.key=YOUR_LOGGLY_SERVICE_TOKEN"
 ```
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
 parameter                          | default | description
 ---                                | ---     | ---
@@ -40,7 +40,7 @@ parameter                          | default | description
 `config.host`<br>*optional*        | `logs-01.loggly.com` | The IP address or host name of Loggly server
 `config.port`<br>*optional*        |`514`    | The UDP port to send data to on the Loggly server
 `config.key`                       |         | Loggly [customer token](https://www.loggly.com/docs/customer-token-authentication-token/).
-`config.tags`<br>*optional*        | `kong`  | An optional list of [tags](https://www.loggly.com/docs/tags/) to support segmentation & filtering of logs.
+`config.tags`<br>*optional*        | `qordoba`  | An optional list of [tags](https://www.loggly.com/docs/tags/) to support segmentation & filtering of logs.
 `config.timeout`<br>*optional*     | `10000` | An optional timeout in milliseconds when sending data to the Loggly server
 `config.successful_severity`<br>*optional*  | `info` | An optional logging severity assigned to the all successful requests with response status code 400 .
 `config.client_errors_severity`<br>*optional* | `info` | An optional logging severity assigned to the all failed requests with response status code 400 or higher but less than 500.
@@ -78,7 +78,7 @@ Every request will be transmitted to Loggly in [SYSLOG](https://en.wikipedia.org
         "size": "434",
         "headers": {
             "Content-Length": "197",
-            "via": "kong/0.3.0",
+            "via": "qordoba/0.3.0",
             "Connection": "close",
             "access-control-allow-credentials": "true",
             "Content-Type": "application/json",
@@ -126,7 +126,7 @@ Every request will be transmitted to Loggly in [SYSLOG](https://en.wikipedia.org
     },
     "latencies": {
         "proxy": 1430,
-        "kong": 9,
+        "qordoba": 9,
         "request": 1921
     },
     "client_ip": "127.0.0.1",
@@ -139,18 +139,18 @@ A few considerations on the above JSON object:
 * `request` contains properties about the request sent by the client
 * `response` contains properties about the response sent to the client
 * `tries` contains the list of (re)tries (successes and failures) made by the load balancer for this request
-* `api` contains Kong properties about the specific API requested
-* `authenticated_entity` contains Kong properties about the authenticated credential (if an authentication plugin has been enabled)
+* `api` contains Qordoba properties about the specific API requested
+* `authenticated_entity` contains Qordoba properties about the authenticated credential (if an authentication plugin has been enabled)
 * `consumer` contains the authenticated Consumer (if an authentication plugin has been enabled)
 * `latencies` contains some data about the latencies involved:
   * `proxy` is the time it took for the final service to process the request
-  * `kong` is the internal Kong latency that it took to run all the plugins
+  * `qordoba` is the internal Qordoba latency that it took to run all the plugins
   * `request` is the time elapsed between the first bytes were read from the client and after the last bytes were sent to the client. Useful for detecting slow clients.
 * `client_ip` contains the original client IP address
 * `started_at` contains the UTC timestamp of when the API transaction has started to be processed.
 
 ----
 
-## Kong Process Errors
+## Qordoba Process Errors
 
-This logging plugin will only log HTTP request and response data. If you are looking for the Kong process error file (which is the nginx error file), then you can find it at the following path: {[prefix](/docs/{{site.data.kong_latest.release}}/configuration/#prefix)}/logs/error.log
+This logging plugin will only log HTTP request and response data. If you are looking for the Qordoba process error file (which is the nginx error file), then you can find it at the following path: {[prefix](/docs/{{site.data.qordoba_latest.release}}/configuration/#prefix)}/logs/error.log

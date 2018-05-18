@@ -11,7 +11,7 @@ nav:
       - label: Requesting Access
 ---
 
-The Request Transformer plugin for Kong Enterprise Edition builds on the Community Edition version of this plugin with enhanced capabilities to match portions of incoming requests using regular expressions, save those matched strings into variables, and substitute those strings into transformed requests via flexible templates.
+The Request Transformer plugin for Qordoba Enterprise Edition builds on the Community Edition version of this plugin with enhanced capabilities to match portions of incoming requests using regular expressions, save those matched strings into variables, and substitute those strings into transformed requests via flexible templates.
 
 <br />
 
@@ -24,8 +24,8 @@ The Request Transformer plugin for Kong Enterprise Edition builds on the Communi
 
 ## Requesting Access
 
-This plugin is only available with a [Kong Enterprise](https://konghq.com/kong-enterprise-edition)
+This plugin is only available with a [Qordoba Enterprise](https://qordobahq.com/qordoba-enterprise-edition)
 subscription.
 
-If you are not a Kong Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](https://konghq.com/request-demo).
+If you are not a Qordoba Enterprise customer, you can inquire about our
+Enterprise offering by [contacting us](https://qordobahq.com/request-demo).

@@ -1,13 +1,13 @@
 ---
 id: page-plugin
-title: Qordoba - Amazon simple queue service SQS i18n integration
+title: Qordoba - Amazon simple queue service SQS integration
 header_title: Qordoba - Amazon simple queue service SQS integration
-header_icon: /assets/images/icons/plugins/amazon-simple-queue-service-SQS-i18n-integration.png
+header_icon: /assets/images/icons/plugins/amazon-simple-queue-service-SQS-integration.png
 breadcrumbs:
   Plugins: /plugins
 ---
 
-Qordoba's Amazon SQS i18n Integration retrieves the content from message based on key. 
+Qordoba's Amazon SQS Integration retrieves the content from message based on key. 
 
 ```json
 [

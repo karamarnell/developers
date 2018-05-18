@@ -15,7 +15,7 @@ nav:
       - label: How it works
       - label: Logging bodies
       - label: FAQ
-  - label: Kong Process Errors
+  - label: Qordoba Process Errors
 ---
 
 Logs request and response data to [Galileo][galileo], the analytics platform for monitoring, visualizing and inspecting API & microservice traffic.
@@ -24,17 +24,17 @@ Logs request and response data to [Galileo][galileo], the analytics platform for
 
 ## Configuration
 
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Kong server:
+Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins/ \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins/ \
     --data "name=galileo" \
     --data "config.service_token=YOUR_SERVICE_TOKEN"
 ```
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
 form parameter                     | default | description
 ---                                | ---     | ---
@@ -67,23 +67,23 @@ The Galileo collector then processes your logs before you are able to see your t
 
 ## Logging bodies
 
-This plugin can have a performance impact when the `log_bodies` option is enabled. Buffering the bodies is an expansive operation for Kong and depending on their size, can put pressure on the LuaJIT VM.
+This plugin can have a performance impact when the `log_bodies` option is enabled. Buffering the bodies is an expansive operation for Qordoba and depending on their size, can put pressure on the LuaJIT VM.
 
 The buffer will only allow for bodies up to `20MB`, and for up to `200MB` of data queued for sending at once.
 
-When logging bodies, make sure to configure your `queue_size` so that Kong flushes frequently enough to the Galileo collector.
+When logging bodies, make sure to configure your `queue_size` so that Qordoba flushes frequently enough to the Galileo collector.
 
 ## FAQ
 
 #### Why can't I see my API logs on my Galileo dashboard?
 
-First of all, check the Kong logs for errors at:
+First of all, check the Qordoba logs for errors at:
 
 ```
 {nginx_working_dir}/logs/error.log
 ```
 
-If you don't see anything useful, you can reload Kong with the `debug` log level by editing your configuration file:
+If you don't see anything useful, you can reload Qordoba with the `debug` log level by editing your configuration file:
 
 ```
 error_log logs/error.log debug;
@@ -91,6 +91,6 @@ error_log logs/error.log debug;
 
 Now, you should see logs telling you what the plugin is doing, as well as responses from the Galileo collector. If the collector is able to process your data, it means Galileo is correctly receiving it. You'll want to make sure you have configured your plugin to send your data to the right `environment`.
 
-## Kong Process Errors
+## Qordoba Process Errors
 
-This logging plugin will only log HTTP request and response data. If you are looking for the Kong process error file (which is the nginx error file), then you can find it at the following path: {[prefix](/docs/{{site.data.kong_latest.release}}/configuration/#prefix)}/logs/error.log
+This logging plugin will only log HTTP request and response data. If you are looking for the Qordoba process error file (which is the nginx error file), then you can find it at the following path: {[prefix](/docs/{{site.data.qordoba_latest.release}}/configuration/#prefix)}/logs/error.log

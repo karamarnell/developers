@@ -8,14 +8,14 @@ breadcrumbs:
 redirect_from: /install/compile/
 ---
 
-{% capture luajit_version %}{{site.data.kong_latest.dependencies.luajit}}{% endcapture %}
-{% capture luarocks_version %}{{site.data.kong_latest.dependencies.luarocks}}{% endcapture %}
-{% capture openresty_version %}{{site.data.kong_latest.dependencies.openresty}}{% endcapture %}
+{% capture luajit_version %}{{site.data.qordoba_latest.dependencies.luajit}}{% endcapture %}
+{% capture luarocks_version %}{{site.data.qordoba_latest.dependencies.luarocks}}{% endcapture %}
+{% capture openresty_version %}{{site.data.qordoba_latest.dependencies.openresty}}{% endcapture %}
 
 1. **Install the dependencies**
 
     [OpenResty {{openresty_version}}](https://openresty.org/en/installation.html).
-    Kong being an OpenResty application, you must follow the OpenResty
+    Qordoba being an OpenResty application, you must follow the OpenResty
     [installation instructions](https://openresty.org/en/installation.html).
     You will need [OpenSSL](https://www.openssl.org/) and
     [PCRE](http://www.pcre.org/) to compile OpenResty, and to at least use the
@@ -36,7 +36,7 @@ redirect_from: /install/compile/
 
     OpenResty conveniently bundles [LuaJIT](http://luajit.org/) and
     [resty-cli](https://github.com/openresty/resty-cli) which are essential to
-    Kong. Add the `nginx` and `resty` executables to your $PATH:
+    Qordoba. Add the `nginx` and `resty` executables to your $PATH:
 
     ```bash
     $ export PATH="$PATH:/usr/local/openresty/bin"
@@ -53,59 +53,59 @@ redirect_from: /install/compile/
       --with-lua-include=/usr/local/openresty/luajit/include/luajit-2.1
     ```
 
-2. **Install Kong**
+2. **Install Qordoba**
 
-    Now that OpenResty is installed, we can use Luarocks to install Kong's Lua sources:
+    Now that OpenResty is installed, we can use Luarocks to install Qordoba's Lua sources:
 
     ```bash
-    $ luarocks install kong {{site.data.kong_latest.luarocks_version}}
+    $ luarocks install qordoba {{site.data.qordoba_latest.luarocks_version}}
     ```
 
     **Or**:
 
     ```bash
-    $ git clone git@github.com:Mashape/kong.git
-    $ [sudo] make install # this simply runs the `luarocks make kong-*.rockspec` command
+    $ git clone git@github.com:Mashape/qordoba.git
+    $ [sudo] make install # this simply runs the `luarocks make qordoba-*.rockspec` command
     ```
 
-    Finally, place the `bin/kong` script in your `$PATH`.
+    Finally, place the `bin/qordoba` script in your `$PATH`.
 
 3. **Prepare your database**
 
-    [Configure][configuration] Kong so it can connect to your database. Kong
-    supports both [PostgreSQL {{site.data.kong_latest.dependencies.postgres}}](http://www.postgresql.org/)
-    and [Cassandra {{site.data.kong_latest.dependencies.cassandra}}](http://cassandra.apache.org/)
+    [Configure][configuration] Qordoba so it can connect to your database. Qordoba
+    supports both [PostgreSQL {{site.data.qordoba_latest.dependencies.postgres}}](http://www.postgresql.org/)
+    and [Cassandra {{site.data.qordoba_latest.dependencies.cassandra}}](http://cassandra.apache.org/)
     as its datastore.
 
-    If you are using Postgres, please provision a database and a user before starting Kong, ie:
+    If you are using Postgres, please provision a database and a user before starting Qordoba, ie:
 
     ```sql
-    CREATE USER kong; CREATE DATABASE kong OWNER kong;
+    CREATE USER qordoba; CREATE DATABASE qordoba OWNER qordoba;
     ```
 
-    Now, run the Kong migrations:
+    Now, run the Qordoba migrations:
 
     ```bash
-    $ kong migrations up [-c /path/to/kong.conf]
+    $ qordoba migrations up [-c /path/to/qordoba.conf]
     ```
 
     **Note**: migrations should never be run concurrently; only
-    one Kong nodes should be performing migrations at a time.
+    one Qordoba nodes should be performing migrations at a time.
 
-4. **Start Kong**
+4. **Start Qordoba**
 
     ```bash
-    $ kong start [-c /path/to/kong.conf]
+    $ qordoba start [-c /path/to/qordoba.conf]
     ```
 
-5. **Use Kong**
+5. **Use Qordoba**
 
-    Kong is running:
+    Qordoba is running:
 
     ```bash
     $ curl -i http://localhost:8001/
     ```
 
-    Quickly learn how to use Kong with the [5-minute Quickstart](/docs/latest/getting-started/quickstart).
+    Quickly learn how to use Qordoba with the [5-minute Quickstart](/docs/latest/getting-started/quickstart).
 
-[configuration]: /docs/{{site.data.kong_latest.release}}/configuration#database
+[configuration]: /docs/{{site.data.qordoba_latest.release}}/configuration#database

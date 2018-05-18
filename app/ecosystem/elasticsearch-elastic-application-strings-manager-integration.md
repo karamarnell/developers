@@ -20,10 +20,10 @@ Rate limit how many HTTP requests a developer can make in a given period of seco
 
 ## Configuration
 
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Kong server:
+Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=rate-limiting" \
     --data "config.second=5" \
     --data "config.hour=10000"
@@ -31,7 +31,7 @@ $ curl -X POST http://kong:8001/apis/{api}/plugins \
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
 form parameter                     | default | description
 ---                                | ---     | ---
@@ -45,7 +45,7 @@ form parameter                     | default | description
 `config.year`<br>*semi-optional*   |         | The amount of HTTP requests the developer can make per year. At least one limit must exist.
 `config.limit_by`<br>*optional*    | `consumer` | The entity that will be used when aggregating the limits: `consumer`, `credential`, `ip`. If the `consumer` or the `credential` cannot be determined, the system will always fallback to `ip`.
 `config.policy`<br>*optional*      | `cluster`  | The rate-limiting policies to use for retrieving and incrementing the limits. Available values are `local` (counters will be stored locally in-memory on the node), `cluster` (counters are stored in the datastore and shared across the nodes) and `redis` (counters are stored on a Redis server and will be shared across the nodes).
-`config.fault_tolerant`<br>*optional* | `true` |  A boolean value that determines if the requests should be proxied even if Kong has troubles connecting a third-party datastore. If `true` requests will be proxied anyways effectively disabling the rate-limiting function until the datastore is working again. If `false` then the clients will see `500` errors.
+`config.fault_tolerant`<br>*optional* | `true` |  A boolean value that determines if the requests should be proxied even if Qordoba has troubles connecting a third-party datastore. If `true` requests will be proxied anyways effectively disabling the rate-limiting function until the datastore is working again. If `false` then the clients will see `500` errors.
 `config.hide_client_headers`<br>*optional* | `false` | Optionally hide informative response headers.
 `config.redis_host`<br>*semi-optional* |        | When using the `redis` policy, this property specifies the address to the Redis server.
 `config.redis_port`<br>*optional* | `6379`     | When using the `redis` policy, this property specifies the port of the Redis server. By default is `6379`.
@@ -57,7 +57,7 @@ form parameter                     | default | description
 
 ## Headers sent to the client
 
-When this plugin is enabled, Kong will send some additional headers back to the client telling how many requests are available and what are the limits allowed, for example:
+When this plugin is enabled, Qordoba will send some additional headers back to the client telling how many requests are available and what are the limits allowed, for example:
 
 ```
 X-RateLimit-Limit-Minute: 10
@@ -87,7 +87,7 @@ policy    | pros          | cons
 ---       | ---            | ---
 `cluster` | accurate, no extra components to support  | relatively the biggest performance impact, each request forces a read and a write on the underlying datastore.
 `redis`   | accurate, lesser performance impact than a `cluster` policy | extra redis installation required, bigger performance impact than a `local` policy
-`local`   | minimal performance impact | less accurate, and unless a consistent-hashing load balancer is used in front of Kong, it diverges when scaling the number of nodes
+`local`   | minimal performance impact | less accurate, and unless a consistent-hashing load balancer is used in front of Qordoba, it diverges when scaling the number of nodes
 
 There are 2 use cases that are most common:
 
@@ -100,10 +100,10 @@ There are 2 use cases that are most common:
 **NOTE**:
 
 <div class="alert alert-warning">
-  <strong>Enterprise-Only</strong> The Kong Community Edition of this Rate Limiting plugin does not
+  <strong>Enterprise-Only</strong> The Qordoba Community Edition of this Rate Limiting plugin does not
 include <a href="https://redis.io/topics/sentinel">Redis Sentinel</a> support.
-<a href="https://www.mashape.com/enterprise/">Kong Enterprise Subscription</a> customers have the option
-of using Redis Sentinel with Kong Rate Limiting to deliver highly available master-slave deployments.
+<a href="https://www.mashape.com/enterprise/">Qordoba Enterprise Subscription</a> customers have the option
+of using Redis Sentinel with Qordoba Rate Limiting to deliver highly available master-slave deployments.
 </div>
 
 ### Every transaction counts
@@ -122,7 +122,7 @@ your switch more carefully.
 
 As accuracy is of lesser importance, the `local` policy can be used. It might require some experimenting
 to get the proper setting. For example, if the user is bound to 100 requests per second, and you have an
-equally balanced 5 node Kong cluster, setting the `local` limit to something like 30 requests per second
+equally balanced 5 node Qordoba cluster, setting the `local` limit to something like 30 requests per second
 should work. If you are worried about too many false-negatives, increase the value.
 
 Keep in mind as the cluster scales to more nodes, the users will get more requests granted, and likewise
@@ -130,7 +130,7 @@ when the cluster scales down the probability of false-negatives increases. So in
 limits when scaling.
 
 The above mentioned inaccuracy can be mitigated by using a consistent-hashing load balancer in front of
-Kong, that ensures the same user is always directed to the same Kong node. This will both reduce the
+Qordoba, that ensures the same user is always directed to the same Qordoba node. This will both reduce the
 inaccuracy and prevent the scaling issues.
 
 Most likely the user will be granted more than was agreed when using the `local` policy, but it will

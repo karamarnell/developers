@@ -4,18 +4,18 @@ title: Proxy Reference
 
 # Proxy Reference
 
-Kong listens for traffic on four ports, which by default are:
+Qordoba listens for traffic on four ports, which by default are:
 
-- `:8000` on which Kong listens for incoming HTTP traffic from your clients,
+- `:8000` on which Qordoba listens for incoming HTTP traffic from your clients,
   and forwards it to your upstream services. **This is the port that interests
   us in this guide.**
-- `:8443` on which Kong listens for incoming HTTPS traffic. This port has a
+- `:8443` on which Qordoba listens for incoming HTTPS traffic. This port has a
   similar behavior as the `:8000` port, except that it expects HTTPS traffic
   only. This port can be disabled via the configuration file.
-- `:8001` on which the [Admin API][API] used to configure Kong listens.
+- `:8001` on which the [Admin API][API] used to configure Qordoba listens.
 - `:8444` on which the [Admin API][API] listens for HTTPS traffic.
 
-In this document we cover routing capabilities of Kong by explaining in detail
+In this document we cover routing capabilities of Qordoba by explaining in detail
 how incoming requests on port `:8000` are proxied to a configured upstream
 service depending on their headers, URI, and HTTP method.
 
@@ -23,7 +23,7 @@ service depending on their headers, URI, and HTTP method.
 
 - [Terminology][proxy-terminology]
 - [Overview][proxy-overview]
-- [Reminder: How to add an API to Kong][proxy-reminder]
+- [Reminder: How to add an API to Qordoba][proxy-reminder]
 - [Routing capabilities][proxy-routing-capabilities]
     - [Request Host header][proxy-request-host-header]
         - [Using wildcard hostnames][proxy-using-wildcard-hostnames]
@@ -51,7 +51,7 @@ service depending on their headers, URI, and HTTP method.
 
 [proxy-terminology]: #terminology
 [proxy-overview]: #overview
-[proxy-reminder]: #reminder-how-to-add-an-api-to-kong
+[proxy-reminder]: #reminder-how-to-add-an-api-to-qordoba
 [proxy-routing-capabilities]: #routing-capabilities
 [proxy-request-host-header]: #request-host-header
 [proxy-using-wildcard-hostnames]: #using-wildcard-hostnames
@@ -79,38 +79,38 @@ service depending on their headers, URI, and HTTP method.
 
 ## Terminology
 
-- `API`: This term refers to the API entity of Kong. You configure your APIs,
+- `API`: This term refers to the API entity of Qordoba. You configure your APIs,
   that point to your own upstream services, through the Admin API.
-- `Plugin`: This refers to Kong "plugins", which are pieces of business logic
+- `Plugin`: This refers to Qordoba "plugins", which are pieces of business logic
   that run in the proxying lifecycle. Plugins can be configured through the
   Admin API - either globally (all incoming traffic) or on a per-API basis.
-- `Client` or : Refers to the *downstream* client making requests to Kong's
+- `Client` or : Refers to the *downstream* client making requests to Qordoba's
   proxy port.
-- `Upstream service`: Refers to your own API/service sitting behind Kong, to
+- `Upstream service`: Refers to your own API/service sitting behind Qordoba, to
   which client requests are forwarded.
 
 [Back to TOC](#table-of-contents)
 
 ## Overview
 
-From a high level perspective, Kong will listen for HTTP traffic on its
+From a high level perspective, Qordoba will listen for HTTP traffic on its
 configured proxy port (`8000` by default), recognize which upstream service is
 being requested, run the configured plugins for that API, and forward the HTTP
 request upstream to your own API or service.
 
-When a client makes a request to the proxy port, Kong will decide to which
+When a client makes a request to the proxy port, Qordoba will decide to which
 upstream service or API to route (or forward) the incoming request, depending
-on the API configuration in Kong, which is managed via the Admin API. You can
+on the API configuration in Qordoba, which is managed via the Admin API. You can
 configure APIs with various properties, but the three relevant ones for routing
 incoming traffic are `hosts`, `uris`, and `methods`.
 
-If Kong cannot determine to which upstream API a given request should be
-routed, Kong will respond with:
+If Qordoba cannot determine to which upstream API a given request should be
+routed, Qordoba will respond with:
 
 ```http
 HTTP/1.1 404 Not Found
 Content-Type: application/json
-Server: kong/<x.x.x>
+Server: qordoba/<x.x.x>
 
 {
     "message": "no API found with those values"
@@ -119,11 +119,11 @@ Server: kong/<x.x.x>
 
 [Back to TOC](#table-of-contents)
 
-## Reminder: How to add an API to Kong
+## Reminder: How to add an API to Qordoba
 
-The [Adding your API][adding-your-api] quickstart guide explains how Kong is
-configured via Kong's [Admin API][API] running by default on port `8001`.
-Adding an API to Kong is as easy as sending an HTTP request:
+The [Adding your API][adding-your-api] quickstart guide explains how Qordoba is
+configured via Qordoba's [Admin API][API] running by default on port `8001`.
+Adding an API to Qordoba is as easy as sending an HTTP request:
 
 ```bash
 $ curl -i -X POST http://localhost:8001/apis/ \
@@ -136,13 +136,13 @@ HTTP/1.1 201 Created
 ...
 ```
 
-This request instructs Kong to register an API named "my-api", reachable at
+This request instructs Qordoba to register an API named "my-api", reachable at
 "http://my-api.com". It also specifies various routing properties, though note
 that **only one of** `hosts`, `uris` and `methods` is  required.
 
-Adding such an API would mean that you configured Kong to proxy all incoming
+Adding such an API would mean that you configured Qordoba to proxy all incoming
 requests matching the specified `hosts`, `uris`, and `methods` to
-`http://example.com`. Kong is a transparent proxy, and it will forward the
+`http://example.com`. Qordoba is a transparent proxy, and it will forward the
 request to your upstream service untouched, with the exception of the addition
 of various headers such as `Connection`.
 
@@ -150,7 +150,7 @@ of various headers such as `Connection`.
 
 ## Routing capabilities
 
-Let's now discuss how Kong matches a request to the configured `hosts`, `uris`
+Let's now discuss how Qordoba matches a request to the configured `hosts`, `uris`
 and `methods` properties (or fields) of your API. Note that all three of these
 fields are **optional**, but at least **one of them** must be specified. For a
 client request to match an API:
@@ -221,8 +221,8 @@ together, let's explore each property individually.
 ### Request Host header
 
 Routing a request based on its Host header is the most straightforward way to
-proxy traffic through Kong, as this is the intended usage of the HTTP Host
-header. Kong makes it easy to do so via the `hosts` field of the API entity.
+proxy traffic through Qordoba, as this is the intended usage of the HTTP Host
+header. Qordoba makes it easy to do so via the `hosts` field of the API entity.
 
 `hosts` accepts multiple values, which must be comma-separated when specifying
 them via the Admin API:
@@ -259,7 +259,7 @@ Host: service.com
 
 #### Using wildcard hostnames
 
-To provide flexibility, Kong allows you to specify hostnames with wildcards in
+To provide flexibility, Qordoba allows you to specify hostnames with wildcards in
 the `hosts` field. Wildcard hostnames allow any matching Host header to satisfy
 the condition, and thus match a given API.
 
@@ -297,9 +297,9 @@ Host: service.com
 
 #### The `preserve_host` property
 
-When proxying, Kong's default behavior is to set the upstream request's Host
+When proxying, Qordoba's default behavior is to set the upstream request's Host
 header to the hostname of the API's `upstream_url` property. The
-`preserve_host` field accepts a boolean flag instructing Kong not to do so.
+`preserve_host` field accepts a boolean flag instructing Qordoba not to do so.
 
 For example, when the `preserve_host` property is not changed and an API is
 configured like this:
@@ -312,14 +312,14 @@ configured like this:
 }
 ```
 
-A possible request from a client to Kong could be:
+A possible request from a client to Qordoba could be:
 
 ```http
 GET / HTTP/1.1
 Host: service.com
 ```
 
-Kong would extract the Host header value from the the hostname of the API's
+Qordoba would extract the Host header value from the the hostname of the API's
 `upstream_url` field, and would send the following request to your upstream
 service:
 
@@ -346,7 +346,7 @@ GET / HTTP/1.1
 Host: service.com
 ```
 
-Kong would preserve the Host on the client request and would send the following
+Qordoba would preserve the Host on the client request and would send the following
 request to your upstream service:
 
 ```http
@@ -358,7 +358,7 @@ Host: service.com
 
 ### Request URI
 
-Another way for Kong to route a request to a given upstream service is to
+Another way for Qordoba to route a request to a given upstream service is to
 specify a request URI via the `uris` property. To satisfy this field's
 condition, a client request's URI **must** be prefixed with one of the values
 of the `uris` field.
@@ -390,8 +390,8 @@ GET /hello/world/resource HTTP/1.1
 Host: anything.com
 ```
 
-For each of these requests, Kong detects that their URI is prefixed with one of
-the API's `uris` values. By default, Kong would then forward the request
+For each of these requests, Qordoba detects that their URI is prefixed with one of
+the API's `uris` values. By default, Qordoba would then forward the request
 upstream with the untouched, **same URI**.
 
 When proxying with URIs prefixes, **the longest URIs get evaluated first**.
@@ -402,7 +402,7 @@ This allow you to define two APIs with two URIs: `/service` and
 
 #### Using regexes in URIs
 
-Kong supports regular expression pattern matching for an API's `uris` field via
+Qordoba supports regular expression pattern matching for an API's `uris` field via
 [PCRE](http://pcre.org/) (Perl Compatible Regular Expression). You can assign
 URIs as both prefixes and regexes to an API at the same time.
 
@@ -416,7 +416,7 @@ For example, if we consider the following API:
 }
 ```
 
-The following requests would match this API and be proxied by Kong:
+The following requests would match this API and be proxied by Qordoba:
 
 ```http
 GET /following HTTP/1.1
@@ -436,8 +436,8 @@ in the URI (the root `/` character).
 
 ##### Evaluation order
 
-As previously mentioned, Kong evaluates prefix URIs by length: the longest
-prefix URIs are evaluated first. However, Kong will evaluate regex URIs **based
+As previously mentioned, Qordoba evaluates prefix URIs by length: the longest
+prefix URIs are evaluated first. However, Qordoba will evaluate regex URIs **based
 on the order in which they are defined**. This means that considering the
 following APIs:
 
@@ -461,7 +461,7 @@ following APIs:
 ]
 ```
 
-In this scenario, Kong will evaluate incoming requests against the following
+In this scenario, Qordoba will evaluate incoming requests against the following
 defined URIs, in this order:
 
 1. `/version`
@@ -472,7 +472,7 @@ URI prefixes are always evaluated first. Then, `api-1` is defined before
 `api-2`, and hence, sees its `uris` evaluated first.
 
 As usual, a request must still match an API's `hosts` and `methods` properties
-as well, and Kong will traverse your APIs until it finds one that matches
+as well, and Qordoba will traverse your APIs until it finds one that matches
 the most rules (see [Routing priorities][proxy-routing-priorities]).
 
 [Back to TOC](#table-of-contents)
@@ -493,7 +493,7 @@ And the following request URI:
 /version/1/users/john
 ```
 
-Kong will consider the request URI a match, and if the overall API is matched
+Qordoba will consider the request URI a match, and if the overall API is matched
 (considering `hosts` and `methods` fields), the extracted capturing groups
 will be available from the plugins in the `ngx.ctx` variable:
 
@@ -526,10 +526,10 @@ HTTP/1.1 201 Created
 
 Note that `curl` does not automatically URL encode your payload, and note the
 usage of `--data-urlencode`, which prevents the `+` character to be URL decoded
-and interpreted as a space ` ` by Kong's Admin API.
+and interpreted as a space ` ` by Qordoba's Admin API.
 
 Last but not least - and still related to special characters commonly found in
-PCRE sequences - we must consider the comma, which is used by Kong to delimit
+PCRE sequences - we must consider the comma, which is used by Qordoba to delimit
 several entries in the `uris` property. Because of this, commas used in a PCRE
 sequence must be escaped, like so:
 
@@ -545,7 +545,7 @@ HTTP/1.1 201 Created
 In the above example, two regex URIs are defined, and both of these URIs
 contain a repeated escape sequence: `\d+{1,3}`. Because those two URIs are
 separated via a comma delimiter, we must escape any comma present in the
-regexes themselves to ensure Kong's Admin API does not interpret them as a
+regexes themselves to ensure Qordoba's Admin API does not interpret them as a
 separator.
 
 [Back to TOC](#table-of-contents)
@@ -565,7 +565,7 @@ property by configuring an API like this:
 }
 ```
 
-Enabling this flag instructs Kong that when proxying this API, it should
+Enabling this flag instructs Qordoba that when proxying this API, it should
 **not** include the matching URI prefix in the upstream request's URI. For
 example, the following client's request to the API configured as above:
 
@@ -574,7 +574,7 @@ GET /service/path/to/resource HTTP/1.1
 Host:
 ```
 
-Will cause Kong to send the following request to your upstream service:
+Will cause Qordoba to send the following request to your upstream service:
 
 ```http
 GET /path/to/resource HTTP/1.1
@@ -600,7 +600,7 @@ GET /version/1/service/path/to/resource HTTP/1.1
 Host: ...
 ```
 
-Will be proxied upstream by Kong as:
+Will be proxied upstream by Qordoba as:
 
 ```http
 GET /path/to/resource HTTP/1.1
@@ -611,8 +611,8 @@ Host: my-api.com
 
 ### Request HTTP method
 
-Starting with Kong 0.10, client requests can also be routed depending on their
-HTTP method by specifying the `methods` field. By default, Kong will route a
+Starting with Qordoba 0.10, client requests can also be routed depending on their
+HTTP method by specifying the `methods` field. By default, Qordoba will route a
 request to an API regardless of its HTTP method. But when this field is set,
 only requests with the specified HTTP methods will be matched.
 
@@ -651,12 +651,12 @@ limiting plugins to such requests).
 ## Routing priorities
 
 An API may define matching rules based on its `hosts`, `uris`, and `methods`
-fields. For Kong to match an incoming request to an API, all existing fields
-must be satisfied. However, Kong allows for quite some flexibility by allowing
+fields. For Qordoba to match an incoming request to an API, all existing fields
+must be satisfied. However, Qordoba allows for quite some flexibility by allowing
 two or more APIs to be configured with fields containing the same values - when
-this occurs, Kong applies a priority rule.
+this occurs, Qordoba applies a priority rule.
 
-The rule is that : **when evaluating a request, Kong will first try
+The rule is that : **when evaluating a request, Qordoba will first try
 to match the APIs with the most rules**.
 
 For example, two APIs are configured like this:
@@ -676,7 +676,7 @@ For example, two APIs are configured like this:
 ```
 
 api-2 has a `hosts` field **and** a `methods` field, so it will be
-evaluated first by Kong. By doing so, we avoid api-1 "shadowing" calls
+evaluated first by Qordoba. By doing so, we avoid api-1 "shadowing" calls
 intended for api-2.
 
 Thus, this request will match api-1:
@@ -694,26 +694,26 @@ Host: example.com
 ```
 
 Following this logic, if a third API was to be configured with a `hosts` field,
-a `methods` field, and a `uris` field, it would be evaluated first by Kong.
+a `methods` field, and a `uris` field, it would be evaluated first by Qordoba.
 
 [Back to TOC](#table-of-contents)
 
 ## Proxying behavior
 
-The proxying rules above detail how Kong forwards incoming requests to your
+The proxying rules above detail how Qordoba forwards incoming requests to your
 upstream services. Below we detail what happens internally between the time
-Kong *recognizes* an HTTP request to a target service, and the actual
+Qordoba *recognizes* an HTTP request to a target service, and the actual
 *forwarding* of the request upstream.
 
 [Back to TOC](#table-of-contents)
 
 ### 1. Load balancing
 
-Starting with Kong 0.10, Kong implements load balancing capabilities to
+Starting with Qordoba 0.10, Qordoba implements load balancing capabilities to
 distribute the forwarded requests across multiple instances of an upstream
 service.
 
-Previous to Kong 0.10, Ordinarily, Kong would send proxied requests to the
+Previous to Qordoba 0.10, Ordinarily, Qordoba would send proxied requests to the
 `upstream_url`, and load balancing across multiple upstream instances required
 an external load balancer.
 
@@ -724,7 +724,7 @@ consulting the [Load Balancing Reference][load-balancing-reference].
 
 ### 2. Plugins execution
 
-Kong is extensible via "plugins" that hook themselves in the
+Qordoba is extensible via "plugins" that hook themselves in the
 request/response lifecycle of the proxied requests. Plugins can perform a
 variety of operations in your environment and/or transformations on the proxied
 request.
@@ -734,7 +734,7 @@ per-API basis by creating a [plugin configuration][plugin-configuration-object]
 through the Admin API.
 
 When a plugin is configured for a given API, and the API has been matched from
-an incoming request, Kong will execute the configured plugin(s) for this
+an incoming request, Qordoba will execute the configured plugin(s) for this
 request before proxying it to your upstream service. This includes, among
 others, the `access` phase of the plugin, on which you can find more
 informations about in the [Plugin development guide][plugin-development-guide].
@@ -743,10 +743,10 @@ informations about in the [Plugin development guide][plugin-development-guide].
 
 ### 3. Proxying & upstream timeouts
 
-Once Kong has executed all the necessary logic (including plugins), it is ready
+Once Qordoba has executed all the necessary logic (including plugins), it is ready
 to forward the request to your upstream service. This is done via Nginx's
-[ngx_http_proxy_module][ngx-http-proxy-module]. Since Kong `0.10`, the timeout
-duration for the connections between Kong and your upstream services may be
+[ngx_http_proxy_module][ngx-http-proxy-module]. Since Qordoba `0.10`, the timeout
+duration for the connections between Qordoba and your upstream services may be
 configured via these three properties of the API object:
 
 - `upstream_connect_timeout`: defines in milliseconds the timeout for
@@ -758,7 +758,7 @@ configured via these three properties of the API object:
   successive read operations for receiving a request from your upstream
   service.  Defaults to `60000`.
 
-Kong will send the request over HTTP/1.1, and set the following headers:
+Qordoba will send the request over HTTP/1.1, and set the following headers:
 
 - `Host: <your_upstream_host>`, as previously described in this document.
 - `Connection: keep-alive`, to allow for reusing the upstream connections.
@@ -787,9 +787,9 @@ Kong will send the request over HTTP/1.1, and set the following headers:
   if provided. Otherwise, the value of the `$server_port` variable provided by
   [ngx_http_core_module][ngx-server-port-variable] will be used.
 
-All the other request headers are forwarded as-is by Kong.
+All the other request headers are forwarded as-is by Qordoba.
 
-One exception to this is made when using the WebSocket protocol. If so, Kong
+One exception to this is made when using the WebSocket protocol. If so, Qordoba
 will set the following headers to allow for upgrading the protocol between the
 client and your upstream services:
 
@@ -803,7 +803,7 @@ More information on this topic is covered in the
 
 ### 4. Errors & retries
 
-Whenever an error occurs during proxying, Kong will use the underlying
+Whenever an error occurs during proxying, Qordoba will use the underlying
 Nginx [retries][ngx-http-proxy-retries] mechanism to pass the request on to
 the next upstream.
 
@@ -813,13 +813,13 @@ There are two configurable elements here:
    property of the `API` object. See the [management API][API] for more
    details on this.
 
-2. What exactly constitutes an error: here Kong uses the Nginx defaults, which
+2. What exactly constitutes an error: here Qordoba uses the Nginx defaults, which
    means an error or timeout occuring while establishing a connection with the
    server, passing a request to it, or reading the response header.
 
 The second option is based on Nginx's
 [proxy_next_upstream][proxy_next_upstream] directive. This option is not
-directly configurable through Kong, but can be added using a custom Nginx
+directly configurable through Qordoba, but can be added using a custom Nginx
 configuration. See the [configuration reference][configuration-reference] for
 more details.
 
@@ -827,24 +827,24 @@ more details.
 
 ### 5. Response
 
-Kong receives the response from the upstream service and send it back to the
-downstream client in a streaming fashion. At this point Kong will execute
+Qordoba receives the response from the upstream service and send it back to the
+downstream client in a streaming fashion. At this point Qordoba will execute
 subsequent plugins added to that particular API that implement a hook in the
 `header_filter` phase.
 
 Once the `header_filter` phase of all registered plugins has been executed, the
-following headers will be added by Kong and the full set of headers be sent to
+following headers will be added by Qordoba and the full set of headers be sent to
 the client:
 
-- `Via: kong/x.x.x`, where `x.x.x` is the Kong version in use
-- `Kong-Proxy-Latency: <latency>`, where `latency` is the time in milliseconds
-  between Kong receiving the request from the client and sending the request to
+- `Via: qordoba/x.x.x`, where `x.x.x` is the Qordoba version in use
+- `Qordoba-Proxy-Latency: <latency>`, where `latency` is the time in milliseconds
+  between Qordoba receiving the request from the client and sending the request to
   your upstream service.
-- `Kong-Upstream-Latency: <latency>`, where `latency` is the time in
-  milliseconds that Kong was waiting for the first byte of the upstream service
+- `Qordoba-Upstream-Latency: <latency>`, where `latency` is the time in
+  milliseconds that Qordoba was waiting for the first byte of the upstream service
   response.
 
-Once the headers are sent to the client, Kong will start executing
+Once the headers are sent to the client, Qordoba will start executing
 registered plugins for that API that implement the `body_filter` hook. This
 hook may be called multiple times, due to the streaming nature of Nginx itself.
 Each chunk of the upstream response that is successfully processed by such
@@ -856,9 +856,9 @@ guide][plugin-development-guide].
 
 ## Configuring a fallback API
 
-As a practical use-case and example of the flexibility offered by Kong's
+As a practical use-case and example of the flexibility offered by Qordoba's
 proxying capabilities, let's try to implement a "fallback API", so that in
-order to avoid Kong responding with an HTTP `404`, "API not found", we can
+order to avoid Qordoba responding with an HTTP `404`, "API not found", we can
 catch such requests and proxy them to a special upstream service of yours, or
 apply a plugin to it (such a plugin could, for example, terminate the request
 with a different status code or response without proxying the request).
@@ -873,23 +873,23 @@ Here is an example of such a fallback API:
 }
 ```
 
-As you can guess, any HTTP request made to Kong would actually match this API,
+As you can guess, any HTTP request made to Qordoba would actually match this API,
 since all URIs are prefixed by the root character `/`. As we know from the
 [Request URI][proxy-request-uri] section, the longest URIs are evaluated first
-by Kong, so the `/` URI will eventually be evaluated last by Kong, and
+by Qordoba, so the `/` URI will eventually be evaluated last by Qordoba, and
 effectively provide a "fallback" API, only matched as a last resort.
 
 [Back to TOC](#table-of-contents)
 
 ## Configuring SSL for an API
 
-Kong provides a way to dynamically serve SSL certificates on a per-connection
+Qordoba provides a way to dynamically serve SSL certificates on a per-connection
 basis. Starting with 0.10, the SSL plugin has been removed and SSL certificates
 are directly handled by the core, and configurable via the Admin API. Your
 client HTTP library must support the [Server Name Indication][SNI] extension to
 make use of this feature.
 
-SSL certificates are handled by two resources of the Kong Admin API:
+SSL certificates are handled by two resources of the Qordoba Admin API:
 
 - `/certificates`, which stores your keys and certificates.
 - `/snis`, which associates a registered certificate with a Server Name
@@ -913,7 +913,7 @@ HTTP/1.1 201 Created
 The `snis` form parameter is a sugar parameter, directly inserting an SNI and
 associating the uploaded certificate to it.
 
-You must now register the following API within Kong. We'll route requests to
+You must now register the following API within Qordoba. We'll route requests to
 this API using the Host header for convenience:
 
 ```bash
@@ -925,7 +925,7 @@ HTTP/1.1 201 Created
 ...
 ```
 
-You can now expect the API to be served over HTTPs by Kong:
+You can now expect the API to be served over HTTPs by Qordoba:
 
 ```bash
 $ curl -i https://localhost:8443/ \
@@ -951,8 +951,8 @@ HTTP/1.1 201 Created
 ...
 ```
 
-By configuring your API like so, Kong will refuse to proxy traffic for it
-without HTTPS. A request to Kong over plain HTTP targetting this API would
+By configuring your API like so, Qordoba will refuse to proxy traffic for it
+without HTTPS. A request to Qordoba over plain HTTP targetting this API would
 instruct your clients to upgrade to HTTPS:
 
 ```bash
@@ -963,7 +963,7 @@ Content-Type: application/json; charset=utf-8
 Transfer-Encoding: chunked
 Connection: Upgrade
 Upgrade: TLS/1.2, HTTP/1.1
-Server: kong/x.x.x
+Server: qordoba/x.x.x
 
 {"message":"Please use HTTPS protocol"}
 ```
@@ -996,18 +996,18 @@ HTTP/1.1 200 OK
 ...
 ```
 
-Kong now proxies this request, because it assumes SSL termination has been
+Qordoba now proxies this request, because it assumes SSL termination has been
 achieved by a previous component of your architecture.
 
 [Back to TOC](#table-of-contents)
 
 ## Proxy WebSocket traffic
 
-Kong supports WebSocket traffic thanks to the underlying Nginx implementation.
+Qordoba supports WebSocket traffic thanks to the underlying Nginx implementation.
 When you wish to establish a WebSocket connection between a client and your
-upstream services *through* Kong, you must establish a WebSocket handshake.
+upstream services *through* Qordoba, you must establish a WebSocket handshake.
 This is done via the HTTP Upgrade mechanism. This is what your client request
-made to Kong would look like:
+made to Qordoba would look like:
 
 ```http
 GET / HTTP/1.1
@@ -1016,7 +1016,7 @@ Host: my-websocket-api.com
 Upgrade: WebSocket
 ```
 
-This will make Kong forward the `Connection` and `Upgrade` headers to your
+This will make Qordoba forward the `Connection` and `Upgrade` headers to your
 upstream service, instead of dismissing them due to the hop-by-hop nature of a
 standard HTTP proxy.
 
@@ -1025,7 +1025,7 @@ standard HTTP proxy.
 ## Conclusion
 
 Through this guide, we hope you gained knowledge of the underlying proxying
-mechanism of Kong, from how is a request matched to an API, to how to allow for
+mechanism of Qordoba, from how is a request matched to an API, to how to allow for
 using the WebSocket protocol or setup SSL for an API.
 
 This website is Open-Source and can be found at
@@ -1038,12 +1038,12 @@ topic we just covered.
 
 [Back to TOC](#table-of-contents)
 
-[plugin-configuration-object]: /docs/{{page.kong_version}}/admin-api#plugin-object
-[plugin-development-guide]: /docs/{{page.kong_version}}/plugin-development
-[load-balancing-reference]: /docs/{{page.kong_version}}/loadbalancing
-[configuration-reference]: /docs/{{page.kong_version}}/configuration-reference
-[adding-your-api]: /docs/{{page.kong_version}}/getting-started/adding-your-api
-[API]: /docs/{{page.kong_version}}/admin-api
+[plugin-configuration-object]: /docs/{{page.qordoba_version}}/admin-api#plugin-object
+[plugin-development-guide]: /docs/{{page.qordoba_version}}/plugin-development
+[load-balancing-reference]: /docs/{{page.qordoba_version}}/loadbalancing
+[configuration-reference]: /docs/{{page.qordoba_version}}/configuration-reference
+[adding-your-api]: /docs/{{page.qordoba_version}}/getting-started/adding-your-api
+[API]: /docs/{{page.qordoba_version}}/admin-api
 
 [ngx-http-proxy-module]: http://nginx.org/en/docs/http/ngx_http_proxy_module.html
 [ngx-http-realip-module]: http://nginx.org/en/docs/http/ngx_http_realip_module.html

@@ -1,7 +1,7 @@
 ---
 id: page-install-method
-title: Install - Kong on DCOS
-header_title: Kong deployment on DC/OS cluster
+title: Install - Qordoba on DCOS
+header_title: Qordoba deployment on DC/OS cluster
 header_icon: /assets/images/icons/icn-installation.svg
 breadcrumbs:
   Installation: /install
@@ -16,7 +16,7 @@ links:
   hello-app: "https://hub.docker.com/r/mashape/node-web-app/"
 ---
 
-Kong can be provisioned on a Mesosphere DC/OS cluster using following
+Qordoba can be provisioned on a Mesosphere DC/OS cluster using following
 steps:
 
 The following steps use AWS for provisioning the DC/OS cluster and assume you 
@@ -29,8 +29,8 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
     Download or clone the following repo:
 
     ```bash
-    $ git clone git@github.com:Mashape/kong-dist-dcos.git
-    $ cd kong-dist-dcos
+    $ git clone git@github.com:Mashape/qordoba-dist-dcos.git
+    $ cd qordoba-dist-dcos
     ```
 
     Skip to step 3 if you have already provisioned a DC/OS cluster.
@@ -39,9 +39,9 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
 
     Following the DC/OS
     [AWS documentation]({{ page.links.mesos-aws }}), deploy a DC/OS cluster on
-    which Kong will be provisioned
+    which Qordoba will be provisioned
     
-    Once your cluster is ready, Kong can be deployed using the
+    Once your cluster is ready, Qordoba can be deployed using the
     [DC/OS CLI]({{ page.links.mesos-cli }}) or the
     [DC/OS GUI]({{ page.links.mesos-gui }}).      
 
@@ -56,9 +56,9 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
     $ dcos package install marathon-lb
     ```
 
-4. **Deploy a Kong-supported database**
+4. **Deploy a Qordoba-supported database**
 
-    Before deploying Kong, you need to provision a Cassandra or PostgreSQL
+    Before deploying Qordoba, you need to provision a Cassandra or PostgreSQL
     instance.
 
     For Cassandra, use the `cassandra` package to deploy 3 nodes of Cassandra
@@ -80,9 +80,9 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
         "mem": 512
       },
       "database": {
-        "username": "kong",
-        "password": "kong",
-        "dbname": "kong"
+        "username": "qordoba",
+        "password": "qordoba",
+        "dbname": "qordoba"
       },
       "storage": {
         "host_volume": "/tmp",
@@ -113,9 +113,9 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
 
     | Config  |     Description |
     |----------|:---------------|
-    | `username` |This parameter configures the username for the Kong database|
-    | `password` |This parameter configures the password for the Kong database|
-    | `dbname` |This parameter configures the name of the kong database|
+    | `username` |This parameter configures the username for the Qordoba database|
+    | `password` |This parameter configures the password for the Qordoba database|
+    | `dbname` |This parameter configures the name of the qordoba database|
     | `persistence`|This parameter enables persistent volumes for PostgreSQL|
 
     Install PostgreSQL using `postgres.json` file from the repo:
@@ -124,16 +124,16 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
     $ dcos package install postgresql --options=postgres.json
     ```
 
-5. **Deploy Kong**
+5. **Deploy Qordoba**
 
-    Now we have an external load balancer and Kong-supported database
-    running. Using the `kong` package from Universe repo, deploy Kong
+    Now we have an external load balancer and Qordoba-supported database
+    running. Using the `qordoba` package from Universe repo, deploy Qordoba
     with the following options:
 
     ```json
     {
       "service": {
-        "name": "kong",
+        "name": "qordoba",
         "instances": 1,
         "cpus": 1,
         "mem": 512,
@@ -148,14 +148,14 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
         "postgres": {
           "host": "postgresql.marathon.l4lb.thisdcos.directory",
           "port": 5432,
-          "database": "kong",
-          "user": "kong",
-          "password": "kong"
+          "database": "qordoba",
+          "user": "qordoba",
+          "password": "qordoba"
         },
         "cassandra": {
           "contact-points": "node-0.cassandra.mesos, node-1.cassandra.mesos, node-2.cassandra.mesos",
           "port": 9042,
-          "keyspace": "kong"
+          "keyspace": "qordoba"
         }
       },
       "networking": {
@@ -178,14 +178,14 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
     }
     ```
 
-    It configures Kong as follows:
+    It configures Qordoba as follows:
 
     | Config  |     Description |
     |----------|:---------------|
-    | `configurations.log_level`|Sets the Kong's log_level configuration|
-    | `configurations.custom-envs`|A space-separated list of Kong configurations|
-    | `configurations.database.use-cassandra`|If `true`, Cassandra is used as the Kong database|
-    | `configurations.database.migration`| If `true`, Kong will run migrations during start|
+    | `configurations.log_level`|Sets the Qordoba's log_level configuration|
+    | `configurations.custom-envs`|A space-separated list of Qordoba configurations|
+    | `configurations.database.use-cassandra`|If `true`, Cassandra is used as the Qordoba database|
+    | `configurations.database.migration`| If `true`, Qordoba will run migrations during start|
     | `configurations.postgres.host`| PostgreSQL host name|
     | `configurations.postgres.port`| PostgreSQL port|
     | `configurations.postgres.database`| PostgreSQL database name|
@@ -194,43 +194,43 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
     | `configurations.cassandra.contact-points`| Comma-delimited list of Cassandra contact points|
     | `configurations.cassandra.port`| Port on which Cassandra is listening for queries|
     | `configurations.cassandra.keyspace`| Keyspace to use in Cassandra. Will be created if it doesn't exist|
-    | `networking.proxy.external-access`| If `true`, allows external access to Kong's proxy port|
-    | `networking.proxy.virtual-host`| The virtual host address to integrate Kong proxy port with Marathon-lb|
+    | `networking.proxy.external-access`| If `true`, allows external access to Qordoba's proxy port|
+    | `networking.proxy.virtual-host`| The virtual host address to integrate Qordoba proxy port with Marathon-lb|
     | `networking.proxy.https-redirect`| If `true`, Marathon-lb redirects HTTP traffic to HTTPS. This requires 'virtual-host' to be set|
-    | `networking.proxy.service-port`| Port number to be used for reaching Kong's proxy port from outside of the cluster|
+    | `networking.proxy.service-port`| Port number to be used for reaching Qordoba's proxy port from outside of the cluster|
     | `networking.proxy.vip-port`| Port number to be used for communication internally to the Proxy API. Default is 8000|
     | `networking.proxy.vip-port-ssl`| Port number to be used for secure communication internally to the Proxy API. Default is 8443|
-    | `networking.admin.external-access`| If `true`, allows external access to Kong's admin port|
-    | `networking.admin.virtual-host`| The virtual host address to integrate Kong admin port with Marathon-lb|
+    | `networking.admin.external-access`| If `true`, allows external access to Qordoba's admin port|
+    | `networking.admin.virtual-host`| The virtual host address to integrate Qordoba admin port with Marathon-lb|
     | `networking.admin.https-redirect`| If `true`, Marathon-lb redirects HTTP traffic to HTTPS. This requires 'virtual-host' to be set|
-    | `networking.admin.service-port`| Port number to be used for reaching Kong's admin port from outside of the cluster|
+    | `networking.admin.service-port`| Port number to be used for reaching Qordoba's admin port from outside of the cluster|
     | `networking.admin.vip-port`| Port number to be used for communication internally to the Admin API. Default is 8001|
     | `networking.admin.vip-port-ssl`| Port number to be used for secure communication internally to the Admin API. Default is 8444|
 
     Note: Tweak the above configuration based on you datastore choice.
 
-    Run the following command to install Kong package:
+    Run the following command to install Qordoba package:
 
     ```bash
-    $ dcos package install kong --options=kong_postgres.json
+    $ dcos package install qordoba --options=qordoba_postgres.json
     ```
 
 6. **Verify your deployments**
 
-    To verify that our Kong instance is up and running, we can use `dcos task`
+    To verify that our Qordoba instance is up and running, we can use `dcos task`
     command:
 
     ```bash
     $ dcos task
     NAME         HOST        USER  STATE  ID
-    kong         10.0.1.8   root    R    kong.af46c916-3b55-11e7-844e-52921ef4378d
+    qordoba         10.0.1.8   root    R    qordoba.af46c916-3b55-11e7-844e-52921ef4378d
     marathon-lb  10.0.4.42  root    R    marathon-lb.d65c3cc3-3b54-11e7-844e-52921ef4378d
     postgres     10.0.1.8   root    R    postgres.5b0a2635-3b55-11e7-844e-52921ef4378d
     ```
 
-7. **Using Kong**
+7. **Using Qordoba**
 
-    Now that Kong is installed, to test the configuration, SSH into one of the
+    Now that Qordoba is installed, to test the configuration, SSH into one of the
     instances in the cluster (such as a master), and try curl-ing the endpoints:
 
     **Admin**
@@ -257,31 +257,31 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
 
     In this example, the public DNS name used is
     `mesos-tes-PublicSl-1TJB5U5K35XXT-591175086.us-east-1.elb.amazonaws.com`
-    for exposing Kong's proxy port.
+    for exposing Qordoba's proxy port.
 
-    Note: Kong returning 404 on proxy port is a valid response as no API was
+    Note: Qordoba returning 404 on proxy port is a valid response as no API was
     registered yet.
 
-8. **Uninstalling Kong**
+8. **Uninstalling Qordoba**
 
-    To uninstall Kong, run the following command:
+    To uninstall Qordoba, run the following command:
 
     ```bash
-    $ dcos package uninstall kong
+    $ dcos package uninstall qordoba
     ```
 
 9. **Example**
 
     For this demo, we created an app which returns `Hello world` on port `8080`.
-    Using the `my_app.json` file from the kong-dist-dcos repo, deploy the app in
+    Using the `my_app.json` file from the qordoba-dist-dcos repo, deploy the app in
     the cluster which will act as a backend server to process requests received
-    from Kong:
+    from Qordoba:
 
     ```bash
     $ dcos marathon app add my_app.json
     ```
 
-    Create an API on Kong:
+    Create an API on Qordoba:
 
     ```bash
     $ curl -i -X POST marathon-lb.marathon.mesos:10002/apis \
@@ -304,5 +304,5 @@ have basic knowledge of [DC/OS]({{ page.links.dcos }}),
     Hello world
     ```
  
-    Quickly learn how to use Kong with the 
+    Quickly learn how to use Qordoba with the 
     [5-minute Quickstart](/docs/latest/getting-started/quickstart/).

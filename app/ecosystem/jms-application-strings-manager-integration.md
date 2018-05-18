@@ -22,24 +22,24 @@ Correlate requests and responses using a unique ID transmitted over an HTTP head
 
 ## Configuration
 
-Configuring the plugin is straightforward. You can associate it with an [API][api-object] by executing the following request to your Kong server:
+Configuring the plugin is straightforward. You can associate it with an [API][api-object] by executing the following request to your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=correlation-id" \
-    --data "config.header_name=Kong-Request-ID" \
+    --data "config.header_name=Qordoba-Request-ID" \
     --data "config.generator=uuid#counter" \
     --data "config.echo_downstream=false"
 ```
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
 form parameter                  | default           | description
 ---                             | ---               | ---
 `name`                          |                   | The name of the plugin to use, in this case: `correlation-id`
-`header_name`<br>*optional*     | `Kong-Request-ID` | The HTTP header name to use for the correlation ID. 
+`header_name`<br>*optional*     | `Qordoba-Request-ID` | The HTTP header name to use for the correlation ID. 
 `generator`<br>*optional*       | `uuid#counter`    | The generator to use for the correlation ID. Accepted values are `uuid`, `uuid#counter` and `tracker` See [Generators](#generators).
 `echo_downstream`<br>*optional* | `false`           | Whether to echo the header back to downstream (the client).
 
@@ -49,7 +49,7 @@ form parameter                  | default           | description
 
 ## How it works
 
-When enabled, this plugin will add a new header to all of the requests processed by Kong. This header bears the name configured in `config.header_name`, and a unique value generated according to `config.generator`.
+When enabled, this plugin will add a new header to all of the requests processed by Qordoba. This header bears the name configured in `config.header_name`, and a unique value generated according to `config.generator`.
 
 This header is always added to calls to your upstream services, and optionally echoed back to your clients according to the `config.echo_downstream` setting.
 
@@ -99,6 +99,6 @@ form parameter      | description
 
 ## FAQ
 
-#### Can I see my correlation ids in my Kong logs?
+#### Can I see my correlation ids in my Qordoba logs?
 
 The correlation id will not show up in the Nginx access or error logs. As such, we suggest you use this plugin alongside one of the Logging plugins, or store this id on your backend-side.

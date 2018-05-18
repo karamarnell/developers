@@ -22,12 +22,12 @@ consumer_body: |
     Attributes | Description
     ---:| ---
     `username`<br>**semi-optional** | The unique username of the consumer. You must send either this field or `custom_id` with the request.
-    `custom_id`<br>**semi-optional** | Field for storing an existing unique ID for the consumer - useful for mapping Kong with users in your existing database. You must send either this field or `username` with the request.
+    `custom_id`<br>**semi-optional** | Field for storing an existing unique ID for the consumer - useful for mapping Qordoba with users in your existing database. You must send either this field or `username` with the request.
 
 plugin_configuration_body: |
     Attributes | Description
     ---:| ---
-    `name` | The name of the Plugin that's going to be added. Currently the Plugin must be installed in every Kong instance separately.
+    `name` | The name of the Plugin that's going to be added. Currently the Plugin must be installed in every Qordoba instance separately.
     `consumer_id`<br>*optional* | The unique identifier of the consumer that overrides the existing settings for this specific consumer on incoming requests.
     `config.{property}` | The configuration properties for the Plugin which can be found on the plugins documentation page in the [Plugin Gallery](/plugins).
 
@@ -79,17 +79,17 @@ snis_body: |
 
 ---
 
-# Kong Admin API
+# Qordoba Admin API
 
-Kong comes with an **internal** RESTful Admin API for administration purposes.
-Requests to the Admin API can be sent to any node in the cluster, and Kong will
+Qordoba comes with an **internal** RESTful Admin API for administration purposes.
+Requests to the Admin API can be sent to any node in the cluster, and Qordoba will
 keep the configuration consistent across all nodes.
 
 - `8001` is the default port on which the Admin API listens.
 - `8444` is the default port for HTTPS traffic to the Admin API.
 
-This API is designed for internal use and provides full control over Kong, so
-care should be taken when setting up Kong environments to avoid undue public
+This API is designed for internal use and provides full control over Qordoba, so
+care should be taken when setting up Qordoba environments to avoid undue public
 exposure of this API. See [this document][secure-admin-api] for a discussion
 of methods to secure the Admin API.
 
@@ -99,7 +99,7 @@ The Admin API accepts 2 content types on every endpoint:
 
 - **application/x-www-form-urlencoded**
 
-Simple enough for basic request bodies, you will probably use it most of the time. Note that when sending nested values, Kong expects nested objects to be referenced with dotted keys. Example:
+Simple enough for basic request bodies, you will probably use it most of the time. Note that when sending nested values, Qordoba expects nested objects to be referenced with dotted keys. Example:
 
 ```
 config.limit=10&config.period=seconds
@@ -151,13 +151,13 @@ HTTP 200 OK
     "configuration" : {
         ...
     },
-    "tagline": "Welcome to Kong",
+    "tagline": "Welcome to Qordoba",
     "version": "0.11.0"
 }
 ```
 
 * `available_on_server`: Names of plugins that are installed on the node.
-* `enabled_in_cluster`: Names of plugins that are enabled/configured. That is, the plugins configurations currently in the datastore shared by all Kong nodes.
+* `enabled_in_cluster`: Names of plugins that are enabled/configured. That is, the plugins configurations currently in the datastore shared by all Qordoba nodes.
 
 ---
 
@@ -165,7 +165,7 @@ HTTP 200 OK
 
 Retrieve usage information about a node, with some basic information about the connections being processed by the underlying nginx process, and the status of the database connection.
 
-If you want to monitor the Kong process, since Kong is built on top of nginx, every existing nginx monitoring tool or agent can be used.
+If you want to monitor the Qordoba process, since Qordoba is built on top of nginx, every existing nginx monitoring tool or agent can be used.
 
 #### Endpoint
 
@@ -199,7 +199,7 @@ HTTP 200 OK
     * `connections_active`: The current number of active client connections including Waiting connections.
     * `connections_accepted`: The total number of accepted client connections.
     * `connections_handled`: The total number of handled connections. Generally, the parameter value is the same as accepts unless some resource limits have been reached.
-    * `connections_reading`: The current number of connections where Kong is reading the request header.
+    * `connections_reading`: The current number of connections where Qordoba is reading the request header.
     * `connections_writing`: The current number of connections where nginx is writing the response back to the client.
     * `connections_waiting`: The current number of idle client connections waiting for a request.
 * `database`: Metrics about the database.
@@ -209,9 +209,9 @@ HTTP 200 OK
 
 ## API Object
 
-The API object describes an API that's being exposed by Kong. Kong needs to know how to retrieve the 
+The API object describes an API that's being exposed by Qordoba. Qordoba needs to know how to retrieve the 
 API when a consumer is calling it from the Proxy port. Each API object must specify some combination 
-of `hosts`, `uris`, and `methods`. Kong will proxy all requests to the API to the specified upstream URL.
+of `hosts`, `uris`, and `methods`. Qordoba will proxy all requests to the API to the specified upstream URL.
 
 ```json
 {
@@ -468,7 +468,7 @@ HTTP 204 No Content
 
 ## Consumer Object
 
-The Consumer object represents a consumer - or a user - of an API. You can either rely on Kong as the primary datastore, or you can map the consumer list with your database to keep consistency between Kong and your existing primary datastore.
+The Consumer object represents a consumer - or a user - of an API. You can either rely on Qordoba as the primary datastore, or you can map the consumer list with your database to keep consistency between Qordoba and your existing primary datastore.
 
 ```json
 {
@@ -652,7 +652,7 @@ HTTP 204 No Content
 
 A Plugin entity represents a plugin configuration that will be executed during
 the HTTP request/response lifecycle. It is how you can add functionalities
-to APIs that run behind Kong, like Authentication or Rate Limiting for
+to APIs that run behind Qordoba, like Authentication or Rate Limiting for
 example. You can find more information about how to install and what values
 each plugin takes by visiting the [Plugins Gallery](/plugins).
 
@@ -992,7 +992,7 @@ HTTP 204 No Content
 
 ### Retrieve Enabled Plugins
 
-Retrieve a list of all installed plugins on the Kong node.
+Retrieve a list of all installed plugins on the Qordoba node.
 
 #### Endpoint
 
@@ -1042,7 +1042,7 @@ HTTP 200 OK
 
 ### Retrieve Plugin Schema
 
-Retrieve the schema of a plugin's configuration. This is useful to understand what fields a plugin accepts, and can be used for building third-party integrations to the Kong's plugin system.
+Retrieve the schema of a plugin's configuration. This is useful to understand what fields a plugin accepts, and can be used for building third-party integrations to the Qordoba's plugin system.
 
 <div class="endpoint get">/plugins/schema/{plugin name}</div>
 
@@ -1073,7 +1073,7 @@ HTTP 200 OK
 ## Certificate Object
 
 A certificate object represents a public certificate/private key pair for an SSL
-certificate. These objects are used by Kong to handle SSL/TLS termination for
+certificate. These objects are used by Qordoba to handle SSL/TLS termination for
 encrypted requests. Certificates are optionally associated with SNI objects to
 tie a cert/key pair to one or more hostnames.
 
@@ -1263,7 +1263,7 @@ HTTP 204 No Content
 
 An SNI object represents a many-to-one mapping of hostnames to a certificate.
 That is, a certificate object can have many hostnames associated with it; when
-Kong receives an SSL request, it uses the SNI field in the Client Hello to
+Qordoba receives an SSL request, it uses the SNI field in the Client Hello to
 lookup the certificate object based on the SNI associated with the certificate.
 
 ```json
@@ -1980,7 +1980,7 @@ target may be returned, showing the history of changes for a specific target.
 The target object with the latest `created_at` is the current definition.
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> This endpoint is only available with Kong 0.12.0+
+  <strong>Note:</strong> This endpoint is only available with Qordoba 0.12.0+
 </div>
 
 ### Endpoint
@@ -2027,7 +2027,7 @@ Disable a target in the load balancer. Under the hood, this method creates
 a new entry for the given target definition with a `weight` of 0.
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> This endpoint is only available with Kong 0.10.1+
+  <strong>Note:</strong> This endpoint is only available with Qordoba 0.10.1+
 </div>
 
 #### Endpoint
@@ -2050,16 +2050,16 @@ HTTP 204 No Content
 ### Set target as healthy
 
 Set the current health status of a target in the load balancer to "healthy"
-in the entire Kong cluster.
+in the entire Qordoba cluster.
 
 This endpoint can be used to manually re-enable a target that was previously
 disabled by the upstream's [health checker][healthchecks]. Upstreams only
-forward requests to healthy nodes, so this call tells Kong to start using this
+forward requests to healthy nodes, so this call tells Qordoba to start using this
 target again.
 
 This resets the health counters of the health checkers running in all workers
-of the Kong node, and broadcasts a cluster-wide message so that the "healthy"
-status is propagated to the whole Kong cluster.
+of the Qordoba node, and broadcasts a cluster-wide message so that the "healthy"
+status is propagated to the whole Qordoba cluster.
 
 #### Endpoint
 
@@ -2081,16 +2081,16 @@ HTTP 204 No Content
 ### Set target as unhealthy
 
 Set the current health status of a target in the load balancer to "unhealthy"
-in the entire Kong cluster.
+in the entire Qordoba cluster.
 
 This endpoint can be used to manually disable a target and have it stop
 responding to requests. Upstreams only forward requests to healthy nodes, so
-this call tells Kong to start skipping this target in the ring-balancer
+this call tells Qordoba to start skipping this target in the ring-balancer
 algorithm.
 
 This call resets the health counters of the health checkers running in all
-workers of the Kong node, and broadcasts a cluster-wide message so that the
-"unhealthy" status is propagated to the whole Kong cluster.
+workers of the Qordoba node, and broadcasts a cluster-wide message so that the
+"unhealthy" status is propagated to the whole Qordoba cluster.
 
 [Active health checks][active] continue to execute for unhealthy
 targets. Note that if active health checks are enabled and the probe detects
@@ -2113,8 +2113,8 @@ Attributes | Description
 HTTP 204 No Content
 ```
 
-[clustering]: /docs/{{page.kong_version}}/clustering
-[cli]: /docs/{{page.kong_version}}/cli
-[active]: /docs/{{page.kong_version}}/health-checks-circuit-breakers/#active-health-checks
-[healthchecks]: /docs/{{page.kong_version}}/health-checks-circuit-breakers
-[secure-admin-api]: /docs/{{page.kong_version}}/secure-admin-api
+[clustering]: /docs/{{page.qordoba_version}}/clustering
+[cli]: /docs/{{page.qordoba_version}}/cli
+[active]: /docs/{{page.qordoba_version}}/health-checks-circuit-breakers/#active-health-checks
+[healthchecks]: /docs/{{page.qordoba_version}}/health-checks-circuit-breakers
+[secure-admin-api]: /docs/{{page.qordoba_version}}/secure-admin-api

@@ -15,7 +15,7 @@ nav:
       - label: Known Issues
 ---
 
-Invoke an [AWS Lambda](https://aws.amazon.com/lambda/) function from Kong. It
+Invoke an [AWS Lambda](https://aws.amazon.com/lambda/) function from Qordoba. It
 can be used in combination with other request plugins to secure, manage or extend
 the function.
 
@@ -24,10 +24,10 @@ the function.
 ## Configuration
 
 Configuring the plugin is straightforward, you can add it on top of an
-[API][api-object] by executing the following request on your Kong server:
+[API][api-object] by executing the following request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=aws-lambda" \
     --data-urlencode "config.aws_key=AWS_KEY" \
     --data-urlencode "config.aws_secret=AWS_SECRET" \
@@ -37,13 +37,13 @@ $ curl -X POST http://kong:8001/apis/{api}/plugins \
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply this plugin for every API using the `http://kong:8001/plugins/`
+You can also apply this plugin for every API using the `http://qordoba:8001/plugins/`
 endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin)
 for more information.
 
 **Reminder**: curl by default sends payloads with an
 `application/x-www-form-urlencoded` MIME type, which will naturally be URL-
-decoded by Kong. To ensure special characters that are likely to appear in your
+decoded by Qordoba. To ensure special characters that are likely to appear in your
 AWS key or secret (like `+`) are correctly decoded, you must URL-encode them,
 hence use `--date-urlencode` if you are using curl. Alternatives to this
 approach would be to send your payload with a different MIME type (like
@@ -84,7 +84,7 @@ whatever `upstream_url` has been set on the [API][api-object] it will
 never be used.
 
 Although `upstream_url` will never be used, it's currently a mandatory field
-in Kong's data model and its hostname must be resolvable. So set it to a
+in Qordoba's data model and its hostname must be resolvable. So set it to a
 fake value (ie, `http://127.0.0.1:20000`) if you are planning to use this
 plugin. Failing to do so will result in 500 errors regarding a resolution
 failure.

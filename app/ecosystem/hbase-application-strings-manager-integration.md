@@ -11,7 +11,7 @@ nav:
       - label: Requesting Access
 ---
 
-The Proxy Caching plugin for Kong Enterprise Edition makes it fast and easy to configure caching of responses and serving of those cached responses to matching requests.
+The Proxy Caching plugin for Qordoba Enterprise Edition makes it fast and easy to configure caching of responses and serving of those cached responses to matching requests.
 
 <br />
 
@@ -24,8 +24,8 @@ The Proxy Caching plugin for Kong Enterprise Edition makes it fast and easy to c
 
 ## Requesting Access
 
-This plugin is only available with a [Kong Enterprise](https://konghq.com/kong-enterprise-edition)
+This plugin is only available with a [Qordoba Enterprise](https://qordobahq.com/qordoba-enterprise-edition)
 subscription.
 
-If you are not a Kong Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](https://konghq.com/request-demo).
+If you are not a Qordoba Enterprise customer, you can inquire about our
+Enterprise offering by [contacting us](https://qordobahq.com/request-demo).

@@ -12,7 +12,7 @@ nav:
   - label: Usage
     items:
       - label: Metrics
-      - label: Kong Process Errors
+      - label: Qordoba Process Errors
 ---
 
 Log API [metrics](#metrics) StatsD server. It can also be used to log metrics on
@@ -25,10 +25,10 @@ Log API [metrics](#metrics) StatsD server. It can also be used to log metrics on
 
 Configuring the plugin is straightforward, you can add it on top of an
 [API][api-object] (or [Consumer][consumer-object]) by executing the following
-request on your Kong server:
+request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=statsd" \
     --data "config.host=127.0.0.1" \
     --data "config.port=8125"
@@ -36,7 +36,7 @@ $ curl -X POST http://kong:8001/apis/{api}/plugins \
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/`
+You can also apply it for every API using the `http://qordoba:8001/plugins/`
 endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for
 more information.
 
@@ -47,7 +47,7 @@ parameter                     | default | description
 `config.host`<br>*optional*   | `127.0.0.1` | The IP address or host name to send data to
 `config.port`<br>*optional*   | `8125`  | The port to send data to on the upstream server
 `config.metrics`<br>*optional* | All metrics<br>are logged | List of Metrics to be logged. Available values are described under [Metrics](#metrics).
-`config.prefix`<br>*optional* | `kong` | String to be prefixed to each metric's name.
+`config.prefix`<br>*optional* | `qordoba` | String to be prefixed to each metric's name.
 
 [api-object]: /docs/latest/admin-api/#api-object
 [configuration]: /docs/latest/configuration
@@ -62,16 +62,16 @@ Metrics the plugin supports logging into the StatsD server.
 
 Metric                     | description | namespace
 ---                        | ---         | ---
-`request_count`            | tracks api request | kong.\<api_name>.request.count
-`request_size`             | tracks api request's body size in bytes | kong.\<api_name>.request.size
-`response_size`            | tracks api response's body size in bytes | kong.\<api_name>.response.size
-`latency`                  | tracks the time interval between the request started and response received from the upstream server | kong.\<api_name>.latency
-`status_count`             | tracks each status code returned in a response | kong.\<api_name>.status.\<status>.count and kong.\<api_name>.status.\<status>.total
-`unique_users`             | tracks unique users who made a request to the API| kong.\<api_name>.user.uniques
-`request_per_user`         | tracks request/user | kong.\<api_name>.user.\<consumer_id>.count
-`upstream_latency`         | tracks the time it took for the final service to process the request | kong.\<api_name>.upstream_latency
-`kong_latency`             | tracks the internal Kong latency that it took to run all the plugins | kong.\<api_name>.kong_latency
-`status_count_per_user`    | tracks request/status/user | kong.\<api_name>.user.\<customer_id>.status.\<status> and kong.\<api_name>.user.\<customer_id>.status.total
+`request_count`            | tracks api request | qordoba.\<api_name>.request.count
+`request_size`             | tracks api request's body size in bytes | qordoba.\<api_name>.request.size
+`response_size`            | tracks api response's body size in bytes | qordoba.\<api_name>.response.size
+`latency`                  | tracks the time interval between the request started and response received from the upstream server | qordoba.\<api_name>.latency
+`status_count`             | tracks each status code returned in a response | qordoba.\<api_name>.status.\<status>.count and qordoba.\<api_name>.status.\<status>.total
+`unique_users`             | tracks unique users who made a request to the API| qordoba.\<api_name>.user.uniques
+`request_per_user`         | tracks request/user | qordoba.\<api_name>.user.\<consumer_id>.count
+`upstream_latency`         | tracks the time it took for the final service to process the request | qordoba.\<api_name>.upstream_latency
+`qordoba_latency`             | tracks the internal Qordoba latency that it took to run all the plugins | qordoba.\<api_name>.qordoba_latency
+`status_count_per_user`    | tracks request/status/user | qordoba.\<api_name>.user.\<customer_id>.status.\<status> and qordoba.\<api_name>.user.\<customer_id>.status.total
 
 ### Metric Fields
 
@@ -93,9 +93,9 @@ Field         | description                                             | allowe
 5.  `status_count_per_user`, `request_per_user` and `unique_users` must have `customer_identifier` defined.
 
 
-## Kong Process Errors
+## Qordoba Process Errors
 
 This logging plugin will only log HTTP request and response data. If you are
-looking for the Kong process error file (which is the nginx error file), then
+looking for the Qordoba process error file (which is the nginx error file), then
 you can find it at the following path:
-{[prefix](/docs/{{site.data.kong_latest.release}}/configuration/#prefix)}/logs/error.log
+{[prefix](/docs/{{site.data.qordoba_latest.release}}/configuration/#prefix)}/logs/error.log

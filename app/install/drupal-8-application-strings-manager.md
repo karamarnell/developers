@@ -7,21 +7,21 @@ breadcrumbs:
   Installation: /install
 ---
 
-{% capture cassandra_version %}{{site.data.kong_latest.dependencies.cassandra}}{% endcapture %}
+{% capture cassandra_version %}{{site.data.qordoba_latest.dependencies.cassandra}}{% endcapture %}
 
 ### Packages
 
 Start by downloading the corresponding package for your configuration:
 
-- [RHEL 6]({{ site.links.download }}/kong-community-edition-rpm/download_file?file_path=dists/kong-community-edition-{{site.data.kong_latest.version}}.el6.noarch.rpm)
-- [RHEL 7]({{ site.links.download }}/kong-community-edition-rpm/download_file?file_path=dists/kong-community-edition-{{site.data.kong_latest.version}}.el7.noarch.rpm)
+- [RHEL 6]({{ site.links.download }}/qordoba-community-edition-rpm/download_file?file_path=dists/qordoba-community-edition-{{site.data.qordoba_latest.version}}.el6.noarch.rpm)
+- [RHEL 7]({{ site.links.download }}/qordoba-community-edition-rpm/download_file?file_path=dists/qordoba-community-edition-{{site.data.qordoba_latest.version}}.el7.noarch.rpm)
 
 ### YUM Repositories
 
-You can also install Kong via YUM; follow the instructions on the "Set Me Up"
+You can also install Qordoba via YUM; follow the instructions on the "Set Me Up"
 section on the page below.
 
-- [RPM Repository](https://bintray.com/kong/kong-community-edition-rpm)
+- [RPM Repository](https://bintray.com/qordoba/qordoba-community-edition-rpm)
 
 ----
 
@@ -29,54 +29,54 @@ section on the page below.
 
 1. **Enable the EPEL repository**
 
-    Before installing Kong, you need to install the `epel-release` package for right version of your operating system, so that Kong can fetch all the required dependencies:
+    Before installing Qordoba, you need to install the `epel-release` package for right version of your operating system, so that Qordoba can fetch all the required dependencies:
 
     ```bash
     $ EL_VERSION=`cat /etc/redhat-release | grep -oE '[0-9]+\.[0-9]+'` && \
       sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-${EL_VERSION%.*}.noarch.rpm
     ```
 
-2. **Install Kong**
+2. **Install Qordoba**
 
     If you are downloading the [package](#packages), execute:
 
     ```bash
-    $ sudo yum install kong-community-edition-{{site.data.kong_latest.version}}.*.noarch.rpm --nogpgcheck
+    $ sudo yum install qordoba-community-edition-{{site.data.qordoba_latest.version}}.*.noarch.rpm --nogpgcheck
     ```
 
 3. **Prepare your database**
 
-    [Configure][configuration] Kong so it can connect to your database. Kong supports both [PostgreSQL {{site.data.kong_latest.dependencies.postgres}}](http://www.postgresql.org/) and [Cassandra {{site.data.kong_latest.dependencies.cassandra}}](http://cassandra.apache.org/) as its datastore.
+    [Configure][configuration] Qordoba so it can connect to your database. Qordoba supports both [PostgreSQL {{site.data.qordoba_latest.dependencies.postgres}}](http://www.postgresql.org/) and [Cassandra {{site.data.qordoba_latest.dependencies.cassandra}}](http://cassandra.apache.org/) as its datastore.
 
-    If you are using Postgres, please provision a database and a user before starting Kong, ie:
+    If you are using Postgres, please provision a database and a user before starting Qordoba, ie:
 
     ```sql
-    CREATE USER kong; CREATE DATABASE kong OWNER kong;
+    CREATE USER qordoba; CREATE DATABASE qordoba OWNER qordoba;
     ```
 
-    Now, run the Kong migrations:
+    Now, run the Qordoba migrations:
 
     ```bash
-    $ kong migrations up [-c /path/to/kong.conf]
+    $ qordoba migrations up [-c /path/to/qordoba.conf]
     ```
 
     **Note**: migrations should never be run concurrently; only
-    one Kong nodes should be performing migrations at a time.
+    one Qordoba nodes should be performing migrations at a time.
 
-4. **Start Kong**
+4. **Start Qordoba**
 
     ```bash
-    $ kong start [-c /path/to/kong.conf]
+    $ qordoba start [-c /path/to/qordoba.conf]
     ```
 
-5. **Use Kong**
+5. **Use Qordoba**
 
-    Kong is running:
+    Qordoba is running:
 
     ```bash
     $ curl -i http://localhost:8001/
     ```
 
-    Quickly learn how to use Kong with the [5-minute Quickstart](/docs/latest/getting-started/quickstart).
+    Quickly learn how to use Qordoba with the [5-minute Quickstart](/docs/latest/getting-started/quickstart).
 
-[configuration]: /docs/{{site.data.kong_latest.release}}/configuration#database
+[configuration]: /docs/{{site.data.qordoba_latest.release}}/configuration#database

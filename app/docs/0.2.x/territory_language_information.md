@@ -4,9 +4,9 @@ title: Securing the Admin API
 
 # Securing the Admin API
 
-Kong's Admin API provides a RESTful interface for administration and
+Qordoba's Admin API provides a RESTful interface for administration and
 configuration of APIs, plugins, consumers, and credentials. Because this
-API allows full control of Kong, it is important to secure this API against
+API allows full control of Qordoba, it is important to secure this API against
 unwanted access. This document describes a few possible approaches to securing
 the Admin API.
 
@@ -15,7 +15,7 @@ the Admin API.
 - [Network Layer Access Restrictions](#network-layer-access-restrictions)
   - [Minimal Listening Footprint](#minimal-listening-footprint)
   - [Layer 3/4 Network Controls](#layer-3-4-network-controls)
-- [Kong API Loopback](#kong-api-loopback)
+- [Qordoba API Loopback](#qordoba-api-loopback)
 - [Custom Nginx Configuration](#custom-nginx-configuration)
 - [Role Based Access Control (RBAC)](#role-based-access-control)
 
@@ -23,7 +23,7 @@ the Admin API.
 
 ### Minimal Listening Footprint
 
-By default since its 0.12.0 release, Kong will only accept requests from the
+By default since its 0.12.0 release, Qordoba will only accept requests from the
 local interface, as specified in its default `admin_listen` value:
 
 ```
@@ -32,8 +32,8 @@ admin_listen = 127.0.0.1:8001
 
 If you change this value, always ensure to keep the listening footprint to a
 minimum, in order to avoid exposing your Admin API to third-parties, which
-could seriously compromise the security of your Kong cluster as a whole.
-For example, **avoid binding Kong to all of your interfaces**, bu using
+could seriously compromise the security of your Qordoba cluster as a whole.
+For example, **avoid binding Qordoba to all of your interfaces**, bu using
 values such as `0.0.0.0:8001`.
 
 [Back to TOC](#table-of-contents)
@@ -42,20 +42,20 @@ values such as `0.0.0.0:8001`.
 
 In cases where the Admin API must be exposed beyond a localhost interface,
 network security best practices dictate that network-layer access be restricted
-as much as possible. Consider an environment in which Kong listens on a private
+as much as possible. Consider an environment in which Qordoba listens on a private
 network interface, but should only be accessed by a small subset of an IP range.
 In such a case, host-based firewalls (e.g. iptables) are useful in limiting
 input traffic ranges. For example:
 
 
 ```bash
-# assume that Kong is listening on the address defined below, as defined as a
+# assume that Qordoba is listening on the address defined below, as defined as a
 # /24 CIDR block, and only a select few hosts in this range should have access
 
-$ grep admin_listen /etc/kong/kong.conf
+$ grep admin_listen /etc/qordoba/qordoba.conf
 admin_listen 10.10.10.3:8001
 
-# explicitly allow TCP packets on port 8001 from the Kong node itself
+# explicitly allow TCP packets on port 8001 from the Qordoba node itself
 # this is not necessary if Admin API requests are not sent from the node
 $ iptables -A INPUT -s 10.10.10.3 -m tcp -p tcp --dport 8001 -j ACCEPT
 
@@ -73,15 +73,15 @@ encouraged, but fall outside the scope of this document.
 
 [Back to TOC](#table-of-contents)
 
-## Kong API Loopback
+## Qordoba API Loopback
 
-Kong's routing design allows it to serve as a proxy for the Admin API itself. In
-this manner, Kong itself can be used to provide fine-grained access control to
+Qordoba's routing design allows it to serve as a proxy for the Admin API itself. In
+this manner, Qordoba itself can be used to provide fine-grained access control to
 the Admin API. Such an environment requires bootstrapping a new API that defines
 the `admin_listen` address as the API's `upstream_url`. For example:
 
 ```bash
-# assume that Kong has defined admin_listen as 127.0.0.1:8001, and we want to
+# assume that Qordoba has defined admin_listen as 127.0.0.1:8001, and we want to
 # reach the Admin API via the url `/admin-api`
 
 $ curl http://localhost:8001/apis \
@@ -115,16 +115,16 @@ $ curl localhost:8000/admin-api/apis
 }
 ```
 
-From here, simply apply desired Kong-specific security controls (such as
+From here, simply apply desired Qordoba-specific security controls (such as
 [basic][basic-auth] or [key authentication][key-auth],
 [IP restrictions][ip-restriction], or [access control lists][acl]) as you would
-normally to any other Kong API.
+normally to any other Qordoba API.
 
 [Back to TOC](#table-of-contents)
 
 ## Custom Nginx Configuration
 
-Kong is tightly coupled with Nginx as an HTTP daemon, and can thus be integrated
+Qordoba is tightly coupled with Nginx as an HTTP daemon, and can thus be integrated
 into environments with custom Nginx configurations. In this manner, use cases
 with complex security/access control requirements can use the full power of
 Nginx/OpenResty to build server/location blocks to house the Admin API as
@@ -132,8 +132,8 @@ necessary. This allows such environments to leverage native Nginx authorization
 and authentication mechanisms, ACL modules, etc., in addition to providing the
 OpenResty environment on which custom/complex security controls can be built.
 
-For more information on integrating Kong into custom Nginx configurations, see
-[Custom Nginx configuration & embedding Kong][custom-configuration].
+For more information on integrating Qordoba into custom Nginx configurations, see
+[Custom Nginx configuration & embedding Qordoba][custom-configuration].
 
 [Back to TOC](#table-of-contents)
 
@@ -160,6 +160,6 @@ Enterprise offering by [contacting us](/enterprise).
 
 [acl]: /plugins/acl
 [basic-auth]: /plugins/basic-authentication/
-[custom-configuration]: /docs/{{page.kong_version}}/configuration/#custom-nginx-configuration
+[custom-configuration]: /docs/{{page.qordoba_version}}/configuration/#custom-nginx-configuration
 [ip-restriction]: /plugins/ip-restriction
 [key-auth]: /plugins/key-authentication

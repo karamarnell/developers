@@ -1,47 +1,47 @@
-- id: javascript-sdk-i18n
-  name: javascript sdk i18n
+- id: javascript-sdk
+  name: javascript sdk strings management
   type: cloud
 
-- id: github-i18n
-  name: Qordoba with github i18n
+- id: github
+  name: Qordoba with github strings management
   type: cloud
 
-- id: qordoba-cli-jenkins-i18n
-  name: qordoba cli jenkins i18n
+- id: qordoba-cli-jenkins
+  name: qordoba cli jenkins strings management
   type: package
 
-- id: websocket-i18n
-  name: websocket i18n
+- id: websocket
+  name: websocket strings management
   type: package
 
-- id: zendesk-i18n
-  name: zendesk i18n
+- id: zendesk
+  name: zendesk strings management
   type: cloud
 
-- id: wordpress-wpml-i18n
-  name: wordpress wpml i18n
+- id: wordpress-wpml
+  name: wordpress wpml strings management
   type: package
 
-- id: wordpress-polylang-i18n
-  name: wordpress polylang i18n
+- id: wordpress-polylang
+  name: wordpress polylang strings management
   type: package
 
-- id: magento-1-i18n
-  name: magento 1 i18n
+- id: magento-1
+  name: magento 1 strings management
   type: package
 
-- id: magento-2-i18n
-  name: magento 2 i18n
+- id: magento-2
+  name: magento 2 strings management
   type: package
 
-- id: sketch-i18n
-  name: sketch i18n
+- id: sketch
+  name: sketch strings management
   type: package
 
-- id: adobe-design-i18n
-  name: adobe design i18n
+- id: adobe-design
+  name: adobe design strings management
   type: package
 
-- id: braze-appboy-i18n
-  name: braze appboy i18n
+- id: braze-appboy
+  name: braze appboy strings management
   type: cloud

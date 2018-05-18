@@ -12,15 +12,15 @@ nav:
 ---
 
 OpenID Connect ([1.0][connect]) plugin allows the integration with a 3rd party
-identity provider (IdP) or [Kong OAuth 2.0 Plugin][oauth2plugin] in a standardized way.
-This plugin can be used to implement Kong as a (proxying) [OAuth 2.0][oauth2] resource
+identity provider (IdP) or [Qordoba OAuth 2.0 Plugin][oauth2plugin] in a standardized way.
+This plugin can be used to implement Qordoba as a (proxying) [OAuth 2.0][oauth2] resource
 server (RS) and / or as an OpenID Connect relying party (RP) between the client
 and the upstream service.
 
 The plugin supports several types of credentials, including:
 
 - Signed [JWT][jwt] access tokens ([JWS][jws]) with the standardized signing algorithms ([JWA][jwa])
-- Opaque access tokens with either Kong OAuth 2.0 plugin issued tokens or 
+- Opaque access tokens with either Qordoba OAuth 2.0 plugin issued tokens or 
   3rd party IdP issued ones through token introspection (IdP needs to support it)
 - Username and password through the OAuth 2.0 password grant (the plugin will
   automatically exchange such credentials with access token by calling the IdP's token
@@ -30,7 +30,7 @@ The plugin supports several types of credentials, including:
   token endpoint)
 - Authorization code that the OpenID Connect plugin can retrieve from the client when using
   OpenID Connect authorization code flow
-- Session cookie credentials that the plugin can setup between the client and Kong
+- Session cookie credentials that the plugin can setup between the client and Qordoba
   (usually used with web browser clients together with authorization code grant)
   
 This plugin can automatically refresh the access token using a refresh token.
@@ -87,11 +87,11 @@ want your provider to be tested and added to the list.
 
 ## Requesting Access
 
-This plugin is only available with a [Kong Enterprise](https://konghq.com/kong-enterprise-edition)
+This plugin is only available with a [Qordoba Enterprise](https://qordobahq.com/qordoba-enterprise-edition)
 subscription.
 
-If you are not a Kong Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](https://konghq.com/request-demo).
+If you are not a Qordoba Enterprise customer, you can inquire about our
+Enterprise offering by [contacting us](https://qordobahq.com/request-demo).
 
 
 [connect]: http://openid.net/specs/openid-connect-core-1_0.html

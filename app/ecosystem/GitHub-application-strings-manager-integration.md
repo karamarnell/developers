@@ -23,17 +23,17 @@ Restrict access to an API by whitelisting or blacklisting consumers using arbitr
 
 ## Configuration
 
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] by executing the following request on your Kong server:
+Configuring the plugin is straightforward, you can add it on top of an [API][api-object] by executing the following request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=acl" \
     --data "config.whitelist=group1, group2"
 ```
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
 form parameter                        | default| description
 ---                                   | ---    | ---
@@ -54,7 +54,7 @@ In order to use this plugin, you need to properly have configured your APIs with
 Once you have added an authentication plugin to an API, and you have created your [Consumers][consumer-object], you can now associate a group to a [Consumer][consumer-object] using the following request:
 
 ```bash
-$ curl -X POST http://kong:8001/consumers/{consumer}/acls \
+$ curl -X POST http://qordoba:8001/consumers/{consumer}/acls \
     --data "group=group1"
 ```
 
@@ -73,14 +73,14 @@ When a consumer has been validated, the plugin will append a `X-Consumer-Groups`
 ### Paginate through the ACLs
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> This endpoint was introduced in Kong 0.11.2.
+  <strong>Note:</strong> This endpoint was introduced in Qordoba 0.11.2.
 </div>
 
 You can retrieve all the ACLs for all Consumers using the following
 request:
 
 ```bash
-$ curl -X GET http://kong:8001/acls
+$ curl -X GET http://qordoba:8001/acls
 
 {
     "total": 3,
@@ -120,14 +120,14 @@ Attributes | Description
 ### Retrieve the Consumer associated with an ACL
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> This endpoint was introduced in Kong 0.11.2.
+  <strong>Note:</strong> This endpoint was introduced in Qordoba 0.11.2.
 </div>
 
 It is possible to retrieve a [Consumer][consumer-object] associated with an ACL
 using the following request:
 
 ```bash
-curl -X GET http://kong:8001/acls/{id}/consumer
+curl -X GET http://qordoba:8001/acls/{id}/consumer
 
 {
    "created_at":1507936639000,

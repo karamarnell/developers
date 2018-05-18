@@ -11,7 +11,7 @@ nav:
       - label: Requesting Access
 ---
 
-The Rate Limiting plugin for Kong Enterprise Edition is a re-engineered version of the incredibly popular Community Edition Rate Limiting plugin, with greatly enhanced configuration options and performance.
+The Rate Limiting plugin for Qordoba Enterprise Edition is a re-engineered version of the incredibly popular Community Edition Rate Limiting plugin, with greatly enhanced configuration options and performance.
 
 <br />
 
@@ -24,8 +24,8 @@ The Rate Limiting plugin for Kong Enterprise Edition is a re-engineered version 
 
 ## Requesting Access
 
-This plugin is only available with a [Kong Enterprise](https://konghq.com/kong-enterprise-edition)
+This plugin is only available with a [Qordoba Enterprise](https://qordobahq.com/qordoba-enterprise-edition)
 subscription.
 
-If you are not a Kong Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](https://konghq.com/request-demo).
+If you are not a Qordoba Enterprise customer, you can inquire about our
+Enterprise offering by [contacting us](https://qordobahq.com/request-demo).

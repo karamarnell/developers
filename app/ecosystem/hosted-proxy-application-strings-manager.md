@@ -12,7 +12,7 @@ nav:
   - label: Usage
     items:
       - label: Log Format
-      - label: Kong Process Errors
+      - label: Qordoba Process Errors
 ---
 
 Log request and response data to an UDP server.
@@ -21,10 +21,10 @@ Log request and response data to an UDP server.
 
 ## Configuration
 
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Kong server:
+Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=udp-log" \
     --data "config.host=127.0.0.1" \
     --data "config.port=9999" \
@@ -33,7 +33,7 @@ $ curl -X POST http://kong:8001/apis/{api}/plugins \
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
 parameter                      | default | description
 ---                            | ---     | ---
@@ -74,7 +74,7 @@ Every request will be logged separately in a JSON object with the following form
         "size": "434",
         "headers": {
             "Content-Length": "197",
-            "via": "kong/0.3.0",
+            "via": "qordoba/0.3.0",
             "Connection": "close",
             "access-control-allow-credentials": "true",
             "Content-Type": "application/json",
@@ -122,7 +122,7 @@ Every request will be logged separately in a JSON object with the following form
     },
     "latencies": {
         "proxy": 1430,
-        "kong": 9,
+        "qordoba": 9,
         "request": 1921
     },
     "client_ip": "127.0.0.1",
@@ -135,18 +135,18 @@ A few considerations on the above JSON object:
 * `request` contains properties about the request sent by the client
 * `response` contains properties about the response sent to the client
 * `tries` contains the list of (re)tries (successes and failures) made by the load balancer for this request
-* `api` contains Kong properties about the specific API requested
-* `authenticated_entity` contains Kong properties about the authenticated credential (if an authentication plugin has been enabled)
+* `api` contains Qordoba properties about the specific API requested
+* `authenticated_entity` contains Qordoba properties about the authenticated credential (if an authentication plugin has been enabled)
 * `consumer` contains the authenticated Consumer (if an authentication plugin has been enabled)
 * `latencies` contains some data about the latencies involved:
   * `proxy` is the time it took for the final service to process the request
-  * `kong` is the internal Kong latency that it took to run all the plugins
+  * `qordoba` is the internal Qordoba latency that it took to run all the plugins
   * `request` is the time elapsed between the first bytes were read from the client and after the last bytes were sent to the client. Useful for detecting slow clients.
 * `client_ip` contains the original client IP address
 * `started_at` contains the UTC timestamp of when the API transaction has started to be processed.
 
 ----
 
-## Kong Process Errors
+## Qordoba Process Errors
 
-This logging plugin will only log HTTP request and response data. If you are looking for the Kong process error file (which is the nginx error file), then you can find it at the following path: {[prefix](/docs/{{site.data.kong_latest.release}}/configuration/#prefix)}/logs/error.log
+This logging plugin will only log HTTP request and response data. If you are looking for the Qordoba process error file (which is the nginx error file), then you can find it at the following path: {[prefix](/docs/{{site.data.qordoba_latest.release}}/configuration/#prefix)}/logs/error.log

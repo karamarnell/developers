@@ -16,7 +16,7 @@ nav:
       - label: Upstream Headers
 ---
 
-This plugin allows you to limit the number of requests a developer can make based on a custom response header returned by the upstream API. You can arbitrary set as many rate-limiting objects (or quotas) as you want and instruct Kong to increase or decrease them by any number of units. Each custom rate-limiting object can limit the inbound requests per seconds, minutes, hours, days, months or years.
+This plugin allows you to limit the number of requests a developer can make based on a custom response header returned by the upstream API. You can arbitrary set as many rate-limiting objects (or quotas) as you want and instruct Qordoba to increase or decrease them by any number of units. Each custom rate-limiting object can limit the inbound requests per seconds, minutes, hours, days, months or years.
 
 If the API has no authentication layer, the **Client IP** address will be used, otherwise the Consumer will be used if an authentication plugin has been configured.
 
@@ -24,17 +24,17 @@ If the API has no authentication layer, the **Client IP** address will be used, 
 
 ## Configuration
 
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Kong server:
+Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=response-ratelimiting" \
     --data "config.limits.{limit_name}.minute=10"
 ```
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
 form parameter                      | default        | description
 ---                                 | ---            | ---
@@ -47,11 +47,11 @@ form parameter                      | default        | description
 `config.limits.{limit_name}.day`<br>*semi-optional*    | | The amount of HTTP requests the developer can make per day. At least one limit must exist.
 `config.limits.{limit_name}.month`<br>*semi-optional*  | | The amount of HTTP requests the developer can make per month. At least one limit must exist.
 `config.limits.{limit_name}.year`<br>*semi-optional*   | | The amount of HTTP requests the developer can make per year. At least one limit must exist.
-`config.header_name`<br>*optional*                | `X-Kong-Limit`      | The name of the response header used to increment the counters.
+`config.header_name`<br>*optional*                | `X-Qordoba-Limit`      | The name of the response header used to increment the counters.
 `config.block_on_first_violation`<br>*optional*  | `false` | A boolean value that determines if the requests should be blocked as soon as one limit is being exceeded. This will block requests that are supposed to consume other limits too.
 `config.limit_by`<br>*optional* | `consumer`  | The entity that will be used when aggregating the limits: `consumer`, `credential`, `ip`. If the `consumer` or the `credential` cannot be determined, the system will always fallback to `ip`.
 `config.policy`<br>*optional* | `cluster` | The rate-limiting policies to use for retrieving and incrementing the limits. Available values are `local` (counters will be stored locally in-memory on the node), `cluster` (counters are stored in the datastore and shared across the nodes) and `redis` (counters are stored on a Redis server and will be shared across the nodes).
-`config.fault_tolerant`<br>*optional*  | `true` |  A boolean value that determines if the requests should be proxied even if Kong has troubles connecting a third-party datastore. If `true` requests will be proxied anyways effectively disabling the rate-limiting function until the datastore is working again. If `false` then the clients will see `500` errors.
+`config.fault_tolerant`<br>*optional*  | `true` |  A boolean value that determines if the requests should be proxied even if Qordoba has troubles connecting a third-party datastore. If `true` requests will be proxied anyways effectively disabling the rate-limiting function until the datastore is working again. If `false` then the clients will see `500` errors.
 `config.hide_client_headers`<br>*optional* | `false` | Optionally hide informative response headers.
 `config.redis_host`<br>*semi-optional* | | When using the `redis` policy, this property specifies the address to the Redis server.
 `config.redis_port`<br>*optional* | `6379` | When using the `redis` policy, this property specifies the port of the Redis server.
@@ -69,10 +69,10 @@ After adding the plugin, you can increment the configured limits by adding the f
 Header-Name: Limit=Value [,Limit=Value]
 ```
 
-Since `X-Kong-Limit` is the default header name (you can optionally change it), it will look like:
+Since `X-Qordoba-Limit` is the default header name (you can optionally change it), it will look like:
 
 ```
-X-Kong-Limit: limitname1=2, limitname2=4
+X-Qordoba-Limit: limitname1=2, limitname2=4
 ```
 
 That will increment the limit `limitname1` by 2 units, and `limitname2` by 4 units.
@@ -83,7 +83,7 @@ You can optionally increment more than one limit by comma separating the entries
 
 ## Headers sent to the client
 
-When this plugin is enabled, Kong will send some additional headers back to the client telling how many units are available and how many are allowed. For example if you created a limit/quota called "Videos" with a per-minute limit:
+When this plugin is enabled, Qordoba will send some additional headers back to the client telling how many units are available and how many are allowed. For example if you created a limit/quota called "Videos" with a per-minute limit:
 
 ```
 X-RateLimit-Limit-Videos-Minute: 10

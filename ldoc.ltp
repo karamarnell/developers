@@ -26,20 +26,20 @@ layout: default
       <h1>$(ldoc.project)</h1>
       <p>$(ldoc.title)</p>
     </div>
-    {% if site.data.kong_versions.size > 1 %}
+    {% if site.data.qordoba_versions.size > 1 %}
       <div class="dropdown page-header-right">
         <button class="page-header-btn" id="version-dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Version {{page.kong_version}}
-          {% if page.kong_version == site.data.kong_latest.release %}<em>(latest)</em>{% endif %}
+          Version {{page.qordoba_version}}
+          {% if page.qordoba_version == site.data.kong_latest.release %}<em>(latest)</em>{% endif %}
           <span class="caret"></span>
         </button>
 
         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="version-dropdown">
-          {% for ver in site.data.kong_versions %}
-            {% if page.kong_version != ver.release %}
+          {% for ver in site.data.qordoba_versions %}
+            {% if page.qordoba_version != ver.release %}
               <li>
                 {% if ver.lua_doc %}
-                  <a href="/docs/{{ver.release}}/$(base_url)"{% if ver.release == page.kong_version %} class="active"{% endif %}>
+                  <a href="/docs/{{ver.release}}/$(base_url)"{% if ver.release == page.qordoba_version %} class="active"{% endif %}>
                     {{ver.release}}
                     {% if ver.release == site.data.kong_latest.release %}(latest){% endif %}
                   </a>
@@ -60,10 +60,10 @@ layout: default
     <nav>
       <ul>
         <li>
-          <a href="/docs/{{page.kong_version}}"><h5>Back to docs</h5></a>
+          <a href="/docs/{{page.qordoba_version}}"><h5>Back to docs</h5></a>
         </li>
         <li>
-          <a href="/docs/{{page.kong_version}}/$(base_url)"><h5>Index</h5></a>
+          <a href="/docs/{{page.qordoba_version}}/$(base_url)"><h5>Index</h5></a>
         </li>
 # local this_mod = module and module.name
 # for kind, mods, type in ldoc.kinds() do

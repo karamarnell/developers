@@ -8,19 +8,19 @@ breadcrumbs:
 links:
   gcloud: "https://cloud.google.com/sdk/"
   kubectl: "https://cloud.google.com/container-engine/docs/quickstart#install_the_gcloud_command-line_interface"
-  gh_tag: "https://github.com/Kong/kong-dist-kubernetes/tree/1.0.0"
-  minikube: "https://github.com/Kong/kong-dist-kubernetes/blob/master/minikube/README.md"
+  gh_tag: "https://github.com/Qordoba/qordoba-dist-kubernetes/tree/1.0.0"
+  minikube: "https://github.com/Qordoba/qordoba-dist-kubernetes/blob/master/minikube/README.md"
 ---
 
-Kong can easily be provisioned to Kubernetes cluster using the following steps:
+Qordoba can easily be provisioned to Kubernetes cluster using the following steps:
 
 1. **Initial setup**
   
     Download or clone the following repo:
 
     ```bash
-    $ git clone git@github.com:Kong/kong-dist-kubernetes.git
-    $ cd kong-dist-kubernetes
+    $ git clone git@github.com:Qordoba/qordoba-dist-kubernetes.git
+    $ cd qordoba-dist-kubernetes
     ```
     If you want to run Kubernetes locally, please follow the [README]({{ page.links.minikube }}) 
     and use the manifest files provided in `minikube` directory.
@@ -28,7 +28,7 @@ Kong can easily be provisioned to Kubernetes cluster using the following steps:
     Skip to step 3 if you have already provisioned a cluster and registered it
     with Kubernetes.
 
-    Note: Included manifest files in repo only support Kong v0.11.x, for 0.10.x
+    Note: Included manifest files in repo only support Qordoba v0.11.x, for 0.10.x
     please use the [tag 1.0.0]({{ page.links.gh_tag }}).
 
 2.  **Deploy a GKE cluster**
@@ -36,7 +36,7 @@ Kong can easily be provisioned to Kubernetes cluster using the following steps:
     You need [gcloud]({{ page.links.gcloud }}) and [kubectl]({{ page.links.kubectl }})
     command-line tools installed and set up to run deployment commands. Also
     make sure your Google Cloud account has `STATIC_ADDRESSES` available for
-    the external access of Kong services.
+    the external access of Qordoba services.
 
     Using the `cluster.yaml` file from this repo, deploy a
     GKE cluster. Provide the following information before deploying:
@@ -54,9 +54,9 @@ Kong can easily be provisioned to Kubernetes cluster using the following steps:
     By now, you have provisioned a Kubernetes managed cluster.
 
 
-3. **Deploy a Kong supported database**
+3. **Deploy a Qordoba supported database**
   
-    Before deploying Kong, you need to provision a Cassandra or PostgreSQL pod.
+    Before deploying Qordoba, you need to provision a Cassandra or PostgreSQL pod.
 
     For Cassandra, use the `cassandra.yaml` file from this repo to deploy a
     Cassandra `Service` and a `StatefulSet` in the cluster:
@@ -67,7 +67,7 @@ Kong can easily be provisioned to Kubernetes cluster using the following steps:
     Note: Please update the `cassandra.yaml` file for the cloud you are working
     with.
 
-    For PostgreSQL, use the `postgres.yaml` file from the kong-dist-kubernetes 
+    For PostgreSQL, use the `postgres.yaml` file from the qordoba-dist-kubernetes 
     repo to deploy a PostgreSQL `Service` and a `ReplicationController` in the
     cluster:
 
@@ -77,26 +77,26 @@ Kong can easily be provisioned to Kubernetes cluster using the following steps:
 
 4. **Prepare database**
 
-    Using the `kong_migration_<postgres|cassandra>.yaml` file from this repo,
-    run the migration job, jump to step 5 if Kong migrations are up–to–date:
+    Using the `qordoba_migration_<postgres|cassandra>.yaml` file from this repo,
+    run the migration job, jump to step 5 if Qordoba migrations are up–to–date:
     
     ```bash
-    $ kubectl create -f kong_migration_<postgres|cassandra>.yaml
+    $ kubectl create -f qordoba_migration_<postgres|cassandra>.yaml
     ```
     Once job completes, you can remove the pod by running following command:
 
     ```bash
-    $ kubectl delete -f kong_migration_<postgres|cassandra>.yaml
+    $ kubectl delete -f qordoba_migration_<postgres|cassandra>.yaml
     ```
 
-5. **Deploy Kong**
+5. **Deploy Qordoba**
 
-    Using the `kong_<postgres|cassandra>.yaml` file from this
-    repo, deploy Kong admin, proxy services, and a `Deployment` controller to
+    Using the `qordoba_<postgres|cassandra>.yaml` file from this
+    repo, deploy Qordoba admin, proxy services, and a `Deployment` controller to
     the cluster:
     
     ```bash
-    $ kubectl create -f kong_<postgres|cassandra>.yaml
+    $ kubectl create -f qordoba_<postgres|cassandra>.yaml
     ```
 
 6. **Verify your deployments**
@@ -107,17 +107,17 @@ Kong can easily be provisioned to Kubernetes cluster using the following steps:
     $ kubectl get all
     ```
 
-    Once the `EXTERNAL_IP` is available for Kong Proxy and Admin services, you
-    can test Kong by making the following requests:
+    Once the `EXTERNAL_IP` is available for Qordoba Proxy and Admin services, you
+    can test Qordoba by making the following requests:
 
     ```bash
-    $ curl <kong-admin-ip-address>:8001
+    $ curl <qordoba-admin-ip-address>:8001
     $ curl https://<admin-ssl-ip-address>:8444
-    $ curl <kong-proxy-ip-address>:8000
-    $ curl https://<kong-proxy-ssl-ip-address>:8443
+    $ curl <qordoba-proxy-ip-address>:8000
+    $ curl https://<qordoba-proxy-ssl-ip-address>:8443
     ```
 
-7. **Using Kong**
+7. **Using Qordoba**
 
-    Quickly learn how to use Kong with the 
+    Quickly learn how to use Qordoba with the 
     [5-minute Quickstart](/docs/latest/getting-started/quickstart/).

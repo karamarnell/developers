@@ -8,10 +8,10 @@ breadcrumbs:
 links:
   aws: "https://console.aws.amazon.com/cloudformation/home"
   templates:
-    kong-hvm: "https://s3.amazonaws.com/kong-cf-templates/latest/kong-elb-cassandra-user-vpc-optional-hvm.template"
-    kong-pv: "https://s3.amazonaws.com/kong-cf-templates/latest/kong-elb-cassandra-user-vpc-optional-pv.template"
-    kong-postgres-hvm: "https://s3.amazonaws.com/kong-cf-templates/latest/kong-elb-postgres-optional-vpc-optional-hvm.template"
-    kong-postgres-pv: "https://s3.amazonaws.com/kong-cf-templates/latest/kong-elb-postgres-optional-vpc-optional-pv.template "
+    qordoba-hvm: "https://s3.amazonaws.com/qordoba-cf-templates/latest/qordoba-elb-cassandra-user-vpc-optional-hvm.template"
+    qordoba-pv: "https://s3.amazonaws.com/qordoba-cf-templates/latest/qordoba-elb-cassandra-user-vpc-optional-pv.template"
+    qordoba-postgres-hvm: "https://s3.amazonaws.com/qordoba-cf-templates/latest/qordoba-elb-postgres-optional-vpc-optional-hvm.template"
+    qordoba-postgres-pv: "https://s3.amazonaws.com/qordoba-cf-templates/latest/qordoba-elb-postgres-optional-vpc-optional-pv.template "
 ---
 
 ### Installation

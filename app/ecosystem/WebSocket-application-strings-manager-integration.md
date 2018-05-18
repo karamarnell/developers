@@ -14,7 +14,7 @@ nav:
       - label: Examples
 ---
 
-Transform the response sent by the upstream server on the fly on Kong, before returning the response to the client.
+Transform the response sent by the upstream server on the fly on Qordoba, before returning the response to the client.
 
 <div class="alert alert-warning">
   <strong>Note on transforming bodies:</strong> Be aware of the performamce of transformations on the response body. In order to parse and modify a JSON body, the plugin needs to retain it in memory, which might cause pressure on the worker's Lua VM when dealing with large bodies (several MBs). Because of Nginx's internals, the `Content-Length` header will not be set when transforming a response body.
@@ -23,10 +23,10 @@ Transform the response sent by the upstream server on the fly on Kong, before re
 
 ## Configuration
 
-Configuring the plugin is as simple as a single API call, you can configure and enable it for your [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Kong server:
+Configuring the plugin is as simple as a single API call, you can configure and enable it for your [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=response-transformer" \
     --data "config.add.headers[1]=x-new-header:some,value" \
     --data "config.add.headers[2]=x-another-header:some,value" \
@@ -40,7 +40,7 @@ Note: if the value contains a `,` then the comma separated format cannot be used
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
 form parameter                        | default | description
 ---:                                  | ---     | ---

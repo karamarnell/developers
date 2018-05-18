@@ -1,5 +1,5 @@
 ---
-title: Lua Reference - kong.plugins.basic-auth.crypto
+title: Lua Reference - qordoba.plugins.basic-auth.crypto
 layout: default
 ---
 
@@ -13,22 +13,22 @@ layout: default
       <h1>Public Lua API Reference</h1>
       <p>For plugins developers and core contributors</p>
     </div>
-    {% if site.data.kong_versions.size > 1 %}
+    {% if site.data.qordoba_versions.size > 1 %}
       <div class="dropdown page-header-right">
         <button class="page-header-btn" id="version-dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Version {{page.kong_version}}
-          {% if page.kong_version == site.data.kong_latest.release %}<em>(latest)</em>{% endif %}
+          Version {{page.qordoba_version}}
+          {% if page.qordoba_version == site.data.qordoba_latest.release %}<em>(latest)</em>{% endif %}
           <span class="caret"></span>
         </button>
 
         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="version-dropdown">
-          {% for ver in site.data.kong_versions %}
-            {% if page.kong_version != ver.release %}
+          {% for ver in site.data.qordoba_versions %}
+            {% if page.qordoba_version != ver.release %}
               <li>
                 {% if ver.lua_doc %}
-                  <a href="/docs/{{ver.release}}/lua-reference/"{% if ver.release == page.kong_version %} class="active"{% endif %}>
+                  <a href="/docs/{{ver.release}}/lua-reference/"{% if ver.release == page.qordoba_version %} class="active"{% endif %}>
                     {{ver.release}}
-                    {% if ver.release == site.data.kong_latest.release %}(latest){% endif %}
+                    {% if ver.release == site.data.qordoba_latest.release %}(latest){% endif %}
                   </a>
                 {% else %}
                   <span>Not available for {{ver.release}}</span>
@@ -47,22 +47,22 @@ layout: default
     <nav>
       <ul>
         <li>
-          <a href="/docs/{{page.kong_version}}"><h5>Back to docs</h5></a>
+          <a href="/docs/{{page.qordoba_version}}"><h5>Back to docs</h5></a>
         </li>
         <li>
-          <a href="/docs/{{page.kong_version}}/lua-reference/"><h5>Index</h5></a>
+          <a href="/docs/{{page.qordoba_version}}/lua-reference/"><h5>Index</h5></a>
         </li>
         <li>
           <h5>Modules</h5>
           <ul>
-            <li><a href="../../modules/kong.dao">kong.dao</a></li>
-            <li>kong.plugins.basic-auth.crypto</li>
-            <li><a href="../../modules/kong.plugins.galileo.alf">kong.plugins.galileo.alf</a></li>
-            <li><a href="../../modules/kong.plugins.galileo.buffer">kong.plugins.galileo.buffer</a></li>
-            <li><a href="../../modules/kong.plugins.jwt.jwt_parser">kong.plugins.jwt.jwt_parser</a></li>
-            <li><a href="../../modules/kong.tools.responses">kong.tools.responses</a></li>
-            <li><a href="../../modules/kong.tools.timestamp">kong.tools.timestamp</a></li>
-            <li><a href="../../modules/kong.tools.utils">kong.tools.utils</a></li>
+            <li><a href="../../modules/qordoba.dao">qordoba.dao</a></li>
+            <li>qordoba.plugins.basic-auth.crypto</li>
+            <li><a href="../../modules/qordoba.plugins.galileo.alf">qordoba.plugins.galileo.alf</a></li>
+            <li><a href="../../modules/qordoba.plugins.galileo.buffer">qordoba.plugins.galileo.buffer</a></li>
+            <li><a href="../../modules/qordoba.plugins.jwt.jwt_parser">qordoba.plugins.jwt.jwt_parser</a></li>
+            <li><a href="../../modules/qordoba.tools.responses">qordoba.tools.responses</a></li>
+            <li><a href="../../modules/qordoba.tools.timestamp">qordoba.tools.timestamp</a></li>
+            <li><a href="../../modules/qordoba.tools.utils">qordoba.tools.utils</a></li>
             <li><a href="../../modules/spec.helpers">spec.helpers</a></li>
           </ul>
         </li>
@@ -73,7 +73,7 @@ layout: default
   <div class="page-content-container">
   <div class="page-content">
     <div class="content">
-<h1><code>kong.plugins.basic-auth.crypto</code></h1>
+<h1><code>qordoba.plugins.basic-auth.crypto</code></h1>
 <p>Salt the password
  Password is salted with the credential's consumer_id (long enough, unique)</p>
 <p></p>

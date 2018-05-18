@@ -25,17 +25,17 @@ Add Basic Authentication to your APIs, with username and password protection. Th
 
 ## Configuration
 
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] by executing the following request on your Kong server:
+Configuring the plugin is straightforward, you can add it on top of an [API][api-object] by executing the following request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=basic-auth" \
     --data "config.hide_credentials=true"
 ```
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
 Once applied, any user with a valid credential can access the service/API.
 To restrict usage to only some of the authenticated users, also add the
@@ -45,8 +45,8 @@ blacklist groups of users.
 form parameter                             | default | description
 ---                                        | ---     | ---
 `name`                                     |         | The name of the plugin to use, in this case: `basic-auth`
-`config.hide_credentials`<br>*optional*    | `false` | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request
-`config.anonymous`<br>*optional*           | ``      | An optional string (consumer uuid) value to use as an "anonymous" consumer if authentication fails. If empty (default), the request will fail with an authentication failure `4xx`. Please note that this value must refer to the Consumer `id` attribute which is internal to Kong, and **not** its `custom_id`.
+`config.hide_credentials`<br>*optional*    | `false` | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Qordoba before proxying the request
+`config.anonymous`<br>*optional*           | ``      | An optional string (consumer uuid) value to use as an "anonymous" consumer if authentication fails. If empty (default), the request will fail with an authentication failure `4xx`. Please note that this value must refer to the Consumer `id` attribute which is internal to Qordoba, and **not** its `custom_id`.
 
 ----
 
@@ -59,7 +59,7 @@ In order to use the plugin, you first need to create a consumer to associate one
 You need to associate a credential to an existing [Consumer][consumer-object] object, that represents a user consuming the API. To create a [Consumer][consumer-object] you can execute the following request:
 
 ```bash
-curl -d "username=user123&custom_id=SOME_CUSTOM_ID" http://kong:8001/consumers/
+curl -d "username=user123&custom_id=SOME_CUSTOM_ID" http://qordoba:8001/consumers/
 ```
 
 parameter                       | default | description
@@ -78,7 +78,7 @@ service, you must add the new consumer to a whitelisted group. See
 You can provision new username/password credentials by making the following HTTP request:
 
 ```bash
-$ curl -X POST http://kong:8001/consumers/{consumer}/basic-auth \
+$ curl -X POST http://qordoba:8001/consumers/{consumer}/basic-auth \
     --data "username=Aladdin" \
     --data "password=OpenSesame"
 ```
@@ -105,7 +105,7 @@ Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
 Simply make a request with the header:
 
 ```bash
-$ curl http://kong:8000/{api path} \
+$ curl http://qordoba:8000/{api path} \
     -H 'Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l'
 ```
 
@@ -113,25 +113,25 @@ $ curl http://kong:8000/{api path} \
 
 When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream API/Microservice, so that you can identify the consumer in your code:
 
-* `X-Consumer-ID`, the ID of the Consumer on Kong
+* `X-Consumer-ID`, the ID of the Consumer on Qordoba
 * `X-Consumer-Custom-ID`, the `custom_id` of the Consumer (if set)
 * `X-Consumer-Username`, the `username` of the Consumer (if set)
 * `X-Credential-Username`, the `username` of the Credential (only if the consumer is not the 'anonymous' consumer)
 * `X-Anonymous-Consumer`, will be set to `true` when authentication failed, and the 'anonymous' consumer was set instead.
 
-You can use this information on your side to implement additional logic. You can use the `X-Consumer-ID` value to query the Kong Admin API and retrieve more information about the Consumer.
+You can use this information on your side to implement additional logic. You can use the `X-Consumer-ID` value to query the Qordoba Admin API and retrieve more information about the Consumer.
 
 ### Paginate through the basic-auth Credentials
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> This endpoint was introduced in Kong 0.11.2.
+  <strong>Note:</strong> This endpoint was introduced in Qordoba 0.11.2.
 </div>
 
 You can paginate through the basic-auth Credentials for all Consumers using the
 following request:
 
 ```bash
-$ curl -X GET http://kong:8001/basic-auths
+$ curl -X GET http://qordoba:8001/basic-auths
 
 {
     "total": 3,
@@ -174,14 +174,14 @@ Attributes | Description
 ### Retrieve the Consumer associated with a Credential
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> This endpoint was introduced in Kong 0.11.2.
+  <strong>Note:</strong> This endpoint was introduced in Qordoba 0.11.2.
 </div>
 
 It is possible to retrieve a [Consumer][consumer-object] associated with a
 basic-auth Credential using the following request:
 
 ```bash
-curl -X GET http://kong:8001/basic-auths/{username or id}/consumer
+curl -X GET http://qordoba:8001/basic-auths/{username or id}/consumer
 
 {
    "created_at":1507936639000,

@@ -28,8 +28,8 @@ third-party OAuth 2.0 server.
 
 ## Requesting Access
 
-This plugin is only available with a [Kong Enterprise](https://konghq.com/kong-enterprise-edition)
+This plugin is only available with a [Qordoba Enterprise](https://qordobahq.com/qordoba-enterprise-edition)
 subscription.
 
-If you are not a Kong Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](https://konghq.com/request-demo).
+If you are not a Qordoba Enterprise customer, you can inquire about our
+Enterprise offering by [contacting us](https://qordobahq.com/request-demo).

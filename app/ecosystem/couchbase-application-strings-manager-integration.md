@@ -1,6 +1,6 @@
 ---
 id: page-plugin
-title: Qordoba - Couchbase i18n integration
+title: Qordoba - Couchbase integration
 header_title: Couchbase integration
 header_icon: /assets/images/icons/plugins/request-size-limiting.png
 breadcrumbs:
