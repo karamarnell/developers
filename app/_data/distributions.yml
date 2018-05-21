@@ -1,47 +1,29 @@
-- id: javascript-sdk
-  name: javascript sdk strings management
+- id: bitbucket-application-strings-manager
+  name: Bitbucket strings management
+  type: cloud
+  
+- id: github-application-strings-manager
+  name: Github strings management
   type: cloud
 
-- id: github
-  name: Qordoba with github strings management
-  type: cloud
-
-- id: qordoba-cli-jenkins
-  name: qordoba cli jenkins strings management
+- id: qordoba-cli-jenkins-application-strings-manager
+  name: Qordoba cli jenkins strings management
   type: package
 
-- id: websocket
-  name: websocket strings management
+- id: websocket-application-strings-manager
+  name: Websocket strings management
   type: package
 
-- id: zendesk
-  name: zendesk strings management
-  type: cloud
-
-- id: wordpress-wpml
-  name: wordpress wpml strings management
+- id: sketch-application-strings-manager
+  name: Sketch strings management
   type: package
 
-- id: wordpress-polylang
-  name: wordpress polylang strings management
+- id: adobe-design-application-strings-manager
+  name: Adobe design strings management
   type: package
-
-- id: magento-1
-  name: magento 1 strings management
-  type: package
-
-- id: magento-2
-  name: magento 2 strings management
-  type: package
-
-- id: sketch
-  name: sketch strings management
-  type: package
-
-- id: adobe-design
-  name: adobe design strings management
-  type: package
-
-- id: braze-appboy
-  name: braze appboy strings management
-  type: cloud
+ 
+- id: javascript-sdk-application-strings-manager
+  name: Javascript sdk strings management
+  ype: package
+  
+ 

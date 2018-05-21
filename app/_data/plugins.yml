@@ -1,5 +1,5 @@
 - name: Cloud softwere
-  info: Visualize, inspect and monitor keys and strings 
+  info: Inspect and monitor keys/strings 
   plugins:
     - name: GitHub (GitHub.com)
       id: GitHub-integration
@@ -24,35 +24,35 @@
       info: Intelligent content for your Help Center articles
       
 
-- name: IDEas and Design tools
+- name: IDEs and Design tools
   info: Ready plugins for your IDEas and Design tools
   plugins:
     - name: Sketch  
       id: sketch-plugin-integration
-      info: Qordoba's Amazon SQS Integration retrieves the content from message based on key.
+      info: Qordoba's plugin retrieves the content from Sketch and send it to Qordoba.
     
     - name: Adobe inDesign and Photoshop  
       id: adobe-plugin-integration
-      info: Qordoba's Amazon SQS Integration retrieves the content from message based on key.
+      info: Qordoba's plugin retrieves the content from Adobe inDesign and Photoshop and send it to Qordoba..
 
 
     - name: Intellij IDE plugin  
       id: Intellij-plugin-integration
-      info: Qordoba's Amazon SQS Integration retrieves the content from message based on key.
+      info: Qordoba's plugin retrieves the content from Intellij and send it to Qordoba.
       
 
     - name: Xcode plugin  
       id: Xcode-plugin-integration
-      info: Qordoba's Amazon SQS Integration retrieves the content from message based on key.      
+      info: Qordoba's plugin retrieves the content from Xcode and send it to Qordoba.      
           
 
     - name: Android Studio  
       id: android-studio-plugin-integration
-      info: Qordoba's Amazon SQS Integration retrieves the content from message based on key.          
+      info: Qordoba's plugin retrieves the content from Android Studio and send it to Qordoba.           
                  
 
 - name: Messages/Queue protocols
-  info: Visualize, inspect and monitor APIs and microservices traffic
+  info:  Transform content on the fly on Qordoba
   plugins:
     - name: Amazon Simple Queue Service (SQS)  
       id: amazon-simple-queue-service-SQS-integration
@@ -95,8 +95,8 @@
              
       
       
-- name: Search Engineg
-  info: Visualize, inspect and monitor APIs and microservices traffic
+- name: Search Engine
+  info: Transform search results with Qordoba
   plugins:
     - name: Apache Solr
       id: apache-Solr-integration
@@ -161,7 +161,7 @@
 
       
 - name: CMS & Ecommerce platforms
-  info: Visualize, inspect and monitor APIs and microservices traffic
+  info: Manage all the strings for your CMS & Ecommerce platforms
   plugins:
     - name: Wordpress Polylang  
       id: wordpress-polylang-integration
@@ -202,7 +202,7 @@
       
 
 - name: Marketing automation software
-  info: Visualize, inspect and monitor APIs and microservices traffic
+  info: Manage all the strings for your marketing automation software
   plugins:
     - name: Braze (formerly Appboy)  
       id: Braze-Appboy-integration
@@ -217,15 +217,3 @@
       id: Marketo-integration
       info: Qordoba's beta integration retrieves the content from Marketo so you can manage it on Qordoba content Editor. 
       
-            
-            
-- name: Proxy (legacy solutions)
-  info: Log requests and response data using the best transport for your infrastructure
-  plugins:
-    - name: Hosted Proxy
-      id: hosted-proxy
-      info: Qordoba delivers the localized versions of your website or webapp to your local users via a fast and reliable CDN.
-
-    - name: SecureProxy
-      id: secure-proxy
-      info: SecureProxy, Qordoba's on-premise proxy solution, is for dynamic websites and webapps that require a highly secure environment. 
