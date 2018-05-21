@@ -24,12 +24,12 @@ title: Strings Intelligence Platform..
 description: "Create a fully automated strings management solution"
 documentation: docs
 links:
-  web: https://dev.qordoba.com
+  web: https://dev-2.qordoba.com
   share: http://qordoba.com
   download: https://www.qordoba.com/
 repos:
   kong: https://github.com/Qordobacode
-  docs: http://dev.qordoba.com
+  docs: http://dev-2.qordoba.com
 
 gems:
   - jekyll-redirect-from
