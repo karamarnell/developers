@@ -16,7 +16,7 @@ pip install qordoba==0.2.0a1
 
 Use the Qordoba ‘extract’ command to identify the local directory path where you have files that need to be localized.
 
-`qor i18n-extract -i input_dir -r report_dir -l customized_lexer`
+`qor extract -i input_dir -r report_dir -l customized_lexer`
 
 The extract command pulls all the files from the given directory path and its subdirectories. 
 Our lexer will parse your files and extract all the strings. The strings are saved in a generated JSON report.
@@ -38,13 +38,13 @@ report elements:
 
 Use the Qordoba ‘generate’ command to generate the keys (QUIDs) for the content that was extracted. The extraction can be modifed to exclude content that you don’t want in your resource file.
 
-`qor i18n-generate -r report_dir -e report_key_dir`
+`qor generate -r report_dir -e report_key_dir`
 
 The generate command will pick up your reports in the report_dir and generate new keys for every string by calling our API.
 Keys are added to a new report which is stored in a new directory. The reason: while processing many reports there may occur connectivity issues. This way you know which reports have been processed.
 
 Optional:
-Flag `--existing_i18nfiles directory_path`. 
+Flag `--existing_strings managementfiles directory_path`. 
 The generate command will look for JSON localization files in the directory_path and scan for existing keys or values.
 
 report elements:
@@ -63,7 +63,7 @@ report elements:
 Use the Qordoba ‘execute’ command to replace the strings in your source code with the generated keys.
 
 
-`qor i18n-execute -i input_dir -r report_key_dir -k key_format`
+`qor execute -i input_dir -r report_key_dir -k key_format`
 
 key format:
 if keys should be replaced with a custom format, add it as a flag or within the configuration file.
@@ -76,7 +76,7 @@ add a custom key flag to execute the command: -k {{KEY}}
 
 **Option 2: **
 
-add a custom key format in your configuration file **.i18n-ml.yml**
+add a custom key format in your configuration file **.ml.yml**
 
 
 ```

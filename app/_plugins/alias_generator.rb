@@ -88,7 +88,7 @@ module Jekyll
   <body>
   Redirecting...
   <script>
-    var latest = '#{@site.data["kong_versions"].last["release"]}';
+    var latest = '#{@site.data["qordoba_versions"].last["release"]}';
     var destination = window.location.pathname.replace(/latest/i, latest);
     var urlsplit = window.location.href.split('latest');
 

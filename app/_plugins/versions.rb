@@ -4,9 +4,9 @@ module Jekyll
     priority :highest
 
     def generate(site)
-      # Retrieve the latest version and put it in `site.data.kong_latest.version`
-      latest = site.data["kong_versions"].last
-      site.data["kong_latest"] = latest
+      # Retrieve the latest version and put it in `site.data.qordoba_latest.version`
+      latest = site.data["qordoba_versions"].last
+      site.data["qordoba_latest"] = latest
 
       # Add a `version` property to every versioned page
       # Also create aliases under /latest/ for all x.x.x doc pages
@@ -15,7 +15,7 @@ module Jekyll
 
         # Only apply those rules to documentation pages
         if parts[0] == site.config["documentation"]
-          page.data["kong_version"] = parts[1]
+          page.data["qordoba_version"] = parts[1]
 
           # Put navigation items for current version in page.nav_items
           page.data["nav_items"] = site.data['docs_nav_' + parts[1].gsub(/\./, '')]

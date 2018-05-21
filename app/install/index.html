@@ -12,7 +12,7 @@ header_icon: /assets/images/icons/icn-download.svg
       <div class="distributions">
         {% for method in site.data.distributions %}
           <a href="{% if method.soon %}#{% else %}/install/{{ method.id }}/{% endif %}" class="box {% if method.soon %}soon{% endif %}" title="{{ method.name }}">
-            <img src="/assets/images/distributions/{{ method.id }}.{% if method.png %}png{% else %}svg{% endif %}" alt="{{ method.name }}"/>
+            <img src="/assets/images/distributions/{{ method.id }}.png" alt="{{ method.name }}"/ style="height: 60px">
           </a>
         {% endfor %}
       </div>

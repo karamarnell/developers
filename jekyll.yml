@@ -20,21 +20,16 @@ keep_files:
 
 # Site settings
 name: Qordoba
-title: Localization for developers, so you can manage text like code.
+title: Strings Intelligence Platform..
 description: "Create a fully automated strings management solution"
 documentation: docs
 links:
   web: https://dev.qordoba.com
-  share: http://getkong.org # legacy link, must maintain for social sharing counters
-  download: https://bintray.com/kong
-  instaclustr: "https://www.instaclustr.com/products/kong/?utm_source=partnership&utm_medium=link&utm_campaign=mashape"
+  share: http://qordoba.com
+  download: https://www.qordoba.com/
 repos:
-  kong: https://github.com/Kong/kong
-  docs: https://github.com/Kong/getkong.org
-  vagrant: https://github.com/Kong/kong-vagrant
-  homebrew: https://github.com/Kong/homebrew-kong
-  cloudformation: https://github.com/Kong/kong-dist-cloudformation
-  oauth2_hello_world: https://github.com/Kong/kong-oauth2-hello-world
+  kong: https://github.com/Qordobacode
+  docs: http://dev.qordoba.com
 
 gems:
   - jekyll-redirect-from
@@ -59,7 +54,7 @@ defaults:
       path: 'about'
     values:
       layout: 'about'
-      header_html: '<a class="github-button" href="https://github.com/Kong/kong" data-style="mega" data-count-href="/Kong/kong/stargazers" data-count-api="/repos/Kong/kong#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Kong/kong on GitHub">Star</a>&nbsp;<a class="github-button" href="https://github.com/Kong/kong/fork" data-icon="octicon-repo-forked" data-style="mega" data-count-href="/Kong/kong/network" data-count-api="/repos/Kong/kong#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork Kong/kong on GitHub">Fork</a>'
+      header_html: ''
       breadcrumbs: null
 
   - scope:

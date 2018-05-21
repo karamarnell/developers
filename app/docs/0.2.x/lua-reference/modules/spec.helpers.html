@@ -13,22 +13,22 @@ layout: default
       <h1>Public Lua API Reference</h1>
       <p>For plugins developers and core contributors</p>
     </div>
-    {% if site.data.kong_versions.size > 1 %}
+    {% if site.data.qordoba_versions.size > 1 %}
       <div class="dropdown page-header-right">
         <button class="page-header-btn" id="version-dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Version {{page.kong_version}}
-          {% if page.kong_version == site.data.kong_latest.release %}<em>(latest)</em>{% endif %}
+          Version {{page.qordoba_version}}
+          {% if page.qordoba_version == site.data.qordoba_latest.release %}<em>(latest)</em>{% endif %}
           <span class="caret"></span>
         </button>
 
         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="version-dropdown">
-          {% for ver in site.data.kong_versions %}
-            {% if page.kong_version != ver.release %}
+          {% for ver in site.data.qordoba_versions %}
+            {% if page.qordoba_version != ver.release %}
               <li>
                 {% if ver.lua_doc %}
-                  <a href="/docs/{{ver.release}}/lua-reference/"{% if ver.release == page.kong_version %} class="active"{% endif %}>
+                  <a href="/docs/{{ver.release}}/lua-reference/"{% if ver.release == page.qordoba_version %} class="active"{% endif %}>
                     {{ver.release}}
-                    {% if ver.release == site.data.kong_latest.release %}(latest){% endif %}
+                    {% if ver.release == site.data.qordoba_latest.release %}(latest){% endif %}
                   </a>
                 {% else %}
                   <span>Not available for {{ver.release}}</span>
@@ -47,22 +47,22 @@ layout: default
     <nav>
       <ul>
         <li>
-          <a href="/docs/{{page.kong_version}}"><h5>Back to docs</h5></a>
+          <a href="/docs/{{page.qordoba_version}}"><h5>Back to docs</h5></a>
         </li>
         <li>
-          <a href="/docs/{{page.kong_version}}/lua-reference/"><h5>Index</h5></a>
+          <a href="/docs/{{page.qordoba_version}}/lua-reference/"><h5>Index</h5></a>
         </li>
         <li>
           <h5>Modules</h5>
           <ul>
-            <li><a href="../../modules/kong.dao">kong.dao</a></li>
-            <li><a href="../../modules/kong.plugins.basic-auth.crypto">kong.plugins.basic-auth.crypto</a></li>
-            <li><a href="../../modules/kong.plugins.galileo.alf">kong.plugins.galileo.alf</a></li>
-            <li><a href="../../modules/kong.plugins.galileo.buffer">kong.plugins.galileo.buffer</a></li>
-            <li><a href="../../modules/kong.plugins.jwt.jwt_parser">kong.plugins.jwt.jwt_parser</a></li>
-            <li><a href="../../modules/kong.tools.responses">kong.tools.responses</a></li>
-            <li><a href="../../modules/kong.tools.timestamp">kong.tools.timestamp</a></li>
-            <li><a href="../../modules/kong.tools.utils">kong.tools.utils</a></li>
+            <li><a href="../../modules/qordoba.dao">qordoba.dao</a></li>
+            <li><a href="../../modules/qordoba.plugins.basic-auth.crypto">qordoba.plugins.basic-auth.crypto</a></li>
+            <li><a href="../../modules/qordoba.plugins.galileo.alf">qordoba.plugins.galileo.alf</a></li>
+            <li><a href="../../modules/qordoba.plugins.galileo.buffer">qordoba.plugins.galileo.buffer</a></li>
+            <li><a href="../../modules/qordoba.plugins.jwt.jwt_parser">qordoba.plugins.jwt.jwt_parser</a></li>
+            <li><a href="../../modules/qordoba.tools.responses">qordoba.tools.responses</a></li>
+            <li><a href="../../modules/qordoba.tools.timestamp">qordoba.tools.timestamp</a></li>
+            <li><a href="../../modules/qordoba.tools.utils">qordoba.tools.utils</a></li>
             <li>spec.helpers</li>
           </ul>
         </li>
@@ -74,7 +74,7 @@ layout: default
   <div class="page-content">
     <div class="content">
 <h1><code>spec.helpers</code></h1>
-<p>Collection of utilities to help testing Kong features and plugins.</p>
+<p>Collection of utilities to help testing Qordoba features and plugins.</p>
 <p></p>
 
 
@@ -86,7 +86,7 @@ layout: default
 <table class="function_list">
   <tr>
     <td class="name"><a href="#admin_client">admin_client ()</a></td>
-    <td class="summary">returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Kong admin port.</td>
+    <td class="summary">returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Qordoba admin port.</td>
   </tr>
   <tr>
     <td class="name"><a href="#http_client">http_client (host, port, timeout)</a></td>
@@ -98,11 +98,11 @@ layout: default
   </tr>
   <tr>
     <td class="name"><a href="#proxy_client">proxy_client ()</a></td>
-    <td class="summary">returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Kong proxy port.</td>
+    <td class="summary">returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Qordoba proxy port.</td>
   </tr>
   <tr>
     <td class="name"><a href="#proxy_ssl_client">proxy_ssl_client ()</a></td>
-    <td class="summary">returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Kong SSL proxy port.</td>
+    <td class="summary">returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Qordoba SSL proxy port.</td>
   </tr>
 </table>
 <h2><a href="#TCP_UDP_server_helpers">TCP/UDP server helpers </a></h2>
@@ -163,19 +163,19 @@ layout: default
 <table class="function_list">
   <tr>
     <td class="name"><a href="#clean_prefix">clean_prefix (prefix)</a></td>
-    <td class="summary">Cleans the Kong environment.</td>
+    <td class="summary">Cleans the Qordoba environment.</td>
   </tr>
   <tr>
     <td class="name"><a href="#execute">execute (...)</a></td>
     <td class="summary">Execute a command.</td>
   </tr>
   <tr>
-    <td class="name"><a href="#kong_exec">kong_exec (cmd, env)</a></td>
-    <td class="summary">Execute a Kong command.</td>
+    <td class="name"><a href="#qordoba_exec">qordoba_exec (cmd, env)</a></td>
+    <td class="summary">Execute a Qordoba command.</td>
   </tr>
   <tr>
     <td class="name"><a href="#prepare_prefix">prepare_prefix (prefix)</a></td>
-    <td class="summary">Prepare the Kong environment.</td>
+    <td class="summary">Prepare the Qordoba environment.</td>
   </tr>
   <tr>
     <td class="name"><a href="#wait_for_invalidation">wait_for_invalidation (key, timeout)</a></td>
@@ -197,7 +197,7 @@ An http-client class to perform requests.
     <h4><a name="admin_client">admin_client</a></h4>
   </dt>
   <dd>
-    returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Kong admin port.
+    returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Qordoba admin port.
 
 
 
@@ -277,7 +277,7 @@ An http-client class to perform requests.
     <h4><a name="proxy_client">proxy_client</a></h4>
   </dt>
   <dd>
-    returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Kong proxy port.
+    returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Qordoba proxy port.
 
 
 
@@ -291,7 +291,7 @@ An http-client class to perform requests.
     <h4><a name="proxy_ssl_client">proxy_ssl_client</a></h4>
   </dt>
   <dd>
-    returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Kong SSL proxy port.
+    returns a pre-configured <a href="../modules/spec.helpers.html#http_client">http_client</a> for the Qordoba SSL proxy port.
 
 
 
@@ -695,7 +695,7 @@ An http-client class to perform requests.
     <h4><a name="clean_prefix">clean_prefix</a></h4>
   </dt>
   <dd>
-    Cleans the Kong environment.
+    Cleans the Qordoba environment.
  Deletes the working directory if it exists.
  configuration will be used
 
@@ -744,10 +744,10 @@ An http-client class to perform requests.
   </dd>
   <hr />
   <dt>
-    <h4><a name="kong_exec">kong_exec</a></h4>
+    <h4><a name="qordoba_exec">qordoba_exec</a></h4>
   </dt>
   <dd>
-    Execute a Kong command.
+    Execute a Qordoba command.
  variables, overriding the test config (each key will automatically be
  prefixed with <code>KONG_</code> and be converted to uppercase)
 
@@ -755,11 +755,11 @@ An http-client class to perform requests.
     <ul>
         <li>
           <code class="parameter">cmd</code>
-          Kong command to execute, eg. <code>start</code>, <code>stop</code>, etc.
+          Qordoba command to execute, eg. <code>start</code>, <code>stop</code>, etc.
         </li>
         <li>
           <code class="parameter">env</code>
-          (optional) table with kong parameters to set as environment
+          (optional) table with qordoba parameters to set as environment
         </li>
     </ul>
 
@@ -780,7 +780,7 @@ An http-client class to perform requests.
     <h4><a name="prepare_prefix">prepare_prefix</a></h4>
   </dt>
   <dd>
-    Prepare the Kong environment.
+    Prepare the Qordoba environment.
  creates the workdirectory and deletes any existing one.
  configuration will be used
 

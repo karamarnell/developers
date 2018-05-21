@@ -88,7 +88,7 @@ $(function () {
 
     var traits = {
       email: email,
-      environment: 'kong',
+      environment: 'qordoba',
       newsletter_updates: true,
       created_at: time
     }
@@ -134,7 +134,7 @@ $(function () {
       payload[data[i].name] = data[i].value
     }
 
-    payload.environment = 'kong'
+    payload.environment = 'qordoba'
 
     var traits = $.extend({
       enterprise: true,
@@ -226,5 +226,5 @@ $(function () {
     })
   })
 
-  analytics.trackLink($('a[href="#comparison"]')[0], 'Clicked Why Kong')
+  analytics.trackLink($('a[href="#comparison"]')[0], 'Clicked Why Qordoba')
 })

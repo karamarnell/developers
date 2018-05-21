@@ -4,7 +4,7 @@ title: Health Checks and Circuit Breakers Reference
 
 # Health Checks and Circuit Breakers Reference
 
-You can make an API proxied by Kong use a [ring-balancer][ringbalancer], configured
+You can make an API proxied by Qordoba use a [ring-balancer][ringbalancer], configured
 by adding an [upstream][upstream] entity that contains one or more [target][ringtarget]
 entities, each target pointing to a different IP address (or hostname) and
 port. The ring-balancer will balance load among the various targets, and based
@@ -12,14 +12,14 @@ on the [upstream][upstream] configuration, will perform health checks on the tar
 making them as healthy or unhealthy whether they are responsive or not. The
 ring-balancer will then only route traffic to healthy targets.
 
-Kong supports two kinds of health checks, which can be used separately or in
+Qordoba supports two kinds of health checks, which can be used separately or in
 conjunction:
 
 * **active checks**, where a specific HTTP endpoint in the target is
 periodically requested and the health of the target is determined based on its
 response;
 
-* **passive checks** (also known as **circuit breakers**), where Kong analyzes
+* **passive checks** (also known as **circuit breakers**), where Qordoba analyzes
 the ongoing traffic being proxied and determines the health of targets based
 on their behavior responding requests.
 
@@ -38,10 +38,10 @@ on their behavior responding requests.
 ### Healthy and unhealthy targets
 
 The objective of the health checks functionality is to dynamically mark
-targets as healthy or unhealthy, **for a given Kong node**. There is
-no cluster-wide synchronization of health information: each Kong node
+targets as healthy or unhealthy, **for a given Qordoba node**. There is
+no cluster-wide synchronization of health information: each Qordoba node
 determines the health of its targets separately. This is desirable since at a
-given point one Kong node may be able to connect to a target successfully
+given point one Qordoba node may be able to connect to a target successfully
 while another node is failing to reach it: the first node will consider
 it healthy, while the second will mark it as unhealthy and start routing
 traffic to other targets of the upstream.
@@ -118,13 +118,13 @@ field is included in the [Admin API][addupstream] reference documentation.
 }
 ```
 
-If all targets of an upstream are unhealthy, Kong will respond to requests
+If all targets of an upstream are unhealthy, Qordoba will respond to requests
 to the upstream with `503 Service Unavailable`.
 
 Note:
 
 1. health checks operate only on [*active* targets][targetobject] and do not
-   modify the *active* status of a target in the Kong database.
+   modify the *active* status of a target in the Qordoba database.
 2. unhealthy targets will not be removed from the loadbalancer, and hence will
    not have any impact on the balancer layout when using the hashing algorithm
    (they will just be skipped).
@@ -140,8 +140,8 @@ Note:
 
 Active health checks, as the name implies, actively probe targets for
 their health. When active health checks are enabled in an upstream entity,
-Kong will periodically issue HTTP requests to a configured path at each target
-of the upstream. This allows Kong to automatically enable and disable targets
+Qordoba will periodically issue HTTP requests to a configured path at each target
+of the upstream. This allows Qordoba to automatically enable and disable targets
 in the balancer based on the [probe results](#healthy-and-unhealthy-targets).
 
 The periodicity of active health checks can be configured separately for
@@ -154,14 +154,14 @@ When both are zero, active health checks are disabled altogether.
 #### Passive health checks (circuit breakers)
 
 Passive health checks, also known as circuit breakers, are
-checks performed based on the requests being proxied by Kong,
+checks performed based on the requests being proxied by Qordoba,
 with no additional traffic being generated. When a target becomes
 unresponsive, the passive health checker will detect that and mark
 the target as unhealthy. The ring-balancer will start skipping this
 target, so no more traffic will be routed to it. 
 
 Once the problem with a target is solved and it is ready to receive
-traffic again, the Kong administrator can manually inform the
+traffic again, the Qordoba administrator can manually inform the
 health checker that the target should be enabled again, via an
 Admin API endpoint:
 
@@ -171,9 +171,9 @@ HTTP/1.1 204 No Content
 ```
 
 This command will broadcast a cluster-wide message so that the "healthy"
-status is propagated to the whole [Kong cluster][clustering]. This will cause Kong nodes to
+status is propagated to the whole [Qordoba cluster][clustering]. This will cause Qordoba nodes to
 reset the health counters of the health checkers running in all workers of the
-Kong node, allowing the ring-balancer to route traffic to the target again.
+Qordoba node, allowing the ring-balancer to route traffic to the target again.
 
 Passive health checks have the advantage of not producing extra
 traffic, but they are unable to automatically mark a target as
@@ -193,7 +193,7 @@ in the target to be configured as a probe endpoint (which may be as
 simple as `"/"`). Passive health checks do not demand such configuration.
 * By providing a custom probe endpoint for an active health checker,
 an application may determine its own health metrics and produce a status
-code to be consumed by Kong. Even though a target continues to serve
+code to be consumed by Qordoba. Even though a target continues to serve
 traffic which looks healthy to the passive health checker,
 it would be able to respond to the active probe with a failure
 status, essentially requesting to be relieved from taking new traffic.
@@ -209,7 +209,7 @@ in order to re-enable it automatically.
 
 To enable active health checks, you need to specify the configuration items
 under `healthchecks.active` in the [Upstream object][upstreamobjects] configuration. You
-need to specify the necessary information so that Kong can perform periodic
+need to specify the necessary information so that Qordoba can perform periodic
 probing on the target, and how to interpret the resulting information.
 
 For configuring the probe, you need to specify:
@@ -235,7 +235,7 @@ This allows you to tune the behavior of the active health checks, whether you
 want probes for healthy and unhealthy targets to run at the same interval, or
 one to be more frequent than the other.
 
-Finally, you need to configure how Kong should interpret the probe, by setting
+Finally, you need to configure how Qordoba should interpret the probe, by setting
 the various thresholds on the [health
 counters](#healthy-and-unhealthy-targets), which, once reached will trigger a
 status change. The counter threshold fields are:
@@ -295,12 +295,12 @@ upstreams.
 
 [Back to TOC](#table-of-contents)
 
-[ringbalancer]: /docs/{{page.kong_version}}/loadbalancing#ring-balancer
-[ringtarget]: /docs/{{page.kong_version}}/loadbalancing#target
-[upstream]: /docs/{{page.kong_version}}/loadbalancing#upstream
-[targetobject]: /docs/{{page.kong_version}}/admin-api#target-object
-[addupstream]: /docs/{{page.kong_version}}/admin-api#add-upstream
-[clustering]: /docs/{{page.kong_version}}/clustering
-[upstreamobjects]: /docs/{{page.kong_version}}/admin-api#upstream-objects
-[balancercaveats]: /docs/{{page.kong_version}}/loadbalancing#balancing-caveats
-[dnscaveats]: /docs/{{page.kong_version}}/loadbalancing#dns-caveats
+[ringbalancer]: /docs/{{page.qordoba_version}}/loadbalancing#ring-balancer
+[ringtarget]: /docs/{{page.qordoba_version}}/loadbalancing#target
+[upstream]: /docs/{{page.qordoba_version}}/loadbalancing#upstream
+[targetobject]: /docs/{{page.qordoba_version}}/admin-api#target-object
+[addupstream]: /docs/{{page.qordoba_version}}/admin-api#add-upstream
+[clustering]: /docs/{{page.qordoba_version}}/clustering
+[upstreamobjects]: /docs/{{page.qordoba_version}}/admin-api#upstream-objects
+[balancercaveats]: /docs/{{page.qordoba_version}}/loadbalancing#balancing-caveats
+[dnscaveats]: /docs/{{page.qordoba_version}}/loadbalancing#dns-caveats

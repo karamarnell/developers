@@ -36,25 +36,25 @@ with a slightly different signature scheme.
 ## Configuration
 
 Configuring the plugin is straightforward, you can add it on top of an
-[API][api-object] by executing the following request on your Kong server:
+[API][api-object] by executing the following request on your Qordoba server:
 
 ```bash
-$ curl -X POST http://kong:8001/apis/{api}/plugins \
+$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
     --data "name=hmac-auth"
 ```
 
 `api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://kong:8001/plugins/`
+You can also apply it for every API using the `http://qordoba:8001/plugins/`
 endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin)
 for more information.
 
 form parameter                          | default | description
 ---                                     | --- | ---
 `name`                                  | | The name of the plugin to use, in this case: `hmac-auth`
-`config.hide_credentials`<br>*optional* | `false` | A boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request
+`config.hide_credentials`<br>*optional* | `false` | A boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Qordoba before proxying the request
 `config.clock_skew`<br>*optional*       | `300` | [Clock Skew][clock-skew] in seconds to prevent replay attacks.
-`config.anonymous`<br>*optional*        | ``      | An optional string (consumer uuid) value to use as an "anonymous" consumer if authentication fails. If empty (default), the request will fail with an authentication failure `4xx`. Please note that this value must refer to the Consumer `id` attribute which is internal to Kong, and **not** its `custom_id`.
+`config.anonymous`<br>*optional*        | ``      | An optional string (consumer uuid) value to use as an "anonymous" consumer if authentication fails. If empty (default), the request will fail with an authentication failure `4xx`. Please note that this value must refer to the Consumer `id` attribute which is internal to Qordoba, and **not** its `custom_id`.
 `config.validate_request_body`<br>*optional* | `false` | A boolean value telling the plugin to enable body validation
 `config.enforce_headers`<br>*optional*  | `` | A list of headers which the client should at least use for HTTP signature creation
 `config.algorithms`<br>*optional*       | `hmac-sha1`,<br>`hmac-sha256`,<br>`hmac-sha384`,<br>`hmac-sha512` | A list of HMAC digest algorithms which the user wants to support. Allowed values are `hmac-sha1`, `hmac-sha256`, `hmac-sha384`, and `hmac-sha512`
@@ -72,7 +72,7 @@ object. To create a
 [Consumer][consumer-object] you can execute the following request:
 
 ```bash
-$ curl -d "username=user123&custom_id=SOME_CUSTOM_ID" http://kong:8001/consumers/
+$ curl -d "username=user123&custom_id=SOME_CUSTOM_ID" http://qordoba:8001/consumers/
 ```
 
 parameter                       | description
@@ -88,7 +88,7 @@ You can provision new username/password credentials by making the following
 HTTP request:
 
 ```bash
-$ curl -X POST http://kong:8001/consumers/{consumer}/hmac-auth \
+$ curl -X POST http://qordoba:8001/consumers/{consumer}/hmac-auth \
     --data "username=bob" \
     --data "secret=secret456"
 ```
@@ -99,7 +99,7 @@ entity to associate the credentials to.
 form parameter             | description
 ---                        | ---
 `username`                 | The username to use in the HMAC Signature verification.
-`secret`<br>*optional*     | The secret to use in the HMAC Signature verification. Note that if this parameter isn't provided, Kong will generate a value for you and send it as part of the response body.
+`secret`<br>*optional*     | The secret to use in the HMAC Signature verification. Note that if this parameter isn't provided, Qordoba will generate a value for you and send it as part of the response body.
 
 ### Signature Authentication Scheme
 
@@ -305,27 +305,27 @@ When a client has been authenticated, the plugin will append some headers to
 the request before proxying it to the upstream API/Microservice, so that you
 can identify the Consumer in your code:
 
-* `X-Consumer-ID`, the ID of the Consumer on Kong
+* `X-Consumer-ID`, the ID of the Consumer on Qordoba
 * `X-Consumer-Custom-ID`, the `custom_id` of the Consumer (if set)
 * `X-Consumer-Username`, the `username` of the Consumer (if set)
 * `X-Credential-Username`, the `username` of the Credential (only if the consumer is not the 'anonymous' consumer)
 * `X-Anonymous-Consumer`, will be set to `true` when authentication failed, and the 'anonymous' consumer was set instead.
 
 You can use this information on your side to implement additional logic.
-You can use the `X-Consumer-ID` value to query the Kong Admin API and retrieve
+You can use the `X-Consumer-ID` value to query the Qordoba Admin API and retrieve
 more information about the Consumer.
 
 ### Paginate through the HMAC Credentials
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> This endpoint was introduced in Kong 0.11.2.
+  <strong>Note:</strong> This endpoint was introduced in Qordoba 0.11.2.
 </div>
 
 You can paginate through the hmac-auth Credentials for all Consumers using the
 following request:
 
 ```bash
-$ curl -X GET http://kong:8001/hmac-auths
+$ curl -X GET http://qordoba:8001/hmac-auths
 
 {
     "total": 3,
@@ -368,14 +368,14 @@ Attributes | Description
 ### Retrieve the Consumer associated with a Credential
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> This endpoint was introduced in Kong 0.11.2.
+  <strong>Note:</strong> This endpoint was introduced in Qordoba 0.11.2.
 </div>
 
 It is possible to retrieve a [Consumer][consumer-object] associated with an
 HMAC Credential using the following request:
 
 ```bash
-curl -X GET http://kong:8001/hmac-auths/{hmac username or id}/consumer
+curl -X GET http://qordoba:8001/hmac-auths/{hmac username or id}/consumer
 
 {
    "created_at":1507936639000,

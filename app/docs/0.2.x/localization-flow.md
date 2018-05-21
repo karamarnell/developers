@@ -4,19 +4,19 @@ title: Clustering Reference
 
 # Clustering Reference
 
-A Kong cluster allows you to scale the system horizontally by adding more
+A Qordoba cluster allows you to scale the system horizontally by adding more
 machines to handle more incoming requests. They will all share the same
-configuration since they point to the same database. Kong nodes pointing to the
-**same datastore** will be part of the same Kong cluster.
+configuration since they point to the same database. Qordoba nodes pointing to the
+**same datastore** will be part of the same Qordoba cluster.
 
-You need a load-balancer in front of your Kong cluster to distribute traffic
+You need a load-balancer in front of your Qordoba cluster to distribute traffic
 across your available nodes.
 
 ### Table of Contents
 
-- [What a Kong cluster does and doesn't do][1]
-- [Single node Kong clusters][2]
-- [Multiple nodes Kong clusters][3]
+- [What a Qordoba cluster does and doesn't do][1]
+- [Single node Qordoba clusters][2]
+- [Multiple nodes Qordoba clusters][3]
 - [What is being cached?][4]
 - [How to configure database caching?][5]
     - 1. [db_update_frequency][5-1]
@@ -28,9 +28,9 @@ across your available nodes.
     - [Purge a cached value][6-2]
     - [Purge a node's cache][6-3]
 
-[1]: #what-a-kong-cluster-does-and-doesnt-do
-[2]: #single-node-kong-clusters
-[3]: #multiple-nodes-kong-clusters
+[1]: #what-a-qordoba-cluster-does-and-doesnt-do
+[2]: #single-node-qordoba-clusters
+[3]: #multiple-nodes-qordoba-clusters
 [4]: #what-is-being-cached
 [5]: #how-to-configure-database-caching
 [5-1]: #1-db_update_frequency-default-5s
@@ -42,32 +42,32 @@ across your available nodes.
 [6-2]: #purge-a-cached-value
 [6-3]: #purge-a-nodes-cache
 
-### What a Kong cluster does and doesn't do
+### What a Qordoba cluster does and doesn't do
 
-**Having a Kong cluster does not mean that your clients traffic will be
-load-balanced across your Kong nodes out of the box.** You still need a
-load-balancer in front of your Kong nodes to distribute your traffic. Instead,
-a Kong cluster means that those nodes will share the same configuration.
+**Having a Qordoba cluster does not mean that your clients traffic will be
+load-balanced across your Qordoba nodes out of the box.** You still need a
+load-balancer in front of your Qordoba nodes to distribute your traffic. Instead,
+a Qordoba cluster means that those nodes will share the same configuration.
 
-For performance reasons, Kong avoids database connections when proxying
+For performance reasons, Qordoba avoids database connections when proxying
 requests, and caches the contents of your database in memory. The cached
 entities include APIs, Consumers, Plugins, Credentials, etc... Since those
 values are in memory, any change made via the Admin API of one of the nodes
 needs to be propagated to the other nodes.
 
 This document describes how those cached entities are being invalidated and how
-to configure your Kong nodes for your use case, which lies somewhere between
+to configure your Qordoba nodes for your use case, which lies somewhere between
 performance and consistency.
 
 [Back to TOC](#table-of-contents)
 
-### Single node Kong clusters
+### Single node Qordoba clusters
 
-A single Kong node connected to a database (Cassandra or PostgreSQL) creates a
-Kong cluster of one node. Any changes applied via the Admin API of this node
+A single Qordoba node connected to a database (Cassandra or PostgreSQL) creates a
+Qordoba cluster of one node. Any changes applied via the Admin API of this node
 will instantly take effect. Example:
 
-Consider a single Kong node `A`. If we delete a previously registered API:
+Consider a single Qordoba node `A`. If we delete a previously registered API:
 
 ```bash
 $ curl -X DELETE http://127.0.0.1:8001/apis/test-api
@@ -82,9 +82,9 @@ $ curl -i http://127.0.0.1:8000/test-api
 
 [Back to TOC](#table-of-contents)
 
-### Multiple nodes Kong clusters
+### Multiple nodes Qordoba clusters
 
-In a cluster of multiple Kong nodes, other nodes connected to the same database
+In a cluster of multiple Qordoba nodes, other nodes connected to the same database
 would not instantly be notified that the API was deleted by node `A`.  While
 the API is **not** in the database anymore (it was deleted by node `A`), it is
 **still** in node `B`'s memory.
@@ -95,7 +95,7 @@ configured via:
 
 * [db_update_frequency][db_update_frequency] (default: 5 seconds)
 
-Every `db_update_frequency` seconds, all running Kong nodes will poll the
+Every `db_update_frequency` seconds, all running Qordoba nodes will poll the
 database for any update, and will purge the relevant entities from their cache
 if necessary.
 
@@ -103,18 +103,18 @@ If we delete an API from node `A`, this change will not be effective in node
 `B` until node `B`s next database poll, which will occur up to
 `db_update_frequency` seconds later (though it could happen sooner).
 
-This makes Kong clusters **eventually consistent**.
+This makes Qordoba clusters **eventually consistent**.
 
 [Back to TOC](#table-of-contents)
 
 ### What is being cached?
 
 All of the core entities such as APIs, Plugins, Consumers, Credentials are
-cached in memory by Kong and depend on their invalidation via the polling
+cached in memory by Qordoba and depend on their invalidation via the polling
 mechanism to be updated.
 
-Additionally, Kong also caches **database misses**. This means that if you
-configure an API with no plugin, Kong will cache this information. Example:
+Additionally, Qordoba also caches **database misses**. This means that if you
+configure an API with no plugin, Qordoba will cache this information. Example:
 
 On node `A`, we add an API:
 
@@ -167,21 +167,21 @@ polling job.
 
 ### How to configure database caching?
 
-You can configure 3 properties in the Kong configuration file, the most
-important one being `db_update_frequency`, which determine where your Kong
+You can configure 3 properties in the Qordoba configuration file, the most
+important one being `db_update_frequency`, which determine where your Qordoba
 nodes stand on the performance vs consistency trade off.
 
-Kong comes with default values tuned for consistency, in order to let you
+Qordoba comes with default values tuned for consistency, in order to let you
 experiment with its clustering capabilities while avoiding "surprises". As you
 prepare a production setup, you should consider tuning those values to ensure
 that your performance constraints are respected.
 
 #### 1. [db_update_frequency][db_update_frequency] (default: 5s)
 
-This value determines the frequency at which your Kong nodes will be polling
+This value determines the frequency at which your Qordoba nodes will be polling
 the database for invalidation events. A lower value will mean that the polling
-job will be executed more frequently, but that your Kong nodes will keep up
-with changes you apply. A higher value will mean that your Kong nodes will
+job will be executed more frequently, but that your Qordoba nodes will keep up
+with changes you apply. A higher value will mean that your Qordoba nodes will
 spend less time running the polling jobs, and will focus on proxying your
 traffic.
 
@@ -194,11 +194,11 @@ seconds.
 
 If your database itself is eventually consistent (ie: Cassandra), you **must**
 configure this value. It is to ensure that the change has time to propagate
-across your database nodes. When set, Kong nodes receiving invalidation events
+across your database nodes. When set, Qordoba nodes receiving invalidation events
 from their polling jobs will delay the purging of their cache for
 `db_update_propagation` seconds.
 
-If a Kong node connected to an eventual consistent database was not delaying
+If a Qordoba node connected to an eventual consistent database was not delaying
 the event handling, it could purge its cache, only to cache the non-updated
 value again (because the change hasn't propagated through the database yet)!
 
@@ -212,14 +212,14 @@ up to `db_update_frequency + db_update_propagation` seconds.
 
 #### 3. [db_cache_ttl][db_cache_ttl] (default: 3600s)
 
-The time (in seconds) for which Kong will cache database entities (both hits
-and misses). This Time-To-Live value acts as a safeguard in case a Kong node
+The time (in seconds) for which Qordoba will cache database entities (both hits
+and misses). This Time-To-Live value acts as a safeguard in case a Qordoba node
 misses an invalidation event, to avoid it from running on stale data for too
 long. When the TTL is reached, the value will be purged from its cache, and the
 next database result will be cached again.
 
 You can configure your cache to not invalidate data based on this TTL, by
-disabling it. To disable it, set this value to `0`. But be wary: if a Kong
+disabling it. To disable it, set this value to `0`. But be wary: if a Qordoba
 node misses an invalidation event for any reason, it might run with a stale
 value in its cache for an undefined amount of time, until the cache is
 manually purged, or the node is restarted.
@@ -228,23 +228,23 @@ manually purged, or the node is restarted.
 
 #### 4. When using Cassandra
 
-If you use Cassandra as your Kong database, you **must** set
+If you use Cassandra as your Qordoba database, you **must** set
 [db_update_propagation][db_update_propagation] to a non-zero value. Since
-Cassandra is eventually consistent by nature, this will ensure that Kong nodes
+Cassandra is eventually consistent by nature, this will ensure that Qordoba nodes
 do not prematurely invalidate their cache, only to fetch and catch a
-not up-to-date entity again. Kong will present you a warning logs if you did
+not up-to-date entity again. Qordoba will present you a warning logs if you did
 not configure this value when using Cassandra.
 
 Additionally, you might want to configure `cassandra_consistency` to a value
 like `QUORUM` or `LOCAL_QUORUM`, to ensure that values being cached by your
-Kong nodes are up-to-date values from your database.
+Qordoba nodes are up-to-date values from your database.
 
 [Back to TOC](#table-of-contents)
 
 ### Interacting with the cache via the Admin API
 
 If for some reason, you wish to investigate the cached values, or manually
-invalidate a value cached by Kong (a cached hit or miss), you can do so via the
+invalidate a value cached by Qordoba (a cached hit or miss), you can do so via the
 Admin API `/cache` endpoint.
 
 #### Inspect a cached value
@@ -271,7 +271,7 @@ Else:
 HTTP 404 Not Found
 ```
 
-**Note**: retrieving the `cache_key` for each entity being cached by Kong is
+**Note**: retrieving the `cache_key` for each entity being cached by Qordoba is
 currently an undocumented process. Future versions of the Admin API will make
 this process easier.
 
@@ -290,7 +290,7 @@ HTTP 204 No Content
 ...
 ```
 
-**Note**: retrieving the `cache_key` for each entity being cached by Kong is
+**Note**: retrieving the `cache_key` for each entity being cached by Qordoba is
 currently an undocumented process. Future versions of the Admin API will make
 this process easier.
 
@@ -315,6 +315,6 @@ will trigger many requests to your database, and could cause a
 
 [Back to TOC](#table-of-contents)
 
-[db_update_frequency]: /docs/{{page.kong_version}}/configuration/#db_update_frequency
-[db_update_propagation]: /docs/{{page.kong_version}}/configuration/#db_update_propagation
-[db_cache_ttl]: /docs/{{page.kong_version}}/configuration/#db_cache_ttl
+[db_update_frequency]: /docs/{{page.qordoba_version}}/configuration/#db_update_frequency
+[db_update_propagation]: /docs/{{page.qordoba_version}}/configuration/#db_update_propagation
+[db_cache_ttl]: /docs/{{page.qordoba_version}}/configuration/#db_cache_ttl

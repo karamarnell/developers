@@ -5,7 +5,7 @@ title: Authentication Reference
 # Authentication Reference
 
 Client access to upstream API services is typically controlled by the application and configuration of 
-Kong [authentication plugins][plugins]. 
+Qordoba [authentication plugins][plugins]. 
 
 ## Generic authentication
 
@@ -16,7 +16,7 @@ works as follows:
 1. Apply an auth plugin to an api, or globally (you cannot apply one on consumers)
 2. Create a `consumer` entity
 3. Provide the consumer with authentication credentials for the specific authentication method
-4. Now whenever a request comes in Kong will check the provided credentials (depends on the auth type) and
+4. Now whenever a request comes in Qordoba will check the provided credentials (depends on the auth type) and
 it will either block the request if it cannot validate, or add consumer and credential details
 in the headers and forward the request
 
@@ -27,20 +27,20 @@ The authentication method specific elements and examples can be found in each [p
 
 ## Consumers
 
-The easiest way to think about consumers is to map them one-on-one to users. Yet, to Kong this does not matter.
+The easiest way to think about consumers is to map them one-on-one to users. Yet, to Qordoba this does not matter.
 The core principle for consumers is that you can attach plugins to them, and hence customize request behaviour.
 So you might have mobile apps, and define one consumer for each app, or version of it. Or have a consumer per
 platform, e.g. an android consumer, an iOS consumer, etc.
 
-It is an opaque concept to Kong and hence they are called "consumers" and not "users".
+It is an opaque concept to Qordoba and hence they are called "consumers" and not "users".
 
 ## Anonymous Access
 
-Prior to Kong 0.10.x, a given API could be configured to allow **only** authenticated access (by applying an
+Prior to Qordoba 0.10.x, a given API could be configured to allow **only** authenticated access (by applying an
 [auth plugin][plugins]) or **only** anonymous access - it was not possible to have a given API allow some 
 users to be authenticated and others to access anonymously.
 
-Kong 0.10.x adds the ability to configure a given API to allow **both** authenticated **and** anonymous access. 
+Qordoba 0.10.x adds the ability to configure a given API to allow **both** authenticated **and** anonymous access. 
 You might use this configuration to grant access to anonymous users with a low rate-limit, and grant access 
 to authenticated users with a higher rate limit. 
 
@@ -99,8 +99,8 @@ access. Here is an example, which assumes you have already configured an API nam
 
 4. ### Create an anonymous consumer
 
-    Every request proxied by Kong must be associated with a consumer. You'll now create a consumer 
-    named `anonymous_users` (that Kong will utilize when proxying anonymous access) by issuing the 
+    Every request proxied by Qordoba must be associated with a consumer. You'll now create a consumer 
+    named `anonymous_users` (that Qordoba will utilize when proxying anonymous access) by issuing the 
     following request:
 
     ```bash
@@ -174,7 +174,7 @@ access. Here is an example, which assumes you have already configured an API nam
 
 ## Multiple Authentication
 
-Kong 0.10.x extends the ability to apply multiple authentication plugins for a given API, allowing 
+Qordoba 0.10.x extends the ability to apply multiple authentication plugins for a given API, allowing 
 different clients to utilize different authentication methods to access a given API endpoint.
 
 The behaviour of the auth plugins can be set to do either a logical `AND`, or a logical `OR` when evaluating
