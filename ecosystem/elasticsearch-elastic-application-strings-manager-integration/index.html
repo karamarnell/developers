@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+  
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Plugins - Rate Limiting | Qordoba - Strings Intelligence Platform..</title>
+  <meta name="description" content="Create a fully automated strings management solution">
+  <meta name="author" content="Qordoba"/>
+  <meta property="og:title" content="Strings Intelligence Platform.."/>
+  <meta property="og:site_name" content="Qordoba"/>
+  <link rel="prefetch" href="/assets/images/qordoba-white-logo.png" /><link rel="prefetch" href="/assets/images/icons/plugins/rate-limiting.png" /><link rel="prefetch" href="/assets/images/qordobalogoblue.png" /><link rel="dns-prefetch" href="https://buttons.github.io" /><link rel="dns-prefetch" href="https://platform.twitter.com" /><link rel="dns-prefetch" href="https://connect.facebook.net" /><link rel="dns-prefetch" href="//mashape.github.io" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png"/>
+  <link rel="stylesheet" href="/assets/styles.css?v=1527101038"/>
+</head>
+
+
+  <body id="page-plugin" >
+    <header class="site-header">
+  <div class="enterprise">
+        <div class="container">
+       <nav class="enterprise-sites one-half column">
+         <ul>
+           <li>
+             <a href="https://qordoba.com/customers/" target="_blank">Customers</a>
+           </li>
+           <li>
+             <a href="https://qordoba.com/partners/" target="_blank" >Partners</a>
+           </li>
+         </ul>
+       </nav>   
+      <nav class="enterprise-contact one-half column">
+        <ul>
+          <li>
+            <a href="https://support.qordoba.com/" target="_blank">Support</a>
+          </li>
+          <li>
+            <a href="http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html">Request Demo</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .enterprise -->
+  <div class="navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand">
+        <img src="/assets/images/qordoba-white-logo.png" alt="Qordoba" style="height: 35px;" >
+      </a>
+      <button data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar" class="navbar-toggle">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <nav id="navbar" class="navbar-nav">
+        <ul>
+          <li>
+            <a href="/docs/" >Docs</a>
+          </li>
+          <li>
+            <a href="/ecosystem" >Ecosystem</a>
+          </li>
+          <li>
+            <a href="/security/" >Security</a>
+          </li>
+          <li>
+            <a href="https://github.com/Qordobacode/" target="_blank">Code</a>
+          </li>
+           <li>
+            <a href="/api/" >API</a>
+          </li>
+          <li>
+            <a href="/install" class="button button-dark" data-analytics='{"event": "Clicked download", "type": "button", "location": "header"}'>Installation</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .navbar -->
+</header>
+
+
+    <div class="page page-plugin">
+  
+  <header class="page-header">
+    <div class="container">
+      
+        <div class="page-header-icon">
+          <img src="/assets/images/icons/plugins/rate-limiting.png" alt="" />
+        </div>
+      
+
+      <div class="page-header-title">
+        
+          <ul class="breadcrumbs">
+            
+              <li class="breadcrumb-item">
+                
+                <a href="/ecosystem">Ecosystem</a>
+                
+              </li>
+            
+          </ul>
+        
+
+        <h1>Rate Limiting</h1>
+
+        
+      </div>
+
+      
+
+      
+    </div>
+  </header>
+
+
+
+  <div class="container">
+    <div class="content">
+      <p>Rate limit how many HTTP requests a developer can make in a given period of seconds, minutes, hours, days, months or years. If the API has no authentication layer, the <strong>Client IP</strong> address will be used, otherwise the Consumer will be used if an authentication plugin has been configured.</p>
+
+<hr>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>Configuring the plugin is straightforward, you can add it on top of an <a href="/docs/latest/admin-api/#api-object">API</a> (or <a href="/docs/latest/admin-api/#consumer-object">Consumer</a>) by executing the following request on your Qordoba server:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>curl -X POST http://qordoba:8001/apis/<span class="o">{</span>api<span class="o">}</span>/plugins <span class="se">\</span>
+    --data <span class="s2">"name=rate-limiting"</span> <span class="se">\</span>
+    --data <span class="s2">"config.second=5"</span> <span class="se">\</span>
+    --data <span class="s2">"config.hour=10000"</span>
+</code></pre></div>
+<p><code>api</code>: The <code>id</code> or <code>name</code> of the API that this plugin configuration will target</p>
+
+<p>You can also apply it for every API using the <code>http://qordoba:8001/plugins/</code> endpoint. Read the <a href="/docs/latest/admin-api/#add-plugin">Plugin Reference</a> for more information.</p>
+
+<table><thead>
+<tr>
+<th>form parameter</th>
+<th>default</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td></td>
+<td>The name of the plugin to use, in this case: <code>rate-limiting</code></td>
+</tr>
+<tr>
+<td><code>consumer_id</code><br><em>optional</em></td>
+<td></td>
+<td>The CONSUMER ID that this plugin configuration will target. This value can only be used if <a href="/about/faq/#how-can-i-add-an-authentication-layer-on-a-microservice/api?">authentication has been enabled</a> so that the system can identify the user making the request.</td>
+</tr>
+<tr>
+<td><code>config.second</code><br><em>semi-optional</em></td>
+<td></td>
+<td>The amount of HTTP requests the developer can make per second. At least one limit must exist.</td>
+</tr>
+<tr>
+<td><code>config.minute</code><br><em>semi-optional</em></td>
+<td></td>
+<td>The amount of HTTP requests the developer can make per minute. At least one limit must exist.</td>
+</tr>
+<tr>
+<td><code>config.hour</code><br><em>semi-optional</em></td>
+<td></td>
+<td>The amount of HTTP requests the developer can make per hour. At least one limit must exist.</td>
+</tr>
+<tr>
+<td><code>config.day</code><br><em>semi-optional</em></td>
+<td></td>
+<td>The amount of HTTP requests the developer can make per day. At least one limit must exist.</td>
+</tr>
+<tr>
+<td><code>config.month</code><br><em>semi-optional</em></td>
+<td></td>
+<td>The amount of HTTP requests the developer can make per month. At least one limit must exist.</td>
+</tr>
+<tr>
+<td><code>config.year</code><br><em>semi-optional</em></td>
+<td></td>
+<td>The amount of HTTP requests the developer can make per year. At least one limit must exist.</td>
+</tr>
+<tr>
+<td><code>config.limit_by</code><br><em>optional</em></td>
+<td><code>consumer</code></td>
+<td>The entity that will be used when aggregating the limits: <code>consumer</code>, <code>credential</code>, <code>ip</code>. If the <code>consumer</code> or the <code>credential</code> cannot be determined, the system will always fallback to <code>ip</code>.</td>
+</tr>
+<tr>
+<td><code>config.policy</code><br><em>optional</em></td>
+<td><code>cluster</code></td>
+<td>The rate-limiting policies to use for retrieving and incrementing the limits. Available values are <code>local</code> (counters will be stored locally in-memory on the node), <code>cluster</code> (counters are stored in the datastore and shared across the nodes) and <code>redis</code> (counters are stored on a Redis server and will be shared across the nodes).</td>
+</tr>
+<tr>
+<td><code>config.fault_tolerant</code><br><em>optional</em></td>
+<td><code>true</code></td>
+<td>A boolean value that determines if the requests should be proxied even if Qordoba has troubles connecting a third-party datastore. If <code>true</code> requests will be proxied anyways effectively disabling the rate-limiting function until the datastore is working again. If <code>false</code> then the clients will see <code>500</code> errors.</td>
+</tr>
+<tr>
+<td><code>config.hide_client_headers</code><br><em>optional</em></td>
+<td><code>false</code></td>
+<td>Optionally hide informative response headers.</td>
+</tr>
+<tr>
+<td><code>config.redis_host</code><br><em>semi-optional</em></td>
+<td></td>
+<td>When using the <code>redis</code> policy, this property specifies the address to the Redis server.</td>
+</tr>
+<tr>
+<td><code>config.redis_port</code><br><em>optional</em></td>
+<td><code>6379</code></td>
+<td>When using the <code>redis</code> policy, this property specifies the port of the Redis server. By default is <code>6379</code>.</td>
+</tr>
+<tr>
+<td><code>config.redis_password</code><br><em>optional</em></td>
+<td></td>
+<td>When using the <code>redis</code> policy, this property specifies the password to connect to the Redis server.</td>
+</tr>
+<tr>
+<td><code>config.redis_timeout</code><br><em>optional</em></td>
+<td><code>2000</code></td>
+<td>When using the <code>redis</code> policy, this property specifies the timeout in milliseconds of any command submitted to the Redis server.</td>
+</tr>
+<tr>
+<td><code>config.redis_database</code><br><em>optional</em></td>
+<td><code>0</code></td>
+<td>When using the <code>redis</code> policy, this property specifies Redis database to use.</td>
+</tr>
+</tbody></table>
+
+<hr>
+
+<h2 id="headers-sent-to-the-client">Headers sent to the client</h2>
+
+<p>When this plugin is enabled, Qordoba will send some additional headers back to the client telling how many requests are available and what are the limits allowed, for example:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">X-RateLimit-Limit-Minute: 10
+X-RateLimit-Remaining-Minute: 9
+</code></pre></div>
+<p>or it will return a combination of more time limits, if more than one is being set:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">X-RateLimit-Limit-Second: 5
+X-RateLimit-Remaining-Second: 4
+X-RateLimit-Limit-Minute: 10
+X-RateLimit-Remaining-Minute: 9
+</code></pre></div>
+<p>If any of the limits configured is being reached, the plugin will return a <code>HTTP/1.1 429</code> status code to the client with the following JSON body:</p>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"API rate limit exceeded"</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h2 id="implementation-considerations">Implementation considerations</h2>
+
+<p>The plugin supports 3 policies, which each have their specific pros and cons.</p>
+
+<table><thead>
+<tr>
+<th>policy</th>
+<th>pros</th>
+<th>cons</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>cluster</code></td>
+<td>accurate, no extra components to support</td>
+<td>relatively the biggest performance impact, each request forces a read and a write on the underlying datastore.</td>
+</tr>
+<tr>
+<td><code>redis</code></td>
+<td>accurate, lesser performance impact than a <code>cluster</code> policy</td>
+<td>extra redis installation required, bigger performance impact than a <code>local</code> policy</td>
+</tr>
+<tr>
+<td><code>local</code></td>
+<td>minimal performance impact</td>
+<td>less accurate, and unless a consistent-hashing load balancer is used in front of Qordoba, it diverges when scaling the number of nodes</td>
+</tr>
+</tbody></table>
+
+<p>There are 2 use cases that are most common:</p>
+
+<ol>
+<li><em>every transaction counts</em>. These are for example transactions with financial
+consequences. Here the highest level of accuracy is required.</li>
+<li><em>backend protection</em>. This is where accuracy is not as relevant, but it is
+merely used to protect backend services from overload. Either by specific
+users, or to protect against an attack in general.</li>
+</ol>
+
+<p><strong>NOTE</strong>:</p>
+
+<div class="alert alert-warning">
+  <strong>Enterprise-Only</strong> The Qordoba Community Edition of this Rate Limiting plugin does not
+include <a href="https://redis.io/topics/sentinel">Redis Sentinel</a> support.
+<a href="https://www.mashape.com/enterprise/">Qordoba Enterprise Subscription</a> customers have the option
+of using Redis Sentinel with Qordoba Rate Limiting to deliver highly available master-slave deployments.
+</div>
+
+<h3 id="every-transaction-counts">Every transaction counts</h3>
+
+<p>In this scenario, the <code>local</code> policy is not an option. So here the decision is between
+the extra performance of the <code>redis</code> policy against its extra support effort. Based on that balance,
+the choice should either be <code>cluster</code> or <code>redis</code>.</p>
+
+<p>The recommendation is to start with the <code>cluster</code> policy, with the option to move over to <code>redis</code>
+if performance reduces drastically. Keep in mind existing usage metrics cannot
+be ported from the datastore to redis. Generally with shortlived metrics (per second or per minute)
+this is not an issue, but with longer lived ones (months) it might be, so you might want to plan
+your switch more carefully.</p>
+
+<h3 id="backend-protection">Backend protection</h3>
+
+<p>As accuracy is of lesser importance, the <code>local</code> policy can be used. It might require some experimenting
+to get the proper setting. For example, if the user is bound to 100 requests per second, and you have an
+equally balanced 5 node Qordoba cluster, setting the <code>local</code> limit to something like 30 requests per second
+should work. If you are worried about too many false-negatives, increase the value.</p>
+
+<p>Keep in mind as the cluster scales to more nodes, the users will get more requests granted, and likewise
+when the cluster scales down the probability of false-negatives increases. So in general, update your
+limits when scaling.</p>
+
+<p>The above mentioned inaccuracy can be mitigated by using a consistent-hashing load balancer in front of
+Qordoba, that ensures the same user is always directed to the same Qordoba node. This will both reduce the
+inaccuracy and prevent the scaling issues.</p>
+
+<p>Most likely the user will be granted more than was agreed when using the <code>local</code> policy, but it will
+effectively block any attacks while maintaining the best performance.</p>
+
+    </div>
+  </div>
+</div>
+
+
+    
+  <!-- section class="section subscribe-section" id="newsletter">
+  <div class="container">
+    <header class="section-header">
+      <h4>Keep up with the latest features</h4>
+    </header>
+
+    <div class="row">
+      <div class="one-half column offset-by-three">
+
+      </div>
+    </div>
+  </div>
+</section -->
+
+
+<footer class="marketing-footer--light-gray">
+  <section>
+    <ul>
+      <li class="logo-wrapper">
+        <div class="logo">
+          <img src="/assets/images/qordobalogoblue.png" alt="Qordoba" >
+        </div>
+      </li>
+      <li>
+        <nav>
+          <h4>Use Cases</h4>
+          <ul>
+            <li><a href="#">Strings Management</a></li>
+            <li><a href="#">Content AI</a></li>
+            <li><a href="#">Localization</a></li>
+            <li><a href="#">Persona Based Content</a></li>
+
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="https://support.qordoba.com/">Knowledge Base</a></li>
+            <li><a href="https://dev.qordoba.com/glossary/">Glossary of Qordoba Terms</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Webinars</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Tutorials</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Network Status</h4>
+          <ul>
+            <li><a href="https://status.qordoba.com/">APIs</a></li>
+            <li><a href="https://status.qordoba.com/">SmartSuggest</a></li>
+            <li><a href="https://status.qordoba.com/">Emotion and Tone</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </section>
+
+  <section class="legal">
+    <ul>
+      <li>
+        <span class="mashape-footer-content">&copy; Qordoba. 2018</span>
+      </li>
+      <li>
+        <div class="social-link">
+          <a href="https://github.com/Qordobacode" title="Github"><i aria-label="Github" class="fa fa-github" aria-hidden="true"></i></a></div>
+        <div class="social-link">
+          <a href="https://twitter.com/qordoba" title="Twitter"><i aria-label="Twitter" class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</footer>
+
+    <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.prepend(anchorForId(header.id));
+      }
+    }
+  };
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      console.log("here")
+      var contentBlock = document.getElementById("documentation");
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+    <script src="/assets/app.js?v=1527101038"></script>
+
+    <div id="fb-root"></div>
+
+    <script id="github-bjs" src="https://buttons.github.io/buttons.js" async defer></script>
+    <script id="twitter-wjs" type="text/javascript" src="https://platform.twitter.com/widgets.js" async defer></script>
+    <script id="facebook-jssdk" type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=842731852424506" async defer></script>
+
+    <script type="text/javascript">
+      piAId = '393112';
+      piCId = '48375';
+
+      (function() {
+        function async_load(){
+          var s = document.createElement('script'); s.type = 'text/javascript';
+          s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+          var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+        }
+        if(window.attachEvent) { window.attachEvent('onload', async_load); }
+        else { window.addEventListener('load', async_load, false); }
+      })();
+    </script>
+
+    <script type='text/javascript'>
+      var _vwo_code=(function(){
+      var account_id=125292,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=true,
+      // DO NOT EDIT BELOW THIS LINE
+      f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load("WDj0nSS7hpyxwL3evgbOzK755s0NUye6");
+        analytics.page()
+      }}();
+    </script>
+
+    <script type="text/javascript" src="//mashape.github.io/notification-bar/embed.js" async defer></script>
+  </body>
+</html>
