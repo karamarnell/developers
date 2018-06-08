@@ -1,8 +1,8 @@
 ---
 id: page-plugin
-title: Qordoba Solr integration
-header_title: Qordoba Solr integration
-header_icon: /assets/images/icons/plugins/solr-integration.png
+title: Qordoba - Solr integration
+header_title: Qordoba - Solr integration
+header_icon: /assets/images/icons/plugins/apache-solr-integration.png
 breadcrumbs:
   Plugins: /plugins
 ---
@@ -12,7 +12,8 @@ Qordoba can retrieve a document from Solr using the specified connection propert
 In the table below, you can view which parameters you can use to customize your configuration with this particular system:
 
 
-```javascript
+####Read from Solr index
+```java
 `Solr Type`	Standard or Cloud A SolrCloud instance. Standard A stand-alone Solr instance.The type of Solr instance, Cloud or Standard.
 `Solr Location`			The Solr url for a Solr Type of Standard (ex: http://localhost:8984/solr/gettingstarted), or the ZooKeeper hosts for a Solr Type of Cloud (ex: localhost:9983).
 `Collection`			The Solr collection name, only used with a Solr Type of Cloud
@@ -31,9 +32,9 @@ Solr Connection Timeout	10 seconds		The amount of time to wait when establishing
 `ZooKeeper Connection Timeout`	10 seconds		The amount of time to wait when establishing a connection to ZooKeeper, only used with a Solr Type of Cloud.
 ```
 
+####Sends the content as a ContentStream to Solr
 
-
-```javascript
+```java
 `Solr Type`	Standard or Cloud A SolrCloud instance. Standard A stand-alone Solr instance. The type of Solr instance, Cloud or Standard.
 `Solr Location`			The Solr url for a Solr Type of Standard (ex: http://localhost:8984/solr/gettingstarted), or the ZooKeeper hosts for a Solr Type of Cloud (ex: localhost:9983).
 `Collection`			The Solr collection name, only used with a Solr Type of Cloud

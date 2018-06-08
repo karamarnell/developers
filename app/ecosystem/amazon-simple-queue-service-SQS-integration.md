@@ -9,6 +9,9 @@ breadcrumbs:
 
 Qordoba's Amazon SQS Integration retrieves the content from message based on key. 
 
+
+####Fetches messages from an Amazon Simple Queuing Service Queue
+
 ```json
 [
   {
@@ -97,6 +100,9 @@ Qordoba's Amazon SQS Integration retrieves the content from message based on key
   }
 ]
 ```
+
+
+####Publishes a message to an Amazon Simple Queuing Service Queue
 
 ```json
 [

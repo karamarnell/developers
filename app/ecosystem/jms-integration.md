@@ -1,8 +1,8 @@
 ---
 id: page-plugin
-title: Plugins - Correlation ID
-header_title: Correlation ID
-header_icon: /assets/images/icons/plugins/correlation-id.png
+title: Qordoba - Java Message Service integration
+header_title: Qordoba - Java Message Service integration
+header_icon: /assets/images/icons/plugins/jms-integration.png
 breadcrumbs:
   Plugins: /plugins
 nav:
