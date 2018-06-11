@@ -1,8 +1,8 @@
 ---
 id: page-plugin
-title: Plugins - Datadog
-header_title: Datadog
-header_icon: /assets/images/icons/plugins/datadog.png
+title: Qordoba - MQTT integration
+header_title: Qordoba - MQTT integration
+header_icon: /assets/images/icons/plugins/mqtt-integration.png
 breadcrumbs:
   Plugins: /plugins
 nav:
@@ -14,86 +14,57 @@ nav:
       - label: Metrics
 ---
 
-Log API [metrics](#metrics) to the local
-[Datadog agent](http://docs.datadoghq.com/guides/basic_agent_usage/).
+The Qordoba connector acts as stand-alone service and can will Subscribers/Publishes to **any configurable MQTT topic.** 
+In the tables below, you can view which parameters you can use to customize your configuration with this particular system:
 
-----
+####Subscribers to a topic and receives messages from an MQTT broker
 
-## Configuration
+```java
 
-Configuring the plugin is straightforward, you can add it on top of an
-[API][api-object] (or [Consumer][consumer-object]) by executing the following
-request on your Qordoba server:
-
-```bash
-$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
-    --data "name=datadog" \
-    --data "config.host=127.0.0.1" \
-    --data "config.port=8125"
+`Broker URI`	The URI to use to connect to the MQTT broker (e.g. tcp://localhost:1883). The 'tcp' and 'ssl' schemes are supported. In order to use 'ssl', the SSL Context Service property must be set.
+`Client ID`	MQTT client ID to use
+`Username`	Username to use when connecting to the broker
+`Password`	Password to use when connecting to the broker
+`SSL Context Service`	The SSL Context Service used to provide client certificate information for TLS/SSL connections.
+`Last Will Topic` The topic to send the client Last Will to. If the Last Will topic and message are not set then a Last Will will not be sent.
+`Last Will Message`	The message to send as the client Last Will. If the Last Will topic and message are not set then a Last Will will not be sent.
+`Last Will Retain`	Whether to retain the client Last Will. If the Last Will topic and message are not set then a Last Will will not be sent.
+`Last Will QoS Level` QoS level to be used when publishing the Last Will Message
+`Session State`	Whether to start afresh or resume previous flows. #value is true or false
+`Connection Timeout`	Maximum time interval the client will wait for the network connection to the MQTT server to be established. The default timeout is 30 seconds. A value of 0 disables timeout processing meaning the client will wait until the network connection is made successfully or fails.
+`Keep Alive Interval` Defines the maximum time interval between messages sent or received. It enables the client to detect if the server is no longer available, without having to wait for the TCP/IP timeout. The client will ensure that at least one message travels across the network within each keep alive period. In the absence of a data-related message during the time period, the client sends a very small "ping" message, which the server will acknowledge. A value of 0 disables keepalive processing in the client.
+`Topic Filter`	The MQTT topic filter to designate the topics to subscribe to.
+`Quality of Service (QoS)` The Quality of Service(QoS) to receive the message with. Accepts values '0', '1' or '2'; '0' for 'at most once', '1' for 'at least once', '2' for 'exactly once'.
+`Max Queue Size`	The MQTT messages are always being sent to subscribers on a topic. If the 'Run Schedule' is significantly behind the rate at which the messages are arriving to this processor then a back up can occur. This property specifies the maximum number of messages this processor will hold in memory at one time.
 ```
 
-`api`: The `id` or `name` of the API that this plugin configuration will target
+####Publishes a message to an MQTT topic
 
-You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
+```java
 
-parameter                      | default     | description
----                            | ---         | ---
-`name`                         |             | The name of the plugin to use, in this case: `datadog`.
-`consumer_id`<br>*optional*    |             | The CONSUMER ID that this plugin configuration will target. This value can only be used if [authentication has been enabled][faq-authentication] so that the system can identify the user making the request.
-`config.host`<br>*optional*    | `127.0.0.1` | The IP address or host name to send data to.
-`config.port`<br>*optional*    | `8125`      | The port to send data to on the upstream server.
-`config.metrics`<br>*optional* | All metrics<br>are logged | List of Metrics to be logged. Available values are described at [Metrics](#metrics).
-`config.prefix`<br>*optional* | `qordoba` | String to be attached as prefix to metric's name.
-
-
-[api-object]: /docs/latest/admin-api/#api-object
-[configuration]: /docs/latest/configuration
-[consumer-object]: /docs/latest/admin-api/#consumer-object
-[faq-authentication]: /about/faq/#how-can-i-add-an-authentication-layer-on-a-microservice/api?
-
-----
-
-## Metrics
-
-Plugin currently logs following metrics to the Datadog server.
-
-Metric                     | description | namespace
----                        | ---         | ---
-`request_count`            | tracks api request | qordoba.\<api_name>.request.count
-`request_size`             | tracks api request's body size in bytes | qordoba.\<api_name>.request.size
-`response_size`            | tracks api response's body size in bytes | qordoba.\<api_name>.response.size
-`latency`                  | tracks the time interval between the request started and response received from the upstream server | qordoba.\<api_name>.latency
-`status_count`             | tracks each status code returned as response | qordoba.\<api_name>.status.\<status>.count and qordoba.\<api_name>.status.\<status>.total
-`unique_users`             | tracks unique users made a request to the api | qordoba.\<api_name>.user.uniques
-`request_per_user`         | tracks request/user | qordoba.\<api_name>.user.\<consumer_id>.count
-`upstream_latency`         | tracks the time it took for the final service to process the request | qordoba.\<api_name>.upstream_latency
-`qordoba_latency`             | tracks the internal Qordoba latency that it took to run all the plugins | qordoba.\<api_name>.qordoba_latency
-`status_count_per_user`    | tracks request/status/user | qordoba.\<api_name>.user.\<customer_id>.status.\<status> and qordoba.\<api_name>.user.\<customer_id>.status.total
-
-### Metric fields
-
-Plugin can be configured with any combination of [Metrics](#metrics), with each entry containing the following fields. 
-
-Field           | description                                           | allowed values
----             | ---                                                   | --- 
-`name`          | Datadog metric's name                                 | [Metrics](#metrics)          
-`stat_type`     | determines what sort of event the metric represents   | `gauge`, `timer`, `counter`, `histogram`, `meter` and `set`
-`sample_rate`<br>*conditional*   | sampling rate                        | `number`                 
-`customer_identifier`<br>*conditional*| authenticated user detail       | `consumer_id`, `custom_id`, `username`
-`tags`<br>*optional*| List of tags                                      | `key[:value]`
-
-### Metric requirements
-
-1.  by default all metrics get logged.
-2.  metric with `stat_type` as `counter` or `gouge` must have `sample_rate` defined as well.
-3.  `unique_users` metric only works with `stat_type` as `set`.
-4.  `status_count`, `status_count_per_user` and `request_per_user` work only with `stat_type`  as `counter`.
-5.  `status_count_per_user`, `request_per_user` and `unique_users` must have `customer_identifier` defined.
+`Broker URI`	The URI to use to connect to the MQTT broker (e.g. tcp://localhost:1883). The 'tcp' and 'ssl' schemes are supported. In order to use 'ssl', the SSL Context Service property must be set.
+`Client ID`	MQTT client ID to use
+`Username`	Username to use when connecting to the broker
+`Password`	Password to use when connecting to the broker
+`SSL Context Service`	The SSL Context Service used to provide client certificate information for TLS/SSL connections.
+`Last Will Topic`	The topic to send the client Last Will to. If the Last Will topic and message are not set then a Last Will will not be sent.
+`Last Will Message`	The message to send as the client Last Will. If the Last Will topic and message are not set then a Last Will will not be sent.
+`Last Will Retain`	Whether to retain the client Last Will. If the Last Will topic and message are not set then a Last Will will not be sent.
+`Last Will QoS Level`	QoS level to be used when publishing the Last Will Message
+`Session state`		Whether to start afresh or resume previous flows. See the allowable value descriptions for more details.
+`Connection Timeout`	Maximum time interval the client will wait for the network connection to the MQTT server to be established. The default timeout is 30 seconds. A value of 0 disables timeout processing meaning the client will wait until the network connection is made successfully or fails.
+`Keep Alive Interval`	Defines the maximum time interval between messages sent or received. It enables the client to detect if the server is no longer available, without having to wait for the TCP/IP timeout. The client will ensure that at least one message travels across the network within each keep alive period. In the absence of a data-related message during the time period, the client sends a very small "ping" message, which the server will acknowledge. A value of 0 disables keepalive processing in the client.
+`Topic`	The topic to publish the message to.
+`Quality of Service (QoS)`	The Quality of Service(QoS) to send the message with. Accepts three values '0', '1' and '2'; '0' for 'at most once', '1' for 'at least once', '2' for 'exactly once'. Expression language is allowed in order to support publishing messages with different QoS but the end value of the property must be either '0', '1' or '2'. 
+`Retain Message`	Whether or not the retain flag should be set on the MQTT message.
 
 
-## Qordoba Process Errors
+```
 
-This logging plugin will only log HTTP request and response data. If you are
-looking for the Qordoba process error file (which is the nginx error file), then
-you can find it at the following path:
-{[prefix](/docs/{{site.data.qordoba_latest.release}}/configuration/#prefix)}/logs/error.log
+---
+## Requesting Access
+
+This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
+
+If you are not a Qordoba Enterprise customer, you can inquire about our
+Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).

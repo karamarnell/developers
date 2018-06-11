@@ -1,101 +1,47 @@
 ---
 id: page-plugin
-title: Plugins - StatsD
-header_title: StatsD
-header_icon: /assets/images/icons/plugins/statsd.png
+title: Qordoba - Amazon DynamoDB integration
+header_title: Qordoba - Amazon DynamoDB integration
+header_icon: /assets/images/icons/plugins/dynamodb-integration.png
 breadcrumbs:
   Plugins: /plugins
-nav:
-  - label: Getting Started
-    items:
-      - label: Configuration
-  - label: Usage
-    items:
-      - label: Metrics
-      - label: Qordoba Process Errors
 ---
 
-Log API [metrics](#metrics) StatsD server. It can also be used to log metrics on
-[Collectd](https://collectd.org/) daemon by enabling its
-[Statsd plugin](https://collectd.org/wiki/index.php/Plugin:StatsD).
+Qordoba's Amazon DynamoDB connector retrieves JSON documents from DynamoDB, including all attributes and content. It reads documents based on hash and range keys, which can be strings or numbers. For any GET request, all the primary keys are required (hash or hash and range based on the table keys
 
-----
 
-## Configuration
+You can customize your DynamoDB configuration using these parameters:
 
-Configuring the plugin is straightforward, you can add it on top of an
-[API][api-object] (or [Consumer][consumer-object]) by executing the following
-request on your Qordoba server:
-
-```bash
-$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
-    --data "name=statsd" \
-    --data "config.host=127.0.0.1" \
-    --data "config.port=8125"
+```java
+`Table Name** DynamoDB table name
+`Hash Key Name` Hash key name of item
+`Range Key Name` Range key name of item
+`Hash Key Value` Hash key value of item (default `${dynamodb.item.hash.key.value}`)
+`Range Key Value` Range key value of item (default `${dynamodb.item.range.key.value}`)
+`Hash Key Value Type` Hash key value type of item
+`JSON Document Attribute` JSON document to be retrieved from DynamoDB item
+`Batch items for each request (1-50` Items to be retrieved in one batch (default `1`)
+`Access Key` Key provided for access to sensitive data
+`Secret Key` Key provided to encrypt and decrypt sensitive data
+`Credentials File` Path to a file containing AWS access key and secret key in properties file format
+`AWS Credentials Provider Service` Controller service used to obtain AWS credentials provider
+`Communications Timeout` No Description Provided (Default `30 seconds`)
+`SSL Context Service` Specifies an optional SSL context service which can be used to create connections
 ```
+####OLD:
+Puts a document from DynamoDB based on hash and range key. The table can have either hash and range or hash key alone. Currently, the keys supported are strings and numbers, and the value can be a Json document. In case of hash and range keys, both key are required for the operation. The Qordoba content must be JSON. The Qordoba Content Editor is mapped to the specified Json Document attribute in the DynamoDB item.
 
-`api`: The `id` or `name` of the API that this plugin configuration will target
+####NEW:
+You can reintegrate JSON documents from Qordoba to DynamoDB. The connector will again read documents based on hash and range keys, which can be strings or numbers. In the case of hash and range keys, both keys are required for the operation. 
 
-You can also apply it for every API using the `http://qordoba:8001/plugins/`
-endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for
-more information.
-
-parameter                     | default | description
----                           | ---     | ---
-`name`                        |         | The name of the plugin to use, in this case: `statsd`
-`consumer_id`<br>*optional*   |         | The CONSUMER ID that this plugin configuration will target. This value can only be used if [authentication has been enabled][faq-authentication] so that the system can identify the user making the request.
-`config.host`<br>*optional*   | `127.0.0.1` | The IP address or host name to send data to
-`config.port`<br>*optional*   | `8125`  | The port to send data to on the upstream server
-`config.metrics`<br>*optional* | All metrics<br>are logged | List of Metrics to be logged. Available values are described under [Metrics](#metrics).
-`config.prefix`<br>*optional* | `qordoba` | String to be prefixed to each metric's name.
-
-[api-object]: /docs/latest/admin-api/#api-object
-[configuration]: /docs/latest/configuration
-[consumer-object]: /docs/latest/admin-api/#consumer-object
-[faq-authentication]: /about/faq/#how-can-i-add-an-authentication-layer-on-a-microservice/api?
-
-----
-
-## Metrics
-
-Metrics the plugin supports logging into the StatsD server.
-
-Metric                     | description | namespace
----                        | ---         | ---
-`request_count`            | tracks api request | qordoba.\<api_name>.request.count
-`request_size`             | tracks api request's body size in bytes | qordoba.\<api_name>.request.size
-`response_size`            | tracks api response's body size in bytes | qordoba.\<api_name>.response.size
-`latency`                  | tracks the time interval between the request started and response received from the upstream server | qordoba.\<api_name>.latency
-`status_count`             | tracks each status code returned in a response | qordoba.\<api_name>.status.\<status>.count and qordoba.\<api_name>.status.\<status>.total
-`unique_users`             | tracks unique users who made a request to the API| qordoba.\<api_name>.user.uniques
-`request_per_user`         | tracks request/user | qordoba.\<api_name>.user.\<consumer_id>.count
-`upstream_latency`         | tracks the time it took for the final service to process the request | qordoba.\<api_name>.upstream_latency
-`qordoba_latency`             | tracks the internal Qordoba latency that it took to run all the plugins | qordoba.\<api_name>.qordoba_latency
-`status_count_per_user`    | tracks request/status/user | qordoba.\<api_name>.user.\<customer_id>.status.\<status> and qordoba.\<api_name>.user.\<customer_id>.status.total
-
-### Metric Fields
-
-Plugin can be configured with any combination of [Metrics](#metrics), with each entry containing the following fields.
-
-Field         | description                                             | allowed values
----           | ---                                                     | --- 
-`name`          | StatsD metric's name                                  | [Metrics](#metrics)          
-`stat_type`     | determines what sort of event the metric represents   | `gauge`, `timer`, `counter`, `histogram`, `meter` and `set`|
-`sample_rate`<br>*conditional*   | sampling rate                        | `number`                 
-`customer_identifier`<br>*conditional*| authenticated user detail       | `consumer_id`, `custom_id`, `username`
-
-### Metric Requirements
-
-1.  By default all metrics get logged.
-2.  Metric with `stat_type` set to `counter` or `gouge` must have `sample_rate` defined as well.
-3.  `unique_users` metric only works with `stat_type` as `set`.
-4.  `status_count`, `status_count_per_user` and `request_per_user` work only with `stat_type`  as `counter`.
-5.  `status_count_per_user`, `request_per_user` and `unique_users` must have `customer_identifier` defined.
+You can customize your configuration using the same parameter as above, plus:
+**Character set of document** Specifies character set of document data (default `UTF-8`)
 
 
-## Qordoba Process Errors
+---
+## Requesting Access
 
-This logging plugin will only log HTTP request and response data. If you are
-looking for the Qordoba process error file (which is the nginx error file), then
-you can find it at the following path:
-{[prefix](/docs/{{site.data.qordoba_latest.release}}/configuration/#prefix)}/logs/error.log
+This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
+
+If you are not a Qordoba Enterprise customer, you can inquire about our
+Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).

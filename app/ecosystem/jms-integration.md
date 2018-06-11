@@ -16,89 +16,48 @@ nav:
       - label: FAQ
 ---
 
-Correlate requests and responses using a unique ID transmitted over an HTTP header.
+The Qordoba platform can receive or pull JMS message content, and after Qordoba A.I, this content can be sent back and published to the same or different topics.
 
-----
+In the tables below, you can view which parameters you can use to customize your configuration with this particular system
 
-## Configuration
 
-Configuring the plugin is straightforward. You can associate it with an [API][api-object] by executing the following request to your Qordoba server:
+####Consumes JMS Message
 
-```bash
-$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
-    --data "name=correlation-id" \
-    --data "config.header_name=Qordoba-Request-ID" \
-    --data "config.generator=uuid#counter" \
-    --data "config.echo_downstream=false"
+```java
+'Connection Factory Service'	The Controller Service that is used to obtain ConnectionFactory
+'Destination Name'	The name of the JMS Destination. Usually provided by the administrator (e.g., 'topic://myTopic' or 'myTopic').
+'Destination Type'	The type of the JMS Destination. Could be one of 'QUEUE' or 'TOPIC'. Usually provided by the administrator. Defaults to 'TOPIC
+'User Name'	User Name used for authentication and authorization.
+'Password'	Password used for authentication and authorization.
+'Session Cache Size' The maximum limit for the number of cached Sessions. #the default value is 1
+'Acknowledgment Mode'	The JMS Acknowledgement Mode. Using Auto Acknowledge can cause messages to be lost on restart of NiFi but may provide better performance than Client Acknowledge. #the default value is 2
 ```
 
-`api`: The `id` or `name` of the API that this plugin configuration will target
 
-You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
 
-form parameter                  | default           | description
----                             | ---               | ---
-`name`                          |                   | The name of the plugin to use, in this case: `correlation-id`
-`header_name`<br>*optional*     | `Qordoba-Request-ID` | The HTTP header name to use for the correlation ID. 
-`generator`<br>*optional*       | `uuid#counter`    | The generator to use for the correlation ID. Accepted values are `uuid`, `uuid#counter` and `tracker` See [Generators](#generators).
-`echo_downstream`<br>*optional* | `false`           | Whether to echo the header back to downstream (the client).
+#####Pulls messages from a JMS Topic config
 
-[api-object]: /docs/latest/admin-api/#api-object
+```java
+'JMS Provider'The Provider used for the JMS Server #the default value is ActiveMQ
+'URL'	The URL of the JMS Server
+'Destination Name'	The name of the JMS Topic or queue to use
+'Communications Timeout'	The amount of time to wait when attempting to receive a message before giving up and assuming failure #the default value is 30 seconds
+'Message Batch Size'	The number of messages to pull/push in a single iteration of the processor #the default value is 10
+'Username'	Username used for authentication and authorization
+'Password'	Password used for authentication and authorization
+'SSL Context Service'	The Controller Service to use in order to obtain an SSL Context.
+'Acknowledgment Mode'	The JMS Acknowledgement Mode. Using Auto Acknowledge can cause messages to be lost on restart of NiFi but may provide better performance than Client Acknowledge. #the default value is Client Acknowledge
+'Message Selector'	The JMS Message Selector to use in order to narrow the messages that are pulled
+'Copy JMS Properties to Attributes'	Whether or not the JMS Message Properties should be copied to the FlowFile Attributes; if so, the attribute name will be jms.XXX, where XXX is the JMS Property name #the default value is true
+'Client ID Prefix'	A human-readable ID that can be used to associate connections with yourself so that the maintainers of the JMS Server know who to contact if problems arise
+'Use Durable Subscription'	If true, connections to the specified topic will use Durable Subscription so that messages are queued when we are not pulling them #the default value is false
 
-----
-
-## How it works
-
-When enabled, this plugin will add a new header to all of the requests processed by Qordoba. This header bears the name configured in `config.header_name`, and a unique value generated according to `config.generator`.
-
-This header is always added to calls to your upstream services, and optionally echoed back to your clients according to the `config.echo_downstream` setting.
-
-If a header bearing the same name is already present in the client request, it is honored and this plugin will **not** temper with it.
-
-## Generators
-
-#### uuid
-
-Format:
-```
-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
-Using this format, a UUID is generated in its hexadecimal form for each request.
+---
+## Requesting Access
 
-#### uuid#counter
+This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
 
-Format:
-```
-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx#counter
-```
-
-In this format, a single UUID is generated on a per-worker basis, and further requests simply append a counter to the UUID after a `#` character. The `counter` value starts at `0` for each worker, and gets incremented independantly of the others.
-
-This format provides a better performance, but might be harder to store or process for analizing (due to its format and low cardinality).
-
-#### tracker
-
-Format:
-```
-ip-port-pid-connection-connection_requests-timestamp
-```
-
-In this format, the correlation id contains more practical implications for each request.
-
-The following is a detailed description of the field
-
-form parameter      | description
----                 | ---
-`ip` | an address of the server which accepted a request
-`port` | port of the server which accepted a request
-`pid` | pid of the nginx worker process
-`connection` | connection serial number
-`connection_requests` | current number of requests made through a connection
-`timestamp` | a floating-point number for the elapsed time in seconds (including milliseconds as the decimal part) from the epoch for the current time stamp from the nginx cached time
-
-## FAQ
-
-#### Can I see my correlation ids in my Qordoba logs?
-
-The correlation id will not show up in the Nginx access or error logs. As such, we suggest you use this plugin alongside one of the Logging plugins, or store this id on your backend-side.
+If you are not a Qordoba Enterprise customer, you can inquire about our
+Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).

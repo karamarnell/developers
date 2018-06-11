@@ -51,7 +51,7 @@ Solr Connection Timeout	10 seconds		The amount of time to wait when establishing
 `ZooKeeper Connection Timeout`	10 seconds	The amount of time to wait when establishing a connection to ZooKeeper, only used with a Solr Type of Cloud.
 
 ```
-
+---
 ## Requesting Access
 
 This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.

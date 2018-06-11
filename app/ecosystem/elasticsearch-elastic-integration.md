@@ -1,142 +1,66 @@
 ---
 id: page-plugin
-title: Plugins - Rate Limiting
-header_title: Rate Limiting
-header_icon: /assets/images/icons/plugins/rate-limiting.png
+title: Qordoba - Elasticsearch integration
+header_title: Qordoba - Elasticsearch integration
+header_icon: /assets/images/icons/plugins/elasticsearch-elastic-integration.png
 breadcrumbs:
   Plugins: /plugins
-nav:
-  - label: Getting Started
-    items:
-      - label: Configuration
-  - label: Usage
-    items:
-      - label: Headers sent to the client
 ---
-
-Rate limit how many HTTP requests a developer can make in a given period of seconds, minutes, hours, days, months or years. If the API has no authentication layer, the **Client IP** address will be used, otherwise the Consumer will be used if an authentication plugin has been configured.
-
-----
-
-## Configuration
-
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] (or [Consumer][consumer-object]) by executing the following request on your Qordoba server:
-
-```bash
-$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
-    --data "name=rate-limiting" \
-    --data "config.second=5" \
-    --data "config.hour=10000"
-```
-
-`api`: The `id` or `name` of the API that this plugin configuration will target
-
-You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
-
-form parameter                     | default | description
----                                | ---     | ---
-`name`                             |         | The name of the plugin to use, in this case: `rate-limiting`
-`consumer_id`<br>*optional*        |         | The CONSUMER ID that this plugin configuration will target. This value can only be used if [authentication has been enabled][faq-authentication] so that the system can identify the user making the request.
-`config.second`<br>*semi-optional* |         | The amount of HTTP requests the developer can make per second. At least one limit must exist.
-`config.minute`<br>*semi-optional* |         | The amount of HTTP requests the developer can make per minute. At least one limit must exist.
-`config.hour`<br>*semi-optional*   |         | The amount of HTTP requests the developer can make per hour. At least one limit must exist.
-`config.day`<br>*semi-optional*    |         | The amount of HTTP requests the developer can make per day. At least one limit must exist.
-`config.month`<br>*semi-optional*  |         | The amount of HTTP requests the developer can make per month. At least one limit must exist.
-`config.year`<br>*semi-optional*   |         | The amount of HTTP requests the developer can make per year. At least one limit must exist.
-`config.limit_by`<br>*optional*    | `consumer` | The entity that will be used when aggregating the limits: `consumer`, `credential`, `ip`. If the `consumer` or the `credential` cannot be determined, the system will always fallback to `ip`.
-`config.policy`<br>*optional*      | `cluster`  | The rate-limiting policies to use for retrieving and incrementing the limits. Available values are `local` (counters will be stored locally in-memory on the node), `cluster` (counters are stored in the datastore and shared across the nodes) and `redis` (counters are stored on a Redis server and will be shared across the nodes).
-`config.fault_tolerant`<br>*optional* | `true` |  A boolean value that determines if the requests should be proxied even if Qordoba has troubles connecting a third-party datastore. If `true` requests will be proxied anyways effectively disabling the rate-limiting function until the datastore is working again. If `false` then the clients will see `500` errors.
-`config.hide_client_headers`<br>*optional* | `false` | Optionally hide informative response headers.
-`config.redis_host`<br>*semi-optional* |        | When using the `redis` policy, this property specifies the address to the Redis server.
-`config.redis_port`<br>*optional* | `6379`     | When using the `redis` policy, this property specifies the port of the Redis server. By default is `6379`.
-`config.redis_password`<br>*optional* |      | When using the `redis` policy, this property specifies the password to connect to the Redis server.
-`config.redis_timeout`<br>*optional* | `2000` | When using the `redis` policy, this property specifies the timeout in milliseconds of any command submitted to the Redis server.
-`config.redis_database`<br>*optional* | `0` | When using the `redis` policy, this property specifies Redis database to use.
-
-----
-
-## Headers sent to the client
-
-When this plugin is enabled, Qordoba will send some additional headers back to the client telling how many requests are available and what are the limits allowed, for example:
-
-```
-X-RateLimit-Limit-Minute: 10
-X-RateLimit-Remaining-Minute: 9
-```
-
-or it will return a combination of more time limits, if more than one is being set:
-
-```
-X-RateLimit-Limit-Second: 5
-X-RateLimit-Remaining-Second: 4
-X-RateLimit-Limit-Minute: 10
-X-RateLimit-Remaining-Minute: 9
-```
-
-If any of the limits configured is being reached, the plugin will return a `HTTP/1.1 429` status code to the client with the following JSON body:
-
-```json
-{"message":"API rate limit exceeded"}
-```
-
-## Implementation considerations
-
-The plugin supports 3 policies, which each have their specific pros and cons.
-
-policy    | pros          | cons
----       | ---            | ---
-`cluster` | accurate, no extra components to support  | relatively the biggest performance impact, each request forces a read and a write on the underlying datastore.
-`redis`   | accurate, lesser performance impact than a `cluster` policy | extra redis installation required, bigger performance impact than a `local` policy
-`local`   | minimal performance impact | less accurate, and unless a consistent-hashing load balancer is used in front of Qordoba, it diverges when scaling the number of nodes
-
-There are 2 use cases that are most common:
-
-1. _every transaction counts_. These are for example transactions with financial
-  consequences. Here the highest level of accuracy is required.
-2. _backend protection_. This is where accuracy is not as relevant, but it is
-  merely used to protect backend services from overload. Either by specific
-  users, or to protect against an attack in general.
-
-**NOTE**:
+Qordoba can retrieve documents from Elasticsearch using your specified connection properties and the identifier of the documents. Qordoba can make secure connections if the cluster is configured for authorization and/or secure transport (SSL/TLS) and the Shield plugin is available.
 
 <div class="alert alert-warning">
-  <strong>Enterprise-Only</strong> The Qordoba Community Edition of this Rate Limiting plugin does not
-include <a href="https://redis.io/topics/sentinel">Redis Sentinel</a> support.
-<a href="https://www.mashape.com/enterprise/">Qordoba Enterprise Subscription</a> customers have the option
-of using Redis Sentinel with Qordoba Rate Limiting to deliver highly available master-slave deployments.
+This integration supports Elasticsearch 2.x clusters and Elasticsearch 5.x clusters.
 </div>
 
-### Every transaction counts
+If you approve the DynamoDB wording, I'd be consistent and repeat it here to introduce this list of parameters, so this would read: 
 
-In this scenario, the `local` policy is not an option. So here the decision is between
-the extra performance of the `redis` policy against its extra support effort. Based on that balance,
-the choice should either be `cluster` or `redis`.
+You can customize your Elasticsearch configuration using these parameters: 
 
-The recommendation is to start with the `cluster` policy, with the option to move over to `redis`
-if performance reduces drastically. Keep in mind existing usage metrics cannot
-be ported from the datastore to redis. Generally with shortlived metrics (per second or per minute)
-this is not an issue, but with longer lived ones (months) it might be, so you might want to plan
-your switch more carefully.
+**Cluster Name** Name of Elasticsearch cluster. *For example: elasticsearch_brew.* (default `elasticsearch`)
 
-### Backend protection
+**Elasticsearch Hosts** Elasticsearch Hosts, which should be written with colons and separated by commas for hostname/port host1:port,host2:port,.... *For example, testcluster:9300. This processor uses the Transport Client to connect to hosts. The default transport client port is 9300.*
 
-As accuracy is of lesser importance, the `local` policy can be used. It might require some experimenting
-to get the proper setting. For example, if the user is bound to 100 requests per second, and you have an
-equally balanced 5 node Qordoba cluster, setting the `local` limit to something like 30 requests per second
-should work. If you are worried about too many false-negatives, increase the value.
+**SSL Context Service** The SSL Context Service used to provide client certificate information for TLS/SSL connections. This service only applies if the Elasticsearch endpoint(s) have been secured with TLS/SSL.
 
-Keep in mind as the cluster scales to more nodes, the users will get more requests granted, and likewise
-when the cluster scales down the probability of false-negatives increases. So in general, update your
-limits when scaling.
+**Shield Plugin Filename** Specifies the path to the JAR for the Elasticsearch Shield plugin. If the Elasticsearch cluster has been secured with the Shield plugin, then the Shield plugin JAR must also be available to this processor. 
 
-The above mentioned inaccuracy can be mitigated by using a consistent-hashing load balancer in front of
-Qordoba, that ensures the same user is always directed to the same Qordoba node. This will both reduce the
-inaccuracy and prevent the scaling issues.
+**Username** Username to access the Elasticsearch cluster
 
-Most likely the user will be granted more than was agreed when using the `local` policy, but it will
-effectively block any attacks while maintaining the best performance.
+**Password** Password to access the Elasticsearch cluster, including sensitive information
 
-[api-object]: /docs/latest/admin-api/#api-object
-[configuration]: /docs/latest/configuration
-[consumer-object]: /docs/latest/admin-api/#consumer-object
-[faq-authentication]: /about/faq/#how-can-i-add-an-authentication-layer-on-a-microservice/api?
+**ElasticSearch Ping Timeout ** Ping timeout used to determine when a node is unreachable. If non-local, recommended timeout is 30 seconds, or 30s (default `5s`)
+**Sampler Interval** How often to sample/ping the nodes. For example, 5s (5 seconds). If non-local, recommended sampler is 30 seconds, or 30s (default `5s`)
+
+**Document Identifier** Identifier for document to be fetched
+
+**Index** Name of index to read from
+
+**Type** Type of document used by Elasticsearch for indexing and searching
+
+**Character set of document** Specifies character set of document data (default `UTF-8`)
+
+NOTE: I edited copy above. Original table is below, without any copy edits, for your reference.
+
+```java
+'Cluster Name'	Name of the Elasticsearch cluster (for example, elasticsearch_brew). And the defaults value is elasticsearch.
+'ElasticSearch Hosts'	ElasticSearch Hosts, which should be comma separated and colon for hostname/port host1:port,host2:port,.... For example testcluster:9300. This processor uses the Transport Client to connect to hosts. The default transport client port is 9300.
+'SSL Context Service'	The SSL Context Service used to provide client certificate information for TLS/SSL connections. This service only applies if the Elasticsearch endpoint(s) have been secured with TLS/SSL.
+'Shield Plugin Filename'	Specifies the path to the JAR for the Elasticsearch Shield plugin. If the Elasticsearch cluster has been secured with the Shield plugin, then the Shield plugin JAR must also be available to this processor. 
+'Username'	Username to access the Elasticsearch cluster
+'Password'	Password to access the Elasticsearch cluster Sensitive Property 
+'ElasticSearch Ping Timeout' the default is 5s	The ping timeout used to determine when a node is unreachable. For example, 5s (5 seconds). If non-local recommended is 30s
+'Sampler Interval'the default is How often to sample / ping the nodes listed and connected. For example, 5s (5 seconds). If non-local recommended is 30s.
+'Document Identifier' The identifier for the document to be fetched Supports Expression Language
+'Index'	The name of the index to read from
+'Type'	The type of this document used by Elasticsearch for indexing and searching
+'Character Set'	UTF-8	Specifies the character set of the document data.
+```
+
+
+---
+## Requesting Access
+
+This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
+
+If you are not a Qordoba Enterprise customer, you can inquire about our
+Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).

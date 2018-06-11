@@ -169,6 +169,7 @@ Qordoba's Amazon SQS Integration retrieves the content from message based on key
 ]
 ```
 
+---
 ## Requesting Access
 
 This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
