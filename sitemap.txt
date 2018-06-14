@@ -69,17 +69,17 @@
 
 /community/
 
-/ecosystem/
-
 /install/
+
+/ecosystem/
 
 /docs/0.2.x/lua-reference/
 
 /
 
-/docs/
-
 /security/
+
+/docs/
 
 /install/javascript-sdk-application-strings-manager/
 
