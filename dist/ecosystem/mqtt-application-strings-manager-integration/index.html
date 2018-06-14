@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+  
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Plugins - Datadog | Qordoba - Strings Intelligence Platform..</title>
+  <meta name="description" content="Create a fully automated strings management solution">
+  <meta name="author" content="Qordoba"/>
+  <meta property="og:title" content="Strings Intelligence Platform.."/>
+  <meta property="og:site_name" content="Qordoba"/>
+  <link rel="prefetch" href="/assets/images/qordoba-white-logo.png" /><link rel="prefetch" href="/assets/images/icons/plugins/datadog.png" /><link rel="prefetch" href="/assets/images/qordobalogoblue.png" /><link rel="dns-prefetch" href="https://buttons.github.io" /><link rel="dns-prefetch" href="https://platform.twitter.com" /><link rel="dns-prefetch" href="https://connect.facebook.net" /><link rel="dns-prefetch" href="//mashape.github.io" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png"/>
+  <link rel="stylesheet" href="/assets/styles.css?v=1529002709"/>
+</head>
+
+
+  <body id="page-plugin" >
+    <header class="site-header">
+  <div class="enterprise">
+        <div class="container">
+       <nav class="enterprise-sites one-half column">
+         <ul>
+           <li>
+             <a href="https://qordoba.com/customers/" target="_blank">Customers</a>
+           </li>
+           <li>
+             <a href="https://qordoba.com/partners/" target="_blank" >Partners</a>
+           </li>
+         </ul>
+       </nav>   
+      <nav class="enterprise-contact one-half column">
+        <ul>
+          <li>
+            <a href="https://support.qordoba.com/" target="_blank">Support</a>
+          </li>
+          <li>
+            <a href="http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html">Request Demo</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .enterprise -->
+  <div class="navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand">
+        <img src="/assets/images/qordoba-white-logo.png" alt="Qordoba" style="height: 35px;" >
+      </a>
+      <button data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar" class="navbar-toggle">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <nav id="navbar" class="navbar-nav">
+        <ul>
+          <li>
+            <a href="/docs/" >Docs</a>
+          </li>
+          <li>
+            <a href="/ecosystem" >Ecosystem</a>
+          </li>
+          <li>
+            <a href="/security/" >Security</a>
+          </li>
+          <li>
+            <a href="https://github.com/Qordobacode/" target="_blank">Code</a>
+          </li>
+           <li>
+            <a href="/api/" >API</a>
+          </li>
+          <li>
+            <a href="/install" class="button button-dark" data-analytics='{"event": "Clicked download", "type": "button", "location": "header"}'>Installation</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .navbar -->
+</header>
+
+
+    <div class="page page-plugin">
+  
+  <header class="page-header">
+    <div class="container">
+      
+        <div class="page-header-icon">
+          <img src="/assets/images/icons/plugins/datadog.png" alt="" />
+        </div>
+      
+
+      <div class="page-header-title">
+        
+          <ul class="breadcrumbs">
+            
+              <li class="breadcrumb-item">
+                
+                <a href="/ecosystem">Ecosystem</a>
+                
+              </li>
+            
+          </ul>
+        
+
+        <h1>Datadog</h1>
+
+        
+      </div>
+
+      
+
+      
+    </div>
+  </header>
+
+
+
+  <div class="container">
+    <div class="content">
+      <p>Log API <a href="#metrics">metrics</a> to the local
+<a href="http://docs.datadoghq.com/guides/basic_agent_usage/">Datadog agent</a>.</p>
+
+<hr>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>Configuring the plugin is straightforward, you can add it on top of an
+<a href="/docs/latest/admin-api/#api-object">API</a> (or <a href="/docs/latest/admin-api/#consumer-object">Consumer</a>) by executing the following
+request on your Qordoba server:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>curl -X POST http://qordoba:8001/apis/<span class="o">{</span>api<span class="o">}</span>/plugins <span class="se">\</span>
+    --data <span class="s2">"name=datadog"</span> <span class="se">\</span>
+    --data <span class="s2">"config.host=127.0.0.1"</span> <span class="se">\</span>
+    --data <span class="s2">"config.port=8125"</span>
+</code></pre></div>
+<p><code>api</code>: The <code>id</code> or <code>name</code> of the API that this plugin configuration will target</p>
+
+<p>You can also apply it for every API using the <code>http://qordoba:8001/plugins/</code> endpoint. Read the <a href="/docs/latest/admin-api/#add-plugin">Plugin Reference</a> for more information.</p>
+
+<table><thead>
+<tr>
+<th>parameter</th>
+<th>default</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td></td>
+<td>The name of the plugin to use, in this case: <code>datadog</code>.</td>
+</tr>
+<tr>
+<td><code>consumer_id</code><br><em>optional</em></td>
+<td></td>
+<td>The CONSUMER ID that this plugin configuration will target. This value can only be used if <a href="/about/faq/#how-can-i-add-an-authentication-layer-on-a-microservice/api?">authentication has been enabled</a> so that the system can identify the user making the request.</td>
+</tr>
+<tr>
+<td><code>config.host</code><br><em>optional</em></td>
+<td><code>127.0.0.1</code></td>
+<td>The IP address or host name to send data to.</td>
+</tr>
+<tr>
+<td><code>config.port</code><br><em>optional</em></td>
+<td><code>8125</code></td>
+<td>The port to send data to on the upstream server.</td>
+</tr>
+<tr>
+<td><code>config.metrics</code><br><em>optional</em></td>
+<td>All metrics<br>are logged</td>
+<td>List of Metrics to be logged. Available values are described at <a href="#metrics">Metrics</a>.</td>
+</tr>
+<tr>
+<td><code>config.prefix</code><br><em>optional</em></td>
+<td><code>qordoba</code></td>
+<td>String to be attached as prefix to metric&#39;s name.</td>
+</tr>
+</tbody></table>
+
+<hr>
+
+<h2 id="metrics">Metrics</h2>
+
+<p>Plugin currently logs following metrics to the Datadog server.</p>
+
+<table><thead>
+<tr>
+<th>Metric</th>
+<th>description</th>
+<th>namespace</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>request_count</code></td>
+<td>tracks api request</td>
+<td>qordoba.&lt;api_name&gt;.request.count</td>
+</tr>
+<tr>
+<td><code>request_size</code></td>
+<td>tracks api request&#39;s body size in bytes</td>
+<td>qordoba.&lt;api_name&gt;.request.size</td>
+</tr>
+<tr>
+<td><code>response_size</code></td>
+<td>tracks api response&#39;s body size in bytes</td>
+<td>qordoba.&lt;api_name&gt;.response.size</td>
+</tr>
+<tr>
+<td><code>latency</code></td>
+<td>tracks the time interval between the request started and response received from the upstream server</td>
+<td>qordoba.&lt;api_name&gt;.latency</td>
+</tr>
+<tr>
+<td><code>status_count</code></td>
+<td>tracks each status code returned as response</td>
+<td>qordoba.&lt;api_name&gt;.status.&lt;status&gt;.count and qordoba.&lt;api_name&gt;.status.&lt;status&gt;.total</td>
+</tr>
+<tr>
+<td><code>unique_users</code></td>
+<td>tracks unique users made a request to the api</td>
+<td>qordoba.&lt;api_name&gt;.user.uniques</td>
+</tr>
+<tr>
+<td><code>request_per_user</code></td>
+<td>tracks request/user</td>
+<td>qordoba.&lt;api_name&gt;.user.&lt;consumer_id&gt;.count</td>
+</tr>
+<tr>
+<td><code>upstream_latency</code></td>
+<td>tracks the time it took for the final service to process the request</td>
+<td>qordoba.&lt;api_name&gt;.upstream_latency</td>
+</tr>
+<tr>
+<td><code>qordoba_latency</code></td>
+<td>tracks the internal Qordoba latency that it took to run all the plugins</td>
+<td>qordoba.&lt;api_name&gt;.qordoba_latency</td>
+</tr>
+<tr>
+<td><code>status_count_per_user</code></td>
+<td>tracks request/status/user</td>
+<td>qordoba.&lt;api_name&gt;.user.&lt;customer_id&gt;.status.&lt;status&gt; and qordoba.&lt;api_name&gt;.user.&lt;customer_id&gt;.status.total</td>
+</tr>
+</tbody></table>
+
+<h3 id="metric-fields">Metric fields</h3>
+
+<p>Plugin can be configured with any combination of <a href="#metrics">Metrics</a>, with each entry containing the following fields. </p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>description</th>
+<th>allowed values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>Datadog metric&#39;s name</td>
+<td><a href="#metrics">Metrics</a></td>
+</tr>
+<tr>
+<td><code>stat_type</code></td>
+<td>determines what sort of event the metric represents</td>
+<td><code>gauge</code>, <code>timer</code>, <code>counter</code>, <code>histogram</code>, <code>meter</code> and <code>set</code></td>
+</tr>
+<tr>
+<td><code>sample_rate</code><br><em>conditional</em></td>
+<td>sampling rate</td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>customer_identifier</code><br><em>conditional</em></td>
+<td>authenticated user detail</td>
+<td><code>consumer_id</code>, <code>custom_id</code>, <code>username</code></td>
+</tr>
+<tr>
+<td><code>tags</code><br><em>optional</em></td>
+<td>List of tags</td>
+<td><code>key[:value]</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="metric-requirements">Metric requirements</h3>
+
+<ol>
+<li> by default all metrics get logged.</li>
+<li> metric with <code>stat_type</code> as <code>counter</code> or <code>gouge</code> must have <code>sample_rate</code> defined as well.</li>
+<li> <code>unique_users</code> metric only works with <code>stat_type</code> as <code>set</code>.</li>
+<li> <code>status_count</code>, <code>status_count_per_user</code> and <code>request_per_user</code> work only with <code>stat_type</code>  as <code>counter</code>.</li>
+<li> <code>status_count_per_user</code>, <code>request_per_user</code> and <code>unique_users</code> must have <code>customer_identifier</code> defined.</li>
+</ol>
+
+<h2 id="qordoba-process-errors">Qordoba Process Errors</h2>
+
+<p>This logging plugin will only log HTTP request and response data. If you are
+looking for the Qordoba process error file (which is the nginx error file), then
+you can find it at the following path:
+{<a href="/docs/0.2.x/configuration/#prefix">prefix</a>}/logs/error.log</p>
+
+    </div>
+  </div>
+</div>
+
+
+    
+  <!-- section class="section subscribe-section" id="newsletter">
+  <div class="container">
+    <header class="section-header">
+      <h4>Keep up with the latest features</h4>
+    </header>
+
+    <div class="row">
+      <div class="one-half column offset-by-three">
+
+      </div>
+    </div>
+  </div>
+</section -->
+
+
+<footer class="marketing-footer--light-gray">
+  <section>
+    <ul>
+      <li class="logo-wrapper">
+        <div class="logo">
+          <img src="/assets/images/qordobalogoblue.png" alt="Qordoba" >
+        </div>
+      </li>
+      <li>
+        <nav>
+          <h4>Use Cases</h4>
+          <ul>
+            <li><a href="#">Strings Management</a></li>
+            <li><a href="#">Content AI</a></li>
+            <li><a href="#">Localization</a></li>
+            <li><a href="#">Persona Based Content</a></li>
+
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="https://support.qordoba.com/">Knowledge Base</a></li>
+            <li><a href="https://dev.qordoba.com/glossary/">Glossary of Qordoba Terms</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Webinars</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Tutorials</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Network Status</h4>
+          <ul>
+            <li><a href="https://status.qordoba.com/">APIs</a></li>
+            <li><a href="https://status.qordoba.com/">SmartSuggest</a></li>
+            <li><a href="https://status.qordoba.com/">Emotion and Tone</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </section>
+
+  <section class="legal">
+    <ul>
+      <li>
+        <span class="mashape-footer-content">&copy; Qordoba. 2018</span>
+      </li>
+      <li>
+        <div class="social-link">
+          <a href="https://github.com/Qordobacode" title="Github"><i aria-label="Github" class="fa fa-github" aria-hidden="true"></i></a></div>
+        <div class="social-link">
+          <a href="https://twitter.com/qordoba" title="Twitter"><i aria-label="Twitter" class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</footer>
+
+    <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.prepend(anchorForId(header.id));
+      }
+    }
+  };
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      console.log("here")
+      var contentBlock = document.getElementById("documentation");
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+    <script src="/assets/app.js?v=1529002709"></script>
+
+    <div id="fb-root"></div>
+
+    <script id="github-bjs" src="https://buttons.github.io/buttons.js" async defer></script>
+    <script id="twitter-wjs" type="text/javascript" src="https://platform.twitter.com/widgets.js" async defer></script>
+    <script id="facebook-jssdk" type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=842731852424506" async defer></script>
+
+    <script type="text/javascript">
+      piAId = '393112';
+      piCId = '48375';
+
+      (function() {
+        function async_load(){
+          var s = document.createElement('script'); s.type = 'text/javascript';
+          s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+          var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+        }
+        if(window.attachEvent) { window.attachEvent('onload', async_load); }
+        else { window.addEventListener('load', async_load, false); }
+      })();
+    </script>
+
+    <script type='text/javascript'>
+      var _vwo_code=(function(){
+      var account_id=125292,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=true,
+      // DO NOT EDIT BELOW THIS LINE
+      f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load("WDj0nSS7hpyxwL3evgbOzK755s0NUye6");
+        analytics.page()
+      }}();
+    </script>
+
+    <script type="text/javascript" src="//mashape.github.io/notification-bar/embed.js" async defer></script>
+  </body>
+</html>
