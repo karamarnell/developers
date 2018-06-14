@@ -51,6 +51,8 @@
 
 /ecosystem/ftp-ftps-application-strings-manager-integration/
 
+/security/gdpr/
+
 /install/github-application-strings-manager/
 
 /docs/0.2.x/github-flow/
