@@ -1,47 +1,242 @@
 ---
-title: Network & Firewall
+title: ✅ languages
+header_title: Security
+breadcrumbs:
+  Security: /security
 ---
 
-# Network & Firewall
+##Grammar/Spelling
+```
+Belarusian - Belarus
+Cambodian - Khmer
+Catalan - Catalan
+Chinese (Simplified)
+Chinese - Simplified (zh-Hans)
+Dutch - Belgium
+Dutch - International
+Dutch - The Netherlands
+English - Australia
+English - Belize
+English - Canada
+English - Caribbean
+English - India
+English - International
+English - Ireland
+English - Jamaica
+English - New Zealand
+English - Philippines
+English - South Africa
+English - Trinidad and Tobago
+English - United Kingdom
+English - United States
+English - Zimbabwe
+Farsi - Iran
+French - Canada
+French - France
+French - International
+Galician - Galician
+German - Austria
+German - Germany
+German - International
+German - Liechtenstein
+German - Luxembourg
+German - Switzerland
+Greek - Greece
+Greek - International
+Italian - International
+Italian - Italy
+Polish - International
+Polish - Poland
+Portuguese - Brazil
+Portuguese - International
+Portuguese - Portugal
+Russian - International
+Russian - Russia
+Spanish - Mexico
+Spanish - Spain
+Spanish - United States
+Tagalog - Philippines
+Tamil - India
+Ukrainian - Ukraine
+```
 
-In this section you will find a summary about the recommended network and firewall settings for Qordoba.
+##Style
+```
+Belarusian - Belarus
+Catalan - Catalan
+Chinese (Simplified)
+Chinese - Simplified (zh-Hans)
+Dutch - Belgium
+Dutch - International
+Dutch - The Netherlands
+English - Australia
+English - Belize
+English - Canada
+English - Caribbean
+English - India
+English - International
+English - Ireland
+English - Jamaica
+English - New Zealand
+English - Philippines
+English - Trinidad and Tobago
+English - United Kingdom
+English - United States
+French - Canada
+French - France
+French - International
+German - Austria
+German - Germany
+German - International
+German - Liechtenstein
+German - Luxembourg
+German - Switzerland
+Greek - Greece
+Greek - International
+Spanish - Mexico
+Spanish - Spain
+Spanish - United States
+```
 
-## Ports
 
-Qordoba uses multiple connections for different purposes.
+##Passiv voice
+```
+English - Australia
+English - Belize
+English - Canada
+English - Caribbean
+English - India
+English - International
+English - Ireland
+English - Jamaica
+English - New Zealand
+English - Philippines
+English - Trinidad and Tobago
+English - United Kingdom
+English - United States
+```
 
-* proxy 
-* management api
+##Gender bias 
+```
+English - Australia
+English - Belize
+English - Canada
+English - Caribbean
+English - India
+English - International
+English - Ireland
+English - Jamaica
+English - New Zealand
+English - Philippines
+English - Trinidad and Tobago
+English - United Kingdom
+English - United States
+```
+
+##Reading level
+```
+Dutch - Belgium
+Dutch - International
+Dutch - The Netherlands
+English - Australia
+English - Belize
+English - Canada
+English - Caribbean
+English - India
+English - International
+English - Ireland
+English - Jamaica
+English - New Zealand
+English - Philippines
+English - Trinidad and Tobago
+English - United Kingdom
+English - United States
+French - Canada
+French - France
+French - International
+German - Austria
+German - Germany
+German - International
+German - Liechtenstein
+German - Luxembourg
+German - Switzerland
+Greek - Greece
+Greek - International
+Spanish - Mexico
+Spanish - Spain
+Spanish - United States
+```
 
 
-### Proxy
+##Tone
+```
+English - Australia
+English - Canada
+English - International
+English - New Zealand
+English - United Kingdom
+English - United States
+French - Canada
+French - France
+French - International
+Spanish - Mexico
+Spanish - Spain
+```
 
-The proxy ports is where Qordoba receives its incoming traffic. There are two ports with the following defaults;
-
-* `8000` for proxying. This is where Qordoba listens for HTTP traffic. Be sure to change it to `80` once you go to production. See [proxy_listen].
-* `8443` for proxying HTTPS traffic. Be sure to change it to `443` once you go to production. See [proxy_listen_ssl].
-
-These are the **only ports** that should be made available to your clients.
-
-### Management api
-
-This is the port where Qordoba exposes its management api. Hence in production this port should be firewalled to protect
-it from unauthorized access.
-
-* `8001` provides Qordoba's **Admin API** that you can use to operate Qordoba. See [admin_api_listen].
-* `8444` provides the same Qordoba **Admin API** but using HTTPS. See [admin_api_listen_ssl].
-
-## Firewall
-
-Below are the recommended firewall settings:
-
-* The upstream APIs behind Qordoba will be available on [proxy_listen][proxy_listen] and [proxy_listen_ssl][proxy_listen_ssl]. 
-  Configure these ports according to the access level you wish to grant to the upstream APIs.
-* **Protect** [admin_api_listen][admin_api_listen] and [admin_api_listen_ssl][admin_api_listen_ssl], to only allow trusted sources that can access the Admin API. See also [Securing the Admin API][secure_admin_api].
+##Brand
+```
+English - Australia
+English - Canada
+English - International
+English - New Zealand
+English - United Kingdom
+English - United States
+French - Canada
+French - France
+French - International
+Spanish - Mexico
+Spanish - Spain
 
 
-[proxy_listen]: /docs/{{page.qordoba_version}}/configuration/#proxy_listen
-[proxy_listen_ssl]: /docs/{{page.qordoba_version}}/configuration/#proxy_listen_ssl
-[admin_api_listen]: /docs/{{page.qordoba_version}}/configuration/#admin_api_listen
-[admin_api_listen_ssl]: /docs/{{page.qordoba_version}}/configuration/#admin_api_listen_ssl
-[secure_admin_api]: /docs/{{page.qordoba_version}}/secure-admin-api
+```
+
+
+##Emotion
+
+```
+English - Australia
+English - Canada
+English - International
+English - New Zealand
+English - United Kingdom
+English - United States
+French - Canada
+French - France
+French - International
+Spanish - Mexico
+Spanish - Spain
+```
+
+
+
+##Plagiarism
+
+```
+English - Australia
+English - Canada
+English - International
+English - New Zealand
+English - United Kingdom
+English - United States
+French - Canada
+French - France
+French - International
+Spanish - Mexico
+Spanish - Spain
+```
+
+
+
+
+
+

@@ -4,9 +4,9 @@ title: Documentation for Qordoba strings manager
 
 <div class="docs-grid">
   <div class="docs-grid-block">
-    <h3><img src="/assets/images/icons/documentation/icn-window.svg" /><a href="/docs/{{page.qordoba_version}}/sketch-flow">Sketch flow</a></h3>
-    <p>Start pulling the strings and generate the keys at the design stage so you will receive the sketch file with ready keys and content</p>
-    <a href="/docs/{{page.qordoba_version}}/sketch-flow">Read more &rarr;</a>
+    <h3><img src="/assets/images/icons/documentation/icn-window.svg" /><a href="/docs/{{page.qordoba_version}}/term-management">Term Management</a></h3>
+    <p>Manage Term Management in your account</p>
+    <a href="/docs/{{page.qordoba_version}}/term-management">Read more &rarr;</a>
   </div>
 
   <div class="docs-grid-block">
