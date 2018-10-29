@@ -1,8 +1,8 @@
 ---
 id: page-plugin
-title: Plugins - AWS Lambda
-header_title: AWS Lambda
-header_icon: /assets/images/icons/plugins/aws-lambda.png
+title: Qordoba - GitHub enterprise integration
+header_title: Qordoba - GitHub enterprise integration
+header_icon: /assets/images/icons/plugins/GitHub-enterprise-integration.png
 breadcrumbs:
   Plugins: /ecosystem
 nav:
@@ -15,9 +15,7 @@ nav:
       - label: Known Issues
 ---
 
-Invoke an [AWS Lambda](https://aws.amazon.com/lambda/) function from Qordoba. It
-can be used in combination with other request plugins to secure, manage or extend
-the function.
+Qordoba - GitHub enterprise integration
 
 ----
 

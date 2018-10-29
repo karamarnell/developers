@@ -13,7 +13,7 @@ In the table below, you can view which parameters you can use to customize your 
 
 
 ####Read from Solr index
-```java
+```javascript
 `Solr Type`	Standard or Cloud A SolrCloud instance. Standard A stand-alone Solr instance.The type of Solr instance, Cloud or Standard.
 `Solr Location`			The Solr url for a Solr Type of Standard (ex: http://localhost:8984/solr/gettingstarted), or the ZooKeeper hosts for a Solr Type of Cloud (ex: localhost:9983).
 `Collection`			The Solr collection name, only used with a Solr Type of Cloud
@@ -34,7 +34,7 @@ Solr Connection Timeout	10 seconds		The amount of time to wait when establishing
 
 ####Sends the content as a ContentStream to Solr
 
-```java
+```javascript
 `Solr Type`	Standard or Cloud A SolrCloud instance. Standard A stand-alone Solr instance. The type of Solr instance, Cloud or Standard.
 `Solr Location`			The Solr url for a Solr Type of Standard (ex: http://localhost:8984/solr/gettingstarted), or the ZooKeeper hosts for a Solr Type of Cloud (ex: localhost:9983).
 `Collection`			The Solr collection name, only used with a Solr Type of Cloud

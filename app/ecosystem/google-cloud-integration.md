@@ -1,8 +1,8 @@
 ---
 id: page-plugin
-title: Qordoba - GitHub integration
-header_title: Qordoba - GitHub integration
-header_icon: /assets/images/icons/plugins/GitHub-integration.png
+title: Qordoba - Google cloud integration
+header_title: Qordoba - Google cloud integration
+header_icon: /assets/images/icons/plugins/google-cloud-integration.png
 breadcrumbs:
   Plugins: /ecosystem
 nav:

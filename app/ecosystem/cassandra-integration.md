@@ -1,8 +1,8 @@
 ---
 id: page-plugin
 title: Qordoba - Cassandra integration
-header_title: Cassandra integration
-header_icon: /assets/images/icons/plugins/syslog.png
+header_title:  Qordoba - Cassandra integration
+header_icon: /assets/images/icons/plugins/cassandra-integration.png
 breadcrumbs:
   Plugins: /plugins
 
@@ -40,10 +40,11 @@ In the table below, you can view which parameters you can use to customize your 
 'Output Format'	The format to which the result rows will be converted. If JSON is selected, the output will contain an object with field 'results' containing an array of result rows. Each row in the array is a map of the named column to its value. For example: { "results": [{"userid":1, "name":"Joe Smith"}]}
 
 ```
-
+---
 ## Requesting Access
 
 This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
 
 If you are not a Qordoba Enterprise customer, you can inquire about our
 Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).
+

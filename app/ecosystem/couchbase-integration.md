@@ -1,8 +1,8 @@
 ---
 id: page-plugin
 title: Qordoba - Couchbase integration
-header_title: Couchbase integration
-header_icon: /assets/images/icons/plugins/request-size-limiting.png
+header_title:  Qordoba - Couchbase integration
+header_icon: /assets/images/icons/plugins/couchbase-integration.png
 breadcrumbs:
   Plugins: /plugins
 ---
@@ -37,10 +37,11 @@ Push a document to Couchbase Server via Key/Value access.
 'Replicate To'	Durability constraint about replication. #the default is NONE
 
 ```
-
+---
 ## Requesting Access
 
 This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
 
 If you are not a Qordoba Enterprise customer, you can inquire about our
 Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).
+
