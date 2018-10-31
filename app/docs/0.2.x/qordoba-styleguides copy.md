@@ -47,6 +47,9 @@ Voice is the underlying character of how your brand speaks to its customers. Kee
 ###Reading level
 Qordoba use Flesch reading ease. In the Flesch reading-ease test, higher scores indicate material that is easier to read; lower numbers mark passages that are more difficult to read. The formula for the Flesch reading-ease score (FRES) test is
 
+
+
+
 <img src="/assets/images/docs/reading-level.svg" />
 
 Scores can be interpreted as shown in the table below
