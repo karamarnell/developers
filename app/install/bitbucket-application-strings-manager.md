@@ -7,7 +7,6 @@ breadcrumbs:
   Installation: /install
 ---
 
-{% capture cassandra_version %}{{site.data.qordoba_latest.dependencies.cassandra}}{% endcapture %}
 
 ### Packages
 
