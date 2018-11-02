@@ -1,7 +1,7 @@
 ---
 id: page-plugin
-title: Qordoba - JavaScript i18n SDK Initialize
-header_title: Qordoba - JavaScript i18n SDK Initialize
+title: Qordoba - JavaScript i18n SDK Parameters
+header_title: Qordoba - JavaScript i18n SDK Parameters
 header_icon: /assets/images/icons/plugins/GitHub-enterprise-integration.png
 breadcrumbs:
   Plugins: /ecosystem
