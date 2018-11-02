@@ -46,16 +46,16 @@ Qordoba delivers localized strings to developers by creating a pull request. Whe
 * A branch of the original feature branch that triggered the status check.
 * A single commit for each target language.
 * A PR that uses the following template in the description field.
-[block:code]
-{
-  "codes": [
-    {
-      "code": "Localized strings for <branch-name>\n| Target locale | Resource file | Number of strings |\n|:------------- |:------------- |------------------ |\n| …             | …             | …                 |\n| …             | …             | …                 | \n/cc @<developer-name>",
-      "language": "text"
-    }
-  ]
-}
-[/block]
+
+```
+Localized strings for <branch-name>
+| Target locale | Resource file | Number of strings |
+|:------------- |:------------- |------------------ |
+| …             | …             | …                 |
+| …             | …             | …                 | 
+/cc @<developer-name>
+```
+
 # Status Checks
 Required status checks on protected branches are a relatively new addition to GitHub, added in late 2015. They allow third-party integrations like Qordoba to monitor pull requests for breaking changes. In most cases, the status checks are used for continuous integration testing. However, they can be also be used for translation workflows. If the status check fails, the following sequence of events will likely take place:
 * Developer requests translations by following the link from the status check UI in GitHub PR.
