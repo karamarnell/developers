@@ -16,131 +16,94 @@ nav:
       - label: Paginate through the ACLs
       - label: Retrieve the Consumer associated with an ACL
 ---
-
-Restrict access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. This plugin requires an [authentication plugin][faq-authentication] to have been already enabled on the API.
-
-----
-
-## Configuration
-
-Configuring the plugin is straightforward, you can add it on top of an [API][api-object] by executing the following request on your Qordoba server:
-
-```bash
-$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
-    --data "name=acl" \
-    --data "config.whitelist=group1, group2"
-```
-
-`api`: The `id` or `name` of the API that this plugin configuration will target
-
-You can also apply it for every API using the `http://qordoba:8001/plugins/` endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin) for more information.
-
-form parameter                        | default| description
----                                   | ---    | ---
-`name`                                |        | The name of the plugin to use, in this case: `acl`
-`config.whitelist`<br>*semi-optional* |        | Comma separated list of arbitrary group names that are allowed to consume the API. One of `config.whitelist` or `config.blacklist` must be specified.
-`config.blacklist`<br>*semi-optional* |        | Comma separated list of arbitrary group names that are not allowed to consume the API. One of `config.whitelist` or `config.blacklist` must be specified.
-
-Note that the `whitelist` and `blacklist` models are mutually exclusive in their usage, as they provide complimentary approaches. That is, you cannot configure an ACL with both `whitelist` and `blacklist` configurations. An ACL with a `whitelist` provides a positive security model, in which the configured groups are allowed access to the resources, and all others are inherently rejected. By contrast, a `blacklist` configuration provides a negative security model, in which certain groups are explicitly denied access to the resource (and all others are inherently allowed).
-
-----
-
-## Usage
-
-In order to use this plugin, you need to properly have configured your APIs with an [authentication plugin][faq-authentication] so that the plugin can identify who is the client [Consumer][consumer-object] making the request.
-
-### Associating Consumers
-
-Once you have added an authentication plugin to an API, and you have created your [Consumers][consumer-object], you can now associate a group to a [Consumer][consumer-object] using the following request:
-
-```bash
-$ curl -X POST http://qordoba:8001/consumers/{consumer}/acls \
-    --data "group=group1"
-```
-
-`consumer`: The `id` or `username` property of the [Consumer][consumer-object] entity to associate the credentials to.
-
-form parameter        | default| description
----                   | ---    | ---
-`group`               |        | The arbitrary group name to associate to the consumer.
-
-You can have more than one group associated to a consumer.
-
-### Upstream Headers
-
-When a consumer has been validated, the plugin will append a `X-Consumer-Groups` header to the request before proxying it to the upstream API/Microservice, so that you can identify the groups associated with the consumer. The value of the header is a comma separated list of groups that belong to the consumer, like `admin, pro_user`.
-
-### Paginate through the ACLs
-
-<div class="alert alert-warning">
-  <strong>Note:</strong> This endpoint was introduced in Qordoba 0.11.2.
-</div>
-
-You can retrieve all the ACLs for all Consumers using the following
-request:
-
-```bash
-$ curl -X GET http://qordoba:8001/acls
-
+Qordoba's GitHub integration simplifies localization management for developers. It automatically detects missing translations and streamlines how translations are received from linguists. Integration increases developer productivity and eliminates errors caused by manual string management.
+[block:image]
 {
-    "total": 3,
-    "data": [
-        {
-            "group": "foo-group",
-            "created_at": 1511391159000,
-            "id": "724d1be7-c39e-443d-bf36-41db17452c75",
-            "consumer_id": "89a41fef-3b40-4bb0-b5af-33da57a7ffcf"
-        },
-        {
-            "group": "bar-group",
-            "created_at": 1511391162000,
-            "id": "0905f68e-fee3-4ecb-965c-fcf6912bf29e",
-            "consumer_id": "c0d92ba9-8306-482a-b60d-0cfdd2f0e880"
-        },
-        {
-            "group": "baz-group",
-            "created_at": 1509814006000,
-            "id": "ff883d4b-aee7-45a8-a17b-8c074ba173bd",
-            "consumer_id": "c0d92ba9-8306-482a-b60d-0cfdd2f0e880"
-        }
-    ]
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/05ada0d-github.png",
+        "github.png",
+        909,
+        664,
+        "#cbcbca"
+      ],
+      "caption": "Sequence diagram of a Qordoba GitHub project"
+    }
+  ]
 }
-```
+[/block]
+# Integration
+This GitHub integration provides the following benefits:
+* Automatically detects missing translations in Pull Requests (PRs).
+* Simplifies developer requests for translation support.
+* Streamlines how translations get merged into a developer's feature branch.
 
-You can filter the list using the following query parameters:
+Qordoba satisfies these requirements by performing status checks on protected branches within GitHub. When a pull request is created on the `Master` branch, Qordoba looks for missing translations based on a project's configuration, and prevents pull requests from being merged until all of the required translations are added.
 
-Attributes | Description
----:| ---
-`id`<br>*optional*                       | A filter on the list based on the ACL `id` field.
-`group`<br>*optional*                 	 | A filter on the list based on the ACL `group` field.
-`consumer_id`<br>*optional*              | A filter on the list based on the ACL `consumer_id` field.
-`size`<br>*optional, default is __100__* | A limit on the number of objects to be returned.
-`offset`<br>*optional*                   | A cursor used for pagination. `offset` is an object identifier that defines a place in the list.
-
-### Retrieve the Consumer associated with an ACL
-
-<div class="alert alert-warning">
-  <strong>Note:</strong> This endpoint was introduced in Qordoba 0.11.2.
-</div>
-
-It is possible to retrieve a [Consumer][consumer-object] associated with an ACL
-using the following request:
-
-```bash
-curl -X GET http://qordoba:8001/acls/{id}/consumer
-
+# Pull Requests
+Qordoba delivers localized strings to developers by creating a pull request. When developers approve the strings in the Qordoba application, a pull request can be created. This process should include the creation of:
+* A branch of the original feature branch that triggered the status check.
+* A single commit for each target language.
+* A PR that uses the following template in the description field.
+[block:code]
 {
-   "created_at":1507936639000,
-   "username":"foo",
-   "id":"c0d92ba9-8306-482a-b60d-0cfdd2f0e880"
+  "codes": [
+    {
+      "code": "Localized strings for <branch-name>\n| Target locale | Resource file | Number of strings |\n|:------------- |:------------- |------------------ |\n| …             | …             | …                 |\n| …             | …             | …                 | \n/cc @<developer-name>",
+      "language": "text"
+    }
+  ]
 }
-```
+[/block]
+# Status Checks
+Required status checks on protected branches are a relatively new addition to GitHub, added in late 2015. They allow third-party integrations like Qordoba to monitor pull requests for breaking changes. In most cases, the status checks are used for continuous integration testing. However, they can be also be used for translation workflows. If the status check fails, the following sequence of events will likely take place:
+* Developer requests translations by following the link from the status check UI in GitHub PR.
+* Linguists complete translation work associated with PR.
+* Linguists create pull request from within Qordoba once translations ready.
+* PR consists of a Qordoba-created branch merging into developer's origin branch.
+* Developer merges the Qordoba branch containing translations into their origin branch.
+* Qordoba status check now passes since translations have been added to origin branch.
+* Developer can merge to `Master` and ship their localized feature.
 
-`id`: The `id` property of the ACL for which to get the associated
-[Consumer][consumer-object].
+## Anatomy
+[block:parameters]
+{
+  "data": {
+    "h-0": "Entity",
+    "h-1": "Notes",
+    "0-0": "Framework Configuration",
+    "0-1": "During `project configuration`, the user confirms the i18n framework being used by the repository in question. This allows Qordoba to know where resources files should live within the repository. (Note: only a subset of frameworks will be supported to start with. Support for custom frameworks and/or file types will come later.)",
+    "1-0": "Source locale",
+    "1-1": "During `project configuration`, the user confirms the source locale (source language) for the project.",
+    "2-0": "Target locales",
+    "2-1": "During `project configuration`, the user confirms the target locale(s) (target languages) for the project.",
+    "3-0": "PR files",
+    "3-1": "Listing of files changed as part of this PR. Qordoba only checks for changes to resource files."
+  },
+  "cols": 2,
+  "rows": 4
+}
+[/block]
+# Use Cases
+## PR with missing translations
+_Scenario:_ Developer creates a pull request that requires translations.
+_Given:_ Qordoba status check enabled.
+_And:_ Resource file(s) changed as part of PR.
+_Then:_ Mark status check as failing.
+_And:_ Have status check URL link to the page from which translations can be requested.
 
-[cidr]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation
-[api-object]: /docs/latest/admin-api/#api-object
-[configuration]: /docs/latest/configuration
-[consumer-object]: /docs/latest/admin-api/#consumer-object
-[faq-authentication]: /about/faq/#how-can-i-add-authentication-to-a-microservice-api
+## PR with failing status check
+_Scenario:_ Developer needs to request translations for failing status check.
+_Given:_ Failing Qordoba status check for PR.
+_And:_ Developer clicked status check URL and landing on the page hosted by Qordoba.
+_Then:_ Allow the developer to request translations.
+_And:_ Notify linguists that work is waiting.
+
+## PR with no missing translations
+This use case should occur after a Qordoba branch with translations merges into developer's feature branch.
+
+_Scenario:_ Developer creates a pull request that DOES NOT require translations.
+_Given:_ Qordoba status check enabled.
+_And:_ No resource files changed as part of PR.
+_Then:_ Mark the status check as passing.
