@@ -67,24 +67,13 @@ Required status checks on protected branches are a relatively new addition to Gi
 * Developer can merge to `Master` and ship their localized feature.
 
 ## Anatomy
-[block:parameters]
-{
-  "data": {
-    "h-0": "Entity",
-    "h-1": "Notes",
-    "0-0": "Framework Configuration",
-    "0-1": "During `project configuration`, the user confirms the i18n framework being used by the repository in question. This allows Qordoba to know where resources files should live within the repository. (Note: only a subset of frameworks will be supported to start with. Support for custom frameworks and/or file types will come later.)",
-    "1-0": "Source locale",
-    "1-1": "During `project configuration`, the user confirms the source locale (source language) for the project.",
-    "2-0": "Target locales",
-    "2-1": "During `project configuration`, the user confirms the target locale(s) (target languages) for the project.",
-    "3-0": "PR files",
-    "3-1": "Listing of files changed as part of this PR. Qordoba only checks for changes to resource files."
-  },
-  "cols": 2,
-  "rows": 4
-}
-[/block]
+|Entity |	Notes|
+|--|--|
+| Framework Configuration| During project configuration, the user confirms the i18n framework being used by the repository in question. This allows Qordoba to know where resources files should live within the repository. (Note: only a subset of frameworks will be supported to start with. Support for custom frameworks and/or file types will come later.) |
+| Source locale | During project configuration, the user confirms the source locale (source language) for the project.|
+| Target locales| During project configuration, the user confirms the target locale(s) (target languages) for the project.|
+|PR files| Listing of files changed as part of this PR. Qordoba only checks for changes to resource files.|
+
 # Use Cases
 ## PR with missing translations
 _Scenario:_ Developer creates a pull request that requires translations.
