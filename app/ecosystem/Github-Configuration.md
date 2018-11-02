@@ -1,6 +1,6 @@
 ---
 id: page-plugin
-title: Qordoba - GitHub Enterprise App Integration
+title: Qordoba - GitHub Configuration
 header_title: Qordoba - GitHub Configuration
 header_icon: /assets/images/icons/plugins/GitHub-enterprise-integration.png
 breadcrumbs:
