@@ -11,116 +11,132 @@ nav:
       - label: Requesting Access
 ---
 
-OpenID Connect ([1.0][connect]) plugin allows the integration with a 3rd party
-identity provider (IdP) or [Qordoba OAuth 2.0 Plugin][oauth2plugin] in a standardized way.
-This plugin can be used to implement Qordoba as a (proxying) [OAuth 2.0][oauth2] resource
-server (RS) and / or as an OpenID Connect relying party (RP) between the client
-and the upstream service.
-
-The plugin supports several types of credentials, including:
-
-- Signed [JWT][jwt] access tokens ([JWS][jws]) with the standardized signing algorithms ([JWA][jwa])
-- Opaque access tokens with either Qordoba OAuth 2.0 plugin issued tokens or 
-  3rd party IdP issued ones through token introspection (IdP needs to support it)
-- Username and password through the OAuth 2.0 password grant (the plugin will
-  automatically exchange such credentials with access token by calling the IdP's token
-  endpoint)
-- Client id and secret through the OAuth 2.0 client credentials grant (the plugin
-  will automatically exchange such credentials with access token by calling the IdP's
-  token endpoint)
-- Authorization code that the OpenID Connect plugin can retrieve from the client when using
-  OpenID Connect authorization code flow
-- Session cookie credentials that the plugin can setup between the client and Qordoba
-  (usually used with web browser clients together with authorization code grant)
-  
-This plugin can automatically refresh the access token using a refresh token.
-
-You can either let the plugin to exclusively talk your IdP as a trusted client
-(and let it do all the credential exchange) or you can let clients talk to IdP
-directly, and then present access token to the upstream service protected with
-the OpenID Connect plugin (or you can do both).
-
-Some of the capabilities of the plugin are listed below:
-
-- [WebFinger][webfinger] and [OpenID Connect Discovery][discovery]
-- [ID Token][idtoken] verification
-- [UserInfo][userinfo] endpoint data injecting
-- [RP-Initiated Logout][rplogout]
-- [OAuth 2.0 Token Revovation][revocation] during the logout (optionally)
-- [OAuth 2.0 Token Introspection][introspection] support
-- [OAuth 2.0 Proof Key for Code Exchange][pkce] (PKCE) support
-- Standard and configurable claims verification
-- Caching (optional) of token, introspection and user info endpoint request
-
-The plugin has been tested with several OpenID Connect capable providers such as:
-
-- [Auht0][auth0]
-- [Connect2id][connect2id]
-- [Dex][dex]
-- [Gluu][gluu]
-- [Google][google]
-- [IdentityServer4][identityserver4]
-- [Keycloak][keycloak]
-- [Microsoft Azure Active Directory v1][azurev1]
-- [Microsoft Azure Active Directory v2][azurev2]
-- Microsoft Live Connect
-- [Okta][okta]
-- [OneLogin][onelogin]
-- [OpenAM][openam]
-- [Paypal][paypal]
-- [PingFederate][pingfederate]
-- [Salesfoce][salesforce]
-- [Yahoo!][yahoo]
-
-As long as your provider supports OpenID Connect standards the plugin should
-work, even if it is not specifically tested against it. Let us know if you
-want your provider to be tested and added to the list.
-
-<br />
-
-<div class="alert alert-warning">
-  <strong>Enterprise-Only</strong> This plugin is only available with an
-  Enterprise Subscription.
-</div>
-
-----
-
-## Requesting Access
-
-This plugin is only available with a [Qordoba Enterprise](https://qordobahq.com/qordoba-enterprise-edition)
-subscription.
-
-If you are not a Qordoba Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](https://qordobahq.com/request-demo).
+Make your Eloqua marketing campaigns truly multilingual with Qordoba's Eloqua plugin. This plugin is added as a Chrome extension, and can be used to send and receive content with Qordoba, all from within Eloqua's UI.
 
 
-[connect]: http://openid.net/specs/openid-connect-core-1_0.html
-[oauth2plugin]: /plugins/oauth2-authentication/
-[oauth2]: https://tools.ietf.org/html/rfc6749
-[jwt]: https://tools.ietf.org/html/rfc7519
-[jws]: https://tools.ietf.org/html/rfc7515
-[jwa]: https://tools.ietf.org/html/rfc7518
-[webfinger]: https://tools.ietf.org/html/rfc7033
-[discovery]: http://openid.net/specs/openid-connect-discovery-1_0.html
-[idtoken]: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
-[userinfo]: http://openid.net/specs/openid-connect-core-1_0.html#UserInfo
-[rplogout]: http://openid.net/specs/openid-connect-session-1_0.html#RPLogout
-[revocation]: https://tools.ietf.org/html/rfc7009
-[introspection]: https://tools.ietf.org/html/rfc7662
-[pkce]: https://tools.ietf.org/html/rfc7636
-[auth0]: https://auth0.com/docs/protocols/oidc
-[connect2id]: https://connect2id.com/products/server
-[dex]: https://github.com/coreos/dex/blob/master/Documentation/openid-connect.md
-[gluu]: https://gluu.org/docs/ce/api-guide/openid-connect-api/
-[google]: https://developers.google.com/identity/protocols/OpenIDConnect
-[identityserver4]: https://identityserver4.readthedocs.io/
-[keycloak]: http://www.keycloak.org/documentation.html
-[azurev1]: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code
-[azurev2]: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oidc
-[okta]: https://developer.okta.com/docs/api/resources/oidc.html
-[onelogin]: https://developers.onelogin.com/openid-connect
-[openam]: https://backstage.forgerock.com/docs/openam/13.5/admin-guide/#chap-openid-connect
-[paypal]: https://developer.paypal.com/docs/integration/direct/identity/log-in-with-paypal/
-[pingfederate]: https://documentation.pingidentity.com/pingfederate/
-[salesforce]: https://developer.salesforce.com/page/Inside_OpenID_Connect_on_Force.com
-[yahoo]: https://developer.yahoo.com/oauth2/guide/openid_connect/
+# Installation
+
+
+To get the plugin, contact Customer Success (support@qordoba.com) with a request to receive the plugin. Once you receive the plugin:
+
+1. Unzip the Eloqua plugin .zip file.
+
+2. Visit chrome://extensions/ to install the plugin.
+
+3. Click on "Load Unpacked", which will create a popup to select your desired file.
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/c463820-Screen_Shot_2018-09-19_at_3.45.47_PM.png",
+        "Screen Shot 2018-09-19 at 3.45.47 PM.png",
+        1684,
+        1140,
+        "#e2e7f1"
+      ]
+    }
+  ]
+}
+[/block]
+4. Select the unzipped Eloqua folder.
+
+5. The plugin should now be installed. You will know it installed correctly if you see a Qordoba logo in your extensions area of the Chrome top navbar.
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/f144dc3-Screen_Shot_2018-09-19_at_3.46.04_PM.png",
+        "Screen Shot 2018-09-19 at 3.46.04 PM.png",
+        1696,
+        980,
+        "#e0e5f1"
+      ]
+    }
+  ]
+}
+[/block]
+# Configuration
+
+Once the plugin is installed, you will need to configure all pertinent information to allow Qordoba to sync with your Eloqua environment.
+
+1. Right click on the Qordoba extension, and select "Options" from the resulting menu that appears. This will take you to the login/config page of the plugin.
+
+2. Fill in all fields.
+  * Your email and password are the email and password you used when you joined Qordoba.
+  * To get Workspace ID, Organization ID, and Account Token, visit your workspace in app.qordoba.com. Once there, go to the settings tab (1), click on CLI Config (2), and collect the values (3).
+  * To get your Eloqua information, use your Eloqua username, password, and company name. 
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/aea17d5-Screen_Shot_2018-09-19_at_3.41.38_PM.png",
+        "Screen Shot 2018-09-19 at 3.41.38 PM.png",
+        1564,
+        1282,
+        "#e9e8ec"
+      ]
+    }
+  ]
+}
+[/block]
+When you have filled in all of the fields, click "Test Connection" to make sure all fields are filled in accurately. If done correctly, you should see a green "Connected Successfully!" notification. Click "Save Preferences" when done, and close the page.
+
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/81dc8ea-Screen_Shot_2018-09-19_at_3.54.11_PM.png",
+        "Screen Shot 2018-09-19 at 3.54.11 PM.png",
+        1372,
+        1656,
+        "#f4f5ec"
+      ]
+    }
+  ]
+}
+[/block]
+# Using the Plugin
+
+Now that the plugin is installed and configured, you are able to use Qordoba to localize content in Eloqua.
+
+1. Go to the draft page of the content that you wish to send to Qordoba.
+
+2. Left click on the Qordoba plugin in your Chrome navbar (1). You should see a new button added to the page's UI above the email template (2). 
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/bc7cc4c-Screen_Shot_2018-09-19_at_4.06.38_PM.png",
+        "Screen Shot 2018-09-19 at 4.06.38 PM.png",
+        3360,
+        1156,
+        "#d2d2d1"
+      ]
+    }
+  ]
+}
+[/block]
+Click the new button to pull up the Qordoba plugin. Here, you can send the current content to Qordoba by clicking "Create translation Request" (1). You can also download any completed content, by selecting the desired languages (2), and then clicking "Create content translation" (3). To figure out what content has been completed, and what is still in progress, check the Translation Status column (4).
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/1aa1fea-Screen_Shot_2018-09-19_at_4.10.02_PM.png",
+        "Screen Shot 2018-09-19 at 4.10.02 PM.png",
+        1362,
+        1704,
+        "#d0d5d9"
+      ]
+    }
+  ]
+}
+[/block]
+And that's it! When the content is pulled back to Eloqua, we persist the styling and structure of your content, but replace the english strings with translated values.
+
+If you have any questions, concerns, or suggestions for our plugin, don't hesitate to reach out to support@qordoba.com!
