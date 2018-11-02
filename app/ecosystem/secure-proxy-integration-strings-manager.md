@@ -20,11 +20,3 @@ Reduce the risk of introducing a new software version in production by slowly ro
 </div>
 
 ----
-
-## Requesting Access
-
-This plugin is only available with a [Qordoba Enterprise](https://qordobahq.com/qordoba-enterprise-edition)
-subscription.
-
-If you are not a Qordoba Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](https://qordobahq.com/request-demo).
