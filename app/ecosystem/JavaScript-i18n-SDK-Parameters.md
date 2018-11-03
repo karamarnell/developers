@@ -17,7 +17,7 @@ nav:
 All the ways you can customize the JavaScript SDK to suit your needs. With no additional parameters to the basic installation, the SDK will save all text segments, images, CSS and SEO on all source pages to which the SDK is applied. You can customize this set up as outlined below. To add parameters list them below the siteKey in the SDK (and make sure you are using camelCase!)
 
 # customDomain
-| Parameter |  Default |  Accepts |
+|Parameter |  Default |  Accepts|
 |--|--|
 | customDomain | null | String |
 
