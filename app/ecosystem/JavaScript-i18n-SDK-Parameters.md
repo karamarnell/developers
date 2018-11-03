@@ -17,9 +17,9 @@ nav:
 All the ways you can customize the JavaScript SDK to suit your needs. With no additional parameters to the basic installation, the SDK will save all text segments, images, CSS and SEO on all source pages to which the SDK is applied. You can customize this set up as outlined below. To add parameters list them below the siteKey in the SDK (and make sure you are using camelCase!)
 
 # customDomain
-|Parameter |  Default |  Accepts|
+|Paramter | Default|
 |--|--|
-| customDomain | null | String |
+| customDomain | null |
 
 **What it does:** Use this parameter when you want to pull content from a domain that is different than the one provided when you created your project in Qordoba.
 
