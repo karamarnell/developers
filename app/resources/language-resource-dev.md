@@ -1,6 +1,6 @@
 ---
-title: ✅ languages
-header_title: Security
+title: Supported Languages
+header_title: Supported Languages
 breadcrumbs:
   Security: /security
 ---
@@ -236,7 +236,20 @@ Spanish - Spain
 ```
 
 
+##Named Enitites 
 
+```
+Chinese (Simplified)		
+Chinese (Traditional)		
+English		
+French		
+German		
+Italian		
+Japanese		
+Korean		
+Portuguese	
+Spanish
 
+```
 
 

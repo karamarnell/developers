@@ -38,10 +38,19 @@ Voice is the underlying character of how your brand speaks to its customers. Kee
 `Informal`
 
 
-###Gender bias (tone)
+###Gender bias
+Built based on: Bolukbasi Tolga, Kai-Wei Chang, James Y. Zou, Venkatesh Saligrama, and Adam T. Kalai. Man is to computer programmer as woman is to homemaker? debiasing word embeddings. NIPS 2016.*
 
-`Masculine`
-`Feminine`
+****Types of Bias****
+
+- **Direct Bias**
+	- 1. Associations: Words that are closer to one end (e.g., he) than to the other end (she). For example, occupational stereotypes.
+	- 2. Analogies: Analogies of he:x::she:y. For example analogies exhibiting stereotypes.
+	
+- **Indirect Bias**
+Projection of a neutral words into a two neutral words direction is explained in a great portion by a shared bias direction projection.
+
+
 
 
 ###Reading level
@@ -83,6 +92,7 @@ Flesch Reading Ease :	21.41 =>  `College graduate`
 ###Brevity
 In Brevity you can set a word limit for sentences.
 
+
 ###Passive voice
 A verb in a sentence is considered to be in the passive voice when the subject of the sentence is acted on by the verb. This happens a lot in technical writing when the process is more important than who is doing the activity. Conversely in the active voice the Subject acts on an object. 
 The passive voice consists of an auxiliary form of "to be" + the participle verb:
@@ -100,6 +110,17 @@ Units of measurement: cases per sentence.
 
 Examples: is made, is being carried, will be started.
 
+
+###Named Entities detection
+
+Categories selected below will be excluded from Qordoba's speelcheck.
+
+- Person
+- Organization
+- Event
+- Work of art
+- Consumer goods
+- Other types
 
 
 ###Emoji

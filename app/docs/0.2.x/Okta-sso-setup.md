@@ -1,9 +1,8 @@
-
 ---
-title: Health Checks and Circuit Breakers Reference
+title: Okta
 ---
 
-# Health Checks and Circuit Breakers Reference
+# Setup Okta with Qordoba SAML SSO
 
 You can make an API proxied by Qordoba use a [ring-balancer][ringbalancer], configured
 by adding an [upstream][upstream] entity that contains one or more [target][ringtarget]

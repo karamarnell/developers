@@ -1,30 +1,53 @@
 ---
-title: SOC 2 Compliance
+title: Segmentation 
 header_icon: /assets/images/icons/icn-documentation.svg
-header_title: SOC 2 Compliance
+header_title: Segmentation
 breadcrumbs:
-  Security: /security
+  Resources: /resources
 ---
 
-<div class="alert alert-success">
-  <center><stromg>Qordoba’s SOC 2 Type IIcompliance is proof of our commitment to security and data integrity throughout our operations and services.</stromg></center>
-</div>
+# Cell-based (default)
 
-As companies increasingly use outside vendors to perform activities that are core to their business operations and strategy, there is a need for more trust and transparency into cloud software providers’ operations, processes and results.
-
-The Service Organization Control (SOC) 2 verifies that Qordoba passed a rigorous audit of its internal controls, meeting the security, availability, confidentiality, and privacy standards set by American Institute of CPAs (AICPA). And beyond Type I compliance, Type II compliance means Qordoba passed an audit of our procedures/ controls over a period of 6 months.
+Coming soon
 
 
-#### What does this mean for your business? 
 
-Along with the added rigor that SOC 2 requires, our SOC 2 Type I compliance means that you can communicate to your customers that your realtime app is built on a SOC 2 compliant infrastructure.
+# Punctuation-based
 
-In addition to SOC 2 compliance, Qordoba has developed and maintains a suite of audited processes that reinforce the security of our service delivery environment:
+Coming soon
 
-- Data Encryption (in transit and at rest)
-- HIPAA Compliance
-- EU and US only Storage when required for PII data
-- Intelligent Data Routing to lock and/or block data streams to specific regions
-- US-EU Privacy Shield Framework Certified
-- Compliance with the EU Standard Contractual Clauses (aka ‘Model Clauses’)
+# ICU MessageFormat
+
+Qordoba can parse your resource file’s strings as ICU MessageFormat strings. Using this string formatting impacts how strings are created in your project. Captured strings are prepared and optimized for translation in the Qordoba content editor.
+
+When translating ICU MessageFormat strings translators and editors are not required to understand ICU MessageFormat syntax. They are presented with normalized strings that are segmented and use placeholders (tags) as needed, making them easily translatable.
+
+####Mapping ICU MessageFormat Features to Qordoba Strings
+
+|ICU Feature|	Qordoba support|
+|--|--|
+|String without arguments|Plain string without placeholders|
+|String with arguments | String with placeholders |
+|String with a single select argument|Multiple source strings; one source string for each option of the select.|
+|String with a single plural argument|Qordoba Plural string|
+|String with multiple nested arguments (limit of one plural)|Limited to creating up to 20 strings, otherwise unsupported and captured as raw text|
+|String with choice argument|Multiple source strings; one source string for each option of the select.|
+|String with multiple plural arguments|Qordoba Plural string|
+|String with plural argument and offset property| String with placeholders|
+|String with **selectordinal** argument| String with placeholders|
+
+####In the following table, we show the value of an example source string and the corresponding string captured in Qordoba.
+
+| Hello world. | Hello world.| 
+| -- | --| 
+| Current temperature {temp}. | Current temperature {0}.| 
+| Please confirm this is your date of birth: {dob, date}. |  Please confirm this is your date of birth: {0}.| 
+| You chose {selector, select, 1 {Option 1} other {an unsupported option.}}|    You chose Option 1  <br/>You chose an unsupported option.| 
+| Your playlist has {items, plural, one {# album.} other {# albums.}}|   Plural Other: Your playlist has {0} albums. <br/> Plural One: Your playlist has {0} album.| 
+
+
+# How I can chnage my Segmentation type
+
+Coming soon
+
 
