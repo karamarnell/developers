@@ -14,7 +14,3 @@ nav:
       - label: Log Format
       - label: Qordoba Process Errors
 ---
-
-Log request and response data to an UDP server.
-
-----
