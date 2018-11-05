@@ -11,9 +11,7 @@ Qordoba can fetch files from an SFTP or FTP server remotely and overwrite the co
 
 In the tables below, you can view which parameters you can use to customize your configuration with this particular system:
 
-Files read config
-
-```javascript
+```
 'Hostname'The fully qualified hostname or IP address of the remote system
 'Port'	22	The port that the remote system is listening on for file transfers
 'Username'	
@@ -37,13 +35,3 @@ Files read config
 'Use Compression'	false	Indicates whether or not ZLIB compression should be used when transferring files
 'Use Natural Ordering'	false	If true, will pull files in the order in which they are naturally listed; otherwise, the order in which the files will be pulled is not defined
 ```
-
-
----
-## Requesting Access
-
-This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
-
-If you are not a Qordoba Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).
-
