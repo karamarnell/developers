@@ -1,7 +1,7 @@
 ---
 id: page-plugin
-title: Qordoba - GitHub Enterprise App Integration
-header_title: Qordoba - GitHub App Configuration
+title: Qordoba - JavaScript SDK Domains
+header_title: Qordoba - JavaScript SDK Domains
 header_icon: /assets/images/icons/plugins/GitHub-enterprise-integration.png
 breadcrumbs:
   Plugins: /ecosystem
@@ -23,32 +23,43 @@ To set up your URL structure, you will ask the SDK to show localized content bas
 `http://yoursite.com/language=sp`
 
 Configure these rules via the **pathMap** key, which is an array of key/value rules to declare when a URL is a _source_ language and when a localized version of the URL should be loaded.
-[block:code]
-{
-  "codes": [
+```
+Qordoba.init({
+  .
+  .
+  .
+  path: "yoursite.com/.*[&?]language=<lang>", // RegExp string to define the format of the URL. For clarity use language and <lang> (not lang and <lang>).
+  source: "english", // Save content when <lang> is "en"
+  targets: [
     {
-      "code": "Qordoba.init({\n  .\n  .\n  .\n  path: \"yoursite.com/.*[&?]language=<lang>\", // RegExp string to define the format of the URL. For clarity use language and <lang> (not lang and <lang>).\n  source: \"english\", // Save content when <lang> is \"en\"\n  targets: [\n    {\n      code: \"de-de\",\n      val: \"german\" // Replace with \"de-de\" values when <lang> is \"de\"\n    },\n    {\n      code: \"sp-sp\",\n      val: \"spanish\" // Replace with \"sp-sp\" values when <lang> is \"sp\"\n    }\n  ]\n]);",
-      "language": "javascript",
-      "name": "example"
+      code: "de-de",
+      val: "german" // Replace with "de-de" values when <lang> is "de"
+    },
+    {
+      code: "sp-sp",
+      val: "spanish" // Replace with "sp-sp" values when <lang> is "sp"
     }
   ]
-}
-[/block]
+]);
+```
 # PathMap subfolder/subdomain
 If you are publishing content to subdomains or subfolders (_i.e._, `de.yoursite.com` or `yoursite.com/de/some-page`), your server must be configured to point target pages to their matching original source content. Although the URL will display `http://de.yoursite.com/some-page`, the content loaded will be drawn from `http://yoursite.com/some-page`, with the localized strings, images and CSS inserted on page load.
 
 After configuring the server to always point to the original _source_ page configure a matching **pathMap**.
-[block:code]
-{
-  "codes": [
+```
+path: "yoursite.com<lang>.*", // RegExp string to define the format of the URL.
+source: "", // Leave blank to save content when there is no <lang> subfolder
+targets: [
     {
-      "code": "path: \"yoursite.com<lang>.*\", // RegExp string to define the format of the URL.\nsource: \"\", // Leave blank to save content when there is no <lang> subfolder\ntargets: [\n    {\n        code: \"de-de\",\n        val: \"/german\" // Replace with \"de-de\" values when <lang> subfolder is \"german\"\n    },\n    {\n        code: \"sp-sp\",\n        val: \"/spanish\" // Replace with \"sp-sp\" values when <lang> subfolder is \"spanish\"\n    }\n]",
-      "language": "javascript",
-      "name": "example"
+        code: "de-de",
+        val: "/german" // Replace with "de-de" values when <lang> subfolder is "german"
+    },
+    {
+        code: "sp-sp",
+        val: "/spanish" // Replace with "sp-sp" values when <lang> subfolder is "spanish"
     }
-  ]
-}
-[/block]
+]
+```
 So, without being too pedantic, the **pathMap** above would have the following result:
 
 Someone visits: `http://yoursite.com/de/some-page`
@@ -59,17 +70,31 @@ Action: Show Spanish versions of source page
 
 # PathMap multiple mapping
 As **pathMap** is an array, it can be configured to accept multiple URL maps for a site. The following **pathMap** configuration example will collect when the URL is `http://yoursite.com/some-page-en/some-article` _OR_ `http://yoursite.com/en/some-page` and replace on `http://yoursite.com/some-page-german/some-article` _OR_ `http://yoursite.com/german/some-page`
-[block:code]
-{
-  "codes": [
+
+```
+[
     {
-      "code": "[\n    {\n        path: \"yoursite.com/.*<lang>\", // RegExp string to define the format of the URL.\n        source: \"-en\", // Save content when <lang> is \"-en\"\n        targets: [\n            {\n                code: \"de-de\",\n                val: \"-german\" // Replace with \"de-de\" values when url contains \"-german\"\n            }\n        ]\n    },\n    {\n        path: \"yoursite.com/<lang>.*\", // RegExp string to define the format of the URL.\n        source: \"en/\", // Save content when <lang> is \"en/\"\n        targets: [\n            {\n                code: \"de-de\",\n                val: \"german/\" // Replace with \"de-de\" values when URL contains \"german/\"\n            }\n        ]\n    }\n]",
-      "language": "javascript",
-      "name": "example"
+        path: "yoursite.com/.*<lang>", // RegExp string to define the format of the URL.
+        source: "-en", // Save content when <lang> is "-en"
+        targets: [
+            {
+                code: "de-de",
+                val: "-german" // Replace with "de-de" values when url contains "-german"
+            }
+        ]
+    },
+    {
+        path: "yoursite.com/<lang>.*", // RegExp string to define the format of the URL.
+        source: "en/", // Save content when <lang> is "en/"
+        targets: [
+            {
+                code: "de-de",
+                val: "german/" // Replace with "de-de" values when URL contains "german/"
+            }
+        ]
     }
-  ]
-}
-[/block]
+]
+```
 # Exclude page content
 Remember that the Qordoba JavaScript SDK will save **all** content on your pages other than that with `notranslate` attributes in the HTML. The SDK will ignore all HTML nested within any tag with the `notranlate` attribute.
 
