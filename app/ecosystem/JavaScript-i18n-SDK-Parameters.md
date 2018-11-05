@@ -16,7 +16,7 @@ nav:
 ---
 All the ways you can customize the JavaScript SDK to suit your needs. With no additional parameters to the basic installation, the SDK will save all text segments, images, CSS and SEO on all source pages to which the SDK is applied. You can customize this set up as outlined below. To add parameters list them below the siteKey in the SDK (and make sure you are using camelCase!)
 
-# customDomain
+### customDomain
 |Parameter |  Default |  Accepts|
 |--|--|--|
 | customDomain | null | String |
@@ -31,7 +31,7 @@ Qordoba.init({
             projectDomain: 'yoursite.com',
 });
 ```
-# liveSyncPages
+### liveSyncPages
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | liveSyncPages | false | Boolean |
@@ -42,7 +42,7 @@ If you'd like your content to be "automatically" collected every time the page i
 
 **Why use it:** This is a great customization for customers who want to create microsites of select content for different locales, rather than all pages :golf:. Content can be added as the project scope grows.
 
-# liveEditor
+### liveEditor
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | liveEditor | true | Boolean |
@@ -51,7 +51,7 @@ If you'd like your content to be "automatically" collected every time the page i
 
 **Why use it:** You can turn off the Live Editor if you'd prefer to make the box longer via code instead of the visual Live Editor. Your team would still see the Live Editor in the Qordoba web application, but their changes there would not go live.
 
-# blackList
+### blackList
 **What it does:** A filter applied to DOM node collection results to ignore content whose node path contains a forbidden value.
 
 **Why use it:** Determines CSS-like selectors (as well as elements nested inside them) that the Qordoba scraper should ignore. You can prevent scraping unneeded or unwanted content with this option. Customers who have injected third-party widgets or other code often end up with various content being generated that they don't want to be copied over to localized versions of the page. With this parameter, this pesky occurrence is banished. :hammer:
@@ -74,7 +74,7 @@ blackList:[
 ]	
 ```
 
-# overrideCss
+### overrideCss
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | overrideCss | true | Boolean |
@@ -83,7 +83,7 @@ blackList:[
 
 **Why use it:** By default, you can add CSS rules in Qordoba to fix issues caused by language. You can do this by locale. If you don't want anyone to use this feature, you can set this parameter to false.
 
-# projectDomain
+### projectDomain
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | projectDomain | null | String |
@@ -101,7 +101,7 @@ Qordoba.init({
 
 ```
 
-# rewriteAbsoluteLinks
+### rewriteAbsoluteLinks
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | rewriteAbsoluteLinks | true | Boolean |
@@ -110,7 +110,7 @@ Qordoba.init({
 
 **Why use it:** The default behavior of the SDK is that all internal links in the pages where the SDK is applied are automatically changed to the localized versions. For example, if your German visitor is sent to the German homepage, whether by browser language detection, geolocation or manual switch, clicking to the blog from there will send her to the German blog. However, if you are using the SDK to create local content on only some pages, or only on parts of pages, then you wouldn't want your visitor to see `lang=de` in the blog URL even though it is in English. Whew.
 
-# saveNewAttributes
+### saveNewAttributes
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | saveNewAttributes | true | Boolean |
@@ -119,7 +119,7 @@ Qordoba.init({
 
 **Why use it:** If you don't want to save attributes at all or want to prevent the SDK from saving new content, you can set this property to false.
 
-# saveNewImages
+### saveNewImages
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | saveNewImages | true | Boolean |
@@ -128,7 +128,7 @@ Qordoba.init({
 
 **Why use it:** This is useful if you are using a third-party tool to manage images on your site (_i.e._, a PIM.)
 
-# saveNewSegments
+### saveNewSegments
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | saveNewSegments | true | Boolean |
@@ -137,7 +137,7 @@ Qordoba.init({
 
 **Why use it:** If you don't want to save text segments at all or want to prevent the SDK from saving new segments, you can set this property to false.
 
-# saveSeo
+### saveSeo
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | saveSeo | true | Boolean |
@@ -146,7 +146,7 @@ Qordoba.init({
 
 **Why use it:** We don't know. Don't you want more organic traffic?!? j/k. Maybe your marketing team decides to not pull in any of the SEO until they develop more strategy around global SEO.
 
-# selectLastLanguage
+### selectLastLanguage
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | selectLastLanguage | true | Boolean |
@@ -155,7 +155,7 @@ Qordoba.init({
 
 **Why use it:** It's good karma to remember user preferences, but there may be reasons why you'd want to turn off this behavior and send a user to the main domain each time (_i.e._, a global landing page.)
 
-# translateSegments
+### translateSegments
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | translateSegments | true | Boolean |
@@ -164,7 +164,7 @@ Qordoba.init({
 
 **Why use it:** This parameter is used by customers who want to review a project's content in staging or test environments before publishing to the production environment. To set up this workflow, the TranslateSegments parameter is kept as true in the staging environment, but false in the production environment, until all of the "Publish" actions in the Qordoba web application have been reviewed in staging.
 
-# translateAttributes
+### translateAttributes
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | translateAttributes | true | Boolean |
@@ -173,7 +173,7 @@ Qordoba.init({
 
 **Why use it:** This parameter can be used by customers who don't want to translate content attributes.
 
-# translateImages
+### translateImages
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | translateImages | true | Boolean |
@@ -182,7 +182,7 @@ Qordoba.init({
 
 **Why use it:** Admin users in your Qordoba project are able to swap out images for the localized pages, replacing an image of the Golden Gate bridge :bridge_at_night: with the Tokyo Tower :tokyo_tower:, for example. Customers who don't want anyone to change images, ever, will use this parameter to turn off this feature.
 
-# translateSeo
+### translateSeo
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | translateSeo | true | Boolean |
@@ -191,7 +191,7 @@ Qordoba.init({
 
 **Why use it:** You may want to turn this off if you'd prefer to handle SEO for your pages differently (_e.g._, manually.)
 
-# siteKey
+### siteKey
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | siteKey | null | String |
@@ -200,7 +200,7 @@ Qordoba.init({
 
 **Why use it:** You'll need to include this in your SDK at all times.
 
-# showLoaderWhenSwitchingLanguage
+### showLoaderWhenSwitchingLanguage
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | showloaderwhenswitchinglanguage | false | Boolean |
@@ -209,7 +209,7 @@ Qordoba.init({
 
 **Why use it:** If you want to prevent the page flashing, you can set this option to true, instead of blank page there will be a loader shown.
 
-# loaderCustomHTML
+### loaderCustomHTML
 
 loaderCustomHTML will allow to change you loader to whatever fits your style.
 
@@ -235,7 +235,7 @@ Example:
   ]
 }
 [/block]
-# pageNotFound
+### pageNotFound
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | pageNotFound | null | String |
@@ -244,7 +244,7 @@ Example:
 
 **Why use it:** Can be leveraged to help users effectively navigate your localized site.
 
-# preferCanonicalUrls
+### preferCanonicalUrls
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | preferCanonicalUrls | false | boolean |
@@ -253,7 +253,7 @@ Example:
 
 **Why use it:** Some websites have multiple URL endpoints that all land on the same page, and each of these URL endpoints have the same canonical URL. If this parameter is `false`, Qordoba will re-collect the same page once for each URL endpoint. Since we only want one version of each page in Qordoba, we could set this parameter to `true`, and Qordoba would only collect one page for each canonical URL, regardless of what you see in the address bar.
 
-# ignoreDomPath
+### ignoreDomPath
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | ignoreDomPath | true | boolean |
@@ -264,7 +264,7 @@ When set to "true", this parameter will tell Qordoba to ignore location and appl
 
 **Why use it:** If you are planning to change the layout of your website but not the content and you want your translations to persist, you should change this to "true". That way, Qordoba will continue to translate the segments in the same way even though their location on the page has changed.
 
-# collectDelay
+### collectDelay
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | collectDelay | 3000 | number |
