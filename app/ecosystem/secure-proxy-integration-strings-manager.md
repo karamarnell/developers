@@ -10,13 +10,3 @@ nav:
     items:
       - label: Requesting Access
 ---
-
-Reduce the risk of introducing a new software version in production by slowly rolling out the change to a small subset of users. This plugin also enables roll back to your original upstream service, or shift all traffic to the new version.
-<br />
-
-<div class="alert alert-warning">
-  <strong>Enterprise-Only</strong> This plugin is only available with an
-  Enterprise Subscription.
-</div>
-
-----
