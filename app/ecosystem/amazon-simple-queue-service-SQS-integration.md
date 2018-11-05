@@ -7,12 +7,9 @@ breadcrumbs:
   Plugins: /plugins
 ---
 
-Qordoba's Amazon SQS Integration retrieves the content from message based on key. 
+Qordoba's Amazon SQS i18n Integration retrieves the content from message based on key. 
 
-
-####Fetches messages from an Amazon Simple Queuing Service Queue
-
-```json
+```
 [
   {
     "Name": "Queue URL",
@@ -101,10 +98,7 @@ Qordoba's Amazon SQS Integration retrieves the content from message based on key
 ]
 ```
 
-
-####Publishes a message to an Amazon Simple Queuing Service Queue
-
-```json
+```
 [
   {
     "Name": "Queue URL",
@@ -168,11 +162,3 @@ Qordoba's Amazon SQS Integration retrieves the content from message based on key
   }
 ]
 ```
-
----
-## Requesting Access
-
-This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
-
-If you are not a Qordoba Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).
