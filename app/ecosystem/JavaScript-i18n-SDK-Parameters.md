@@ -243,7 +243,7 @@ Example:
 
 **Why use it:** Can be leveraged to help users effectively navigate your localized site.
 
-#preferCanonicalUrls
+# preferCanonicalUrls
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | preferCanonicalUrls | false | boolean |
@@ -252,7 +252,7 @@ Example:
 
 **Why use it:** Some websites have multiple URL endpoints that all land on the same page, and each of these URL endpoints have the same canonical URL. If this parameter is `false`, Qordoba will re-collect the same page once for each URL endpoint. Since we only want one version of each page in Qordoba, we could set this parameter to `true`, and Qordoba would only collect one page for each canonical URL, regardless of what you see in the address bar.
 
-#ignoreDomPath
+# ignoreDomPath
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | ignoreDomPath | true | boolean |
@@ -263,7 +263,7 @@ When set to "true", this parameter will tell Qordoba to ignore location and appl
 
 **Why use it:** If you are planning to change the layout of your website but not the content and you want your translations to persist, you should change this to "true". That way, Qordoba will continue to translate the segments in the same way even though their location on the page has changed.
 
-#collectDelay
+# collectDelay
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | collectDelay | 3000 | number |
