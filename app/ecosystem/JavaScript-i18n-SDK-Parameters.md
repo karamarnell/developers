@@ -212,6 +212,7 @@ Qordoba.init({
 # loaderCustomHTML
 
 loaderCustomHTML will allow to change you loader to whatever fits your style.
+
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | loaderCustomHTML: |  | HTML string |
