@@ -209,7 +209,7 @@ Qordoba.init({
 
 **Why use it:** If you want to prevent the page flashing, you can set this option to true, instead of blank page there will be a loader shown.
 
-#loaderCustomHTML
+# loaderCustomHTML
 
 loaderCustomHTML will allow to change you loader to whatever fits your style.
 | Parameter |  Default |  Accepts |
@@ -267,6 +267,7 @@ When set to "true", this parameter will tell Qordoba to ignore location and appl
 | Parameter |  Default |  Accepts |
 |--|--|--|
 | collectDelay | 3000 | number |
+
 **What it does:** Delays the SDK running on your page for the number of milliseconds specified.
 
 **Why use it:** If some of your page content takes a while to load, our SDK may run before all content is loaded. Use this parameter to introduce a delay and allow the content to fully load.
