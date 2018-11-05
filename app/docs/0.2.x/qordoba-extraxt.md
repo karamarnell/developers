@@ -1,8 +1,8 @@
 ---
-title: Qordoba Extraxt
+title: Qordoba Extract
 ---
 
-# Qordoba Extraxt `beta`
+# Qordoba Extract `beta`
 
 The Qordoba String Extractor is AI that reads your code, extracts strings and replaces them with keys. It’s smart enough to understand what frameworks and programming languages you are using, and learns from your coding patterns.
 
