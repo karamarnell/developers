@@ -46,7 +46,7 @@ Create a new anchor tag with the same structure for each language you offer, and
 </div>
 ```
 
-###CSS
+# CSS
 
 Basic styling and positioning for the dropdown menu. 
 
