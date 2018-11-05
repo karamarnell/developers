@@ -18,13 +18,12 @@ nav:
 ```
 Qordoba requires using "https://" and port 443 to access your Github Enterprise server.
 ```
+
 ### Create an Application
 Go to your GitHub Enterprise installation, and create a new Application at 
 
-`https://[[host]]/organizations/[[Org Name]]/settings/apps/new`
-
 ```
-
+https://[[host]]/organizations/[[Org Name]]/settings/apps/new
 ```
 
 Please use these values for the below three fields; and follow Github help as required for the others. Their values do not affect Qordoba interactions.
@@ -32,6 +31,7 @@ Please use these values for the below three fields; and follow Github help as re
 https://app.qordoba.com
 https://app.qordoba.com/githubAppAuthRedirect.html
 https://app.qordoba.com/api/qordoba/github/app/webhook/callback
+
 [block:image]
 {
   "images": [
@@ -47,6 +47,7 @@ https://app.qordoba.com/api/qordoba/github/app/webhook/callback
   ]
 }
 [/block]
+
 **Permissions**
 *Read-only*
 Repository metadata
