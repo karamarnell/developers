@@ -16,12 +16,9 @@ nav:
 ---
 
 This guide will show how to gain the required repository access permissions within Github, as well as how to enable the Github Qordoba App during workspace creation.
-[block:api-header]
-{
-  "type": "basic",
-  "title": "1. Gain permissions within Github"
-}
-[/block]
+
+### 1. Gain permissions within Github"
+
 Make sure that you have admin privileges to the specific repository that you want to connect Qordoba with. You need the organization admin to add you as an admin collaborator at the repository level:
 [block:image]
 {
@@ -39,11 +36,9 @@ Make sure that you have admin privileges to the specific repository that you wan
 }
 [/block]
 Here, I had the admin of the witty-willow organization (Ethan) add me as a collaborator on the Github-Apps-Demo repository.
-[block:api-header]
-{
-  "title": "2. Create Workspace Within Qordoba"
-}
-[/block]
+
+### 2. Create Workspace Within Qordoba"
+
 In Qordoba, create a new workspace, and fill out the preliminary fields. Make sure that you select "Github Apps" for the integration type. Once you get to the Github authentication page, you should see this:
 [block:image]
 {
@@ -61,11 +56,9 @@ In Qordoba, create a new workspace, and fill out the preliminary fields. Make su
 }
 [/block]
 Notice there is a "Authorize your session here" button. Click on it.
-[block:api-header]
-{
-  "title": "3. Use Popup to Give Permissions at Repository Level"
-}
-[/block]
+
+### 3. Use Popup to Give Permissions at Repository Level"
+
 When you click the Authorize button, a popup window will appear. In the popup, click Install in the top right, and look for the organization with your desired repository:
 [block:image]
 {
@@ -82,7 +75,9 @@ When you click the Authorize button, a popup window will appear. In the popup, c
   ]
 }
 [/block]
+
 In that organization, you should have permission to specifically allow the one repository that you have admin access to:
+
 [block:image]
 {
   "images": [
