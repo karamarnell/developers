@@ -10,13 +10,9 @@ nav:
     items:
       - label: Requesting Access
 ---
+Receives messages from a Microsoft Azure Event Hub, writing the contents of the Azure message to Qordoba content Editor. And after you finish the translations/l10n process you can sends the contents to a Windows Azure Event Hub or use Qordoba APIs/CLI to download the content.
 
-Receives messages from a Microsoft Azure Event Hub, writing the contents of the Azure message to Qordoba content Editor. And after you finish the content process you can sends the contents to a Windows Azure Event Hub or use Qordoba APIs/CLI to download the content.
-
-
-####Get Windows Azure Event Hub
-```java
-
+```
 [
   {
     "Name": "Event Hub Name",
@@ -73,11 +69,9 @@ Receives messages from a Microsoft Azure Event Hub, writing the contents of the 
     "Description": "The amount of time a Partition Receiver should wait to receive the Fetch Size before returning. Default(60000)"
   }
 ]
-
 ```
 
-####Publish Windows Azure Event Hub
-```java
+```
 [
   {
     "Name": "Event Hub Name",
@@ -104,16 +98,8 @@ Receives messages from a Microsoft Azure Event Hub, writing the contents of the 
     "Description": "The primary key of the Event Hub Shared Access Policy\nSensitive Property: true"
   }
 ]
-
 ```
 
-
-----
-
-## Requesting Access
-
-This plugin is only available with a [Qordoba Enterprise](https://qordobahq.com/qordoba-enterprise-edition)
-subscription.
-
-If you are not a Qordoba Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](https://qordobahq.com/request-demo).
+```
+The content of the Windows Azure Event should not be more than 500KB per massages, so care should be taken to avoid the limitations
+```
