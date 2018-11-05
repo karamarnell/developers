@@ -6,14 +6,10 @@ header_icon: /assets/images/icons/plugins/apache-solr-integration.png
 breadcrumbs:
   Plugins: /plugins
 ---
-
-
 Qordoba can retrieve a document from Solr using the specified connection properties and the identifier of the document to retrieve. 
 In the table below, you can view which parameters you can use to customize your configuration with this particular system:
 
-
-####Read from Solr index
-```javascript
+```
 `Solr Type`	Standard or Cloud A SolrCloud instance. Standard A stand-alone Solr instance.The type of Solr instance, Cloud or Standard.
 `Solr Location`			The Solr url for a Solr Type of Standard (ex: http://localhost:8984/solr/gettingstarted), or the ZooKeeper hosts for a Solr Type of Cloud (ex: localhost:9983).
 `Collection`			The Solr collection name, only used with a Solr Type of Cloud
@@ -32,9 +28,7 @@ Solr Connection Timeout	10 seconds		The amount of time to wait when establishing
 `ZooKeeper Connection Timeout`	10 seconds		The amount of time to wait when establishing a connection to ZooKeeper, only used with a Solr Type of Cloud.
 ```
 
-####Sends the content as a ContentStream to Solr
-
-```javascript
+```
 `Solr Type`	Standard or Cloud A SolrCloud instance. Standard A stand-alone Solr instance. The type of Solr instance, Cloud or Standard.
 `Solr Location`			The Solr url for a Solr Type of Standard (ex: http://localhost:8984/solr/gettingstarted), or the ZooKeeper hosts for a Solr Type of Cloud (ex: localhost:9983).
 `Collection`			The Solr collection name, only used with a Solr Type of Cloud
@@ -49,12 +43,4 @@ Solr Connection Timeout	10 seconds		The amount of time to wait when establishing
 `Solr Maximum Connections Per Host`	5	The maximum number of connections allowed from the Solr client to a single Solr host.
 `ZooKeeper Client Timeout`	10 seconds	The amount of time to wait for data on a connection to ZooKeeper, only used with a Solr Type of Cloud.
 `ZooKeeper Connection Timeout`	10 seconds	The amount of time to wait when establishing a connection to ZooKeeper, only used with a Solr Type of Cloud.
-
 ```
----
-## Requesting Access
-
-This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
-
-If you are not a Qordoba Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).
