@@ -20,7 +20,7 @@ In the Javascript snippet below, we have provided some common configuration opti
 
 You can find all of the source code on our <a href='https://github.com/Qordobacode/language-switcher-js-sdk/tree/master'> Github page </a>.
 
-###HTML
+# HTML
 
 Create a new anchor tag with the same structure for each language you offer, and ensure the language codes are correct.
 
@@ -107,7 +107,7 @@ Basic styling and positioning for the dropdown menu.
 }
 ```
 
-###Javascript
+# Javascript
 
 Javascript to render the dropdown and attach necessary event listeners. Configuration options are available to you here.
 
