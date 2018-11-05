@@ -13,14 +13,10 @@ nav:
     items:
       - label: Metrics
 ---
-
 The Qordoba connector acts as stand-alone service and can will Subscribers/Publishes to **any configurable MQTT topic.** 
 In the tables below, you can view which parameters you can use to customize your configuration with this particular system:
 
-####Subscribers to a topic and receives messages from an MQTT broker
-
-```java
-
+```
 `Broker URI`	The URI to use to connect to the MQTT broker (e.g. tcp://localhost:1883). The 'tcp' and 'ssl' schemes are supported. In order to use 'ssl', the SSL Context Service property must be set.
 `Client ID`	MQTT client ID to use
 `Username`	Username to use when connecting to the broker
@@ -38,10 +34,7 @@ In the tables below, you can view which parameters you can use to customize your
 `Max Queue Size`	The MQTT messages are always being sent to subscribers on a topic. If the 'Run Schedule' is significantly behind the rate at which the messages are arriving to this processor then a back up can occur. This property specifies the maximum number of messages this processor will hold in memory at one time.
 ```
 
-####Publishes a message to an MQTT topic
-
-```java
-
+```
 `Broker URI`	The URI to use to connect to the MQTT broker (e.g. tcp://localhost:1883). The 'tcp' and 'ssl' schemes are supported. In order to use 'ssl', the SSL Context Service property must be set.
 `Client ID`	MQTT client ID to use
 `Username`	Username to use when connecting to the broker
@@ -57,14 +50,4 @@ In the tables below, you can view which parameters you can use to customize your
 `Topic`	The topic to publish the message to.
 `Quality of Service (QoS)`	The Quality of Service(QoS) to send the message with. Accepts three values '0', '1' and '2'; '0' for 'at most once', '1' for 'at least once', '2' for 'exactly once'. Expression language is allowed in order to support publishing messages with different QoS but the end value of the property must be either '0', '1' or '2'. 
 `Retain Message`	Whether or not the retain flag should be set on the MQTT message.
-
-
 ```
-
----
-## Requesting Access
-
-This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
-
-If you are not a Qordoba Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).
