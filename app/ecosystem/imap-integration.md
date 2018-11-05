@@ -22,14 +22,3 @@ In the table below, you can view which parameters you can use to customize your 
 'Mark Messages as Read'	Specify if messages should be marked as read after retrieval. #the default value is false
 'Use SSL'	Specifies if IMAP connection must be obtained via SSL encrypted connection (i.e., IMAPS) #the default value is true
 ```
-
-
----
-## Requesting Access
-
-This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
-
-If you are not a Qordoba Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).
-
-
