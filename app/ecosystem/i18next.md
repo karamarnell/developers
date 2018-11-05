@@ -132,9 +132,9 @@ Qordoba-Node-Backend-Plugin for i18next using Qordoba files API
   * Will handle checking Qordoba for updates, downloading updated files and writing translations to file system
   * Will serve files from Qordoba locales folder in fs
   
-###Run options
+### Run options
 
-##Pull 
+## Pull 
   * Download the latest translations manually from the command line (gulp)
   * Download the latest translations real time from Qordoba Files API
   a) Plugin will check timestamps from Qordoba files API on every incoming request 
@@ -142,7 +142,7 @@ Qordoba-Node-Backend-Plugin for i18next using Qordoba files API
   * Load the latest translation on a preset interval
   a) Will check Qordoba for file updates on specified interval
 
-##Push
+## Push
   * Upload the latest source language files manually from the command line (gulp)
   * Will upload files to Qordoba web app via the Files API so the translations can be created, edited, proofread, and pushed (deployed) for use by the qordoba-nodejs-plugin 
 
