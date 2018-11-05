@@ -15,9 +15,6 @@ nav:
       - label: Known Issues
 ---
 
-Qordoba - GitHub enterprise integration
-
-----
 Qordoba's GitHub Enterprise integration supports the same powerful integration available for repositories hosted on GitHub.com. 
 
 ### Endpoint URLs
