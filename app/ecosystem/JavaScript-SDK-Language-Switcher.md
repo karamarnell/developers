@@ -19,7 +19,12 @@ If you don't want to use URL mapping to automatically translate pages, you need 
 In the Javascript snippet below, we have provided some common configuration options. If these options don't meet your needs, you should change the HTML/CSS/JS source code as needed.
 
 You can find all of the source code on our <a href='https://github.com/Qordobacode/language-switcher-js-sdk/tree/master'> Github page </a>.
-
+[block:api-header]
+{
+  "title": "HTML"
+}
+[/block]
+Create a new anchor tag with the same structure for each language you offer, and ensure the language codes are correct.
 ```
 <!-- Insert into <head> and change src/href paths as needed -->
 <link rel="stylesheet" type="text/css" href="./main.css">
@@ -42,9 +47,12 @@ You can find all of the source code on our <a href='https://github.com/Qordobaco
 </div>
 ```
 
+[block:api-header]
 {
   "title": "CSS"
 }
+[/block]
+Basic styling and positioning for the dropdown menu. 
 ```
 /* Dropdown Button */
 .qordoba-dropbtn {
@@ -100,11 +108,14 @@ You can find all of the source code on our <a href='https://github.com/Qordobaco
   top: 0px;
   right: 0px;
 }
-
 ```
+
+[block:api-header]
 {
   "title": "Javascript"
 }
+[/block]
+Javascript to render the dropdown and attach necessary event listeners. Configuration options are available to you here.
 ```
 /*
   Config options:
