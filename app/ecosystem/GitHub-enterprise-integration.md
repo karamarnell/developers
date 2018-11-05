@@ -20,19 +20,22 @@ Qordoba - GitHub enterprise integration
 ----
 Qordoba's GitHub Enterprise integration supports the same powerful integration available for repositories hosted on GitHub.com. 
 
-###Endpoint URLs
+### Endpoint URLs
 All API endpoints except for the Management Console API endpoints are prefixed with the following:
+
 ```
 http(s)://hostname/api/v3/
 ```
 
 The Management Console API endpoints are only prefixed with a hostname:
+
 ```
 http(s)://hostname/
 ```
 
-###Authentication
+### Authentication
 Your Enterprise installation's API endpoints accept the same authentication methods as the GitHub.com API. Specifically, you can authenticate yourself with OAuth tokens (which can be created using the Authorizations API) when you access Qordoba.
+
 ```
 Qordoba requires using "https://" and port 443 to access your Github Enterprise server.
 ```
@@ -103,6 +106,7 @@ Callback URL
 `https://app.qordoba.com/api`
 
 Here's an image you can use:
+
 [block:image]
 {
   "images": [
@@ -118,6 +122,7 @@ Here's an image you can use:
   ]
 }
 [/block]
+
 Once filled out, click the Register application button at the bottom of the form.
 
 Now that we've created an application, we have access to the Client ID and Client Secret. We'll need those to setup your GitHub Enterprise project on Qordoba.
