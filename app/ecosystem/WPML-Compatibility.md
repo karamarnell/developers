@@ -12,7 +12,7 @@ nav:
 ---
 The WordPress multilingual plugin WPML has been created far before Polylang and thus some plugins and themes have been written to play nicely with it. Polylang does support most of the [WPML API](http://wpml.org/documentation/support/wpml-coding-api/) to avoid double work for themes and plugins author.
 
-###icl_get_home_url
+### icl_get_home_url
 
 **Polylang equivalent**: pll_home_url
 
@@ -41,7 +41,7 @@ $args is an optional array parameter. Options are:
   * ‘skip_missing’ => 0 or 1 (default: 0)
   * link_empty_to => works in conjunction with skip_missing=0 and allows using custom links for the languages that do not have translations for the current element. {$lang} can be used as placeholder for the language code (default: empty)
 
-###icl_link_to_element
+### icl_link_to_element
 
 **Polylang equivalent**: none
 
