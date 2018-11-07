@@ -15,88 +15,126 @@ nav:
       - label: Known Issues
 ---
 
-Qordoba - GitHub enterprise integration
+Qordoba's GitHub Enterprise integration supports the same powerful integration available for repositories hosted on GitHub.com. 
 
-----
+### Endpoint URLs
+All API endpoints except for the Management Console API endpoints are prefixed with the following:
 
-## Configuration
-
-Configuring the plugin is straightforward, you can add it on top of an
-[API][api-object] by executing the following request on your Qordoba server:
-
-```bash
-$ curl -X POST http://qordoba:8001/apis/{api}/plugins \
-    --data "name=aws-lambda" \
-    --data-urlencode "config.aws_key=AWS_KEY" \
-    --data-urlencode "config.aws_secret=AWS_SECRET" \
-    --data "config.aws_region=AWS_REGION" \
-    --data "config.function_name=LAMBDA_FUNCTION_NAME"
+```
+http(s)://hostname/api/v3/
 ```
 
-`api`: The `id` or `name` of the API that this plugin configuration will target
+The Management Console API endpoints are only prefixed with a hostname:
 
-You can also apply this plugin for every API using the `http://qordoba:8001/plugins/`
-endpoint. Read the [Plugin Reference](/docs/latest/admin-api/#add-plugin)
-for more information.
+```
+http(s)://hostname/
+```
 
-**Reminder**: curl by default sends payloads with an
-`application/x-www-form-urlencoded` MIME type, which will naturally be URL-
-decoded by Qordoba. To ensure special characters that are likely to appear in your
-AWS key or secret (like `+`) are correctly decoded, you must URL-encode them,
-hence use `--date-urlencode` if you are using curl. Alternatives to this
-approach would be to send your payload with a different MIME type (like
-`application/json`), or to use a different HTTP client.
+### Authentication
+Your Enterprise installation's API endpoints accept the same authentication methods as the GitHub.com API. Specifically, you can authenticate yourself with OAuth tokens (which can be created using the Authorizations API) when you access Qordoba.
 
-form parameter                             | default | description
----                                        | ---     | ---
-`name`                                     |         | The name of the plugin to use, in this case: `aws-lambda`
-`config.aws_key`                           |         | The AWS key credential to be used when invoking the function
-`config.aws_secret`                        |         | The AWS secret credential to be used when invoking the function
-`config.aws_region`                        |         | The AWS region where the Lambda function is located. Regions supported are: `us-east-1`, `us-east-2`, `ap-northeast-1`, `ap-northeast-2`, `ap-southeast-1`, `ap-southeast-2`, `eu-central-1`, `eu-west-1`
-`config.function_name`                     |         | The AWS Lambda function name to invoke
-`config.qualifier`<br>*optional*           | ``      | The [`Qualifier`](http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax) to use when invoking the function.
-`config.invocation_type`<br>*optional*     | `RequestResponse` | The [`InvocationType`](http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax) to use when invoking the function. Available types are `RequestResponse`, `Event`, `DryRun`
-`config.log_type`<br>*optional*            | `Tail`  | The [`LogType`](http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax) to use when invoking the function. By default `None` and `Tail` are supported
-`config.timeout`<br>*optional*             | `60000` | An optional timeout in milliseconds when invoking the function
-`config.keepalive`<br>*optional*           | `60000` | An optional value in milliseconds that defines how long an idle connection will live before being closed
-`config.unhandled_status`                  | ``      | The response status code to use (instead of the default `200`, `202`, or `204`) in the case of an [`Unhandled` Function Error](https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_ResponseSyntax)
-`config.forward_request_body`<br>*optional*           | `false` | An optional value that defines whether the request body is to be sent in the `request_body` field of the JSON-encoded request. If the body arguments can be parsed, they will be sent in the separate `request_body_args` field of the request. The body arguments can be parsed for `application/json`, `application/x-www-form-urlencoded`, and `multipart/form-data` content types.
-`config.forward_request_headers`<br>*optional*        | `false` | An optional value that defines whether the original HTTP request headers are to be sent as a map in the `request_headers` field of the JSON-encoded request.
-`config.forward_request_method`<br>*optional*         | `false` | An optional value that defines whether the original HTTP request method verb is to be sent in the `request_method` field of the JSON-encoded request.
-`config.forward_request_uri`<br>*optional*            | `false` | An optional value that defines whether the original HTTP request URI is to be sent in the `request_uri` field of the JSON-encoded request. Request URI arguments (if any) will be sent in the separate `request_uri_args` field of the JSON body.
+```
+Qordoba requires using "https://" and port 443 to access your Github Enterprise server.
+```
 
-----
+### Create an OAuth application
+All developers need to register their application before getting started. A registered **OAuth application** is assigned a unique Client ID and Client Secret. The Client Secret should not be shared. 
 
-### Sending parameters
+Go to your GitHub Enterprise installation, and start by registering a new Developer application. This can be done by going to your GitHub User Settings, clicking Applications on the left, then selecting Developer applications at the top:
 
-Any form parameter sent along with the request, will be also sent as an
-argument to the AWS Lambda function.
 
-### Known Issues
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/88dba68-github-user-settings-6fa2b465f0ab95b777c20928032df074c74ea5c97f9a0c72191cbe43765a9a9c.png",
+        "github-user-settings-6fa2b465f0ab95b777c20928032df074c74ea5c97f9a0c72191cbe43765a9a9c.png",
+        602,
+        652,
+        "#e3e2e2"
+      ]
+    }
+  ]
+}
+[/block]
 
-#### Use a fake upstream_url
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/905589f-applications-menu-fdac6bf705123d29ecc70e13cff95a46d26bea84ea3477faf085fb16ce5a5811.png",
+        "applications-menu-fdac6bf705123d29ecc70e13cff95a46d26bea84ea3477faf085fb16ce5a5811.png",
+        686,
+        314,
+        "#e1e3e7"
+      ]
+    }
+  ]
+}
+[/block]
+From this page, click Register new application
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/057d292-register-application-button-3ca9b9a371a9b9febb4d0fcada6e8b4bb0e0262fcaa996bcd80af572e5d5b19b.png",
+        "register-application-button-3ca9b9a371a9b9febb4d0fcada6e8b4bb0e0262fcaa996bcd80af572e5d5b19b.png",
+        1137,
+        174,
+        "#f3f3f3"
+      ]
+    }
+  ]
+}
+[/block]
+Name
 
-When using the AWS Lambda plugin, the response will be returned by the plugin
-itself without proxying the request to any upstream service. This means that
-whatever `upstream_url` has been set on the [API][api-object] it will
-never be used.
+`Qordoba`
 
-Although `upstream_url` will never be used, it's currently a mandatory field
-in Qordoba's data model and its hostname must be resolvable. So set it to a
-fake value (ie, `http://127.0.0.1:20000`) if you are planning to use this
-plugin. Failing to do so will result in 500 errors regarding a resolution
-failure.
+URL
 
-In the future we will provide a more intuitive way to deal with similar
-use cases.
+`https://qordoba.com`
 
-#### Response plugins
+Callback URL
 
-There is a known limitation in the system that prevents some response plugins
-from being executed. We are planning to remove this limitation in the future.
+`https://app.qordoba.com/api`
 
-[api-object]: /docs/latest/admin-api/#api-object
-[configuration]: /docs/latest/configuration
-[consumer-object]: /docs/latest/admin-api/#consumer-object
-[acl-associating]: /plugins/acl/#associating-consumers
-[faq-authentication]: /about/faq/#how-can-i-add-an-authentication-layer-on-a-microservice/api?
+Here's an image you can use:
+
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/d034fd8-8090724.png",
+        "8090724.png",
+        200,
+        200,
+        "#5454ac"
+      ]
+    }
+  ]
+}
+[/block]
+
+Once filled out, click the Register application button at the bottom of the form.
+
+Now that we've created an application, we have access to the Client ID and Client Secret. We'll need those to setup your GitHub Enterprise project on Qordoba.
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/6e69336-client-secrets-8e76c5470a71d9b6d56a34b9d3b5402a04a2e7916f383614e57ad92474a6c7a4_1.png",
+        "client-secrets-8e76c5470a71d9b6d56a34b9d3b5402a04a2e7916f383614e57ad92474a6c7a4 (1).png",
+        880,
+        350,
+        "#662828"
+      ]
+    }
+  ]
+}
+[/block]

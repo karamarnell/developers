@@ -10,10 +10,7 @@ breadcrumbs:
 Qordoba can sync S3 buckets. For each object that is listed, Qordoba creates a FlowFile that represents the object so that it can be fetched in conjunction with the FetchS3Object. This processor is designed to run on Primary Node only in a cluster. If the primary node changes, the new primary node will pick up where the previous node left off without duplicating all of the data.
 In the table below, you can view which parameters you can use to customize your configuration with this particular system:
 
-
-####Download from Amazon S3 Bucket
-
-```java
+```
 `Bucket`	No Description Provided.
 `Object Key`	${filename}	No Description Provided.
 `Region`	us-west-2	No Description Provided.
@@ -30,10 +27,7 @@ In the table below, you can view which parameters you can use to customize your 
 `Proxy Host Port`	Proxy host port
 ```
 
-
-####Upload to Amazon s3 bucket
-
-```java
+```
 `Object Key`	${filename}	No Description Provided.
 `Bucket`	No Description Provided.
 `Content Type`	Sets the Content-Type HTTP header indicating the type of content stored in the associated object. The value of this header is a standard MIME type. AWS S3 Java client will attempt to determine the correct content type if one hasn't been set yet. Users are responsible for ensuring a suitable content type is set when uploading streams. If no content type is provided and cannot be determined by the filename, the default content type "application/octet-stream" will be used.
@@ -65,11 +59,3 @@ Specifies an optional SSL Context Service that, if provided, will be used to cre
 `Proxy Host`	Proxy host name or IP
 `Proxy Host Port`	Proxy host port
 ```
-
----
-## Requesting Access
-
-This integration is only available with a [Qordoba Enterprise](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html) subscription.
-
-If you are not a Qordoba Enterprise customer, you can inquire about our
-Enterprise offering by [contacting us](http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html).
