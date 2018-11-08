@@ -17,3 +17,5 @@ dist
 
 # package managers
 node_modules
+
+package.json
