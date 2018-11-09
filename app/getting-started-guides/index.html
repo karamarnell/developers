@@ -1,0 +1,22 @@
+---
+title: Installation - 5-minute Quickstart localization
+layout: default
+header_title: Installation  (5-minute Quickstart)
+header_icon: /assets/images/icons/icn-download.svg
+---
+
+<div class="page page-install">
+  {% include header.html header_caption=header_caption %}</a>
+  <section class="content-section">
+    <div class="container">
+      <div class="distributions">
+        {% for method in site.data.distributions %}
+          <a href="{% if method.soon %}#{% else %}/install/{{ method.id }}/{% endif %}" class="box {% if method.soon %}soon{% endif %}" title="{{ method.name }}">
+            <img src="/assets/images/distributions/{{ method.id }}.png" alt="{{ method.name }}"/ style="height: 60px">
+          </a>
+        {% endfor %}
+      </div>
+      <br>
+    </div>
+  </section>
+</div>

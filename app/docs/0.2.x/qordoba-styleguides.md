@@ -2,7 +2,7 @@
 title: Introducing Qordoba Styleguides
 ---
 
-# Introducing Qordoba Styleguides
+# Introducing  Styleguides
 
 Define you brand's writing style. Qordoba's Artificial Intelligence will analyze content from all your writers to help you achieve a consistent voice across all your content.
 
