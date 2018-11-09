@@ -76,8 +76,8 @@ Resources
 | &lt;bpt(.*)&lt;/bpt&gt;	| &lt;bpt&gt; text &lt;/bpt&gt;	| 	✅| 
 | &lt;ept(.*)&lt;/ept&gt;	| &lt;ept&gt; text &lt;/ept&gt;	| 	✅| 
 |  &lt;(/?)([a-z]*:)*[a-z]+ (.*)&gt;| 	&lt;span&gt;		| ✅| 
-|  %[0-9]&dollar;(0&verbar;1)?([sSdDuUxoOfeEgGcCpaAFlL@]) | 	%1&dollar;0s <br/>%1&dollar;s	|  ?/✅	| 
-| %([sSdDuUxoOfeEgGcCpaAFlL@])	| %s| 	?/✅| 
+|  %[0-9]&dollar;(0&verbar;1)?([sSdDuUxoOfeEgGcCpaAFlL@]) | 	%1&dollar;0s <br/>%1&dollar;s	|  ✅	| 
+| %([sSdDuUxoOfeEgGcCpaAFlL@])	| %s| 	✅| 
 | %[0-9]&dollar;(s&verbar;d)	|  %0&dollar;s	| 	✅| 
 | &dollar;&lowbar;([a-z])| 	&dollar;&lowbar;a	| 	✅| 
 | %@!	|  %@!	| 	✅| 
