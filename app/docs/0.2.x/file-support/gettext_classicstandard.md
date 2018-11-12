@@ -16,7 +16,11 @@ breadcrumbs:
 
 **Gettext PO, Can't be used together with content_type=POKEY**
 
+Resources
 
+- [GNU gettext](http://www.gnu.org/software/gettext/)
+ 
+ 
 ####Keys Management
 
 
