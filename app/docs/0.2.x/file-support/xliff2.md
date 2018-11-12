@@ -1,25 +1,24 @@
 ---
-title: Android XML
+title: XLIFF 2
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: XLIFF 2
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#XLIFF 2
 
 ####Feature support list
-- Pluralization support: `Yes`
+- Pluralization support: `No`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: Keep original value
+- Content&lowbar;type API Endpoint: xliff
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
+**Xliff 2.0, Can't be used with content_type=XLIFF1.2 or content_type=xliff1.2_v2**
 
 Resources
 
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
+- [Background](https://en.wikipedia.org/wiki/XLIFF)
  
 
 ####Keys Management
@@ -27,13 +26,13 @@ Resources
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  XLIFF 2 |   ❌ |  ❌|  ❌|  ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  XLIFF 2 |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules

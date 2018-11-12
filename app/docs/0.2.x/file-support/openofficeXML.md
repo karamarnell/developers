@@ -1,39 +1,38 @@
 ---
-title: Android XML
+title: Open Office XML
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: Open Office XML
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#Open Office XML
 
 ####Feature support list
-- Pluralization support: `Yes`
+- Pluralization support: `No`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: kepe original value
+- Content&lowbar;type API Endpoint: stringsDocx, excel
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
+**Microsoft Office file formats**
 
 Resources
 
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
- 
+- [Open XML](https://developer.microsoft.com/en-us/office/docs)
+
 
 ####Keys Management
 
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  Open Office XML |   ❌ |  ❌|  ❌|  ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  Open Office XML |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules

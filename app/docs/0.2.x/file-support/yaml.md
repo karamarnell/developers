@@ -1,25 +1,24 @@
 ---
-title: Android XML
+title: YAML
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: YAML
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#YAML
 
 ####Feature support list
-- Pluralization support: `Yes`
+- Pluralization support: `No`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: Keep original value❗️If something is a number or boolean it's marked as DNM on CE
+- Content&lowbar;type API Endpoint: YAML
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
+**Standard Yaml 1.1, Can't be used with content_type=YAMLi18n**
 
 Resources
 
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
+- [YAML](https://guides.rubyonrails.org/i18n.html)
  
 
 ####Keys Management
@@ -27,13 +26,13 @@ Resources
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  YAML |   ✅ |  ❌|  ❌|  ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  YAML |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules
@@ -41,7 +40,7 @@ Resources
 | regex approximation of variable matcher |  Variable example |  Status | 
 |--|-- |-- | 
 | %% | 	%%| 	❌	| 
-| %&lowbar;(.*)&lowbar;%	| %&lowbar;variable&lowbar;%	|  ❌	| 
+| %&lowbar;(.*)&lowbar;%	| %&lowbar;variable&lowbar;%	|  ✅	| 
 | &bsol;&bsol;n	| &bsol;n	| ✅	| 
 | &lt;(/&lbrace;0,1&#125;)([a-z]*:)*[a-z]+ (.*)&gt; |  &lt;span&gt; | 	✅	| 
 | &lt;(/&lbrace;0,1&#125;)([a-z]*:)*[a-z]+ (.*)&gt; |  	&lt;span&gt;	| ✅	| 
@@ -69,8 +68,8 @@ Resources
 | %([a-z])| 	%a	| 	✅| 
 | &bsol;(%([a-z])&bsol;)	| (%a)	| 	✅| 
 | &bsol;[&bsol;[(.*)&bsol;]&bsol;]	|  [[variable]]	| 	✅| 
-| &bsol;[(.*)&bsol;]&bsol;([:url:]&bsol;)	|  [google&rbrack;(google.com)	| ❌	| 
-| &bsol;[(.*)&bsol;]&bsol;[(.*)&bsol;]	|  [google&rbrack;[google-ref&rbrack; | 	❌	| 
+| &bsol;[(.*)&bsol;]&bsol;([:url:]&bsol;)	|  [google&rbrack;(google.com)	| ✅	| 
+| &bsol;[(.*)&bsol;]&bsol;[(.*)&bsol;]	|  [google&rbrack;[google-ref&rbrack; | 	✅	| 
 | &bsol;[(.*)&bsol;]	| [google-ref]	| 	✅| 
 | &lt;!&bsol;[CDATA&bsol;[| 	&lt;![CDATA[	| 	✅| 
 | &bsol;]&bsol;]&gt;	|  ]]&gt;	| 	✅| 
@@ -85,11 +84,11 @@ Resources
 | %@	|  %@	| 	✅| 
 |  /&bsol;&bsol;u([a-z]&lbrace;4&#125;)/| 	/&bsol;uaadf/	| 	✅| 
 |  &bsol;&bsol;u([a-z]&lbrace;4&#125;)| 	&bsol;uaadf		| ✅| 
-| &ast;&ast;&ast;(.&ast;)&ast;&ast;&ast;	| &ast;&ast;&ast;variable&ast;&ast;&ast;| 	❌	| 
-| &lowbar;&lowbar;&lowbar;(.&ast;)&lowbar;&lowbar;&lowbar;	| &lowbar;&lowbar;&lowbar;variable&lowbar;&lowbar;&lowbar;	| ❌	| 
-| &ast;&ast;(.&ast;)&ast;&ast;| 	&ast;&ast;variable&ast;&ast;	| ❌	| 
-| &lowbar;&lowbar;(.&ast;)&lowbar;&lowbar;| 	&lowbar;&lowbar;variable&lowbar;&lowbar;	| ❌	| 
-| &#126;(.&ast;)&#126;	| &#126;variable&#126;	| ❌	| 
+| &ast;&ast;&ast;(.&ast;)&ast;&ast;&ast;	| &ast;&ast;&ast;variable&ast;&ast;&ast;| 	✅	| 
+| &lowbar;&lowbar;&lowbar;(.&ast;)&lowbar;&lowbar;&lowbar;	| &lowbar;&lowbar;&lowbar;variable&lowbar;&lowbar;&lowbar;	| ✅	| 
+| &ast;&ast;(.&ast;)&ast;&ast;| 	&ast;&ast;variable&ast;&ast;	| ✅	| 
+| &lowbar;&lowbar;(.&ast;)&lowbar;&lowbar;| 	&lowbar;&lowbar;variable&lowbar;&lowbar;	| ✅	| 
+| &#126;(.&ast;)&#126;	| &#126;variable&#126;	| ✅	| 
 | &ast;&verbar;(.&ast;)&verbar;&ast; | 	&ast;&verbar;variable&verbar;&ast;	| 	✅| 
-| &ast;(.&ast;)&ast;	|  &ast;variable&ast;	| ❌	| 
-| &lowbar;(.&ast;)&lowbar; | 	&lowbar;variable&lowbar;	| ❌| 
+| &ast;(.&ast;)&ast;	|  &ast;variable&ast;	| ✅	| 
+| &lowbar;(.&ast;)&lowbar; | 	&lowbar;variable&lowbar;	| ✅| 

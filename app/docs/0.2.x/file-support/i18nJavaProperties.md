@@ -1,39 +1,35 @@
 ---
-title: Android XML
+title: i18n Java Properties
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: i18n Java Properties
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#i18n Java Properties
 
 ####Feature support list
-- Pluralization support: `Yes`
+- Pluralization support: `No`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: keep original value
+- Content&lowbar;type API Endpoint: stringsI18nProperties
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
+**Random text file format from some framework. By accident compatible with new java 9+ properties files**
 
-Resources
 
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
- 
 
 ####Keys Management
 
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  i18n Java Properties |   ✅ |  ✅|  ❌|  ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  i18n Java Properties |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules

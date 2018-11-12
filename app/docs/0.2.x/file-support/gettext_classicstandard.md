@@ -1,39 +1,38 @@
 ---
-title: Android XML
+title: gettext/classic standard
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: gettext/classic standard
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#gettext/classic standard
 
 ####Feature support list
 - Pluralization support: `Yes`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: keep original value
+- Content&lowbar;type API Endpoint: PO
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
+**Gettext PO, Can't be used together with content_type=POKEY**
 
 Resources
 
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
+- [GNU gettext](http://www.gnu.org/software/gettext/)
  
-
+ 
 ####Keys Management
 
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  gettext/classic standard |   ✅ |  ❌|  ❌|  ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  gettext/classic standard |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules

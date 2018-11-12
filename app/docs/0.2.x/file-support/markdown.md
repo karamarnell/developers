@@ -1,39 +1,34 @@
 ---
-title: Android XML
+title: Markdown
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: Markdown
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#Markdown
 
 ####Feature support list
-- Pluralization support: `Yes`
+- Pluralization support: `No`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: Keep original value
+- Content&lowbar;type API Endpoint: md
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
+**Markdown file format**
 
-Resources
-
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
- 
 
 ####Keys Management
 
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  Markdown |   ✅ |  ❌|  ❌|  ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  Markdown |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules
@@ -69,8 +64,8 @@ Resources
 | %([a-z])| 	%a	| 	✅| 
 | &bsol;(%([a-z])&bsol;)	| (%a)	| 	✅| 
 | &bsol;[&bsol;[(.*)&bsol;]&bsol;]	|  [[variable]]	| 	✅| 
-| &bsol;[(.*)&bsol;]&bsol;([:url:]&bsol;)	|  [google&rbrack;(google.com)	| ❌	| 
-| &bsol;[(.*)&bsol;]&bsol;[(.*)&bsol;]	|  [google&rbrack;[google-ref&rbrack; | 	❌	| 
+| &bsol;[(.*)&bsol;]&bsol;([:url:]&bsol;)	|  [google&rbrack;(google.com)	| ✅	| 
+| &bsol;[(.*)&bsol;]&bsol;[(.*)&bsol;]	|  [google&rbrack;[google-ref&rbrack; | 	✅	| 
 | &bsol;[(.*)&bsol;]	| [google-ref]	| 	✅| 
 | &lt;!&bsol;[CDATA&bsol;[| 	&lt;![CDATA[	| 	✅| 
 | &bsol;]&bsol;]&gt;	|  ]]&gt;	| 	✅| 
@@ -85,11 +80,11 @@ Resources
 | %@	|  %@	| 	✅| 
 |  /&bsol;&bsol;u([a-z]&lbrace;4&#125;)/| 	/&bsol;uaadf/	| 	✅| 
 |  &bsol;&bsol;u([a-z]&lbrace;4&#125;)| 	&bsol;uaadf		| ✅| 
-| &ast;&ast;&ast;(.&ast;)&ast;&ast;&ast;	| &ast;&ast;&ast;variable&ast;&ast;&ast;| 	❌	| 
-| &lowbar;&lowbar;&lowbar;(.&ast;)&lowbar;&lowbar;&lowbar;	| &lowbar;&lowbar;&lowbar;variable&lowbar;&lowbar;&lowbar;	| ❌	| 
-| &ast;&ast;(.&ast;)&ast;&ast;| 	&ast;&ast;variable&ast;&ast;	| ❌	| 
-| &lowbar;&lowbar;(.&ast;)&lowbar;&lowbar;| 	&lowbar;&lowbar;variable&lowbar;&lowbar;	| ❌	| 
-| &#126;(.&ast;)&#126;	| &#126;variable&#126;	| ❌	| 
+| &ast;&ast;&ast;(.&ast;)&ast;&ast;&ast;	| &ast;&ast;&ast;variable&ast;&ast;&ast;| 	✅	| 
+| &lowbar;&lowbar;&lowbar;(.&ast;)&lowbar;&lowbar;&lowbar;	| &lowbar;&lowbar;&lowbar;variable&lowbar;&lowbar;&lowbar;	| ✅	| 
+| &ast;&ast;(.&ast;)&ast;&ast;| 	&ast;&ast;variable&ast;&ast;	| ✅	| 
+| &lowbar;&lowbar;(.&ast;)&lowbar;&lowbar;| 	&lowbar;&lowbar;variable&lowbar;&lowbar;	| ✅	| 
+| &#126;(.&ast;)&#126;	| &#126;variable&#126;	| ✅	| 
 | &ast;&verbar;(.&ast;)&verbar;&ast; | 	&ast;&verbar;variable&verbar;&ast;	| 	✅| 
-| &ast;(.&ast;)&ast;	|  &ast;variable&ast;	| ❌	| 
-| &lowbar;(.&ast;)&lowbar; | 	&lowbar;variable&lowbar;	| ❌| 
+| &ast;(.&ast;)&ast;	|  &ast;variable&ast;	| ✅	| 
+| &lowbar;(.&ast;)&lowbar; | 	&lowbar;variable&lowbar;	| ✅| 

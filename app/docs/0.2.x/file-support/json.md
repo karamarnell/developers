@@ -1,25 +1,24 @@
 ---
-title: Android XML
+title: JSON
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: JSON
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#JSON
 
 ####Feature support list
-- Pluralization support: `Yes`
+- Pluralization support: `No`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: keep original value❗️if something is a number or boolean it's marked as DNM on CE
+- Content&lowbar;type API Endpoint: 100% Standard JSON file format. No comments
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
 
 Resources
 
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
+- [JSON](http://json.org/)
+
  
 
 ####Keys Management
@@ -27,13 +26,13 @@ Resources
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  JSON |   ✅ |  ✅|  ✅|  ✅| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  JSON |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules
@@ -41,7 +40,7 @@ Resources
 | regex approximation of variable matcher |  Variable example |  Status | 
 |--|-- |-- | 
 | %% | 	%%| 	❌	| 
-| %&lowbar;(.*)&lowbar;%	| %&lowbar;variable&lowbar;%	|  ❌	| 
+| %&lowbar;(.*)&lowbar;%	| %&lowbar;variable&lowbar;%	|  ✅	| 
 | &bsol;&bsol;n	| &bsol;n	| ✅	| 
 | &lt;(/&lbrace;0,1&#125;)([a-z]*:)*[a-z]+ (.*)&gt; |  &lt;span&gt; | 	✅	| 
 | &lt;(/&lbrace;0,1&#125;)([a-z]*:)*[a-z]+ (.*)&gt; |  	&lt;span&gt;	| ✅	| 

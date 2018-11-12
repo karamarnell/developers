@@ -1,39 +1,33 @@
 ---
-title: Android XML
+title: SRT
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: SRT
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#SRT
 
 ####Feature support list
-- Pluralization support: `Yes`
-- Segmentation support: `Yes`
+- Pluralization support: `No`
+- Segmentation support: `No`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: Keep original value
+- Content&lowbar;type API Endpoint: SRT
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
 
-Resources
-
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
- 
 
 ####Keys Management
 
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  SRT |   ✅ |  ❌|  ❌|  ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  SRT |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules

@@ -1,25 +1,25 @@
 ---
-title: Android XML
+title: Java Properties
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: Java Properties 
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#Java Properties 
 
 ####Feature support list
-- Pluralization support: `Yes`
+- Pluralization support: `No`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: keep original value
+- Content&lowbar;type API Endpoint: propertiesJava
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
+**Java properties file (old version)**
 
 Resources
 
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
+- [Java Properties](https://docs.oracle.com/javase/tutorial/i18n/index.html)
+
  
 
 ####Keys Management
@@ -27,13 +27,13 @@ Resources
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  Java Properties |   ✅ |  ✅|  ❌| ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  Java Properties |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules

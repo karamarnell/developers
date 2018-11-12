@@ -1,39 +1,35 @@
 ---
-title: Android XML
+title: Po msgid as key
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: Po msgid as key
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#Po msgid as key
 
 ####Feature support list
 - Pluralization support: `Yes`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: Keep original value
+- Content&lowbar;type API Endpoint: POKEY
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
+**Nonstandard PO file type where msgid contains key. Can't be used together with content_type=PO**
 
-Resources
 
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
- 
 
 ####Keys Management
 
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  Po msgid as key |   ✅ |  ❌|  ❌|  ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  Po msgid as key |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules

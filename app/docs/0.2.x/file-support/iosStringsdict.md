@@ -1,46 +1,45 @@
 ---
-title: Android XML
+title: iOS Stringsdict
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: iOS Stringsdict
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#iOS Stringsdict
 
 ####Feature support list
 - Pluralization support: `Yes`
-- Segmentation support: `Yes`
+- Segmentation support: `Yes` (If using plurals non icu only)
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: keep original value
+- Content&lowbar;type API Endpoint: iosStringsDict
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
+**iOS/OSX strings dict file**
 
 Resources
 
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
- 
+- [iOS Stringdict](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/StringsdictFileFormat/StringsdictFileFormat.html)
+
 
 ####Keys Management
 
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  iOS Stringsdict |   ✅ |  ❌|  ❌|  ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  iOS Stringsdict |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules
 
 | regex approximation of variable matcher |  Variable example |  Status | 
 |--|-- |-- | 
-| %% | 	%%| 	❌	| 
+| %% | 	%%| 	✅	| 
 | %&lowbar;(.*)&lowbar;%	| %&lowbar;variable&lowbar;%	|  ❌	| 
 | &bsol;&bsol;n	| &bsol;n	| ✅	| 
 | &lt;(/&lbrace;0,1&#125;)([a-z]*:)*[a-z]+ (.*)&gt; |  &lt;span&gt; | 	✅	| 
@@ -77,8 +76,8 @@ Resources
 | &lt;bpt(.*)&lt;/bpt&gt;	| &lt;bpt&gt; text &lt;/bpt&gt;	| 	✅| 
 | &lt;ept(.*)&lt;/ept&gt;	| &lt;ept&gt; text &lt;/ept&gt;	| 	✅| 
 |  &lt;(/?)([a-z]*:)*[a-z]+ (.*)&gt;| 	&lt;span&gt;		| ✅| 
-|  %[0-9]&dollar;(0&verbar;1)?([sSdDuUxoOfeEgGcCpaAFlL@]) | 	%1&dollar;0s <br/>%1&dollar;s	|  ❌	| 
-| %([sSdDuUxoOfeEgGcCpaAFlL@])	| %s| 	❌| 
+|  %[0-9]&dollar;(0&verbar;1)?([sSdDuUxoOfeEgGcCpaAFlL@]) | 	%1&dollar;0s <br/>%1&dollar;s	|  ?/✅	| 
+| %([sSdDuUxoOfeEgGcCpaAFlL@])	| %s| 	?/✅| 
 | %[0-9]&dollar;(s&verbar;d)	|  %0&dollar;s	| 	✅| 
 | &dollar;&lowbar;([a-z])| 	&dollar;&lowbar;a	| 	✅| 
 | %@!	|  %@!	| 	✅| 

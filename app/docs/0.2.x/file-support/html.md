@@ -1,25 +1,23 @@
----
-title: Android XML
+title: HTML
 header&lowbar;icon: /assets/images/icons/icn-documentation.svg
-header&lowbar;title: Android XML
+header&lowbar;title: HTML
 breadcrumbs:
   Files types list: /files
 ---
-#Android XML
+#html
 
 ####Feature support list
-- Pluralization support: `Yes`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: yes builtin, segments described as dnm are not imported into CE
-- Content&lowbar;type API Endpoint: xmlAndroid
+- DNM behavior: Keep original value
+- Content&lowbar;type API Endpoint: stringsHtml
 
-**AndroidXML support. This file format has as much in common with XML as extension. It is not generic XML reader (and will never be).**
+**Standard compliant HTML. Nonstandard stuff will be treated up to standard which may be surprising to customers.**
 
 Resources
 
-- [Android Strings](https://developer.android.com/guide/topics/resources/string-resource)
-- [Android resource ](https://developer.android.com/guide/topics/resources/localization)
+- [WC3 HTML](https://www.w3.org/TR/html/)
+
  
 
 ####Keys Management
@@ -27,13 +25,13 @@ Resources
 
 |  file name |  View Key |  Adding Key |  Delete Key |  Edit Key |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  HTML |   ❌ |  ❌|  ❌|  ❌| 
 
 ####Integration Support 
 
 |  file name |  CLI |  API |  GitHub |  BitBucket |  
 | --| --| --| --| --| 
-|  Android XML |   ✅ |  ✅|  ✅|  ✅| 
+|  HTML |   ✅ |  ✅|  ✅|  ✅| 
 
 
 ####Variables Rules
@@ -93,3 +91,16 @@ Resources
 | &ast;&verbar;(.&ast;)&verbar;&ast; | 	&ast;&verbar;variable&verbar;&ast;	| 	✅| 
 | &ast;(.&ast;)&ast;	|  &ast;variable&ast;	| ❌	| 
 | &lowbar;(.&ast;)&lowbar; | 	&lowbar;variable&lowbar;	| ❌| 
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Press h to open a hovercard with more details.
