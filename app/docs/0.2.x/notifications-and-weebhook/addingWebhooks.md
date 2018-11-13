@@ -11,9 +11,9 @@ title: Adding Webhooks
   2. You can send the Webhook to anywhere as a JSON payload, and once that webhook arrives at its destination, the customer can write code (or we can help  - simply email Support@qordoba.com) to open up the webhook (in order to receive the message). This is how companies can operate webhooks with Jira for example.
   We leverage slack for Webhooks but if you have a different messaging platform, it is possible to send our webhooks there with a little effort.
   
-  ####**For more information on Slack Webhooks see below:**
+  **For more information on Slack Webhooks see below:**
   
-    #####Incoming WebHooks for Slack
+    #####Incoming WebHooks for Slack:
     
       - Incoming Webhooks are a type of integration that makes it easy to post Slack messages from outside sources into your workspace. This is a great way to send data to your workspace in real-time.
 
