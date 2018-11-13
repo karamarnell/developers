@@ -12,7 +12,7 @@ Click on “Add New Role” and name your role.
 
 You now have the ability to modify permissions for 7 different sections (listed below) Toggling the slider to the right for each permission will enable the permission for your specific role:
 
-**Terms Management:** this section covers permissions associated with your organization’s glossaries.
+####Terms Management: this section covers permissions associated with your organization’s glossaries.
 
   - **Bulk add:** enable/disable a user’s ability to add new glossary terms in bulk
   - **Create new terms management:** enable/disable a user’s ability to create a new terms management within your organization
@@ -24,7 +24,7 @@ You now have the ability to modify permissions for 7 different sections (listed 
   
 There is an option to apply these permissions to all Terms Managements in your organization. If this is left unchecked, we will apply these permissions only to Terms Managements associated with a user’s assigned projects and languages.
 
-**Content Memory:** this section covers permissions associated with your organization’s content memories.
+####Content Memory: this section covers permissions associated with your organization’s content memories.
 
   - **Bulk add:** enable/disable a user’s ability to add segments to your content memories
   - **Create new CM:** enable/disable a user’s ability to create a new content memory within your organization
@@ -36,7 +36,7 @@ There is an option to apply these permissions to all Terms Managements in your o
 
 There is an option to apply these permissions to all CMs in your organization. If this is left unchecked, we will apply these permissions only to CMs associated with a user’s assigned projects and languages. 
 
-**Admin:** this section covers your organization’s administrative permissions.
+####Admin: this section covers your organization’s administrative permissions.
 
   - **Add team members:** enable/disable a user’s ability to add team members to your organization
   - **Billing:** enable/disable a user’s ability to access billing information within your organization
@@ -57,14 +57,14 @@ There is an option to apply these permissions to all CMs in your organization. I
   - **Project Create:**
   - **Project settings:** enable/disable a user’s ability to modify project settings
   
-**Content:** this section covers permissions associated with your organization’s content.
+####Content: this section covers permissions associated with your organization’s content.
 
   - **Do not modify strings:** enable/disable a user’s ability to mark segments as “Do Not Modify” within the Content Editor
   - **Download content:** enable/disable a user’s ability to download content within the Content Editor or Content Root
   - **Edit source strings:** enable/disable a user’s ability to edit source segments within the Content Editor
   - **View:**
 
-**String:** this section covers permissions associated with your organization’s Strings projects.
+####String: this section covers permissions associated with your organization’s Strings projects.
 
   - **Add file:** enable/disable a user’s ability to upload a new file to an existing Strings project.
   - **Add segment/key:** enable/disable a user’s ability to add a segment or a key to an existing file within a Strings project.
@@ -72,7 +72,7 @@ There is an option to apply these permissions to all CMs in your organization. I
   - **Disable file:** enable/disable a user’s ability to disable existing files within a Strings project.
   - **Update file:** enable/disable a user’s ability to update existing files within a Strings project.
 
-**Web:** this section covers permissions associated with your organization’s web projects.
+####Web: this section covers permissions associated with your organization’s web projects.
 
   - **CSS:** enable/disable a user’s ability to modify the CSS associated with your web projects
   - **Disable page:** enable/disable a user’s ability to disable pages within your web projects
@@ -83,7 +83,7 @@ There is an option to apply these permissions to all CMs in your organization. I
   - **Web LiveEditor:** enable/disable a user’s ability to modify content in your web project’s LiveEditor
   - **Web LiveEditor Tools:** 
 
-**Mobile:** this section covers permissions associated with your organization’s mobile projects.
+####Mobile: this section covers permissions associated with your organization’s mobile projects.
 
   - **Cancel release:** enable/disable a user’s ability to cancel live releases within your organization’s mobile projects
   - **Create release:** enable/disable a user’s ability to create live releases within your organization’s mobile projects
