@@ -11,12 +11,14 @@ So how does it work?
  
 If have an existing Content Memory in your organization and have linked it to the workspace you currently working in, you will see a SmartSuggest percentage rating to the left of the string. If the string was previously translated and had been saved in the Content Memory, you'll see a SmartSuggest confidence rating as 100%
 
-If the string does not have an exact match in the Content Memory, the SmartSuggest confidence will be based on our machine translation technology. This number will fluctuate based on real-world actions performed by your linguists. As your linguist work in Qordoba, SmartSuggest adapts to the changes that are made and refines its recommendations over time for future translations. 
+If the string does not have an exact source match in the Content Memory, the SmartSuggest confidence will be based on our machine translation technology. The higher the percentage, the more confident Qordoba's SmartSuggest is recommending the correct translation.
 
-For example, there are two linguists and each of them translated the same segment in a different way. How can you tell what is the correct translation? Smart Suggest will use the content history to find the best option and provide the best possible translation to you.
+This number will fluctuate based on real-world actions performed by your linguists. As your linguist work in Qordoba, SmartSuggest adapts to the changes that are made and refines its recommendations over time for future translations. 
 
+Why do I see SmartSuggest less than 100% when the content was previously translated?
 
-Smart Suggest is just that - an informed recommendation intended to serve as a guide or a benchmark. It will continue to get smarter as you continue to translate content for your app, website, or other project.
+SmartSuggest scans and analyzes the source within your Content Memory. If there are are slight differences in the Content Memory source, it will reduce its confidence rating. 
 
+For example, if your source in the Content Memory contains a period and your new content does not, it will reduce it's SmartSuggest confidence rating slightly.
 
 **insert image here**
