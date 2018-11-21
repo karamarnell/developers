@@ -38,7 +38,7 @@ Resources
 
 ####Variables Rules
 
-| regex approximation of variable matcher |  Variable example |  Status | 
+| Regex approximation of variable matcher |  Variable example |  Status | 
 |--|-- |-- | 
 | %% | 	%%| 	❌	| 
 | %&lowbar;(.*)&lowbar;%	| %&lowbar;variable&lowbar;%	|  ❌	| 
