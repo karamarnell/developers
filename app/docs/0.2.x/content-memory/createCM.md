@@ -14,5 +14,7 @@ Once logged into Qordoba, you can create a new CM by clicking on "CM" at the top
 You have three ways of adding content to your CM: **link to addtoCM.md**
 
 Option 1 - Add content segment by segment
+
 Option 2 - Bulk upload existing content or TMs
+
 Option 3 - Adding as you go from the Content Editor 
