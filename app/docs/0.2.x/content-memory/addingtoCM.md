@@ -44,4 +44,5 @@ If you have an existing content memory (CM) or translation memory (TM), you can 
 **insert image here**
 
 ###Option 3 - Adding as you go from the Content Editor 
+
 As you create and/or translate new content within Qordoba, it is automatically added the CM as your users complete and finalize it within the content editor
