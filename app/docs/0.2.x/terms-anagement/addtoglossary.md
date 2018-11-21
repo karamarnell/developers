@@ -3,6 +3,7 @@ title: Add Glossary Terms to the Terms Bank
 ---
 
 #What is a glossary and how should I use it?
+
 A glossary is a reference tool in which you want to have terms translated in a specific way. However, there may be circumstances in which do not want to be translated in that way due to the context of the sentence. 
 
 For example, let's use the word "Amazon." Amazon is a name of the largest tropical rainforest in the world and also the name of one the largest e-commerce stores. When translating "Amazon" when referring to the company, it will likely remain as "Amazon." However when referring to the name of the rainforest, "Amazon" is likely translated.
