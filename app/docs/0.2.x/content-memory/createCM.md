@@ -1,18 +1,35 @@
 ---
-title: Creating a new Content Memory 
+title: What is a Content Memory and how do I use it?
 ---
 
-#How do I upload a new translation memory?
+#What is a Content Memory?
 
-If you have an existing content memory (CM), you can easily upload it into Qordoba.
+A Content Memory (CM) is a library of all your content that you previously created or translated within Qordoba. If you have content that was translated previously outside of Qordoba, this is typically also commonly known as a "Translation Memory (TM)". 
 
-Make sure that you have the following before proceeding:
 
-  - Permissions: Full access or have a custom role with "Create New CM" enabled
-  - Support File formats: csv, tmx, and xliff
-  
-  
-###Uploading your TM
+#How do I create a new CM?
+
+Once logged into Qordoba, you can create a new CM by clicking on "CM" at the top right of your browser. Click on "Create new" and fill in the prompts.
+
+You have three ways of adding content to your CM:
+
+Option 1 - Add content segment by segment
+Option 2 - Bulk upload existing content or TMs
+Option 3 - Adding as you go from the Content Editor 
+
+
+###Option 1 - Add content segment by segment
+
+1. Open an existing CM and click on "Actions." Select "Add new segment."
+
+2. Type in the new source and target content. Hit "Enter" on your keyboard to save.
+
+3. Repeat Steps 1-2 if you have more segments to enter.
+
+
+###Option 2 - Bulk upload existing content or TMs
+
+If you have an existing content memory (CM) or translation memory (TM), you can easily upload it into Qordoba. Qordoba currently supports csv, tmx, and xliff files.
 
 1. Click on "CM" at the top right of the page in Qordoba.
 
@@ -23,7 +40,7 @@ Make sure that you have the following before proceeding:
   - Select the Target Persona
   - Description (optional)
   - Tags (optional)
-  - Upload TM file
+  - Upload CM file
 
 3. Click on "Next."
 
@@ -35,4 +52,5 @@ Make sure that you have the following before proceeding:
 
 **insert image here**
 
-Your uploaded CM is now available for you to use in any new or existing workspace(s) in Qordoba!
+###Option 3 - Adding as you go from the Content Editor 
+As you create and/or translate new content within Qordoba, it is automatically added the CM as your users complete and finalize it within the content editor
