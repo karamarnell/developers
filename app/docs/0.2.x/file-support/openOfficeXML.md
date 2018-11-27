@@ -5,22 +5,21 @@ header&lowbar;title: Open Office XML
 breadcrumbs:
   Files types list: /files
 ---
-#AOpen Office XML
+#Open Office XML
 
 ####Feature support list
 - Pluralization support: `No`
 - Segmentation support: `Yes`
 - Reference in CE (file comments): We pull the Key content
-- DNM behavior: Keep original value
+- DNM behavior: kepe original value
 - Content&lowbar;type API Endpoint: stringsDocx, excel
 
 **Microsoft Office file formats**
 
 Resources
 
-- [Open Office XML](https://developer.microsoft.com/en-us/office/docs)
+- [Open XML](https://developer.microsoft.com/en-us/office/docs)
 
- 
 
 ####Keys Management
 
