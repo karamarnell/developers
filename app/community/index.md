@@ -145,8 +145,7 @@ community_meetups:
 ---
 
 <div class="page page-community">
-  {% include header.html %}
-
+  {% include header.html header_caption=header_caption %}
   <div class="container">
     <div class="content">
       <h3>Community Resources</h3>
