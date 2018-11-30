@@ -8,8 +8,7 @@ header_caption: Extend your stack with powerful integrations configurable per Se
 ---
 
 <div class="page page-plugins">
-  {% include header.html %}
-
+  {% include header.html header_caption=header_caption %}
   <div class="container">
     <div class="plugins-list">
       {% for group in site.data.plugins %}
