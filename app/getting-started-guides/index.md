@@ -6,7 +6,6 @@ header_icon: /assets/images/icons/icn-download.svg
 ---
 
 <div class="page page-install">
-  <!--{% include header.html %}-->
   <section class="content-section">
     <div class="container">
       <div class="distributions">
