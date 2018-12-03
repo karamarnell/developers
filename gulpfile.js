@@ -14,14 +14,14 @@ var dev = false
 var $ = require('gulp-load-plugins')()
 
 var paths = {
-  assets: './docs/_assets/',
+  assets: './pages/_assets/',
   modules: './node_modules/',
   dist: './dist/'
 }
 
 // Sources
 var sources = {
-  content: 'docs/**/*.{markdown,md,html,txt,yml,yaml}',
+  content: 'pages/**/*.{markdown,md,html,txt,yml,yaml}',
   styles: paths.assets + 'stylesheets/**/*',
   js: [
     paths.assets + 'javascripts/jquery.2.1.3.min.js',

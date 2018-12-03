@@ -1,5 +1,5 @@
 # Build settings
-source: docs
+source: pages
 destination: dist
 permalink: pretty
 timezone: America/San_Francisco
