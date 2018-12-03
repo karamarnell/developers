@@ -6,7 +6,7 @@ title: Github Apps Integration
 
 Qordoba's GitHub integration simplifies localization management for developers. It automatically detects missing translations and streamlines how translations are received from linguists. Integration increases developer productivity and eliminates errors caused by manual string management.
 
-[https://github.com/Qordobacode/developers/blob/dev/app/_assets/images/githubflow.png]
+![flow](https://github.com/Qordobacode/developers/blob/dev/app/_assets/images/githubflow.png)
 
 This guide will show how to gain the required repository access permissions within Github, as well as how to enable the Github Qordoba App during workspace creation.
 
@@ -19,7 +19,7 @@ Make sure that you have admin privileges to the specific repository that you wan
 
 In Qordoba, create a new workspace, and fill out the preliminary fields. Make sure that you select "Github Apps" for the integration type. Once you get to the Github authentication page, you should see this:
 
-**insert image here**
+![workspace](https://github.com/Qordobacode/developers/blob/images/app/_assets/images/githubWorkspace.png) 
 
 Notice there is a "Authorize your session here" button. Click on it.
 
@@ -27,11 +27,11 @@ Notice there is a "Authorize your session here" button. Click on it.
 
 When you click the Authorize button, a popup window will appear. In the popup, click Install in the top right, and look for the organization with your desired repository:
 
-**insert image here**
+![permissions](https://github.com/Qordobacode/developers/blob/images/app/_assets/images/githubPermission.png)
 
 In that organization, you should have permission to specifically allow the one repository that you have admin access to:
 
-**insert image here**
+![repo](https://github.com/Qordobacode/developers/blob/images/app/_assets/images/githubRepo.png)
 
 Once you have selected and saved that repository, you should be able to select that same repository from the dropdown menu back in Qordoba's UI. Afterwards, select your protected branch, as well as the desired naming convention for files that are returning to Github from Qordoba. Complete the workspace creation.
 
