@@ -83,15 +83,6 @@ There is an option to apply these permissions to all CMs in your organization. I
   - **Web LiveEditor:** enable/disable a user’s ability to modify content in your web project’s LiveEditor
   - **Web LiveEditor Tools:** 
 
-####Mobile: this section covers permissions associated with your organization’s mobile projects.
-
-  - **Cancel release:** enable/disable a user’s ability to cancel live releases within your organization’s mobile projects
-  - **Create release:** enable/disable a user’s ability to create live releases within your organization’s mobile projects
-  - **Download releases:** enable/disable a user’s ability to download releases within your organization’s mobile projects
-  - **Store:** enable/disable a user’s ability to authorize import of your iTunes/Google Play data into your organization.
-
-Once you have enabled all relevant permissions associated with your desired role, click “Create.” You will now see your role in the list of created roles, alongside the system defaults of “Account Owner,” “Restricted Access,” and “Full Access.” You can edit or delete any created roles by clicking on the gear icon to the right of the role.
-
 **insert image here**
 
 To assign your newly-created role to users within your organization, head to the “Team” module within your Qordoba account.
