@@ -17,7 +17,7 @@ https://app.qordoba.com
 https://app.qordoba.com/githubAppAuthRedirect.html
 https://app.qordoba.com/api/qordoba/github/app/webhook/callback
 
-**insert image here**
+![setup](https://github.com/Qordobacode/developers/blob/images/app/_assets/images/enterpriseSetup.png)
 
 **Permissions**
   - Read-only
@@ -41,14 +41,14 @@ https://app.qordoba.com/api/qordoba/github/app/webhook/callback
   
 Here's an image you can use:
 
-**insert image here**
+![logo](https://github.com/Qordobacode/developers/blob/images/app/_assets/images/logo.png)
 
 
 Once the app is created; generate a Private Key for it by clicking "Generate a private key."
 
 Then in [http://app.qordoba.com](http://app.qordoba.com) during the first "GitHub Enterprise Apps" workflow create, you will be prompted for the below values
 
-**insert image here**
+![config](https://github.com/Qordobacode/developers/blob/images/app/_assets/images/enterpriseconfiguration.png)
 
 
 The Redirect Url for Installation is of the form:
