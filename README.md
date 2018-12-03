@@ -1,12 +1,7 @@
 # Qordoba Website
-
 This folder is the source code for [Qordoba developer](https://github.com/Qordobacode/developer.qordoba.com)'s website. It is a [Jekyll](http://jekyllrb.com/) website hosted on GitHub pages.
 
-# @jr doubts the stuff below this line for publishing on GitHub
------
-
 ## Requirements
-
 - [npm](https://www.npmjs.com/)
 - [Bundler](http://bundler.io/)
 - [Ruby](https://www.ruby-lang.org) (>= 2.0, < 2.3)
@@ -14,7 +9,6 @@ This folder is the source code for [Qordoba developer](https://github.com/Qordob
 
 
 ## Install
-
 >
 ```bash
 gem install bundler
@@ -22,7 +16,6 @@ npm install
 ```
 
 ## Running locally
-
 >
 ```bash
 npm start
@@ -30,7 +23,6 @@ npm start
 ```
 
 ## Deploying
-
 This will deploy to GitHub pages:
 
 >
