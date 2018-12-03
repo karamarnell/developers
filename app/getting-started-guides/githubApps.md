@@ -4,6 +4,10 @@ title: Github Apps Integration
 
 # How to Integrate with GitHub
 
+Qordoba's GitHub integration simplifies localization management for developers. It automatically detects missing translations and streamlines how translations are received from linguists. Integration increases developer productivity and eliminates errors caused by manual string management.
+
+[https://github.com/Qordobacode/developers/blob/dev/app/_assets/images/githubflow.png]
+
 This guide will show how to gain the required repository access permissions within Github, as well as how to enable the Github Qordoba App during workspace creation.
 
 
