@@ -1,5 +1,5 @@
 # Build settings
-source: pages
+source: app
 destination: dist
 permalink: pretty
 timezone: America/San_Francisco
