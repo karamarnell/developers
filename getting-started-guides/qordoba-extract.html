@@ -1,0 +1,267 @@
+<h1 id="qordoba-extract-beta">Qordoba Extract <code class="highlighter-rouge">beta</code></h1>
+
+<p>The Qordoba String Extractor is AI that reads your code, extracts strings and replaces them with keys. It’s smart enough to understand what frameworks and programming languages you are using, and learns from your coding patterns.</p>
+
+<p>Download latest version</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pip install qordoba==0.2.0a1
+</code></pre>
+</div>
+
+<p>##Extract</p>
+
+<p>Use the Qordoba ‘extract’ command to identify the local directory path where you have files that need to be localized.</p>
+
+<p><code class="highlighter-rouge">qor extract -i input_dir -r report_dir -l customized_lexer</code></p>
+
+<p>The extract command pulls all the files from the given directory path and its subdirectories. 
+Our lexer will parse your files and extract all the strings. The strings are saved in a generated JSON report.</p>
+
+<p>report elements:</p>
+<ul>
+  <li>filename</li>
+  <li>string</li>
+  <li>start_line</li>
+  <li>end_line</li>
+  <li>code_snippet
+    <div class="alert alert-warning">
+  <div class="text-center">
+    <strong>Note</strong>: The report can be edited (delete values, add) at this step. Not later.
+  </div>
+</div>
+  </li>
+</ul>
+
+<p>##Generate</p>
+
+<p>Use the Qordoba ‘generate’ command to generate the keys (QUIDs) for the content that was extracted. The extraction can be modifed to exclude content that you don’t want in your resource file.</p>
+
+<p><code class="highlighter-rouge">qor generate -r report_dir -e report_key_dir</code></p>
+
+<p>The generate command will pick up your reports in the report_dir and generate new keys for every string by calling our API.
+Keys are added to a new report which is stored in a new directory. The reason: while processing many reports there may occur connectivity issues. This way you know which reports have been processed.</p>
+
+<p>Optional:
+Flag <code class="highlighter-rouge">--existing_strings managementfiles directory_path</code>. 
+The generate command will look for JSON localization files in the directory_path and scan for existing keys or values.</p>
+
+<p>report elements:</p>
+<ul>
+  <li>filename</li>
+  <li>string</li>
+  <li>start_line</li>
+  <li>end_line</li>
+  <li>code_snippet</li>
+  <li>generated_key</li>
+  <li>existing_key</li>
+</ul>
+
+<p>##Execute</p>
+
+<p>Use the Qordoba ‘execute’ command to replace the strings in your source code with the generated keys.</p>
+
+<p><code class="highlighter-rouge">qor execute -i input_dir -r report_key_dir -k key_format</code></p>
+
+<p>key format:
+if keys should be replaced with a custom format, add it as a flag or within the configuration file.</p>
+
+<p>The “KEY” characters will be replaced by the generated key within your report:</p>
+
+<p>**Option 1: **</p>
+
+<p>add a custom key flag to execute the command: -k</p>
+
+<p>**Option 2: **</p>
+
+<p>add a custom key format in your configuration file <strong>.ml.yml</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>key_format:
+  html: '$KEY' #file extension: format
+</code></pre>
+</div>
+
+<p><strong>Example</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> "/Users/Qordoba/Desktop/demo/deep/translate.html": {
+         "0": {
+             "end_line": 5,
+             "generated_key": {
+                 "key": "qor_5A8DDC25_example_domain"
+             },
+             "snippet": "    &lt;title&gt;Example Domain&lt;/title&gt;",
+             "start_line": 5,
+             "value": "Example Domain"
+         },
+</code></pre>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>status</th>
+      <th>snippet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>not localized</td>
+      <td>&lt;title&gt;<code class="highlighter-rouge">Example Domain</code>&lt;/title&gt;</td>
+    </tr>
+    <tr>
+      <td>execution - default</td>
+      <td>&lt;title&gt;<code class="highlighter-rouge">qor_5A8DDC25_example_domain</code>&lt;/title&gt;</td>
+    </tr>
+    <tr>
+      <td>execution - custom key format</td>
+      <td>&lt;title&gt; <code class="highlighter-rouge">$qor_5A8DDC25_example_domain</code>&lt;/title&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p><a href="#table-of-contents">Back to TOC</a>
+##Supported languages</p>
+
+<p>####Programming languages</p>
+
+<ul>
+  <li>ActionScript</li>
+  <li>Ada</li>
+  <li>ANTLR</li>
+  <li>AppleScript</li>
+  <li>Assembly (various)</li>
+  <li>Asymptote</li>
+  <li>Awk</li>
+  <li>Befunge</li>
+  <li>Boo</li>
+  <li>BrainFuck</li>
+  <li>C, C++</li>
+  <li>C#</li>
+  <li>Clojure</li>
+  <li>CoffeeScript</li>
+  <li>ColdFusion</li>
+  <li>Common Lisp</li>
+  <li>Coq</li>
+  <li>Cryptol (incl. Literate Cryptol)</li>
+  <li>Crystal</li>
+  <li>Cython</li>
+  <li>D</li>
+  <li>Dart</li>
+  <li>Delphi</li>
+  <li>Dylan</li>
+  <li>Elm</li>
+  <li>Erlang</li>
+  <li>Ezhil Ezhil - A Tamil programming language</li>
+  <li>Factor</li>
+  <li>Fancy</li>
+  <li>Fortran</li>
+  <li>F#</li>
+  <li>GAP</li>
+  <li>Gherkin (Cucumber)</li>
+  <li>GL shaders</li>
+  <li>Groovy</li>
+  <li>Haskell (incl. Literate Haskell)</li>
+  <li>IDL</li>
+  <li>Io</li>
+  <li>Java</li>
+  <li>JavaScript</li>
+  <li>Lasso</li>
+  <li>LLVM</li>
+  <li>Logtalk</li>
+  <li>Lua</li>
+  <li>Matlab</li>
+  <li>MiniD</li>
+  <li>Modelica</li>
+  <li>Modula-2</li>
+  <li>MuPad</li>
+  <li>Nemerle</li>
+  <li>Nimrod</li>
+  <li>Objective-C</li>
+  <li>Objective-J</li>
+  <li>Octave</li>
+  <li>OCaml</li>
+  <li>PHP</li>
+  <li>Perl</li>
+  <li>PovRay</li>
+  <li>PostScript</li>
+  <li>PowerShell</li>
+  <li>Prolog</li>
+  <li>Python 2.x and 3.x (incl. console sessions and tracebacks)</li>
+  <li>REBOL</li>
+  <li>Red</li>
+  <li>Redcode</li>
+  <li>Ruby (incl. irb sessions)</li>
+  <li>Rust</li>
+  <li>S, S-Plus, R</li>
+  <li>Scala</li>
+  <li>Scheme</li>
+  <li>Scilab</li>
+  <li>Smalltalk</li>
+  <li>SNOBOL</li>
+  <li>Tcl</li>
+  <li>Vala</li>
+  <li>Verilog</li>
+  <li>VHDL</li>
+  <li>Visual Basic.NET</li>
+  <li>Visual FoxPro</li>
+  <li>XQuery</li>
+  <li>Zephir</li>
+</ul>
+
+<p><a href="#table-of-contents">Back to TOC</a>
+####Template languages</p>
+
+<ul>
+  <li>Cheetah templates</li>
+  <li>Django / Jinja templates</li>
+  <li>ERB (Ruby templating)</li>
+  <li>Genshi (the Trac template language)</li>
+  <li>JSP (Java Server Pages)</li>
+  <li>Myghty (the HTML::Mason based framework)</li>
+  <li>Mako (the Myghty successor)</li>
+  <li>Smarty templates (PHP templating)</li>
+  <li>Tea</li>
+</ul>
+
+<p><a href="#table-of-contents">Back to TOC</a>
+###Other markup</p>
+
+<ul>
+  <li>Apache config files</li>
+  <li>Bash shell scripts</li>
+  <li>BBCode</li>
+  <li>CMake</li>
+  <li>CSS</li>
+  <li>Debian control files</li>
+  <li>Diff files</li>
+  <li>DTD</li>
+  <li>Gettext catalogs</li>
+  <li>Gnuplot script</li>
+  <li>Groff markup</li>
+  <li>HTML</li>
+  <li>HTTP sessions</li>
+  <li>INI-style config files</li>
+  <li>IRC logs (irssi style)</li>
+  <li>Lighttpd config files</li>
+  <li>Makefiles</li>
+  <li>MoinMoin/Trac Wiki markup</li>
+  <li>MySQL</li>
+  <li>Nginx config files</li>
+  <li>POV-Ray scenes</li>
+  <li>Ragel</li>
+  <li>Redcode</li>
+  <li>ReST</li>
+  <li>Robot Framework</li>
+  <li>RPM spec files</li>
+  <li>SQL, also MySQL, SQLite</li>
+  <li>Squid configuration</li>
+  <li>TeX</li>
+  <li>tcsh</li>
+  <li>Vim Script</li>
+  <li>Windows batch files</li>
+  <li>XML</li>
+  <li>XSLT</li>
+  <li>YAML
+<a href="#table-of-contents">Back to TOC</a></li>
+</ul>

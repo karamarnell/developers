@@ -1,0 +1,240 @@
+<h1 id="dlp-system-on-demand">DLP System On Demand</h1>
+
+<p>The DLP API lets you understand and manage sensitive data. It provides fast, scalable classification and optional redaction for sensitive data elements like credit card numbers, names, social security numbers, passport numbers, US and selected international driver’s license numbers, and phone numbers. The API classifies this data using more than 50 predefined detectors to identify patterns, formats, and checksums, and even understands contextual clues. The API supports text and images.</p>
+
+<h1 id="united-states">United States</h1>
+<p><strong>Social Security Number</strong>
+In the United States, a Social Security number (SSN) is a 9-digit number issued to U.S. citizens, permanent residents, and temporary residents. The Social Security number has become the de facto national identification number for taxation and other purposes.
+Detection method: Pattern match or 9 digits with context
+Context: SSN, Social, Social Security, Taxpayer
+ </p>
+
+<p><strong>Driver’s License Number</strong>
+Driver’s license number for the United States. Format can vary depending on the issuing U.S. state.
+Detection method: Pattern match and context
+Context: Drive, Driving, Learn, Lic, License, Licence, Permit, DL
+Match Quality:: Driver’s licenses are not well defined and may generate noise results unless there is clear context.</p>
+
+<p><strong>Drug Administration Enforcement (DEA) Number</strong>
+A DEA number is assigned to a health care provider by the U.S. Drug Enforcement Administration. It allows the health care provider to write prescriptions for controlled substances. The DEA number is often used as a general “prescriber number” that is a unique identifier for anyone who can prescribe medication.
+Detection method: Pattern match and checksum</p>
+
+<p><strong>ABA Routing Number:</strong>The American Bankers Association (ABA) Routing Number (also called the <em>transit number</em>) is a nine-digit code. It’s used to identify the financial institution that’s responsible to credit or entitled to receive credit for a check or electronic transaction.
+Detection method: Checksum on 9 digits
+Context: hotwords:
+ABA
+routing
+transit
+bank
+banking</p>
+
+<p><strong>National Provider Identifier (NPI):</strong>The National Provider Identifier (NPI) is a unique 10-digit identification number issued to health care providers in the United States by the Centers for Medicare and Medicaid Services (CMS). The NPI has replaced the unique provider identification number (UPIN) as the required identifier for Medicare services. It’s also used by other payers, including commercial healthcare insurers.
+Detection method: Checksum on 10 digits
+ </p>
+
+<p><strong>CUSIP:</strong>A CUSIP number is a 9-character alphanumeric code that identifies a North American financial security.
+Detection method: Checksum or context (when check digit not present)
+Context: CUSIP</p>
+
+<p><strong>FDA Approved Prescription Drugs:</strong>This is any drug on the list of prescription drugs approved by the United States Food and Drug Administration (FDA).
+Detection method: Word and phrase list</p>
+
+<p><strong>Passport:</strong>This is a detector for a United States passport.
+Detection method: Pattern match and context
+Context: United States, USA, Passport, Travel Document</p>
+
+<h1 id="united-kingdom">United Kingdom</h1>
+
+<p><strong>Driver’s License Number:</strong>Driver’s license number for the United Kingdom of Great Britain and Northern Ireland (UK).
+Detection method: Pattern match</p>
+
+<p><strong>National Health Service (NHS) Number:</strong>NHS numbers are the unique numbers allocated to registered users of the three public health services in England, Wales, and the Isle of Man.
+Detection method: Pattern match and checksum
+ </p>
+
+<p><strong>National Insurance Number (NINO):</strong>The National Insurance number is a number used in the United Kingdom (UK) in the administration of the National Insurance or social security system. It identifies people. It’s also used for some purposes in the UK tax system. The number is sometimes referred to as NI No or NINO.
+Detection method: Pattern match (with delimiters) or Pattern match and context words
+ </p>
+
+<p><strong>Passport:</strong>This is a detector for a United Kingdom (UK) passport.
+Detection method: Pattern match and context
+Context: United Kingdom, Passport, Travel Document</p>
+
+<p><strong>Taxpayer Identification Number:</strong>This is a detector for a United Kingdom (UK) Unique Taxpayer Reference (UTR) number. This number, comprised of a string of 10 decimal digits, is an identifier used by the UK government to manage the taxation system. Unlike other identifiers, such as the passport number or social insurance number, the UTR is not listed on official identity cards.
+Detection method: Pattern match and context
+Context: United Kingdom, Taxpayer, UTR</p>
+
+<h1 id="australia">Australia</h1>
+
+<p><strong>Medicare Account Number:</strong>A 9-digit Medicare number is issued to permanent residents of Australia (except for Norfolk island). The primary purpose of this number is to prove Medicare eligibility to receive subsidized care in Australia.
+Detection method: Checksum and (pattern match or context)
+Context: Medicare, Australia, IRN</p>
+
+<p><strong>Tax File Number (TFN):</strong>A number issued by the Australian Tax Office for taxpayer identification. Every taxpaying entity, such as an individual or an organization, is assigned a unique number.
+Detection method: Checksum and (pattern match or context)
+Context: Tax File Number, TFN, Australian Tax Office</p>
+
+<h1 id="brazil">Brazil</h1>
+
+<p><strong>CPF number:</strong>The Cadastro de Pessoas Físicas (CPF), which is Portuguese for “Natural Persons Register,” is an 11-digit number used in Brazil for taxpayer identification.
+Detection method: Checksum and (pattern match or context)
+Context: CPF, Cadastro de Pessoas Físicas, Pessoas Físicas, Tax Number, Taxpayer</p>
+
+<h1 id="canada">Canada</h1>
+
+<p><strong>Quebec Health Insurance Number (HIN):</strong>The Quebec Health Insurance Number (HIN) is issued to citizens, permanent residents, temporary workers, students and other individuals who are entitled to health care coverage in the Province of Quebec.
+Detection method: Pattern match
+ </p>
+
+<p><strong>Ontario Health Insurance Plan (OHIP):</strong>The Ontario Health Insurance Plan (OHIP) number is issued to citizens, permanent residents, temporary workers, students, and other individuals who are entitled to health care coverage in the Province of Ontario.
+Detection method: Pattern match and checksum
+ </p>
+
+<p><strong>British Columbia Personal Health Number (PHN):</strong>The British Columbia Personal Health Number (PHN) is issued to citizens, permanent residents, temporary workers, students, and other individuals who are entitled to health care coverage in the Province of British Columbia.
+Detection method: Pattern match or 10 digits with context
+Context: BC ID, PHN, British Columbia, Personal Health Number, Services Card, Canadian health insurance number, Canadian health ID
+ </p>
+
+<p><strong>Social Insurance Number (SIN):</strong>The Canadian Social Insurance Number (SIN) is the main identifier used in Canada for citizens, permanent residents, and those on work or study visas. With a Canadian SIN and mailing address, one can apply for health care coverage, driver’s licenses, and other important services.
+Detection method: Checksum and (pattern match or context)
+ </p>
+
+<p><strong>Passport:</strong>This is a detector for a Canadian passport.
+Detection method: Pattern match and context
+Context: Canada, Canadian, Numéro de passeport, Passport, Travel Document, document number</p>
+
+<h1 id="china">China</h1>
+
+<p><strong>Passport:</strong>This is a detector for a Chinese passport.
+Detection method: Pattern match and context
+Context: China, Passport, 中华人民共和国护照, 护照号, Hùzhào hào, 护照</p>
+
+<h1 id="france">France</h1>
+
+<p><strong>National ID Card (CNI):</strong>The Carte Nationale d’Identité Sécurisée (CNI or CNIS) is the French national identity card. It’s an official identity document consisting of a 12-digit ID number. This number is commonly used when opening bank accounts and when paying by check. It can sometimes be used instead of a passport or visa within the European Union (EU) and in some other countries.
+Detection method: Pattern match and context
+Context: CNI, CNIS (carte nationale d’identité securisée), identité, identite</p>
+
+<p><strong>Social Security Number (NIR):</strong>The Numéro d’Inscription au Répertoire (NIR) is a permanent personal ID number that’s also known as the French social security number for services including healthcare as well as pensions.
+Detection method: Pattern match and checksum</p>
+
+<p><strong>Passport:</strong>This is a detector for a French passport.
+Detection method: Pattern match and context
+Context: France, Passport, Passeport, REPUBLIC FRANCAIS, Numéro de passeport</p>
+
+<h1 id="germany">Germany</h1>
+
+<p><strong>Passport:</strong>This is a detector for a German passport. The format of a German passport number is 10 alphanumeric characters, chosen from numerals 0-9 and letters C, F, G, H, J, K, L, M, N, P, R, T, V, W, X, Y, Z.
+Detection method: Pattern match and context
+Context: GERMANY, REISEPASS, PASSPORT, Europäische Union, Bundesrepublik, Deutschland, reisepassnummer</p>
+
+<h1 id="india">India</h1>
+
+<p><strong>Personal Permanent Account Number (PAN):</strong>The Personal Permanent Account Number (PAN) is a unique 10-digit alphanumeric identifier used for identification of individuals, particularly those who pay income tax. It’s issued by the Indian Income Tax Department. The PAN is valid for the lifetime of the holder.
+Detection method: Pattern match and context
+Context: India, Account Number, PAN, Taxpayer ID</p>
+
+<h1 id="japan">Japan</h1>
+
+<p><strong>Passport:</strong>This is a detector for a Japanese passport. The passport number consists of two alphabetic characters followed by seven digits.
+Detection method: Pattern match and context
+Context: Japan, Passport, パスポート,
+パスポート番号</p>
+
+<p><strong>National ID number:</strong>Sometimes referred to as the ‘My Number’ This is a relatively new (January 2016) identification number that is analogous to a social security number in the US.
+Context:
+個人番号
+マイナンバー
+身分証明書
+Individual Number
+My Number
+Identity Card</p>
+
+<h1 id="korea">Korea</h1>
+
+<p><strong>Passport:</strong>This is a detector for a Korean passport. There are 2 different formats.
+Pre-2008 passport numbers consist of 9 characters. The first 2 characters are the issued local code, corresponding to the holder’s gu, or district. The remaining seven digits are the serial number.
+Post-2008 passport numbers consist of 9 characters. The first character is either a single letter M, denoting PM passports, or the letter S for PS passports. The remaining 8 digits are the serial number.
+Detection method: Pattern match and context
+Context: Passport, Korea, 여권, 대한민국</p>
+
+<p><strong>South Korean Social Security Numbers:</strong>South Korean Social Security Numbers
+Detection method: Pattern match, checksum and context
+Context: 
+korean
+korea
+KSSN
+RRN
+resident registration
+registration number
+social security
+주민등록번호
+住民登錄番號</p>
+
+<h1 id="mexico">Mexico</h1>
+
+<p><strong>National Identification Number (CURP):</strong>This is a detector for the Mexico Clave Única de Registro de Población (CURP) number. In English, this is the Unique Population Registry Code, or Personal ID Code Number. This is an 18-character state-issued identification number assigned by the Mexican government to citizens or residents of Mexico and used for taxpayer identification.
+Detection method: Pattern match and context
+Context: CURP, Clave Única, Población, Registro, UPRC, Personal ID, Registry Code</p>
+
+<p><strong>Passport:</strong>This is a detector for a Mexican passport.
+Detection method: Pattern match and context
+Context: Mexico, Passport, Pasaporte, México, Mexican</p>
+
+<h1 id="netherlands">Netherlands</h1>
+
+<p><strong>National Identification Number (BSN):</strong>This is a detector for the Netherlands Burgerservicenummer (BSN). It’s also known as a Citizen’s Service Number. It’s a state-issued identification number that’s on driver’s licenses, passports, and international ID cards.
+Detection method: Checksum and (pattern match or context)
+Context: BSN, Personal Number, Burgerservicenummer, Netherlands, Identification Number, Service Number, sofinummer, sofi, personalnummer</p>
+
+<h1 id="spain">Spain</h1>
+
+<p><strong>NIF Number:</strong>Número de Identificación Fiscal (NIF) numbers are government ID numbers for Spanish citizens. An NIF number is needed for key transactions such as opening a bank account, buying a car, or setting up a mobile phone contract.
+Detection method: Checksum and (pattern match or context)
+Context: Número de Identificación Fiscal, NIF
+ </p>
+
+<p><strong>NIE Number:</strong>Número de Identificación de Extranjeros (NIE) numbers are government ID numbers for foreigners living or doing business in Spain. An NIE number is needed for key transactions such as opening a bank account, buying a car, or setting up a mobile phone contract.
+Detection method: Checksum and (pattern match or context)
+Context: Número de Identificación de Extranjeros, NIE
+ </p>
+
+<p><strong>Passport:</strong>There are 4 different types of passports in Spain. This detector is for the Ordinary Passport (Pasaporte Ordinario) type, which is issued for ordinary travel, such as vacations and business trips.
+Detection method: Pattern match and context
+Context: Passport, Pasaporte, Espana, España, Spain</p>
+
+<h1 id="global">Global</h1>
+
+<p><strong>Credit card number:</strong>Credit card numbers are 12 to 19 digits long. They’re used for payment transactions globally.
+Detection method: Pattern match and checksum
+ </p>
+
+<p><strong>Bank account number (IBAN):</strong>An International Bank Account Number (IBAN) is defined as an internationally agreed-upon method for identifying bank accounts. It’s defined by the International Standard of Organization (ISO) 13616:2007 standard. ISO 13616:2007 was created by the European Committee for Banking Standards (ECBS). An IBAN consists of up to 34 alphanumeric characters including elements such as a country code or account number.
+Detection method: Pattern match and checksum</p>
+
+<p><strong>Bank account number (SWIFT):</strong>A SWIFT code is the same as a Bank Identifier Code (BIC). It’s a unique identification code for a particular bank. These codes are used when transferring money between banks, particularly for international wire transfers. Banks also use the codes for exchanging other messages.
+Detection method: Pattern match and context
+Context: SWIFT, ISO 9362, Business Identifier Code, BIC, Business Entity Identifier, BEI, bank, interbank</p>
+
+<p><strong>ICD 9-CM Lexicon:</strong>The International Classification of Diseases, Clinical Modification (ICD-9-CM) lexicon is used to assign diagnostic and procedure codes associated with inpatient, outpatient, and physician office use in the United States. It was created by the U.S. National Center for Health Statistics (NCHS). The ICD-9-CM is based on the ICD-9 but provides for additional morbidity detail. It’s updated annually on October 1.
+Detection method: Word and phrase list</p>
+
+<p><strong>ICD 10-CM Lexicon:</strong>Like ICD 9 codes, ICD 10 codes are a series of diagnostic codes published by the World Health Organization (WHO) to describe causes of morbidity and mortality.
+Detection method: Word and phrase list</p>
+
+<p><strong>International Mobile Equipment Identity:</strong>Detection method: Custom Logic, pattern match and context.
+<strong>IP address (IP v4 only):</strong>Detection method: Custom Logic, pattern match and context.
+<strong>MAC Address:</strong>Detection method: Custom Logic, pattern match and context
+Context: “mac address”
+“hardware address”
+“physical address”
+“hwaddr”
+“ether”
+“ethernet”
+“BSSID”</p>
+
+<p><strong>Phone Numbers:</strong>Detection method: Custom Logic, pattern match and context</p>
+
+<p><strong>Email address:</strong>
+Email addresses indicate the mailbox that emails are sent to or from. The maximum length of the domain name is 63 characters, and the maximum length of the host name is 253 characters.
+Detection method: Pattern and top level domain validation</p>

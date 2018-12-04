@@ -1,0 +1,8 @@
+<p>To populate your Qordoba account with your project content, paste the following code into the page you want to track inside the <code class="highlighter-rouge">&lt;head&gt;</code> and <code class="highlighter-rouge">&lt;/head&gt;</code> tags, before the first section. Change <code class="highlighter-rouge">site-key</code> to—you guessed it—your site key. You can find your key in the Settings tab in the <a href="https://app.qordoba.com/">Qordoba</a> web application.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;script type="text/javascript"&gt;
+  document.write("&lt;scrip"+"t src=\"//qcdn.qordoba.com/qordoba-	latest.min.js\"&gt;&lt;/scrip"+"t&gt;&lt;scrip"+"t src=\"https://storaged.qordoba.com/sdk-settings-&lt;site-key&gt;.js?cachebust="+Math.random()+"\"&gt;&lt;/scrip"+"t&gt;")
+&lt;/script&gt;
+
+</code></pre>
+</div>
+<p>The SDK works with all major frontend frameworks, including Angular and Backbone.</p>

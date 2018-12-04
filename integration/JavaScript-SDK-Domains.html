@@ -1,0 +1,90 @@
+<p><em>source</em> page or <em>target</em> page. If the SDK determines the URL is a <em>source</em> page it will send page content to your project in Qordoba. If the SDK determines the URL is a <em>target</em> page it will replace page content with the content developed in Qordoba for that locale.</p>
+
+<h3 id="pathmap-urls">PathMap URLs</h3>
+<p>To set up your URL structure, you will ask the SDK to show localized content based on certain URL conditions. For example: Dear SDK, please save content to Qordoba when the URL is
+<code class="highlighter-rouge">http://yoursite.com/language=en</code>; replace content with German content when the URL is
+<code class="highlighter-rouge">http://yoursite.com/language=de</code>, and with Spanish content when the URL is
+<code class="highlighter-rouge">http://yoursite.com/language=sp</code></p>
+
+<p>Configure these rules via the <strong>pathMap</strong> key, which is an array of key/value rules to declare when a URL is a <em>source</em> language and when a localized version of the URL should be loaded.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Qordoba.init({
+  .
+  .
+  .
+  path: "yoursite.com/.*[&amp;?]language=&lt;lang&gt;", // RegExp string to define the format of the URL. For clarity use language and &lt;lang&gt; (not lang and &lt;lang&gt;).
+  source: "english", // Save content when &lt;lang&gt; is "en"
+  targets: [
+    {
+      code: "de-de",
+      val: "german" // Replace with "de-de" values when &lt;lang&gt; is "de"
+    },
+    {
+      code: "sp-sp",
+      val: "spanish" // Replace with "sp-sp" values when &lt;lang&gt; is "sp"
+    }
+  ]
+]);
+</code></pre>
+</div>
+<h3 id="pathmap-subfoldersubdomain">PathMap subfolder/subdomain</h3>
+<p>If you are publishing content to subdomains or subfolders (<em>i.e.</em>, <code class="highlighter-rouge">de.yoursite.com</code> or <code class="highlighter-rouge">yoursite.com/de/some-page</code>), your server must be configured to point target pages to their matching original source content. Although the URL will display <code class="highlighter-rouge">http://de.yoursite.com/some-page</code>, the content loaded will be drawn from <code class="highlighter-rouge">http://yoursite.com/some-page</code>, with the localized strings, images and CSS inserted on page load.</p>
+
+<p>After configuring the server to always point to the original <em>source</em> page configure a matching <strong>pathMap</strong>.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>path: "yoursite.com&lt;lang&gt;.*", // RegExp string to define the format of the URL.
+source: "", // Leave blank to save content when there is no &lt;lang&gt; subfolder
+targets: [
+    {
+        code: "de-de",
+        val: "/german" // Replace with "de-de" values when &lt;lang&gt; subfolder is "german"
+    },
+    {
+        code: "sp-sp",
+        val: "/spanish" // Replace with "sp-sp" values when &lt;lang&gt; subfolder is "spanish"
+    }
+]
+</code></pre>
+</div>
+<p>So, without being too pedantic, the <strong>pathMap</strong> above would have the following result:</p>
+
+<p>Someone visits: <code class="highlighter-rouge">http://yoursite.com/de/some-page</code>
+Action: Show German versions of source page</p>
+
+<p>Someone visits: <code class="highlighter-rouge">http://yoursite.com/sp/some-page</code>
+Action: Show Spanish versions of source page</p>
+
+<h3 id="pathmap-multiple-mapping">PathMap multiple mapping</h3>
+<p>As <strong>pathMap</strong> is an array, it can be configured to accept multiple URL maps for a site. The following <strong>pathMap</strong> configuration example will collect when the URL is <code class="highlighter-rouge">http://yoursite.com/some-page-en/some-article</code> <em>OR</em> <code class="highlighter-rouge">http://yoursite.com/en/some-page</code> and replace on <code class="highlighter-rouge">http://yoursite.com/some-page-german/some-article</code> <em>OR</em> <code class="highlighter-rouge">http://yoursite.com/german/some-page</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[
+    {
+        path: "yoursite.com/.*&lt;lang&gt;", // RegExp string to define the format of the URL.
+        source: "-en", // Save content when &lt;lang&gt; is "-en"
+        targets: [
+            {
+                code: "de-de",
+                val: "-german" // Replace with "de-de" values when url contains "-german"
+            }
+        ]
+    },
+    {
+        path: "yoursite.com/&lt;lang&gt;.*", // RegExp string to define the format of the URL.
+        source: "en/", // Save content when &lt;lang&gt; is "en/"
+        targets: [
+            {
+                code: "de-de",
+                val: "german/" // Replace with "de-de" values when URL contains "german/"
+            }
+        ]
+    }
+]
+</code></pre>
+</div>
+<h3 id="exclude-page-content">Exclude page content</h3>
+<p>Remember that the Qordoba JavaScript SDK will save <strong>all</strong> content on your pages other than that with <code class="highlighter-rouge">notranslate</code> attributes in the HTML. The SDK will ignore all HTML nested within any tag with the <code class="highlighter-rouge">notranlate</code> attribute.</p>
+
+<p>The SDK will also ignore the following tags by default: <code class="highlighter-rouge">&lt;script&gt; &lt;noscript&gt; &lt;style&gt; &lt;iframe&gt; &lt;object&gt; &lt;path&gt; &lt;svg&gt; &lt;canvas&gt;</code></p>
+
+<p>The SDK has filters to prevent content from Google Maps, Twitter, Facebook, and dynamic numbers from being saved to your Qordoba project, but using <code class="highlighter-rouge">notranslate</code> is recommended. Content <em>can</em> be disabled from the Qordoba web application, but your product team might not be super happy about cleaning up thousands of strings. :cop:</p>
+
+<h3 id="manually-disable-sdk">Manually disable SDK</h3>
+<p>For translated pages, you may occasionally want to disable the SDK to see the raw, untranslated content. To do so, just add <code class="highlighter-rouge">?q_sdk_disable_now</code> as a query parameter. Example: <code class="highlighter-rouge">www.demo.com/jp/aboutus.html?q_sdk_disable_now</code></p>

@@ -1,155 +1,319 @@
 
-/ecosystem/Braze-Appboy-translation-application-strings-manager-integration/
+/integration/Braze-Appboy-translation-integration.html
 
-/ecosystem/Eloqua-application-strings-manager-integration/
+/integration/Eloqua-integration.html
 
-/ecosystem/GitHub-application-strings-manager-integration/
+/integration/GitHub-Enterprise-App-Integration.html
 
-/ecosystem/GitHub-enterprise-application-strings-manager-integration/
+/integration/GitHub-app-configuration.html
 
-/ecosystem/Marketo-application-strings-manager-integration/
+/integration/GitHub-enterprise-integration.html
 
-/security/Reporting-a-bug/
+/integration/GitHub-integration.html
 
-/ecosystem/WebSocket-application-strings-manager-integration/
+/integration/Github-Configuration.html
 
-/ecosystem/Zendesk-application-strings-manager-integration/
+/integration/JavaScript-SDK-Domains.html
 
-/install/adobe-design-application-strings-manager/
+/integration/JavaScript-SDK-FAQ.html
 
-/ecosystem/amazon-simple-queue-service-SQS-application-strings-manager-integration/
+/integration/JavaScript-SDK-Language-Switcher.html
 
-/ecosystem/amqp-application-strings-manager-integration/
+/integration/JavaScript-SDK-SEO.html
 
-/ecosystem/apache-Solr-application-strings-manager-integration/
+/integration/JavaScript-i18n-SDK-Initialize.html
 
-/docs/0.2.x/api/
+/integration/JavaScript-i18n-SDK-Parameters.html
 
-/install/bitbucket-application-strings-manager/
+/integration/JavaScript-i18n-SDK.html
 
-/docs/0.2.x/bitbucket-flow/
+/integration/Marketo-integration.html
 
-/ecosystem/cassandra-application-strings-manager-integration/
+/docs/0.2.x/teams-and-users/Okta-sso-setup.html
 
-/docs/0.2.x/cli/
+/security/Reporting-a-bug.html
 
-/ecosystem/couchbase-application-strings-manager-integration/
+/resources/SmartSuggest.html
 
-/ecosystem/demandware-application-strings-manager-integration/
+/integration/Switch-WPML-to-Polylang.html
 
-/ecosystem/drupal-7-application-strings-manager-integration/
+/integration/WPML-Compatibility.html
 
-/ecosystem/drupal-8-application-strings-manager-integration/
+/integration/WPML-One-menu-per-language.html
 
-/ecosystem/dynamodb-application-strings-manager-integration/
+/integration/WPML-language-configuration-file.html
 
-/ecosystem/elasticsearch-elastic-application-strings-manager-integration/
+/integration/WPML-to-Polylang.html
 
-/docs/0.2.x/enterprise-single-sign-on-sso/
+/integration/WebSocket-integration.html
 
-/docs/0.2.x/file-resource-dev/
+/integration/Wordpress-multilingual-plugin.html
 
-/ecosystem/ftp-ftps-application-strings-manager-integration/
+/integration/Zendesk-integration.html
 
-/security/gdpr/
+/docs/0.2.x/teams-and-users/addOrRemoveUsers.html
 
-/install/github-application-strings-manager/
+/docs/0.2.x/notifications-and-weebhook/addingWebhooks.html
 
-/docs/0.2.x/github-flow/
+/docs/0.2.x/content-memory/addingtoCM.html
 
-/ecosystem/hbase-application-strings-manager-integration/
+/docs/0.2.x/terms-anagement/addtoglossary.html
 
-/ecosystem/hdfs-application-strings-manager-integration/
+/integration/amazon-simple-queue-service-SQS-integration.html
 
-/ecosystem/hmac-authentication/
+/integration/amqp-integration.html
 
-/ecosystem/hosted-proxy-application-strings-manager/
+/resources/files/android-xml.html
 
-/ecosystem/i18next-plugin-application-strings-manager-integration/
+/docs/0.2.x/file-support/android-xml.html
 
-/ecosystem/imap-application-strings-manager-integration/
+/integration/apache-Solr-integration.html
 
-/community/
+/docs/0.2.x/api.html
+
+/docs/0.2.x/workflows-and-automation/automateWorkflows.html
+
+/install/bitbucket-application-strings-manager.html
+
+/docs/0.2.x/bitbucket-flow.html
+
+/getting-started-guides/bitbucket-flow.html
+
+/integration/bitbucket-integration.html
+
+/integration/cassandra-integration.html
+
+/getting-started-guides/cli.html
+
+/docs/0.2.x/cli.html
+
+/docs/0.2.x/content-memory/cmMatch.html
+
+/docs/0.2.x/content-memory/confidenceInterval.html
+
+/getting-started-guides/content-ai.html
+
+/resources/content-memory.html
+
+/docs/0.2.x/history/contenthistory.html
+
+/integration/couchbase-integration.html
+
+/docs/0.2.x/content-memory/createCM.html
+
+/docs/0.2.x/file-support/csv.html
+
+/docs/0.2.x/teams-and-users/customroles.html
+
+/integration/demandware-integration.html
+
+/install/developer-integrations.html
+
+/integration/drupal-7-integration.html
+
+/integration/drupal-8-integration.html
+
+/integration/dynamodb-integration.html
+
+/integration/elasticsearch-elastic-integration.html
+
+/docs/0.2.x/notifications-and-weebhook/emailNotifications.html
+
+/docs/0.2.x/history/filehistory.html
+
+/integration/ftp-ftps-integration.html
+
+/security/gdpr.html
+
+/docs/0.2.x/file-support/gettext_classicstandard.html
+
+/docs/0.2.x/file-support/gettexttemplate_classicstandard.html
+
+/install/github-application-strings-manager.html
+
+/docs/0.2.x/github-flow.html
+
+/getting-started-guides/github-flow.html
+
+/integration/google-cloud-integration.html
+
+/docs/0.2.x/teams-and-users/google-sso-setup.html
+
+/integration/hbase-integration.html
+
+/integration/hdfs-integration.html
+
+/integration/hmac-authentication.html
+
+/integration/hosted-proxy-integration-strings-manager.html
+
+/docs/0.2.x/file-support/i18nJavaProperties.html
+
+/integration/i18next-plugin-integration.html
+
+/integration/i18next.html
+
+/integration/imap-integration.html
+
+/docs/0.2.x/api-reference/modules/index.dao.html
 
 /install/
 
-/ecosystem/
+/security/
 
-/docs/0.2.x/lua-reference/
+/community/
+
+/integration/
 
 /
 
-/security/
+/docs/0.2.x/api-reference/
 
-/docs/
+/resources/files/
 
-/install/javascript-sdk-application-strings-manager/
+/getting-started-guides/
 
-/ecosystem/jdbc-application-strings-manager-integration/
+/resources/
 
-/ecosystem/jms-application-strings-manager-integration/
+/docs/0.2.x/terms-anagement/
 
-/ecosystem/kafka-application-strings-manager-integration/
+/docs/0.2.x/file-support/
 
-/docs/0.2.x/lua-reference/modules/kong.dao/
+/docs/0.2.x/
 
-/docs/0.2.x/lua-reference/modules/kong.plugins.basic-auth.crypto/
+/docs/0.2.x/file-support/iosStringsFile.html
 
-/docs/0.2.x/lua-reference/modules/kong.plugins.galileo.alf/
+/docs/0.2.x/file-support/iosStringsdict.html
 
-/docs/0.2.x/lua-reference/modules/kong.plugins.galileo.buffer/
+/docs/0.2.x/file-support/javaProperties.html
 
-/docs/0.2.x/lua-reference/modules/kong.plugins.jwt.jwt_parser/
+/install/javascript-sdk-application-strings-manager.html
 
-/docs/0.2.x/lua-reference/modules/kong.tools.responses/
+/getting-started-guides/javascript-sdk.html
 
-/docs/0.2.x/lua-reference/modules/kong.tools.timestamp/
+/integration/jdbc-integration.html
 
-/docs/0.2.x/lua-reference/modules/kong.tools.utils/
+/integration/jms-integration.html
 
-/docs/0.2.x/language-plural-rules/
+/docs/0.2.x/file-support/json.html
 
-/docs/0.2.x/language-resource-dev/
+/integration/kafka-integration.html
 
-/docs/0.2.x/localization-flow/
+/resources/key-reference.html
 
-/ecosystem/magento-1-application-strings-manager-integration/
+/resources/language-plural-rules.html
 
-/ecosystem/magento-2-application-strings-manager-integration/
+/resources/language-resource-dev.html
 
-/ecosystem/mongodb-application-strings-manager-integration/
+/docs/0.2.x/reporting/leveragereport.html
 
-/ecosystem/mqtt-application-strings-manager-integration/
+/docs/0.2.x/content-memory/linkingCM.html
 
-/install/qordoba-cli-jenkins-application-strings-manager/
+/docs/0.2.x/terms-anagement/linkingtermsbank.html
 
-/docs/0.2.x/qordoba-extraxt/
+/getting-started-guides/localization.html
 
-/security/redact-sensitive-data/
+/integration/magento-1-integration.html
+
+/integration/magento-2-integration.html
+
+/docs/0.2.x/file-support/markdown.html
+
+/integration/mongodb-integration.html
+
+/integration/mqtt-integration.html
+
+/docs/0.2.x/file-support/openOfficeXML.html
+
+/docs/0.2.x/teams-and-users/permissions.html
+
+/docs/0.2.x/personas.html
+
+/resources/personas.html
+
+/docs/0.2.x/content-ai/plagiarism-qordoba.html
+
+/docs/0.2.x/plugin-development.html
+
+/docs/0.2.x/file-support/poMsgidAsKey.html
+
+/docs/0.2.x/reporting/progressreport.html
+
+/install/qordoba-cli-jenkins-application-strings-manager.html
+
+/docs/0.2.x/content-ai/qordoba-content-scoring.html
+
+/getting-started-guides/qordoba-extract.html
+
+/docs/0.2.x/qordoba-styleguides.html
+
+/security/redact-sensitive-data.html
 
 /robots.txt
 
-/ecosystem/secure-proxy-application-strings-manager/
+/integration/s3-integration.html
 
-/ecosystem/service-cloud-salesforce-application-strings-manager-integration/
+/integration/secure-proxy-integration-strings-manager.html
 
-/install/sketch-application-strings-manager/
+/resources/segmentation.html
 
-/docs/0.2.x/sketch-flow/
+/integration/service-cloud-salesforce-integration.html
 
-/ecosystem/smtp-application-strings-manager-integration/
+/install/sketch-application-strings-manager.html
 
-/security/soc-2/
+/docs/0.2.x/notifications-and-weebhook/slackIntegration.html
 
-/docs/0.2.x/lua-reference/modules/spec.helpers/
+/docs/0.2.x/content-ai/smartsuggest.html
 
-/docs/0.2.x/territory_language_information/
+/integration/smtp-integration.html
 
-/install/websocket-application-strings-manager/
+/security/soc-2.html
 
-/ecosystem/windows-azure-event-hub-application-strings-manager-integration/
+/docs/0.2.x/api-reference/modules/spec.helpers.html
 
-/ecosystem/wordpress-polylang-application-strings-manager-integration/
+/docs/0.2.x/file-support/srt.html
 
-/redirects.json
+/getting-started-guides/strings-management.html
+
+/resources/territory_language_information.html
+
+/docs/0.2.x/general/tmp.html
+
+/docs/0.2.x/notifications-and-weebhook/tmp.html
+
+/docs/0.2.x/history/tmp.html
+
+/docs/0.2.x/content-editor/tmp.html
+
+/docs/0.2.x/faqs/tmp.html
+
+/docs/0.2.x/workspaces/tmp.html
+
+/docs/0.2.x/reporting/tmp.html
+
+/docs/0.2.x/content-memory/tmp.html
+
+/docs/0.2.x/live-editor/tmp.html
+
+/docs/0.2.x/workflows-and-automation/tmp.html
+
+/docs/0.2.x/reporting/velocityreport.html
+
+/docs/0.2.x/file-support/visualStudio.html
+
+/install/websocket-application-strings-manager.html
+
+/integration/windows-azure-event-hub-integration.html
+
+/integration/wordpress-polylang-integration.html
+
+/integration/wpml-integration.html
+
+/docs/0.2.x/file-support/xliff12.html
+
+/docs/0.2.x/file-support/xliff2.html
+
+/docs/0.2.x/file-support/yaml.html
+
+/docs/0.2.x/file-support/yamli18n.html
 

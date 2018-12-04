@@ -1,0 +1,86 @@
+<p>Qordoba’s GitHub integration simplifies localization management for developers. It automatically detects missing translations and streamlines how translations are received from linguists. Integration increases developer productivity and eliminates errors caused by manual string management.
+[block:image]
+{
+  “images”: [
+    {
+      “image”: [
+        “https://files.readme.io/05ada0d-github.png”,
+        “github.png”,
+        909,
+        664,
+        “#cbcbca”
+      ],
+      “caption”: “Sequence diagram of a Qordoba GitHub project”
+    }
+  ]
+}
+[/block]</p>
+<h1 id="integration">Integration</h1>
+<p>This GitHub integration provides the following benefits:</p>
+<ul>
+  <li>Automatically detects missing translations in Pull Requests (PRs).</li>
+  <li>Simplifies developer requests for translation support.</li>
+  <li>Streamlines how translations get merged into a developer’s feature branch.</li>
+</ul>
+
+<p>Qordoba satisfies these requirements by performing status checks on protected branches within GitHub. When a pull request is created on the <code class="highlighter-rouge">Master</code> branch, Qordoba looks for missing translations based on a project’s configuration, and prevents pull requests from being merged until all of the required translations are added.</p>
+
+<h1 id="pull-requests">Pull Requests</h1>
+<p>Qordoba delivers localized strings to developers by creating a pull request. When developers approve the strings in the Qordoba application, a pull request can be created. This process should include the creation of:</p>
+<ul>
+  <li>A branch of the original feature branch that triggered the status check.</li>
+  <li>A single commit for each target language.</li>
+  <li>A PR that uses the following template in the description field.</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Localized strings for &lt;branch-name&gt;
+| Target locale | Resource file | Number of strings |
+|:------------- |:------------- |------------------ |
+| …             | …             | …                 |
+| …             | …             | …                 | 
+/cc @&lt;developer-name&gt;
+</code></pre>
+</div>
+
+<h1 id="status-checks">Status Checks</h1>
+<p>Required status checks on protected branches are a relatively new addition to GitHub, added in late 2015. They allow third-party integrations like Qordoba to monitor pull requests for breaking changes. In most cases, the status checks are used for continuous integration testing. However, they can be also be used for translation workflows. If the status check fails, the following sequence of events will likely take place:</p>
+<ul>
+  <li>Developer requests translations by following the link from the status check UI in GitHub PR.</li>
+  <li>Linguists complete translation work associated with PR.</li>
+  <li>Linguists create pull request from within Qordoba once translations ready.</li>
+  <li>PR consists of a Qordoba-created branch merging into developer’s origin branch.</li>
+  <li>Developer merges the Qordoba branch containing translations into their origin branch.</li>
+  <li>Qordoba status check now passes since translations have been added to origin branch.</li>
+  <li>Developer can merge to <code class="highlighter-rouge">Master</code> and ship their localized feature.</li>
+</ul>
+
+<h2 id="anatomy">Anatomy</h2>
+<p>|Entity |	Notes|
+|–|–|
+| Framework Configuration| During project configuration, the user confirms the i18n framework being used by the repository in question. This allows Qordoba to know where resources files should live within the repository. (Note: only a subset of frameworks will be supported to start with. Support for custom frameworks and/or file types will come later.) |
+| Source locale | During project configuration, the user confirms the source locale (source language) for the project.|
+| Target locales| During project configuration, the user confirms the target locale(s) (target languages) for the project.|
+|PR files| Listing of files changed as part of this PR. Qordoba only checks for changes to resource files.|</p>
+
+<h1 id="use-cases">Use Cases</h1>
+<h2 id="pr-with-missing-translations">PR with missing translations</h2>
+<p><em>Scenario:</em> Developer creates a pull request that requires translations.
+<em>Given:</em> Qordoba status check enabled.
+<em>And:</em> Resource file(s) changed as part of PR.
+<em>Then:</em> Mark status check as failing.
+<em>And:</em> Have status check URL link to the page from which translations can be requested.</p>
+
+<h2 id="pr-with-failing-status-check">PR with failing status check</h2>
+<p><em>Scenario:</em> Developer needs to request translations for failing status check.
+<em>Given:</em> Failing Qordoba status check for PR.
+<em>And:</em> Developer clicked status check URL and landing on the page hosted by Qordoba.
+<em>Then:</em> Allow the developer to request translations.
+<em>And:</em> Notify linguists that work is waiting.</p>
+
+<h2 id="pr-with-no-missing-translations">PR with no missing translations</h2>
+<p>This use case should occur after a Qordoba branch with translations merges into developer’s feature branch.</p>
+
+<p><em>Scenario:</em> Developer creates a pull request that DOES NOT require translations.
+<em>Given:</em> Qordoba status check enabled.
+<em>And:</em> No resource files changed as part of PR.
+<em>Then:</em> Mark the status check as passing.</p>

@@ -1,0 +1,96 @@
+<h1 id="cell-based-default">Cell-based (default)</h1>
+
+<p>Coming soon</p>
+
+<h1 id="punctuation-based">Punctuation-based</h1>
+
+<p>Coming soon</p>
+
+<h1 id="icu-messageformat">ICU MessageFormat</h1>
+
+<p>Qordoba can parse your resource file’s strings as ICU MessageFormat strings. Using this string formatting impacts how strings are created in your project. Captured strings are prepared and optimized for translation in the Qordoba content editor.</p>
+
+<p>When translating ICU MessageFormat strings translators and editors are not required to understand ICU MessageFormat syntax. They are presented with normalized strings that are segmented and use placeholders (tags) as needed, making them easily translatable.</p>
+
+<p>####Mapping ICU MessageFormat Features to Qordoba Strings</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ICU Feature</th>
+      <th>Qordoba support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>String without arguments</td>
+      <td>Plain string without placeholders</td>
+    </tr>
+    <tr>
+      <td>String with arguments</td>
+      <td>String with placeholders</td>
+    </tr>
+    <tr>
+      <td>String with a single select argument</td>
+      <td>Multiple source strings; one source string for each option of the select.</td>
+    </tr>
+    <tr>
+      <td>String with a single plural argument</td>
+      <td>Qordoba Plural string</td>
+    </tr>
+    <tr>
+      <td>String with multiple nested arguments (limit of one plural)</td>
+      <td>Limited to creating up to 20 strings, otherwise unsupported and captured as raw text</td>
+    </tr>
+    <tr>
+      <td>String with choice argument</td>
+      <td>Multiple source strings; one source string for each option of the select.</td>
+    </tr>
+    <tr>
+      <td>String with multiple plural arguments</td>
+      <td>Qordoba Plural string</td>
+    </tr>
+    <tr>
+      <td>String with plural argument and offset property</td>
+      <td>String with placeholders</td>
+    </tr>
+    <tr>
+      <td>String with <strong>selectordinal</strong> argument</td>
+      <td>String with placeholders</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>####In the following table, we show the value of an example source string and the corresponding string captured in Qordoba.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hello world.</th>
+      <th>Hello world.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Current temperature {temp}.</td>
+      <td>Current temperature {0}.</td>
+    </tr>
+    <tr>
+      <td>Please confirm this is your date of birth: {dob, date}.</td>
+      <td>Please confirm this is your date of birth: {0}.</td>
+    </tr>
+    <tr>
+      <td>You chose {selector, select, 1 {Option 1} other {an unsupported option.}}</td>
+      <td>You chose Option 1  <br />You chose an unsupported option.</td>
+    </tr>
+    <tr>
+      <td>Your playlist has {items, plural, one {# album.} other {# albums.}}</td>
+      <td>Plural Other: Your playlist has {0} albums. <br /> Plural One: Your playlist has {0} album.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="how-i-can-chnage-my-segmentation-type">How I can chnage my Segmentation type</h1>
+
+<p>Coming soon</p>
+

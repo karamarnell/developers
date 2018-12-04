@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://dev-2.qordoba.com/sitemap.xml
+Sitemap: /sitemap.xml

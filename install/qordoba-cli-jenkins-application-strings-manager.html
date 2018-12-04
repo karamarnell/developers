@@ -1,0 +1,102 @@
+<h3 id="installation">Installation</h3>
+
+<ol>
+  <li>
+    <p><strong>Install Qordoba Command Line Integration (Q-CLI) Package</strong></p>
+
+    <p>The client uses pip commands for housekeeping. Please have both <a href="https://www.python.org/">python</a> and <a href="https://pip.pypa.io/en/stable/installing/#">pip</a> installed and available in the system PATH. Run the following command on your command line:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> pip install qordoba
+</code></pre>
+    </div>
+    <p>If you are instead updating an existing Q-CLI, run this command:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> pip install qordoba -U
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>Configure Q-CLI to Project</strong></p>
+
+    <p>Connecting to a Qordoba project from your command line needs authentication. The required parameters are:</p>
+    <ul>
+      <li>Organization ID</li>
+      <li>Project ID</li>
+      <li>Access Token</li>
+    </ul>
+
+    <p>There are two ways to include these parameters in the Q-CLI:</p>
+
+    <p><br />
+ <strong>Recommended:</strong> Download Configuration File.</p>
+
+    <p>The configuration file saves you from re-entering your option-value pairs on the command line each time you want to send content to Qordoba.</p>
+
+    <p>To download the configuration file, go to your project’s settings in Qordoba, and select CLI config. Click on “Download the config file”. Once downloaded, you can move the file named <code class="highlighter-rouge">config.yaml</code> to one of three places:<br /><br /></p>
+    <ul>
+      <li>At the path specified in the environment variable <code class="highlighter-rouge">QORDOBA_CONFIG</code>.<br /></li>
+      <li>In the current working directory as hidden file <code class="highlighter-rouge">.qordoba.yml</code>.<br /></li>
+      <li>In the user’s home directory as hidden file <code class="highlighter-rouge">.qordoba.yml</code>.</li>
+    </ul>
+
+    <p>Once this is done, make sure to rename <code class="highlighter-rouge">config.yaml</code> to <code class="highlighter-rouge">.qordoba.yml</code>.<br />
+ <strong>Note</strong>: <em>Notice that <strong>.yaml</strong> changes to <strong>.yml</strong></em></p>
+
+    <p>Edit the file to add your source paths and optionally your output paths:</p>
+
+    <div class="language-yaml highlighter-rouge"><pre class="highlight"><code>  <span class="c1">#Example .qordoba.yml file after adding push and pull edits.</span>
+ <span class="s">qordoba</span><span class="pi">:</span> 
+   <span class="s">access_token</span><span class="pi">:</span> <span class="s">10c7f4qordobaisdopestdf2d817a0e9e28391ad9c6f22d</span>
+   <span class="s">organization_id</span><span class="pi">:</span> <span class="s">1234</span>
+   <span class="s">project_id</span><span class="pi">:</span> <span class="s">12321</span>
+       
+   <span class="c1">#as of version 1.2.0:</span>
+   <span class="s">push</span><span class="pi">:</span> <span class="c1">#(required)</span>
+     <span class="s">sources</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="s2">"</span><span class="s">./sourcePath/*.yml"</span>
+   <span class="s">pull</span><span class="pi">:</span> <span class="c1">#(optional. default: files pulled into same dir as config)</span>
+     <span class="s">targets</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="s2">"</span><span class="s">./&lt;language_code&gt;/&lt;filename&gt;.&lt;extension&gt;"</span> 
+</code></pre>
+    </div>
+    <p><br />
+ <br />
+ <strong>Not Recommended:</strong> Manual addition of parameters.</p>
+
+    <p>The other option is to manually add parameters to each call to Qordoba. If you do this, you will also have to identify which source files you want to push with each call, and where you want each output file to be stored.</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> <span class="nv">$ </span>qor push --organization-id 1234 --access-token 10c7f4cfrohzuseinbedarfeswenige2d --project-id 4422
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>Send Content To Qordoba</strong></p>
+
+    <p>Now that you have your configuration set up, all you have to do to send strings for translation to Qordoba is the command (assuming you have added and edited the <code class="highlighter-rouge">.qordoba.yml</code> file):</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> <span class="nv">$ </span>qor push
+</code></pre>
+    </div>
+    <p>And all of the valid files specified in your sources paths will get uploaded to your project in Qordoba. If the <code class="highlighter-rouge">.qordoba.yml</code> file was saved into the file structure of your codebase, make sure you are in the same working directory when you call this command.</p>
+  </li>
+  <li>
+    <p><strong>Retrieve Content from Qordoba</strong></p>
+
+    <p>Once content is complete in Qordoba, it will be able to be collected from Qordoba. To do this, run:</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> <span class="nv">$ </span>qor pull
+</code></pre>
+    </div>
+
+    <p>And all finished content will be pulled down and added to the location you defined in <code class="highlighter-rouge">.qordoba.yml</code>.</p>
+  </li>
+  <li>
+    <p><strong>Next Steps/Help</strong>
+ You can type:</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> <span class="nv">$ </span>qor -h
+</code></pre>
+    </div>
+    <p>To get basic help and instructions for the Q-CLI. If you cannot find what you are looking for there, Please look at our FAQ <strong>INSERT LINKS</strong> and documentation <strong>INSERT LINKS</strong> pages.</p>
+  </li>
+</ol>

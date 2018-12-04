@@ -1,0 +1,159 @@
+<h1 id="securing-the-admin-api">Securing the Admin API</h1>
+
+<p>Qordoba’s Admin API provides a RESTful interface for administration and
+configuration of APIs, plugins, consumers, and credentials. Because this
+API allows full control of Qordoba, it is important to secure this API against
+unwanted access. This document describes a few possible approaches to securing
+the Admin API.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ul>
+  <li><a href="#network-layer-access-restrictions">Network Layer Access Restrictions</a>
+    <ul>
+      <li><a href="#minimal-listening-footprint">Minimal Listening Footprint</a></li>
+      <li><a href="#layer-3-4-network-controls">Layer 3/4 Network Controls</a></li>
+    </ul>
+  </li>
+  <li><a href="#qordoba-api-loopback">Qordoba API Loopback</a></li>
+  <li><a href="#custom-nginx-configuration">Custom Nginx Configuration</a></li>
+  <li><a href="#role-based-access-control">Role Based Access Control (RBAC)</a></li>
+</ul>
+
+<h2 id="network-layer-access-restrictions">Network Layer Access Restrictions</h2>
+
+<h3 id="minimal-listening-footprint">Minimal Listening Footprint</h3>
+
+<p>By default since its 0.12.0 release, Qordoba will only accept requests from the
+local interface, as specified in its default <code class="highlighter-rouge">admin_listen</code> value:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>admin_listen = 127.0.0.1:8001
+</code></pre>
+</div>
+
+<p>If you change this value, always ensure to keep the listening footprint to a
+minimum, in order to avoid exposing your Admin API to third-parties, which
+could seriously compromise the security of your Qordoba cluster as a whole.
+For example, <strong>avoid binding Qordoba to all of your interfaces</strong>, bu using
+values such as <code class="highlighter-rouge">0.0.0.0:8001</code>.</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h3 id="layer-34-network-controls">Layer 3/4 Network Controls</h3>
+
+<p>In cases where the Admin API must be exposed beyond a localhost interface,
+network security best practices dictate that network-layer access be restricted
+as much as possible. Consider an environment in which Qordoba listens on a private
+network interface, but should only be accessed by a small subset of an IP range.
+In such a case, host-based firewalls (e.g. iptables) are useful in limiting
+input traffic ranges. For example:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># assume that Qordoba is listening on the address defined below, as defined as a</span>
+<span class="c"># /24 CIDR block, and only a select few hosts in this range should have access</span>
+
+<span class="gp">$ </span>grep admin_listen /etc/qordoba/qordoba.conf
+admin_listen 10.10.10.3:8001
+
+<span class="c"># explicitly allow TCP packets on port 8001 from the Qordoba node itself</span>
+<span class="c"># this is not necessary if Admin API requests are not sent from the node</span>
+<span class="gp">$ </span>iptables -A INPUT -s 10.10.10.3 -m tcp -p tcp --dport 8001 -j ACCEPT
+
+<span class="c"># explicitly allow TCP packets on port 8001 from the following addresses</span>
+<span class="gp">$ </span>iptables -A INPUT -s 10.10.10.4 -m tcp -p tcp --dport 8001 -j ACCEPT
+<span class="gp">$ </span>iptables -A INPUT -s 10.10.10.5 -m tcp -p tcp --dport 8001 -j ACCEPT
+
+<span class="c"># drop all TCP packets on port 8001 not in the above IP list</span>
+<span class="gp">$ </span>iptables -A INPUT -m tcp -p tcp --dport 8001 -j DROP
+
+</code></pre>
+</div>
+
+<p>Additional controls, such as similar ACLs applied at a network device level, are
+encouraged, but fall outside the scope of this document.</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h2 id="qordoba-api-loopback">Qordoba API Loopback</h2>
+
+<p>Qordoba’s routing design allows it to serve as a proxy for the Admin API itself. In
+this manner, Qordoba itself can be used to provide fine-grained access control to
+the Admin API. Such an environment requires bootstrapping a new API that defines
+the <code class="highlighter-rouge">admin_listen</code> address as the API’s <code class="highlighter-rouge">upstream_url</code>. For example:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># assume that Qordoba has defined admin_listen as 127.0.0.1:8001, and we want to</span>
+<span class="c"># reach the Admin API via the url `/admin-api`</span>
+
+<span class="gp">$ </span>curl http://localhost:8001/apis <span class="se">\</span>
+  --data <span class="nv">name</span><span class="o">=</span>admin-api <span class="se">\</span>
+  --data <span class="nv">uris</span><span class="o">=</span>/admin-api <span class="se">\</span>
+  --data <span class="nv">upstream_url</span><span class="o">=</span>http://localhost:8001
+
+<span class="c"># we can now transparently reach the Admin API through the proxy server</span>
+<span class="gp">$ </span>curl localhost:8000/admin-api/apis
+<span class="o">{</span>  
+   <span class="s2">"data"</span>:[  
+      <span class="o">{</span>  
+         <span class="s2">"uris"</span>:[  
+            <span class="s2">"</span><span class="se">\/</span><span class="s2">admin-api"</span>
+         <span class="o">]</span>,
+         <span class="s2">"id"</span>:<span class="s2">"653b21bd-4d81-4573-ba00-177cc0108dec"</span>,
+         <span class="s2">"upstream_read_timeout"</span>:60000,
+         <span class="s2">"preserve_host"</span>:false,
+         <span class="s2">"created_at"</span>:1496351805000,
+         <span class="s2">"upstream_connect_timeout"</span>:60000,
+         <span class="s2">"upstream_url"</span>:<span class="s2">"http:</span><span class="se">\/\/</span><span class="s2">localhost:8001"</span>,
+         <span class="s2">"strip_uri"</span>:true,
+         <span class="s2">"https_only"</span>:false,
+         <span class="s2">"name"</span>:<span class="s2">"admin-api"</span>,
+         <span class="s2">"http_if_terminated"</span>:true,
+         <span class="s2">"upstream_send_timeout"</span>:60000,
+         <span class="s2">"retries"</span>:5
+      <span class="o">}</span>
+   <span class="o">]</span>,
+   <span class="s2">"total"</span>:1
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>From here, simply apply desired Qordoba-specific security controls (such as
+<a href="/plugins/basic-authentication/">basic</a> or <a href="/plugins/key-authentication">key authentication</a>,
+<a href="/plugins/ip-restriction">IP restrictions</a>, or <a href="/plugins/acl">access control lists</a>) as you would
+normally to any other Qordoba API.</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h2 id="custom-nginx-configuration">Custom Nginx Configuration</h2>
+
+<p>Qordoba is tightly coupled with Nginx as an HTTP daemon, and can thus be integrated
+into environments with custom Nginx configurations. In this manner, use cases
+with complex security/access control requirements can use the full power of
+Nginx/OpenResty to build server/location blocks to house the Admin API as
+necessary. This allows such environments to leverage native Nginx authorization
+and authentication mechanisms, ACL modules, etc., in addition to providing the
+OpenResty environment on which custom/complex security controls can be built.</p>
+
+<p>For more information on integrating Qordoba into custom Nginx configurations, see
+<a href="/docs//configuration/#custom-nginx-configuration">Custom Nginx configuration &amp; embedding Qordoba</a>.</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h2 id="role-based-access-control">Role Based Access Control</h2>
+
+<div class="alert alert-warning">
+  <strong>Enterprise-Only</strong> This feature is only available with an
+  Enterprise Subscription.
+</div>
+
+<p>Enterprise users can configure role-based access control to secure access to the
+Admin API. RBAC allows for fine-grained control over resource access based on
+a model of user roles and permissions. Users are assigned to one or more roles,
+which each in turn possess one or more permissions granting or denying access
+to a particular resource. In this way, fine-grained control over specific Admin
+API resources can be enforced, while scaling to allow complex, case-specific
+uses.</p>
+
+<p>If you are not a Mashape Enterprise customer, you can inquire about our
+Enterprise offering by <a href="/enterprise">contacting us</a>.</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+

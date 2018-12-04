@@ -1,0 +1,39 @@
+<p>Qordoba can retrieve documents from Elasticsearch using your specified connection properties and the identifier of the documents. Qordoba can make secure connections if the cluster is configured for authorization and/or secure transport (SSL/TLS) and the Shield plugin is available.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>This integration supports Elasticsearch 2.x clusters and Elasticsearch 5.x clusters.
+</code></pre>
+</div>
+
+<p>If you approve the DynamoDB wording, I’d be consistent and repeat it here to introduce this list of parameters, so this would read:</p>
+
+<p>You can customize your Elasticsearch configuration using these parameters:</p>
+
+<p><strong>Cluster Name</strong> Name of Elasticsearch cluster. <em>For example: elasticsearch_brew.</em> (default <code class="highlighter-rouge">elasticsearch</code>)
+<strong>Elasticsearch Hosts</strong> Elasticsearch Hosts, which should be written with colons and separated by commas for hostname/port host1:port,host2:port,…. <em>For example, testcluster:9300. This processor uses the Transport Client to connect to hosts. The default transport client port is 9300.</em>
+<strong>SSL Context Service</strong> The SSL Context Service used to provide client certificate information for TLS/SSL connections. This service only applies if the Elasticsearch endpoint(s) have been secured with TLS/SSL.
+<strong>Shield Plugin Filename</strong> Specifies the path to the JAR for the Elasticsearch Shield plugin. If the Elasticsearch cluster has been secured with the Shield plugin, then the Shield plugin JAR must also be available to this processor. 
+<strong>Username</strong> Username to access the Elasticsearch cluster
+<strong>Password</strong> Password to access the Elasticsearch cluster, including sensitive information
+<strong>ElasticSearch Ping Timeout ** Ping timeout used to determine when a node is unreachable. If non-local, recommended timeout is 30 seconds, or 30s (default <code class="highlighter-rouge">5s</code>)
+**Sampler Interval</strong> How often to sample/ping the nodes. For example, 5s (5 seconds). If non-local, recommended sampler is 30 seconds, or 30s (default <code class="highlighter-rouge">5s</code>)
+<strong>Document Identifier</strong> Identifier for document to be fetched
+<strong>Index</strong> Name of index to read from
+<strong>Type</strong> Type of document used by Elasticsearch for indexing and searching
+<strong>Character set of document</strong> Specifies character set of document data (default <code class="highlighter-rouge">UTF-8</code>)</p>
+
+<p>NOTE: I edited copy above. Original table is below, without any copy edits, for your reference.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>'Cluster Name'	Name of the Elasticsearch cluster (for example, elasticsearch_brew). And the defaults value is elasticsearch.
+'ElasticSearch Hosts'	ElasticSearch Hosts, which should be comma separated and colon for hostname/port host1:port,host2:port,.... For example testcluster:9300. This processor uses the Transport Client to connect to hosts. The default transport client port is 9300.
+'SSL Context Service'	The SSL Context Service used to provide client certificate information for TLS/SSL connections. This service only applies if the Elasticsearch endpoint(s) have been secured with TLS/SSL.
+'Shield Plugin Filename'	Specifies the path to the JAR for the Elasticsearch Shield plugin. If the Elasticsearch cluster has been secured with the Shield plugin, then the Shield plugin JAR must also be available to this processor. 
+'Username'	Username to access the Elasticsearch cluster
+'Password'	Password to access the Elasticsearch cluster Sensitive Property 
+'ElasticSearch Ping Timeout' the default is 5s	The ping timeout used to determine when a node is unreachable. For example, 5s (5 seconds). If non-local recommended is 30s
+'Sampler Interval'the default is How often to sample / ping the nodes listed and connected. For example, 5s (5 seconds). If non-local recommended is 30s.
+'Document Identifier' The identifier for the document to be fetched Supports Expression Language
+'Index'	The name of the index to read from
+'Type'	The type of this document used by Elasticsearch for indexing and searching
+'Character Set'	UTF-8	Specifies the character set of the document data.
+</code></pre>
+</div>

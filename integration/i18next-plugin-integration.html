@@ -1,0 +1,99 @@
+<p>Easily add <strong>Cross-origin resource sharing <em>(CORS)</em></strong> to your API by enabling
+this plugin.</p>
+
+<hr />
+
+<h2 id="configuration">Configuration</h2>
+
+<p>Configuring the plugin is as simple as a single API call, you can configure and
+enable it for your <a href="/docs/latest/admin-api/#api-object">API</a> by executing the following request on your
+Qordoba server:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl -X POST http://qordoba:8001/apis/<span class="o">{</span>api<span class="o">}</span>/plugins <span class="se">\</span>
+    --data <span class="s2">"name=cors"</span> <span class="se">\</span>
+    --data <span class="s2">"config.origins=http://mockbin.com"</span> <span class="se">\</span>
+    --data <span class="s2">"config.methods=GET, POST"</span> <span class="se">\</span>
+    --data <span class="s2">"config.headers=Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Auth-Token"</span> <span class="se">\</span>
+    --data <span class="s2">"config.exposed_headers=X-Auth-Token"</span> <span class="se">\</span>
+    --data <span class="s2">"config.credentials=true"</span> <span class="se">\</span>
+    --data <span class="s2">"config.max_age=3600"</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">api</code>: The <code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">name</code> of the API that this plugin configuration will target</p>
+
+<p>You can also apply it for every API using the <code class="highlighter-rouge">http://qordoba:8001/plugins/</code>
+endpoint. Read the <a href="/docs/latest/admin-api/#add-plugin">Plugin Reference</a> for
+more information.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">form parameter</th>
+      <th>default</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><code class="highlighter-rouge">name</code></td>
+      <td> </td>
+      <td>Name of the plugin to use, in this case: <code class="highlighter-rouge">cors</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="highlighter-rouge">config.origins</code><br /><em>optional</em></td>
+      <td> </td>
+      <td>A comma-separated list of allowed domains for the <code class="highlighter-rouge">Access-Control-Allow-Origin</code> header. If you wish to allow all origins, add <code class="highlighter-rouge">*</code> as a single value to this configuration field. The accepted values can either be flat strings or PCRE regexes. <strong>NOTE</strong>: Prior to Qordoba 0.10.x, this parameter was <code class="highlighter-rouge">config.origin</code> (note the change in trailing <code class="highlighter-rouge">s</code>), and only accepted a single value, or the <code class="highlighter-rouge">*</code> special value.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="highlighter-rouge">config.methods</code><br /><em>optional</em></td>
+      <td><code class="highlighter-rouge">GET,HEAD,PUT,PATCH,POST,DELETE</code></td>
+      <td>Value for the <code class="highlighter-rouge">Access-Control-Allow-Methods</code> header, expects a comma delimited string (e.g. <code class="highlighter-rouge">GET,POST</code>).</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="highlighter-rouge">config.headers</code><br /><em>optional</em></td>
+      <td>Value of the <code class="highlighter-rouge">Access-Control-Request-Headers</code><br />request header</td>
+      <td>Value for the <code class="highlighter-rouge">Access-Control-Allow-Headers</code> header, expects a comma delimited string (e.g. <code class="highlighter-rouge">Origin, Authorization</code>).</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="highlighter-rouge">config.exposed_headers</code><br /><em>optional</em></td>
+      <td> </td>
+      <td>Value for the <code class="highlighter-rouge">Access-Control-Expose-Headers</code> header, expects a comma delimited string (e.g. <code class="highlighter-rouge">Origin, Authorization</code>). If not specified, no custom headers are exposed.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="highlighter-rouge">config.credentials</code><br /><em>optional</em></td>
+      <td><code class="highlighter-rouge">false</code></td>
+      <td>Flag to determine whether the <code class="highlighter-rouge">Access-Control-Allow-Credentials</code> header should be sent with <code class="highlighter-rouge">true</code> as the value.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="highlighter-rouge">config.max_age</code><br /><em>optional</em></td>
+      <td> </td>
+      <td>Indicated how long the results of the preflight request can be cached, in <code class="highlighter-rouge">seconds</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="highlighter-rouge">config.preflight_continue</code><br /><em>optional</em></td>
+      <td><code class="highlighter-rouge">false</code></td>
+      <td>A boolean value that instructs the plugin to proxy the <code class="highlighter-rouge">OPTIONS</code> preflight request to the upstream API.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="known-issues">Known issues</h2>
+
+<p>Below is a list of known issues or limitations for this plugin.</p>
+
+<h3 id="cors-limitations">CORS Limitations</h3>
+
+<p>If the client is a browser, there is a known issue with this plugin caused by a
+limitation of the CORS specification that doesn’t allow to specify a custom
+<code class="highlighter-rouge">Host</code> header in a preflight <code class="highlighter-rouge">OPTIONS</code> request.</p>
+
+<p>Because of this limitation, this plugin will only work for APIs that have been
+configured with a <code class="highlighter-rouge">uris</code> setting, and it will not work for APIs that
+are being resolved using a custom DNS (the <code class="highlighter-rouge">hosts</code> property).</p>
+
+<p>To learn how to configure <code class="highlighter-rouge">uris</code> for an API, please read the <a href="/docs/latest/proxy">Proxy
+Reference</a>.</p>
+

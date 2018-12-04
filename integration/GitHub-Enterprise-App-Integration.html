@@ -1,0 +1,88 @@
+<div class="highlighter-rouge"><pre class="highlight"><code>Qordoba requires using "https://" and port 443 to access your Github Enterprise server.
+</code></pre>
+</div>
+
+<h3 id="create-an-application">Create an Application</h3>
+<p>Go to your GitHub Enterprise installation, and create a new Application at</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://[[host]]/organizations/[[Org Name]]/settings/apps/new
+</code></pre>
+</div>
+
+<p>Please use these values for the below three fields; and follow Github help as required for the others. Their values do not affect Qordoba interactions.</p>
+
+<p>https://app.qordoba.com
+https://app.qordoba.com/githubAppAuthRedirect.html
+https://app.qordoba.com/api/qordoba/github/app/webhook/callback</p>
+
+<p>[block:image]
+{
+  “images”: [
+    {
+      “image”: [
+        “https://files.readme.io/2372bef-gha-requirefields.png”,
+        “gha-requirefields.png”,
+        641,
+        291,
+        “#f5f5f6”
+      ]
+    }
+  ]
+}
+[/block]</p>
+
+<p><strong>Permissions</strong>
+<em>Read-only</em>
+Repository metadata</p>
+
+<p><em>Read &amp; write</em>
+Repository contents
+Issues
+Pull requests
+Commit statuses</p>
+
+<p><strong>Subscribe to events</strong>
+Commit comment
+Delete
+Issues
+Pull request
+Create
+Push
+Pull request review comment</p>
+
+<p>Here’s an image you can use:
+[block:image]
+{
+  “images”: [
+    {
+      “image”: [
+        “https://files.readme.io/d034fd8-8090724.png”,
+        “8090724.png”,
+        200,
+        200,
+        “#5454ac”
+      ]
+    }
+  ]
+}
+[/block]
+Once the app is created; generate a Private Key for it by clicking “Generate a private key.”</p>
+
+<p>Then; in http://app.qordoba.com; during the first “GitHub Enterprise Apps” workflow create, you will be prompted for the below values
+[block:image]
+{
+  “images”: [
+    {
+      “image”: [
+        “https://files.readme.io/50d1f6b-GitHub_Enterprise_Apps_Configuration.png”,
+        “GitHub Enterprise Apps Configuration.png”,
+        1914,
+        947,
+        “#b3b7ba”
+      ]
+    }
+  ]
+}
+[/block]
+The <code class="highlighter-rouge">Redirect Url for Installation</code> is of the form 
+<code class="highlighter-rouge">https://[[host]]/organizations/[[Org Name]]/settings/apps/[[App Name]]/installations</code></p>

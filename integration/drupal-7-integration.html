@@ -1,0 +1,52 @@
+<p>Restrict access to an API by either whitelisting or blacklisting IP addresses. Single IPs, multiple IPs or ranges in <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">CIDR notation</a> like <code class="highlighter-rouge">10.10.10.0/24</code> can be used.</p>
+
+<hr />
+
+<h2 id="configuration">Configuration</h2>
+
+<p>Configuring the plugin is straightforward, you can add it on top of an <a href="/docs/latest/admin-api/#api-object">API</a> (or <a href="/docs/latest/admin-api/#consumer-object">Consumer</a>) by executing the following request on your Qordoba server:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl -X POST http://qordoba:8001/apis/<span class="o">{</span>api<span class="o">}</span>/plugins <span class="se">\</span>
+    --data <span class="s2">"name=ip-restriction"</span> <span class="se">\</span>
+    --data <span class="s2">"config.whitelist=54.13.21.1, 143.1.0.0/24"</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">api</code>: The <code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">name</code> of the API that this plugin configuration will target</p>
+
+<p>You can also apply it for every API using the <code class="highlighter-rouge">http://qordoba:8001/plugins/</code> endpoint. Read the <a href="/docs/latest/admin-api/#add-plugin">Plugin Reference</a> for more information.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>form parameter</th>
+      <th>default</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">name</code></td>
+      <td> </td>
+      <td>The name of the plugin to use, in this case: <code class="highlighter-rouge">ip-restriction</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">consumer_id</code><br /><em>optional</em></td>
+      <td> </td>
+      <td>The CONSUMER ID that this plugin configuration will target. This value can only be used if <a href="/about/faq/#how-can-i-add-an-authentication-layer-on-a-microservice/api?">authentication has been enabled</a> so that the system can identify the user making the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">config.whitelist</code><br /><em>semi-optional</em></td>
+      <td> </td>
+      <td>Comma separated list of IPs or CIDR ranges to whitelist. One of <code class="highlighter-rouge">config.whitelist</code> or <code class="highlighter-rouge">config.blacklist</code> must be specified.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">config.blacklist</code><br /><em>semi-optional</em></td>
+      <td> </td>
+      <td>Comma separated list of IPs or CIDR ranges to blacklist. One of <code class="highlighter-rouge">config.whitelist</code> or <code class="highlighter-rouge">config.blacklist</code> must be specified.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note that the <code class="highlighter-rouge">whitelist</code> and <code class="highlighter-rouge">blacklist</code> models are mutually exclusive in their usage, as they provide complimentary approaches. That is, you cannot configure an ACL with both <code class="highlighter-rouge">whitelist</code> and <code class="highlighter-rouge">blacklist</code> configurations. An ACL with a <code class="highlighter-rouge">whitelist</code> provides a positive security model, in which the configured CIDR ranges are allowed access to the resource, and all others are inherently rejected. By contrast, a <code class="highlighter-rouge">blacklist</code> configuration provides a negative security model, in which certain CIDRS are explicitly denied access to the resource (and all others are inherently allowed).</p>
+

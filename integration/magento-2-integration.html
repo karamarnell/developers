@@ -1,0 +1,179 @@
+<p>Send request and response logs to an HTTP server.</p>
+
+<hr />
+
+<h2 id="configuration">Configuration</h2>
+
+<p>Configuring the plugin is straightforward, you can add it on top of an <a href="/docs/latest/admin-api/#api-object">API</a> (or <a href="/docs/latest/admin-api/#consumer-object">Consumer</a>) by executing the following request on your Qordoba server:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl -X POST http://qordoba:8001/apis/<span class="o">{</span>api<span class="o">}</span>/plugins <span class="se">\</span>
+    --data <span class="s2">"name=http-log"</span> <span class="se">\</span>
+    --data <span class="s2">"config.http_endpoint=http://mockbin.org/bin/:id/"</span> <span class="se">\</span>
+    --data <span class="s2">"config.method=POST"</span> <span class="se">\</span>
+    --data <span class="s2">"config.timeout=1000"</span> <span class="se">\</span>
+    --data <span class="s2">"config.keepalive=1000"</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">api</code>: The <code class="highlighter-rouge">id</code> or <code class="highlighter-rouge">name</code> of the API that this plugin configuration will target</p>
+
+<p>You can also apply it for every API using the <code class="highlighter-rouge">http://qordoba:8001/plugins/</code> endpoint. Read the <a href="/docs/latest/admin-api/#add-plugin">Plugin Reference</a> for more information.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>form parameter</th>
+      <th>default</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">name</code></td>
+      <td> </td>
+      <td>The name of the plugin to use, in this case: <code class="highlighter-rouge">http-log</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">consumer_id</code><br /><em>optional</em></td>
+      <td> </td>
+      <td>The CONSUMER ID that this plugin configuration will target. This value can only be used if <a href="/about/faq/#how-can-i-add-an-authentication-layer-on-a-microservice/api?">authentication has been enabled</a> so that the system can identify the user making the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">config.http_endpoint</code></td>
+      <td> </td>
+      <td>The HTTP endpoint (including the protocol to use) to which the data will be sent.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">config.method</code><br /><em>optional</em></td>
+      <td><code class="highlighter-rouge">POST</code></td>
+      <td>An optional method used to send data to the http server, other supported values are PUT, PATCH</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">config.timeout</code><br /><em>optional</em></td>
+      <td><code class="highlighter-rouge">10000</code></td>
+      <td>An optional timeout in milliseconds when sending data to the upstream server</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">config.keepalive</code><br /><em>optional</em></td>
+      <td><code class="highlighter-rouge">60000</code></td>
+      <td>An optional value in milliseconds that defines for how long an idle connection will live before being closed</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>NOTE:</strong> If the <code class="highlighter-rouge">config.http_endpoint</code> contains a username and password (ex.
+<code class="highlighter-rouge">http://bob:password@example.com/logs</code>), then Qordoba will automatically include
+a basic-auth <code class="highlighter-rouge">Authorization</code> header in the log requests.</p>
+
+<hr />
+
+<h2 id="log-format">Log Format</h2>
+
+<p>Every request will be logged separately in a JSON object, with the following format:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/get"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://httpbin.org:8000/get"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"querystring"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"accept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*/*"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"httpbin.org"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"user-agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"curl/7.37.1"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"upstream_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"434"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"Content-Length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"197"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"via"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qordoba/0.3.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"Connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"close"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"access-control-allow-credentials"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"Content-Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nginx"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"access-control-allow-origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"tries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"next"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">502</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">8000</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">8000</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"authenticated_entity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"consumer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80f74eef-31b8-45d5-c525-ae532297ea8e"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eaa330c0-4cff-47f5-c79e-b2e4f355207e"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"api"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1488830759000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"example.org"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"http_if_terminated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"https_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6378122c-a0a1-438d-a5c6-efabae9fb969"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example-api"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"preserve_host"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"retries"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"strip_uri"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"upstream_connect_timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">60000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"upstream_read_timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">60000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"upstream_send_timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">60000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"upstream_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://httpbin.org"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"consumer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1491847011000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35b03bfc-7a5b-4a23-a594-aa350c585fa8"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"latencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"proxy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1430</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"qordoba"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="mi">1921</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"client_ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1433209822425</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>A few considerations on the above JSON object:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">request</code> contains properties about the request sent by the client</li>
+  <li><code class="highlighter-rouge">response</code> contains properties about the response sent to the client</li>
+  <li><code class="highlighter-rouge">tries</code> contains the list of (re)tries (successes and failures) made by the load balancer for this request</li>
+  <li><code class="highlighter-rouge">api</code> contains Qordoba properties about the specific API requested</li>
+  <li><code class="highlighter-rouge">authenticated_entity</code> contains Qordoba properties about the authenticated credential (if an authentication plugin has been enabled)</li>
+  <li><code class="highlighter-rouge">consumer</code> contains the authenticated Consumer (if an authentication plugin has been enabled)</li>
+  <li><code class="highlighter-rouge">latencies</code> contains some data about the latencies involved:
+    <ul>
+      <li><code class="highlighter-rouge">proxy</code> is the time it took for the final service to process the request</li>
+      <li><code class="highlighter-rouge">qordoba</code> is the internal Qordoba latency that it took to run all the plugins</li>
+      <li><code class="highlighter-rouge">request</code> is the time elapsed between the first bytes were read from the client and after the last bytes were sent to the client. Useful for detecting slow clients.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">client_ip</code> contains the original client IP address</li>
+  <li><code class="highlighter-rouge">started_at</code> contains the UTC timestamp of when the API transaction has started to be processed.</li>
+</ul>
+
+<hr />
+
+<h2 id="qordoba-process-errors">Qordoba Process Errors</h2>
+
+<p>This logging plugin will only log HTTP request and response data. If you are
+looking for the Qordoba process error file (which is the nginx error file), then
+you can find it at the following path: 
+<code class="highlighter-rouge">$KONG_PREFIX/logs/error.log</code>,
+where <code class="highlighter-rouge">$KONG_PREFIX</code> means
+<a href="/docs/0.2.x/configuration/#prefix">prefix in the configuration</a>.</p>

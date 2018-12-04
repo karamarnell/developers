@@ -1,0 +1,82 @@
+<h3 id="packages">Packages</h3>
+
+<p>Start by downloading the corresponding package for your configuration:</p>
+
+<ul>
+  <li><a href="/qordoba-community-edition-rpm/download_file?file_path=dists/qordoba-community-edition-0.2.1.el6.noarch.rpm">RHEL 6</a></li>
+  <li><a href="/qordoba-community-edition-rpm/download_file?file_path=dists/qordoba-community-edition-0.2.1.el7.noarch.rpm">RHEL 7</a></li>
+</ul>
+
+<h3 id="yum-repositories">YUM Repositories</h3>
+
+<p>You can also install Qordoba via YUM; follow the instructions on the “Set Me Up”
+section on the page below.</p>
+
+<ul>
+  <li><a href="https://bintray.com/qordoba/qordoba-community-edition-rpm">RPM Repository</a></li>
+</ul>
+
+<hr />
+
+<h3 id="installation">Installation</h3>
+
+<ol>
+  <li>
+    <p><strong>Enable the EPEL repository</strong></p>
+
+    <p>Before installing Qordoba, you need to install the <code class="highlighter-rouge">epel-release</code> package for right version of your operating system, so that Qordoba can fetch all the required dependencies:</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> <span class="nv">$ EL_VERSION</span><span class="o">=</span><span class="sb">`</span>cat /etc/redhat-release | grep -oE <span class="s1">'[0-9]+\.[0-9]+'</span><span class="sb">`</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+   sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-<span class="k">${</span><span class="nv">EL_VERSION</span><span class="p">%.*</span><span class="k">}</span>.noarch.rpm
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>Install Qordoba</strong></p>
+
+    <p>If you are downloading the <a href="#packages">package</a>, execute:</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> <span class="nv">$ </span>sudo yum install qordoba-community-edition-0.2.1.<span class="k">*</span>.noarch.rpm --nogpgcheck
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>Prepare your database</strong></p>
+
+    <p><a href="/docs/0.2.x/configuration#database">Configure</a> Qordoba so it can connect to your database. Qordoba supports both <a href="http://www.postgresql.org/">PostgreSQL 9.5+</a> and <a href="http://cassandra.apache.org/">Cassandra 3.x.x</a> as its datastore.</p>
+
+    <p>If you are using Postgres, please provision a database and a user before starting Qordoba, ie:</p>
+
+    <div class="language-sql highlighter-rouge"><pre class="highlight"><code> <span class="k">CREATE</span> <span class="k">USER</span> <span class="n">qordoba</span><span class="p">;</span> <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">qordoba</span> <span class="k">OWNER</span> <span class="n">qordoba</span><span class="p">;</span>
+</code></pre>
+    </div>
+
+    <p>Now, run the Qordoba migrations:</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> <span class="nv">$ </span>qordoba migrations up <span class="o">[</span>-c /path/to/qordoba.conf]
+</code></pre>
+    </div>
+
+    <p><strong>Note</strong>: migrations should never be run concurrently; only
+ one Qordoba nodes should be performing migrations at a time.</p>
+  </li>
+  <li>
+    <p><strong>Start Qordoba</strong></p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> <span class="nv">$ </span>qordoba start <span class="o">[</span>-c /path/to/qordoba.conf]
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>Use Qordoba</strong></p>
+
+    <p>Qordoba is running:</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code> <span class="nv">$ </span>curl -i http://localhost:8001/
+</code></pre>
+    </div>
+
+    <p>Quickly learn how to use Qordoba with the <a href="/docs/latest/getting-started/quickstart">5-minute Quickstart</a>.</p>
+  </li>
+</ol>
+

@@ -1,0 +1,48 @@
+<p>The WordPress multilingual plugin WPML has been created far before Polylang and thus some plugins and themes have been written to play nicely with it. Polylang does support the WPML language configuration file wpml-config.xml to avoid double work for themes and plugins author.</p>
+
+<p>Here is an example which is pretty much self-explanatory:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;wpml-config&gt;
+    &lt;custom-fields&gt;
+        &lt;custom-field action="copy"&gt;quantity&lt;/custom-field&gt;
+        &lt;custom-field action="translate"&gt;custom-title&lt;/custom-field&gt;
+    &lt;/custom-fields&gt;
+    &lt;custom-types&gt;
+        &lt;custom-type translate="1"&gt;book&lt;/custom-type&gt;
+        &lt;custom-type translate="1"&gt;DVD&lt;/custom-type&gt;
+    &lt;/custom-types&gt;
+    &lt;taxonomies&gt;
+        &lt;taxonomy translate="1"&gt;genre&lt;/taxonomy&gt;
+    &lt;/taxonomies&gt;
+    &lt;admin-texts&gt;
+        &lt;key name="my_plugins_options"&gt;
+            &lt;key name="option_name_1" /&gt;
+            &lt;key name="option_name_2" /&gt;
+            &lt;key name="options_group_1"&gt;
+                &lt;key name="sub_option_name_11" /&gt;
+                &lt;key name="sub_option_name_12" /&gt;
+            &lt;/key&gt;
+        &lt;/key&gt;
+        &lt;key name="simple_string_option" /&gt;
+    &lt;/admin-texts&gt;
+&lt;/wpml-config&gt;
+</code></pre>
+</div>
+
+<p><strong>custom-fields:</strong> the custom field name needs to be provided and also the action that Polylang is expected to take:</p>
+
+<ul>
+  <li>“ignore”: no action from Polylang</li>
+  <li>“translate”: the custom field is copied from the source post but may be modified</li>
+  <li>“copy”: the custom field is copied from the source post and synchronized across translations</li>
+</ul>
+
+<p><strong>custom-types:</strong> the custom post types that Polylang should translate</p>
+
+<p><strong>taxonomies:</strong> the custom taxonomies that Polylang should translate</p>
+
+<p><strong>admin-texts:</strong> When themes and plugins use ‘get_option’, Polylang can filter these calls and provide translation to the values of these options. To translate a single option, add a key entry under admin-texts (as simple_string_option in the example above). To translate a serialized array, add several keys under a key, (as in my_plugin_options in the example above.</p>
+
+<p>Polylang does not support the <language-switcher-settings> section.</language-switcher-settings></p>
+
+<p>The file wpml-config.xml must be placed in the root directory of the plugin or theme. It is also possible for users to create their own wpml-config.xml file and to upload it in /wp-content/polylang/ (create the directory if it does not exist).</p>

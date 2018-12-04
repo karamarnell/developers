@@ -1,0 +1,28 @@
+<h2 id="features">FEATURES</h2>
+
+<ul>
+  <li>Imports languages and WPML options (when the same options exist in Polylang)</li>
+  <li>Imports posts and terms languages as well as translations (including for custom post types and * custom taxonomies)</li>
+  <li>Imports multilingual nav menus</li>
+  <li>Imports strings translations</li>
+  <li>Does not delete WPML data</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Although WPML data should not be corrupted, as Polylang data are created without deleting anything, make a database backup before proceeding.
+</code></pre>
+</div>
+
+<h2 id="how-to-proceed">HOW TO PROCEED?</h2>
+
+<ul>
+  <li>De-activate WPML</li>
+  <li>Activate Polylang and WPML to Polylang. Do not create any language with Polylang.</li>
+  <li>Go in Tools -&gt; WPML Importer</li>
+  <li>If all checks pass, click on ‘Import’</li>
+  <li>De-activate WPML to Polylang (you can even delete it)</li>
+  <li>Setup a language switcher either as a widget or in nav menus</li>
+  <li>Check that everything is OK</li>
+  <li>If something went wrong and you want to revert to WPML, you can delete Polylang using the red link in Plugins table (You can delete all data created for Polylang by checking the relevant option in Settings &gt; Languages&gt; Settings &gt; Tools before deleting Polylang) and then re-activate WPML</li>
+</ul>
+
+<p>This plugin is still experimental and does not include error management.</p>

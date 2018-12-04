@@ -1,0 +1,1099 @@
+<h1 id="configuration-reference">Configuration Reference</h1>
+
+<h3 id="table-of-contents">Table of Contents</h3>
+
+<ul>
+  <li><a href="#configuration-loading">Configuration loading</a></li>
+  <li><a href="#verifying-your-configuration">Verifying your configuration</a></li>
+  <li><a href="#environment-variables">Environment variables</a></li>
+  <li><a href="#custom-nginx-configuration-embedding-qordoba">Custom Nginx configuration &amp; embedding Qordoba</a>
+    <ul>
+      <li><a href="#custom-nginx-configuration">Custom Nginx configuration</a></li>
+      <li><a href="#embedding-qordoba-in-openresty">Embedding Qordoba in OpenResty</a></li>
+      <li><a href="#serving-both-a-website-and-your-apis-from-qordoba">Serving both a website and your APIs from Qordoba</a></li>
+    </ul>
+  </li>
+  <li><a href="#properties-reference">Properties reference</a>
+    <ul>
+      <li><a href="#general-section">General section</a></li>
+      <li><a href="#nginx-section">Nginx section</a></li>
+      <li><a href="#datastore-section">Datastore section</a></li>
+      <li><a href="#datastore-cache-section">Datastore cache section</a></li>
+      <li><a href="#dns-resolver-section">DNS resolver section</a></li>
+      <li><a href="#development-miscellaneous-section">Development &amp; miscellaneous section</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="configuration-loading">Configuration loading</h3>
+
+<p>Qordoba comes with a default configuration file that can be found at
+<code class="highlighter-rouge">/etc/qordoba/qordoba.conf.default</code> if you installed Qordoba via one of the official
+packages. To start configuring Qordoba, you can copy this file:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cp /etc/qordoba/qordoba.conf.default /etc/qordoba/qordoba.conf
+</code></pre>
+</div>
+
+<p>Qordoba will operate with default settings should all the values in your
+configuration be commented-out. Upon starting, Qordoba looks for several
+default locations that might contain a configuration file:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/etc/qordoba/qordoba.conf
+/etc/qordoba.conf
+</code></pre>
+</div>
+
+<p>You can override this behavior by specifying a custom path for your
+configuration file using the <code class="highlighter-rouge">-c / --conf</code> argument in the CLI:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ qordoba start --conf /path/to/qordoba.conf
+</code></pre>
+</div>
+
+<p>The configuration format is straightforward: simply uncomment any property
+(comments are defined by the <code class="highlighter-rouge">#</code> character) and modify it to your needs.
+Booleans values can be specified as <code class="highlighter-rouge">on/off</code> or <code class="highlighter-rouge">true</code>/<code class="highlighter-rouge">false</code> for convenience.</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h3 id="verifying-your-configuration">Verifying your configuration</h3>
+
+<p>You can verify the integrity of your settings with the <code class="highlighter-rouge">check</code> command:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ qordoba check &lt;path/to/qordoba.conf&gt;
+configuration at &lt;path/to/qordoba.conf&gt; is valid
+</code></pre>
+</div>
+
+<p>This command will take into account the environment variables you have
+currently set, and will error out in case your settings are invalid.</p>
+
+<p>Additionally, you can also use the CLI in debug mode to have more insight
+as to what properties Qordoba is being started with:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ qordoba start -c &lt;qordoba.conf&gt; --vv
+2016/08/11 14:53:36 [verbose] no config file found at /etc/qordoba.conf
+2016/08/11 14:53:36 [verbose] no config file found at /etc/qordoba/qordoba.conf
+2016/08/11 14:53:36 [debug] admin_listen = "0.0.0.0:8001"
+2016/08/11 14:53:36 [debug] database = "postgres"
+2016/08/11 14:53:36 [debug] log_level = "notice"
+[...]
+</code></pre>
+</div>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h3 id="environment-variables">Environment variables</h3>
+
+<p>When loading properties out of a configuration file, Qordoba will also look for
+environment variables of the same name. This allows you to fully configure Qordoba
+via environment variables, which is very convenient for container-based
+infrastructures, for example.</p>
+
+<p>All environment variables prefixed with <code class="highlighter-rouge">KONG_</code>, capitalized and bearing the
+same name as a setting will override it.</p>
+
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>log_level = debug # in qordoba.conf
+</code></pre>
+</div>
+
+<p>Can be overridden with:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ export KONG_LOG_LEVEL=error
+</code></pre>
+</div>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h3 id="custom-nginx-configuration--embedding-qordoba">Custom Nginx configuration &amp; embedding Qordoba</h3>
+
+<p>Tweaking the Nginx configuration is an essential part of setting up your Qordoba
+instances since it allows you to optimize its performance for your
+infrastructure, or embed Qordoba in an already running OpenResty instance.</p>
+
+<h4 id="custom-nginx-configuration">Custom Nginx configuration</h4>
+
+<p>Qordoba can be started, reloaded and restarted with an <code class="highlighter-rouge">--nginx-conf</code> argument,
+which must specify an Nginx configuration template. Such a template uses the
+<a href="http://stevedonovan.github.io/Penlight/api/index.html">Penlight</a> <a href="http://stevedonovan.github.io/Penlight/api/libraries/pl.template.html">templating engine</a>, which is compiled using
+the given Qordoba configuration, before being dumped in your Qordoba prefix
+directory, moments before starting Nginx.</p>
+
+<p>The default template can be found at:
+https://github.com/Mashape/qordoba/tree/master/qordoba/templates. It is split in two
+Nginx configuration files: <code class="highlighter-rouge">nginx.lua</code> and <code class="highlighter-rouge">nginx_qordoba.lua</code>. The former is
+minimalistic and includes the latter, which contains everything Qordoba requires
+to run. When <code class="highlighter-rouge">qordoba start</code> runs, right before starting Nginx, it copies these
+two files into the prefix directory, which looks like so:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/usr/local/qordoba
+├── nginx-qordoba.conf
+├── nginx.conf
+</code></pre>
+</div>
+
+<p>If you wish to include other <code class="highlighter-rouge">server</code> blocks in your Nginx configuration, or if
+you must tweak global settings that are not exposed by the Qordoba configuration,
+here is a suggestion:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># ---------------------
+# custom_nginx.template
+# ---------------------
+
+worker_processes ${{NGINX_WORKER_PROCESSES}}; # can be set by qordoba.conf
+daemon ${{NGINX_DAEMON}};                     # can be set by qordoba.conf
+
+pid pids/nginx.pid;                      # this setting is mandatory
+error_log logs/error.log ${{LOG_LEVEL}}; # can be set by qordoba.conf
+
+events {
+    use epoll; # custom setting
+    multi_accept on;
+}
+
+http {
+    # include default Qordoba Nginx config
+    include 'nginx-qordoba.conf';
+
+    # custom server
+    server {
+        listen 8888;
+        server_name custom_server;
+
+        location / {
+          ... # etc
+        }
+    }
+}
+</code></pre>
+</div>
+
+<p>You can then start Qordoba with:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ qordoba start -c qordoba.conf --nginx-conf custom_nginx.template
+</code></pre>
+</div>
+
+<p>If you wish to customize the Qordoba Nginx sub-configuration file to, eventually,
+add other Lua handlers or customize the <code class="highlighter-rouge">lua_*</code> directives, you can inline the
+<code class="highlighter-rouge">nginx_qordoba.lua</code> configuration in this <code class="highlighter-rouge">custom_nginx.template</code> example file:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># ---------------------
+# custom_nginx.template
+# ---------------------
+
+worker_processes ${{NGINX_WORKER_PROCESSES}}; # can be set by qordoba.conf
+daemon ${{NGINX_DAEMON}};                     # can be set by qordoba.conf
+
+pid pids/nginx.pid;                      # this setting is mandatory
+error_log logs/error.log ${{LOG_LEVEL}}; # can be set by qordoba.conf
+
+events {}
+
+http {
+  resolver ${{DNS_RESOLVER}} ipv6=off;
+  charset UTF-8;
+  error_log logs/error.log ${{LOG_LEVEL}};
+  access_log logs/access.log;
+
+  ... # etc
+}
+</code></pre>
+</div>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h4 id="embedding-qordoba-in-openresty">Embedding Qordoba in OpenResty</h4>
+
+<p>If you are running your own OpenResty servers, you can also easily embed Qordoba
+by including the Qordoba Nginx sub-configuration using the <code class="highlighter-rouge">include</code> directive
+(similar to the examples of the previous section). If you have a valid
+top-level NGINX configuration that simply includes the Qordoba-specific
+configuration:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># my_nginx.conf
+
+http {
+    include 'nginx-qordoba.conf';
+}
+</code></pre>
+</div>
+
+<p>you can start your instance like so:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ nginx -p /usr/local/openresty -c my_nginx.conf
+</code></pre>
+</div>
+
+<p>And Qordoba will be running in that instance (as configured in <code class="highlighter-rouge">nginx-qordoba.conf</code>).</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h4 id="serving-both-a-website-and-your-apis-from-qordoba">Serving both a website and your APIs from Qordoba</h4>
+
+<p>A common use case for API providers is to make Qordoba serve both a website
+and the APIs themselves over the Proxy port — <code class="highlighter-rouge">80</code> or <code class="highlighter-rouge">443</code> in
+production. For example, <code class="highlighter-rouge">https://my-api.com</code> (Website) and
+<code class="highlighter-rouge">https://my-api.com/api/v1</code> (API).</p>
+
+<p>To achieve this, we cannot simply declare a new virtual server block,
+like we did in the previous section. A good solution is to use a custom
+Nginx configuration template which inlines <code class="highlighter-rouge">nginx_qordoba.lua</code> and adds a new
+<code class="highlighter-rouge">location</code> block serving the website alongside the Qordoba Proxy <code class="highlighter-rouge">location</code>
+block:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># ---------------------
+# custom_nginx.template
+# ---------------------
+
+worker_processes ${{NGINX_WORKER_PROCESSES}}; # can be set by qordoba.conf
+daemon ${{NGINX_DAEMON}};                     # can be set by qordoba.conf
+
+pid pids/nginx.pid;                      # this setting is mandatory
+error_log logs/error.log ${{LOG_LEVEL}}; # can be set by qordoba.conf
+events {}
+
+http {
+  # here, we inline the contents of nginx_qordoba.lua
+  charset UTF-8;
+
+  # any contents until Qordoba's Proxy server block
+  ...
+
+  # Qordoba's Proxy server block
+  server {
+    server_name qordoba;
+
+    # any contents until the location / block
+    ...
+
+    # here, we declare our custom location serving our website
+    # (or API portal) which we can optimize for serving static assets
+    location / {
+      root /var/www/my-api.com;
+      index index.htm index.html;
+      ...
+    }
+
+    # Qordoba's Proxy location / has been changed to /api/v1
+    location /api/v1 {
+      set $upstream_host nil;
+      set $upstream_scheme nil;
+      set $upstream_uri nil;
+
+      # Any remaining configuration for the Proxy location
+      ...
+    }
+  }
+
+  # Qordoba's Admin server block goes below
+}
+</code></pre>
+</div>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h3 id="properties-reference">Properties reference</h3>
+
+<h4 id="general-section">General section</h4>
+
+<h5 id="prefix"><strong>prefix</strong></h5>
+
+<p>Working directory. Equivalent to Nginx’s prefix path, containing temporary files
+and logs. Each Qordoba process must have a separate working directory.</p>
+
+<p>Default: <code class="highlighter-rouge">/usr/local/qordoba</code></p>
+
+<hr />
+
+<h5 id="log_level"><strong>log_level</strong></h5>
+
+<p>Log level of the Nginx server. Logs can be found at <code class="highlighter-rouge">&lt;prefix&gt;/logs/error.log</code></p>
+
+<p>See http://nginx.org/en/docs/ngx_core_module.html#error_log for a list of
+accepted values.</p>
+
+<p>Default: <code class="highlighter-rouge">notice</code></p>
+
+<hr />
+
+<h5 id="proxy_access_log"><strong>proxy_access_log</strong></h5>
+
+<p>Path for proxy port request access logs. Set this value to <code class="highlighter-rouge">off</code> to disable
+logging proxy requests. If this value is a relative path, it will be placed
+under the <code class="highlighter-rouge">prefix</code> location.</p>
+
+<p>Default: <code class="highlighter-rouge">logs/access.log</code></p>
+
+<hr />
+
+<h5 id="proxy_error_log"><strong>proxy_error_log</strong></h5>
+
+<p>Path for proxy port request error logs. Granularity of these logs is adjusted
+by the <code class="highlighter-rouge">log_level</code> directive.</p>
+
+<p>Default: <code class="highlighter-rouge">logs/error.log</code></p>
+
+<hr />
+
+<h5 id="admin_access_log"><strong>admin_access_log</strong></h5>
+
+<p>Path for Admin API request access logs. Set this value to <code class="highlighter-rouge">off</code> to disable
+logging Admin API requests. If this value is a relative path, it will be placed
+under the <code class="highlighter-rouge">prefix</code> location.</p>
+
+<p>Default: <code class="highlighter-rouge">logs/admin_access.log</code></p>
+
+<hr />
+
+<h5 id="admin_error_log"><strong>admin_error_log</strong></h5>
+
+<p>Path for Admin API request error logs. Granularity of these logs is adjusted by
+the <code class="highlighter-rouge">log_level</code> directive.</p>
+
+<p>Default: <code class="highlighter-rouge">logs/error.log</code></p>
+
+<hr />
+
+<h5 id="custom_plugins"><strong>custom_plugins</strong></h5>
+
+<p>Comma-separated list of additional plugins this node should load. Use this
+property to load custom plugins that are not bundled with Qordoba. Plugins will
+be loaded from the <code class="highlighter-rouge">qordoba.plugins.{name}.*</code> namespace.</p>
+
+<p>Default: none</p>
+
+<p>Example: <code class="highlighter-rouge">my-plugin,hello-world,custom-rate-limiting</code></p>
+
+<hr />
+
+<h5 id="anonymous_reports"><strong>anonymous_reports</strong></h5>
+
+<p>Send anonymous usage data such as error stack traces to help improve Qordoba.</p>
+
+<p>Default: <code class="highlighter-rouge">on</code></p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<hr />
+
+<h4 id="nginx-section">Nginx section</h4>
+
+<h5 id="proxy_listen"><strong>proxy_listen</strong></h5>
+
+<p>Address and port on which Qordoba will accept HTTP requests. This is the
+public-facing entrypoint of Qordoba, to which your consumers will make
+requests to.</p>
+
+<p>See http://nginx.org/en/docs/http/ngx_http_core_module.html#listen for
+a description of the accepted formats for this and other <code class="highlighter-rouge">*_listen</code> values.</p>
+
+<p>Default: <code class="highlighter-rouge">0.0.0.0:8000</code></p>
+
+<p>Example: <code class="highlighter-rouge">0.0.0.0:80</code></p>
+
+<hr />
+
+<h5 id="proxy_listen_ssl"><strong>proxy_listen_ssl</strong></h5>
+
+<p>Address and port on which Qordoba will accept HTTPS requests if <code class="highlighter-rouge">ssl</code> is enabled.</p>
+
+<p>Default: <code class="highlighter-rouge">0.0.0.0:8443</code></p>
+
+<p>Example: <code class="highlighter-rouge">0.0.0.0:443</code></p>
+
+<hr />
+
+<h5 id="admin_listen"><strong>admin_listen</strong></h5>
+
+<p>Address and port on which Qordoba will expose an entrypoint to the Admin API.
+This API lets you configure and manage Qordoba, and should be kept private
+and secured.</p>
+
+<p>Default: <code class="highlighter-rouge">127.0.0.1:8001</code></p>
+
+<p>Example: <code class="highlighter-rouge">0.0.0.0:8001</code></p>
+
+<hr />
+
+<h5 id="admin_listen_ssl"><strong>admin_listen_ssl</strong></h5>
+
+<p>Address and port on which Qordoba will accept HTTPS requests to the Admin API if
+<code class="highlighter-rouge">admin_ssl</code> is enabled.</p>
+
+<p>Default: <code class="highlighter-rouge">127.0.0.1:8444</code></p>
+
+<p>Example: <code class="highlighter-rouge">0.0.0.0:8444</code></p>
+
+<hr />
+
+<h5 id="nginx_user"><strong>nginx_user</strong></h5>
+
+<p>Defines user and group credentials used by worker processes. If group is omitted, a
+group whose name equals that of user is used.</p>
+
+<p>Default: <code class="highlighter-rouge">nobody nobody</code></p>
+
+<p>Example: <code class="highlighter-rouge">nginx www</code></p>
+
+<hr />
+
+<h5 id="nginx_worker_processes"><strong>nginx_worker_processes</strong></h5>
+
+<p>Determines the number of worker processes spawned by Nginx.
+See http://nginx.org/en/docs/ngx_core_module.html#worker_processes for detailed
+usage of this directive and a description of accepted values.</p>
+
+<p>Default: <code class="highlighter-rouge">auto</code></p>
+
+<hr />
+
+<h5 id="nginx_daemon"><strong>nginx_daemon</strong></h5>
+
+<p>Determines whether Nginx will run as a daemon or as a foreground process.
+Mainly useful for development or when running Qordoba inside a Docker environment.</p>
+
+<p>See http://nginx.org/en/docs/ngx_core_module.html#daemon.</p>
+
+<p>Default: <code class="highlighter-rouge">on</code></p>
+
+<hr />
+
+<h5 id="mem_cache_size"><strong>mem_cache_size</strong></h5>
+
+<p>Size of the in-memory cache for database entities. The accepted units are <code class="highlighter-rouge">k</code> and
+<code class="highlighter-rouge">m</code>, with a minimum recommended value of a few MBs.</p>
+
+<p>Default: <code class="highlighter-rouge">128m</code></p>
+
+<hr />
+
+<h5 id="ssl"><strong>ssl</strong></h5>
+
+<p>Determines if Nginx should be listening for HTTPS traffic on the
+<code class="highlighter-rouge">proxy_listen_ssl</code> address. If disabled, Nginx will only bind itself
+on <code class="highlighter-rouge">proxy_listen</code>, and all SSL settings will be ignored.</p>
+
+<p>Default: <code class="highlighter-rouge">on</code></p>
+
+<hr />
+
+<h5 id="ssl_cipher_suite"><strong>ssl_cipher_suite</strong></h5>
+
+<p>Defines the TLS ciphers served by Nginx. Accepted values are <code class="highlighter-rouge">modern</code>,
+<code class="highlighter-rouge">intermediate</code>, <code class="highlighter-rouge">old</code>, or <code class="highlighter-rouge">custom</code>.
+See https://wiki.mozilla.org/Security/Server_Side_TLS for detailed
+descriptions of each cipher suite.</p>
+
+<p>Default: <code class="highlighter-rouge">modern</code></p>
+
+<hr />
+
+<h5 id="ssl_ciphers"><strong>ssl_ciphers</strong></h5>
+
+<p>Defines a custom list of TLS ciphers to be served by Nginx. This list must
+conform to the pattern defined by <code class="highlighter-rouge">openssl ciphers</code>. This value is ignored if
+<code class="highlighter-rouge">ssl_cipher_suite</code> is not <code class="highlighter-rouge">custom</code>.</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="ssl_cert"><strong>ssl_cert</strong></h5>
+
+<p>If <code class="highlighter-rouge">ssl</code> is enabled, the absolute path to the SSL certificate for the
+<code class="highlighter-rouge">proxy_listen_ssl</code> address. If none is specified and <code class="highlighter-rouge">ssl</code> is enabled, Qordoba will
+generate a default certificate and key.</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="ssl_cert_key"><strong>ssl_cert_key</strong></h5>
+
+<p>If <code class="highlighter-rouge">ssl</code> is enabled, the absolute path to the SSL key for the
+<code class="highlighter-rouge">proxy_listen_ssl</code> address.</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="http2"><strong>http2</strong></h5>
+
+<p>Enables HTTP2 support for HTTPS traffic on the <code class="highlighter-rouge">proxy_listen_ssl</code> address.</p>
+
+<p>Default: <code class="highlighter-rouge">off</code></p>
+
+<hr />
+
+<h5 id="client_ssl"><strong>client_ssl</strong></h5>
+
+<p>Determines if Nginx should send client-side SSL certificates when proxying
+requests.</p>
+
+<p>Default: <code class="highlighter-rouge">off</code></p>
+
+<hr />
+
+<h5 id="client_ssl_cert"><strong>client_ssl_cert</strong></h5>
+
+<p>If <code class="highlighter-rouge">client_ssl</code> is enabled, the absolute path to the client SSL certificate for
+the <code class="highlighter-rouge">proxy_ssl_certificate</code> directive. Note that this value is statically
+defined on the node, and currently cannot be configured on a per-API basis.</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="client_ssl_cert_key"><strong>client_ssl_cert_key</strong></h5>
+
+<p>If <code class="highlighter-rouge">client_ssl</code> is enabled, the absolute path to the client SSL key for the
+<code class="highlighter-rouge">proxy_ssl_certificate_key</code> address. Note this value is statically defined on
+the node, and currently cannot be configured on a per-API basis.</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="admin_ssl"><strong>admin_ssl</strong></h5>
+
+<p>Determines if Nginx should be listening for HTTPS traffic on the
+<code class="highlighter-rouge">admin_listen_ssl</code> address. If disabled, Nginx will only bind itself on
+<code class="highlighter-rouge">admin_listen</code>, and all SSL settings will be ignored.</p>
+
+<p>Default: <code class="highlighter-rouge">on</code></p>
+
+<hr />
+
+<h5 id="admin_ssl_cert"><strong>admin_ssl_cert</strong></h5>
+
+<p>If <code class="highlighter-rouge">admin_ssl</code> is enabled, the absolute path to the SSL certificate for the
+<code class="highlighter-rouge">admin_listen_ssl</code> address. If none is specified and <code class="highlighter-rouge">admin_ssl</code> is enabled,
+Qordoba will generate a default certificate and key.</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="admin_ssl_cert_key"><strong>admin_ssl_cert_key</strong></h5>
+
+<p>If <code class="highlighter-rouge">admin_ssl</code> is enabled, the absolute path to the SSL key for the
+<code class="highlighter-rouge">admin_listen_ssl</code> address.</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="admin_http2"><strong>admin_http2</strong></h5>
+
+<p>Enables HTTP2 support for HTTPS traffic on the <code class="highlighter-rouge">admin_listen_ssl</code> address.</p>
+
+<p>Default: <code class="highlighter-rouge">off</code></p>
+
+<hr />
+
+<h5 id="upstream_keepalive"><strong>upstream_keepalive</strong></h5>
+
+<p>Sets the maximum number of idle keepalive connections to upstream servers that
+are preserved in the cache of each worker process. When this number is
+exceeded, the least recently used connections are closed.</p>
+
+<p>Default: <code class="highlighter-rouge">60</code></p>
+
+<hr />
+
+<h5 id="server_tokens"><strong>server_tokens</strong></h5>
+
+<p>Enables or disables emitting Qordoba version on error pages and in the <code class="highlighter-rouge">Server</code>
+or <code class="highlighter-rouge">Via</code> (in case the request was proxied) response header field.</p>
+
+<p>Default: <code class="highlighter-rouge">on</code></p>
+
+<hr />
+
+<h5 id="latency_tokens"><strong>latency_tokens</strong></h5>
+
+<p>Enables or disables emitting Qordoba latency information in the <code class="highlighter-rouge">X-Qordoba-Proxy-Latency</code>
+and <code class="highlighter-rouge">X-Qordoba-Upstream-Latency</code> response header fields.</p>
+
+<p>Default: <code class="highlighter-rouge">on</code></p>
+
+<hr />
+
+<h5 id="trusted_ips"><strong>trusted_ips</strong></h5>
+
+<p>Defines trusted IP address blocks that are known to send correct
+<code class="highlighter-rouge">X-Forwarded-*</code> headers. Requests from trusted IPs make Qordoba forward their
+<code class="highlighter-rouge">X-Forwarded-*</code> headers upstream. Non-trusted requests make Qordoba insert its own
+<code class="highlighter-rouge">X-Forwarded-*</code> headers.</p>
+
+<p>This property also sets the <code class="highlighter-rouge">set_real_ip_from</code> directive(s) in the Nginx
+configuration. It accepts the same type of values (CIDR blocks) but as a
+comma-separated list.</p>
+
+<p>To trust <em>all</em> /!\ IPs, set this value to <code class="highlighter-rouge">0.0.0.0/0,::/0</code>.</p>
+
+<p>If the special value <code class="highlighter-rouge">unix:</code> is specified, all UNIX-domain sockets will be
+trusted.</p>
+
+<p>See <a href="http://nginx.org/en/docs/http/ngx_http_realip_module.html#set_real_ip_from">the Nginx docs</a>
+for more details on the <code class="highlighter-rouge">set_real_ip_from</code> directive.</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="real_ip_header"><strong>real_ip_header</strong></h5>
+
+<p>Defines the request header field whose value will be used to replace the client
+address. This value sets the <a href="http://nginx.org/en/docs/http/ngx_http_realip_module.html">ngx_http_realip_module</a>
+directive of the same name in the Nginx configuration.</p>
+
+<p>If this value receives <code class="highlighter-rouge">proxy_protocol</code>, the <code class="highlighter-rouge">proxy_protocol</code> parameter will be
+appended to the <code class="highlighter-rouge">listen</code> directive of the Nginx template.</p>
+
+<p>See <a href="http://nginx.org/en/docs/http/ngx_http_realip_module.html#real_ip_header">the Nginx docs</a>
+for a description of this directive.</p>
+
+<p>Default: <code class="highlighter-rouge">X-Real-IP</code></p>
+
+<hr />
+
+<h5 id="real_ip_recursive"><strong>real_ip_recursive</strong></h5>
+
+<p>This value sets the <a href="http://nginx.org/en/docs/http/ngx_http_realip_module.html">ngx_http_realip_module</a> directive
+of the same name in the Nginx configuration.</p>
+
+<p>See <a href="http://nginx.org/en/docs/http/ngx_http_realip_module.html#real_ip_recursive">the Nginx docs</a>
+for a description of this directive.</p>
+
+<p>Default: <code class="highlighter-rouge">off</code></p>
+
+<hr />
+
+<h5 id="client_max_body_size"><strong>client_max_body_size</strong></h5>
+
+<p>Defines the maximum request body size allowed by requests proxied by Qordoba, specified in the
+Content-Length request header. If a request exceeds this limit, Qordoba will respond with a
+413 (Request Entity Too Large). Setting this value to 0 disables checking the request body
+size.</p>
+
+<p>Note: See <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size">the Nginx docs</a>
+for further description of this parameter. Numeric values may be suffixed with
+<code class="highlighter-rouge">k</code> or <code class="highlighter-rouge">m</code> to denote limits in terms of kilobytes or megabytes.</p>
+
+<p>Default: <code class="highlighter-rouge">0</code></p>
+
+<hr />
+
+<h5 id="client_body_buffer_size"><strong>client_body_buffer_size</strong></h5>
+
+<p>Defines the buffer size for reading the request body. If the client request body is
+larger than this value, the body will be buffered to disk. Note that when the body is
+buffered to disk Qordoba plugins that access or manipulate the request body may not work, so
+it is advisable to set this value as high as possible (e.g., set it as high as
+<code class="highlighter-rouge">client_max_body_size</code> to force request bodies to be kept in memory). Do note that
+high-concurrency environments will require significant memory allocations to process
+many concurrent large request bodies.</p>
+
+<p>Note: See <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#client_body_buffer_size">the Nginx docs</a>
+for further description of this parameter. Numeric values may be suffixed with
+<code class="highlighter-rouge">k</code> or <code class="highlighter-rouge">m</code> to denote limits in terms of kilobytes or megabytes.</p>
+
+<p>Default: <code class="highlighter-rouge">8k</code></p>
+
+<hr />
+
+<h5 id="error_default_type"><strong>error_default_type</strong></h5>
+
+<p>Default MIME type to use when the request <code class="highlighter-rouge">Accept</code> header is missing and Nginx is
+returning an error for the request. Accepted values are <code class="highlighter-rouge">text/plain</code>,
+<code class="highlighter-rouge">text/html</code>, <code class="highlighter-rouge">application/json</code>, and <code class="highlighter-rouge">application/xml</code>.</p>
+
+<p>Default: <code class="highlighter-rouge">text/plain</code></p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<hr />
+
+<h4 id="datastore-section">Datastore section</h4>
+
+<p>Qordoba will store all of its data (such as APIs, Consumers and Plugins) in
+either Cassandra or PostgreSQL.</p>
+
+<p>All Qordoba nodes belonging to the same cluster must connect themselves to the
+same database.</p>
+
+<div class="alert alert-warning">
+  <p><strong>Starting with Qordoba 0.12.0:</strong></p>
+  <ul>
+    <li>PostgreSQL 9.4 support should be considered deprecated. Users are encouraged to upgrade to 9.5+</li>
+    <li>Cassandra 2.1 support should be considered deprecated. Users are encouraged to upgrade to 2.2+</li>
+  </ul>
+</div>
+
+<hr />
+
+<h5 id="database"><strong>database</strong></h5>
+
+<p>Determines which of PostgreSQL or Cassandra this node will use as its
+datastore. Accepted values are <code class="highlighter-rouge">postgres</code> and <code class="highlighter-rouge">cassandra</code>.</p>
+
+<p>Default: <code class="highlighter-rouge">postgres</code></p>
+
+<hr />
+
+<h5 id="postgres-settings"><strong>Postgres settings</strong></h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>pg_host</strong></td>
+      <td>Host of the Postgres server</td>
+    </tr>
+    <tr>
+      <td><strong>pg_port</strong></td>
+      <td>Port of the Postgres server</td>
+    </tr>
+    <tr>
+      <td><strong>pg_user</strong></td>
+      <td>Postgres user</td>
+    </tr>
+    <tr>
+      <td><strong>pg_password</strong></td>
+      <td>Postgres user’s password</td>
+    </tr>
+    <tr>
+      <td><strong>pg_database</strong></td>
+      <td>Database to connect to. <strong>must exist</strong></td>
+    </tr>
+    <tr>
+      <td><strong>pg_ssl</strong></td>
+      <td>Enable SSL connections to the server</td>
+    </tr>
+    <tr>
+      <td><strong>pg_ssl_verify</strong></td>
+      <td>If <code class="highlighter-rouge">pg_ssl</code> is enabled, toggle server certificate verification. See <code class="highlighter-rouge">lua_ssl_trusted_certificate</code> setting.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h5 id="cassandra-settings"><strong>Cassandra settings</strong></h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>cassandra_contact_points</strong></td>
+      <td>Comma-separated list of contacts points to your Cassandra cluster.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_port</strong></td>
+      <td>Port on which your nodes are listening.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_keyspace</strong></td>
+      <td>Keyspace to use in your cluster. Will be created if doesn’t exist.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_consistency</strong></td>
+      <td>Consistency setting to use when reading/writing.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_timeout</strong></td>
+      <td>Timeout (in ms) for reading/writing.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_ssl</strong></td>
+      <td>Enable SSL connections to the nodes.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_ssl_verify</strong></td>
+      <td>If <code class="highlighter-rouge">cassandra_ssl</code> is enabled, toggle server certificate verification. See <code class="highlighter-rouge">lua_ssl_trusted_certificate</code> setting.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_username</strong></td>
+      <td>Username when using the PasswordAuthenticator scheme.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_password</strong></td>
+      <td>Password when using the PasswordAuthenticator scheme.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_consistency</strong></td>
+      <td>Consistency setting to use when reading/writing to the Cassandra cluster.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_lb_policy</strong></td>
+      <td>Load balancing policy to use when distributing queries across your Cassandra cluster. Accepted values are <code class="highlighter-rouge">RoundRobin</code> and <code class="highlighter-rouge">DCAwareRoundRobin</code>. Prefer the later if and only if you are using a multi-datacenter cluster, and set the <code class="highlighter-rouge">cassandra_local_datacenter</code> if so.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_local_datacenter</strong></td>
+      <td>When using the <code class="highlighter-rouge">DCAwareRoundRobin</code> policy, you must specify the name of the cluster local (closest) to this Qordoba node.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_repl_strategy</strong></td>
+      <td>If creating the keyspace for the first time, specify a replication strategy.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_repl_factor</strong></td>
+      <td>Specify a replication factor for the <code class="highlighter-rouge">SimpleStrategy</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_data_centers</strong></td>
+      <td>Specify data centers for the <code class="highlighter-rouge">NetworkTopologyStrategy</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>cassandra_schema_consensus_timeout</strong></td>
+      <td>Define the timeout (in ms) for the waiting period to each a schema consensus between your Cassandra nodes. This value is only used during migrations.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<hr />
+
+<h4 id="datastore-cache-section">Datastore cache section</h4>
+
+<p>In order to avoid unecessary communication with the datastore, Qordoba caches
+entities (such as APIs, Consumers, Credentials, etc…) for a configurable
+period of time. It also handles invalidations if such an entity is updated.</p>
+
+<p>This section allows for configuring the behavior of Qordoba regarding the
+caching of such configuration entities.</p>
+
+<hr />
+
+<h5 id="db_update_frequency"><strong>db_update_frequency</strong></h5>
+
+<p>Frequency (in seconds) at which to check for
+updated entities with the datastore.
+When a node creates, updates, or deletes an
+entity via the Admin API, other nodes need
+to wait for the next poll (configured by
+this value) to eventually purge the old
+cached entity and start using the new one.</p>
+
+<p>Default: 5 seconds</p>
+
+<hr />
+
+<h5 id="db_update_propagation"><strong>db_update_propagation</strong></h5>
+
+<p>Time (in seconds) taken for an entity in the
+datastore to be propagated to replica nodes
+of another datacenter.
+When in a distributed environment such as
+a multi-datacenter Cassandra cluster, this
+value should be the maximum number of
+seconds taken by Cassandra to propagate a
+row to other datacenters.
+When set, this property will increase the
+time taken by Qordoba to propagate the change
+of an entity.
+Single-datacenter setups or PostgreSQL
+servers should suffer no such delays, and
+this value can be safely set to 0.</p>
+
+<p>Default: 0 seconds</p>
+
+<hr />
+
+<h5 id="db_cache_ttl"><strong>db_cache_ttl</strong></h5>
+
+<p>Time-to-live (in seconds) of an entity from
+the datastore when cached by this node.
+Database misses (no entity) are also cached
+according to this setting.
+If set to 0, such cached entities/misses
+never expire.</p>
+
+<p>Default: 3600 seconds (1 hour)</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<hr />
+
+<h4 id="dns-resolver-section">DNS resolver section</h4>
+
+<p>Qordoba will resolve hostnames as either <code class="highlighter-rouge">SRV</code> or <code class="highlighter-rouge">A</code> records (in that order, and
+<code class="highlighter-rouge">CNAME</code> records will be dereferenced in the process).
+In case a name was resolved as an <code class="highlighter-rouge">SRV</code> record it will also override any given
+port number by the <code class="highlighter-rouge">port</code> field contents received from the DNS server.</p>
+
+<p>The DNS options <code class="highlighter-rouge">SEARCH</code> and <code class="highlighter-rouge">NDOTS</code> (from the <code class="highlighter-rouge">/etc/resolv.conf</code> file) will
+be used to expand short names to fully qualified ones. So it will first try the
+entire <code class="highlighter-rouge">SEARCH</code> list for the <code class="highlighter-rouge">SRV</code> type, if that fails it will try the <code class="highlighter-rouge">SEARCH</code>
+list for <code class="highlighter-rouge">A</code>, etc.</p>
+
+<p>For the duration of the <code class="highlighter-rouge">ttl</code>, the internal DNS resolver will loadbalance each
+request it gets over the entries in the DNS record. For <code class="highlighter-rouge">SRV</code> records the
+<code class="highlighter-rouge">weight</code> fields will be honored, but it will only use the lowest <code class="highlighter-rouge">priority</code>
+field entries in the record.</p>
+
+<hr />
+
+<h5 id="dns_resolver"><strong>dns_resolver</strong></h5>
+
+<p>Comma separated list of nameservers, each
+entry in <code class="highlighter-rouge">ip[:port]</code> format to be used by
+Qordoba. If not specified the nameservers in
+the local <code class="highlighter-rouge">resolv.conf</code> file will be used.
+Port defaults to 53 if omitted. Accepts
+both IPv4 and IPv6 addresses.</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="dns_hostsfile"><strong>dns_hostsfile</strong></h5>
+
+<p>The hosts file to use. This file is read once and its content is static
+in memory. To read the file again after modifying it, Qordoba must be reloaded.</p>
+
+<p>Default: <code class="highlighter-rouge">/etc/hosts</code></p>
+
+<hr />
+
+<h5 id="dns_order"><strong>dns_order</strong></h5>
+
+<p>The order in which to resolve different
+record types. The <code class="highlighter-rouge">LAST</code> type means the
+type of the last successful lookup (for the
+specified name). The format is a (case
+insensitive) comma separated list.</p>
+
+<p>Default: <code class="highlighter-rouge">LAST,SRV,A,CNAME</code></p>
+
+<hr />
+
+<h5 id="dns_stale_ttl"><strong>dns_stale_ttl</strong></h5>
+
+<p>Defines, in seconds, how long a record will
+remain in cache past its TTL. This value
+will be used while the new DNS record is
+fetched in the background.
+Stale data will be used from expiry of a
+record until either the refresh query
+completes, or the <code class="highlighter-rouge">dns_stale_ttl</code> number of
+seconds have passed.</p>
+
+<p>Default: <code class="highlighter-rouge">4</code></p>
+
+<hr />
+
+<h5 id="dns_not_found_ttl"><strong>dns_not_found_ttl</strong></h5>
+
+<p>TTL in seconds for empty DNS responses and
+“(3) name error” responses.</p>
+
+<p>Default: <code class="highlighter-rouge">30</code></p>
+
+<hr />
+
+<h5 id="dns_error_ttl"><strong>dns_error_ttl</strong></h5>
+
+<p>TTL in seconds for error responses.</p>
+
+<p>Default: <code class="highlighter-rouge">1</code></p>
+
+<hr />
+
+<h5 id="dns_no_sync"><strong>dns_no_sync</strong></h5>
+
+<p>If enabled, then upon a cache-miss every
+request will trigger its own dns query.
+When disabled multiple requests for the
+same name/type will be synchronised to a
+single query.</p>
+
+<p>Default: off</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<hr />
+
+<h4 id="development--miscellaneous-section">Development &amp; miscellaneous section</h4>
+
+<p>Additional settings inherited from lua-nginx-module allowing for more
+flexibility and advanced usage.</p>
+
+<p>See the lua-nginx-module documentation for more informations:
+https://github.com/openresty/lua-nginx-module</p>
+
+<hr />
+
+<h5 id="lua_ssl_trusted_certificate"><strong>lua_ssl_trusted_certificate</strong></h5>
+
+<p>Absolute path to the certificate authority file for Lua cosockets in PEM
+format. This certificate will be the one used for verifying Qordoba’s database
+connections, when <code class="highlighter-rouge">pg_ssl_verify</code> or <code class="highlighter-rouge">cassandra_ssl_verify</code> are enabled.</p>
+
+<p>See https://github.com/openresty/lua-nginx-module#lua_ssl_trusted_certificate</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="lua_ssl_verify_depth"><strong>lua_ssl_verify_depth</strong></h5>
+
+<p>Sets the verification depth in the server certificates chain used by Lua
+cosockets, set by <code class="highlighter-rouge">lua_ssl_trusted_certificate</code>.</p>
+
+<p>This includes the certificates configured for Qordoba’s database connections.</p>
+
+<p>See https://github.com/openresty/lua-nginx-module#lua_ssl_verify_depth</p>
+
+<p>Default: <code class="highlighter-rouge">1</code></p>
+
+<hr />
+
+<h5 id="lua_package_path"><strong>lua_package_path</strong></h5>
+
+<p>Sets the Lua module search path (LUA_PATH). Useful when developing or using
+custom plugins not stored in the default search path.</p>
+
+<p>See https://github.com/openresty/lua-nginx-module#lua_package_path</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="lua_package_cpath"><strong>lua_package_cpath</strong></h5>
+
+<p>Sets the Lua C module search path (LUA_CPATH).</p>
+
+<p>See https://github.com/openresty/lua-nginx-module#lua_package_cpath</p>
+
+<p>Default: none</p>
+
+<hr />
+
+<h5 id="lua_socket_pool_size"><strong>lua_socket_pool_size</strong></h5>
+
+<p>Specifies the size limit for every cosocket connection pool associated with
+every remote server.</p>
+
+<p>See https://github.com/openresty/lua-nginx-module#lua_socket_pool_size</p>
+
+<p>Default: <code class="highlighter-rouge">30</code></p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
