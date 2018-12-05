@@ -312,29 +312,29 @@ Pulling file paths smoothly back into your local folder structure has two requir
 
 2. **file naming**: 
 
-Know the source code pattern.
+	Know the source code pattern.
 
-The pattern needs to be added as a flag ```--file-path-pattern``` to your pull command:
+	The pattern needs to be added as a flag ```--file-path-pattern``` to your pull command:
 
-<language_code> - en-us
+	<language_code> - en-us
 
-<language_lang_code> - en
+	<language_lang_code> - en
 
-<language_name> - english
+	<language_name> - english
 
-<language_name_cap> - English
+	<language_name_cap> - English
 
-<language_name_allcap> - ENGLISH
+	<language_name_allcap> - ENGLISH
 
-<local_capitalized> - US
+	<local_capitalized> - US
 
-Example:
+	Example:
 
-source file-path: "./folder/en/index.html"
-pattern: language_lang_code
-command: ```$ qor pull --file-path-pattern language_lang_code```
+	source file-path: "./folder/en/index.html"
+	pattern: language_lang_code
+	command: ```$ qor pull --file-path-pattern language_lang_code```
 
-the name of the source language will change accordingly
+	the name of the source language will change accordingly
 
-Default:
-```qor pull --file-path-pattern default.```
+	Default:
+	```qor pull --file-path-pattern default.```
