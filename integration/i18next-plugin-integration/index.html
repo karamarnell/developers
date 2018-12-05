@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+  
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Plugins - Cross-origin resource sharing | Qordoba - Strings Intelligence Platform..</title>
+  <meta name="description" content="Create a fully automated strings management solution">
+  <meta name="author" content="Qordoba"/>
+  <meta property="og:title" content="Strings Intelligence Platform.."/>
+  <meta property="og:site_name" content="Qordoba"/>
+  <link rel="prefetch" href="/assets/images/qordoba-white-logo.png" /><link rel="prefetch" href="/assets/images/icons/plugins/cors.png" /><link rel="prefetch" href="/assets/images/qordobalogoblue.png" /><link rel="dns-prefetch" href="https://buttons.github.io" /><link rel="dns-prefetch" href="https://platform.twitter.com" /><link rel="dns-prefetch" href="https://connect.facebook.net" /><link rel="dns-prefetch" href="//mashape.github.io" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png"/>
+  <link rel="stylesheet" href="/assets/styles.css?v=1544053565"/>
+</head>
+
+
+  <body id="page-plugin" >
+    <header class="site-header">
+  <div class="enterprise">
+        <div class="container">
+       <nav class="enterprise-sites one-half column">
+         <ul>
+           <li>
+             <a href="https://qordoba.com/customers/" target="_blank">Customers</a>
+           </li>
+           <li>
+             <a href="https://qordoba.com/partners/" target="_blank" >Partners</a>
+           </li>
+         </ul>
+       </nav>   
+      <nav class="enterprise-contact one-half column">
+        <ul>
+          <li>
+            <a href="https://support.qordoba.com/" target="_blank">Support</a>
+          </li>
+          <li>
+            <a href="http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html">Request Demo</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .enterprise -->
+  <div class="navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand">
+        <img src="/assets/images/qordoba-white-logo.png" alt="Qordoba" style="height: 35px;" >
+      </a>
+      <button data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar" class="navbar-toggle">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <nav id="navbar" class="navbar-nav">
+        <ul>
+          <li>
+            <a href="/docs/" >Docs</a>
+          </li>
+          <li>
+            <a href="/ecosystem" >Ecosystem</a>
+          </li>
+          <li>
+            <a href="/security/" >Security</a>
+          </li>
+          <li>
+            <a href="https://github.com/Qordobacode/" target="_blank">Code</a>
+          </li>
+           <li>
+            <a href="/api/" >API</a>
+          </li>
+          <li>
+            <a href="/install" class="button button-dark" data-analytics='{"event": "Clicked download", "type": "button", "location": "header"}'>Installation</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .navbar -->
+</header>
+
+
+    <div class="page page-plugin">
+  
+  <header class="page-header">
+    <div class="container">
+      
+        <div class="page-header-icon">
+          <img src="/assets/images/icons/plugins/cors.png" alt="" />
+        </div>
+      
+
+      <div class="page-header-title">
+        
+          <ul class="breadcrumbs">
+            
+              <li class="breadcrumb-item">
+                
+                <a href="/ecosystem">Ecosystem</a>
+                
+              </li>
+            
+          </ul>
+        
+
+        <h1>CORS</h1>
+
+        
+      </div>
+
+      
+
+      
+    </div>
+  </header>
+
+
+
+  <div class="container">
+    <div class="content">
+      <p>Easily add <strong>Cross-origin resource sharing <em>(CORS)</em></strong> to your API by enabling
+this plugin.</p>
+
+<hr>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>Configuring the plugin is as simple as a single API call, you can configure and
+enable it for your <a href="/docs/latest/admin-api/#api-object">API</a> by executing the following request on your
+Qordoba server:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>curl -X POST http://qordoba:8001/apis/<span class="o">{</span>api<span class="o">}</span>/plugins <span class="se">\</span>
+    --data <span class="s2">"name=cors"</span> <span class="se">\</span>
+    --data <span class="s2">"config.origins=http://mockbin.com"</span> <span class="se">\</span>
+    --data <span class="s2">"config.methods=GET, POST"</span> <span class="se">\</span>
+    --data <span class="s2">"config.headers=Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Auth-Token"</span> <span class="se">\</span>
+    --data <span class="s2">"config.exposed_headers=X-Auth-Token"</span> <span class="se">\</span>
+    --data <span class="s2">"config.credentials=true"</span> <span class="se">\</span>
+    --data <span class="s2">"config.max_age=3600"</span>
+</code></pre></div>
+<p><code>api</code>: The <code>id</code> or <code>name</code> of the API that this plugin configuration will target</p>
+
+<p>You can also apply it for every API using the <code>http://qordoba:8001/plugins/</code>
+endpoint. Read the <a href="/docs/latest/admin-api/#add-plugin">Plugin Reference</a> for
+more information.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">form parameter</th>
+<th>default</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><code>name</code></td>
+<td></td>
+<td>Name of the plugin to use, in this case: <code>cors</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><code>config.origins</code><br><em>optional</em></td>
+<td></td>
+<td>A comma-separated list of allowed domains for the <code>Access-Control-Allow-Origin</code> header. If you wish to allow all origins, add <code>*</code> as a single value to this configuration field. The accepted values can either be flat strings or PCRE regexes. <strong>NOTE</strong>: Prior to Qordoba 0.10.x, this parameter was <code>config.origin</code> (note the change in trailing <code>s</code>), and only accepted a single value, or the <code>*</code> special value.</td>
+</tr>
+<tr>
+<td style="text-align: right"><code>config.methods</code><br><em>optional</em></td>
+<td><code>GET,HEAD,PUT,PATCH,POST,DELETE</code></td>
+<td>Value for the <code>Access-Control-Allow-Methods</code> header, expects a comma delimited string (e.g. <code>GET,POST</code>).</td>
+</tr>
+<tr>
+<td style="text-align: right"><code>config.headers</code><br><em>optional</em></td>
+<td>Value of the <code>Access-Control-Request-Headers</code><br>request header</td>
+<td>Value for the <code>Access-Control-Allow-Headers</code> header, expects a comma delimited string (e.g. <code>Origin, Authorization</code>).</td>
+</tr>
+<tr>
+<td style="text-align: right"><code>config.exposed_headers</code><br><em>optional</em></td>
+<td></td>
+<td>Value for the <code>Access-Control-Expose-Headers</code> header, expects a comma delimited string (e.g. <code>Origin, Authorization</code>). If not specified, no custom headers are exposed.</td>
+</tr>
+<tr>
+<td style="text-align: right"><code>config.credentials</code><br><em>optional</em></td>
+<td><code>false</code></td>
+<td>Flag to determine whether the <code>Access-Control-Allow-Credentials</code> header should be sent with <code>true</code> as the value.</td>
+</tr>
+<tr>
+<td style="text-align: right"><code>config.max_age</code><br><em>optional</em></td>
+<td></td>
+<td>Indicated how long the results of the preflight request can be cached, in <code>seconds</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><code>config.preflight_continue</code><br><em>optional</em></td>
+<td><code>false</code></td>
+<td>A boolean value that instructs the plugin to proxy the <code>OPTIONS</code> preflight request to the upstream API.</td>
+</tr>
+</tbody></table>
+
+<hr>
+
+<h2 id="known-issues">Known issues</h2>
+
+<p>Below is a list of known issues or limitations for this plugin.</p>
+
+<h3 id="cors-limitations">CORS Limitations</h3>
+
+<p>If the client is a browser, there is a known issue with this plugin caused by a
+limitation of the CORS specification that doesn&#39;t allow to specify a custom
+<code>Host</code> header in a preflight <code>OPTIONS</code> request.</p>
+
+<p>Because of this limitation, this plugin will only work for APIs that have been
+configured with a <code>uris</code> setting, and it will not work for APIs that
+are being resolved using a custom DNS (the <code>hosts</code> property).</p>
+
+<p>To learn how to configure <code>uris</code> for an API, please read the <a href="/docs/latest/proxy">Proxy
+Reference</a>.</p>
+
+    </div>
+  </div>
+</div>
+
+
+    
+  <!-- section class="section subscribe-section" id="newsletter">
+  <div class="container">
+    <header class="section-header">
+      <h4>Keep up with the latest features</h4>
+    </header>
+
+    <div class="row">
+      <div class="one-half column offset-by-three">
+
+      </div>
+    </div>
+  </div>
+</section -->
+
+
+<footer class="marketing-footer--light-gray">
+  <section>
+    <ul>
+      <li class="logo-wrapper">
+        <div class="logo">
+          <img src="/assets/images/qordobalogoblue.png" alt="Qordoba" >
+        </div>
+      </li>
+      <li>
+        <nav>
+          <h4>Use Cases</h4>
+          <ul>
+            <li><a href="#">Strings Management</a></li>
+            <li><a href="#">Content AI</a></li>
+            <li><a href="#">Localization</a></li>
+            <li><a href="#">Persona Based Content</a></li>
+
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="https://support.qordoba.com/">Knowledge Base</a></li>
+            <li><a href="https://dev.qordoba.com/glossary/">Glossary of Qordoba Terms</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Webinars</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Tutorials</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Network Status</h4>
+          <ul>
+            <li><a href="https://status.qordoba.com/">APIs</a></li>
+            <li><a href="https://status.qordoba.com/">SmartSuggest</a></li>
+            <li><a href="https://status.qordoba.com/">Emotion and Tone</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </section>
+
+  <section class="legal">
+    <ul>
+      <li>
+        <span class="mashape-footer-content">&copy; Qordoba. 2018</span>
+      </li>
+      <li>
+        <div class="social-link">
+          <a href="https://github.com/Qordobacode" title="Github"><i aria-label="Github" class="fa fa-github" aria-hidden="true"></i></a></div>
+        <div class="social-link">
+          <a href="https://twitter.com/qordoba" title="Twitter"><i aria-label="Twitter" class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</footer>
+
+    <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.prepend(anchorForId(header.id));
+      }
+    }
+  };
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      console.log("here")
+      var contentBlock = document.getElementById("documentation");
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+    <script src="/assets/app.js?v=1544053565"></script>
+
+    <div id="fb-root"></div>
+
+    <script id="github-bjs" src="https://buttons.github.io/buttons.js" async defer></script>
+    <script id="twitter-wjs" type="text/javascript" src="https://platform.twitter.com/widgets.js" async defer></script>
+    <script id="facebook-jssdk" type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=842731852424506" async defer></script>
+
+    <script type="text/javascript">
+      piAId = '393112';
+      piCId = '48375';
+
+      (function() {
+        function async_load(){
+          var s = document.createElement('script'); s.type = 'text/javascript';
+          s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+          var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+        }
+        if(window.attachEvent) { window.attachEvent('onload', async_load); }
+        else { window.addEventListener('load', async_load, false); }
+      })();
+    </script>
+
+    <script type='text/javascript'>
+      var _vwo_code=(function(){
+      var account_id=125292,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=true,
+      // DO NOT EDIT BELOW THIS LINE
+      f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load("WDj0nSS7hpyxwL3evgbOzK755s0NUye6");
+        analytics.page()
+      }}();
+    </script>
+
+    <script type="text/javascript" src="//mashape.github.io/notification-bar/embed.js" async defer></script>
+  </body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+  
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Plugins - LDAP Authentication | Qordoba - Strings Intelligence Platform..</title>
+  <meta name="description" content="Create a fully automated strings management solution">
+  <meta name="author" content="Qordoba"/>
+  <meta property="og:title" content="Strings Intelligence Platform.."/>
+  <meta property="og:site_name" content="Qordoba"/>
+  <link rel="prefetch" href="/assets/images/qordoba-white-logo.png" /><link rel="prefetch" href="/assets/images/icons/plugins/ldap-authentication.png" /><link rel="prefetch" href="/assets/images/qordobalogoblue.png" /><link rel="dns-prefetch" href="https://buttons.github.io" /><link rel="dns-prefetch" href="https://platform.twitter.com" /><link rel="dns-prefetch" href="https://connect.facebook.net" /><link rel="dns-prefetch" href="//mashape.github.io" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png"/>
+  <link rel="stylesheet" href="/assets/styles.css?v=1544053565"/>
+</head>
+
+
+  <body id="page-plugin" >
+    <header class="site-header">
+  <div class="enterprise">
+        <div class="container">
+       <nav class="enterprise-sites one-half column">
+         <ul>
+           <li>
+             <a href="https://qordoba.com/customers/" target="_blank">Customers</a>
+           </li>
+           <li>
+             <a href="https://qordoba.com/partners/" target="_blank" >Partners</a>
+           </li>
+         </ul>
+       </nav>   
+      <nav class="enterprise-contact one-half column">
+        <ul>
+          <li>
+            <a href="https://support.qordoba.com/" target="_blank">Support</a>
+          </li>
+          <li>
+            <a href="http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html">Request Demo</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .enterprise -->
+  <div class="navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand">
+        <img src="/assets/images/qordoba-white-logo.png" alt="Qordoba" style="height: 35px;" >
+      </a>
+      <button data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar" class="navbar-toggle">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <nav id="navbar" class="navbar-nav">
+        <ul>
+          <li>
+            <a href="/docs/" >Docs</a>
+          </li>
+          <li>
+            <a href="/ecosystem" >Ecosystem</a>
+          </li>
+          <li>
+            <a href="/security/" >Security</a>
+          </li>
+          <li>
+            <a href="https://github.com/Qordobacode/" target="_blank">Code</a>
+          </li>
+           <li>
+            <a href="/api/" >API</a>
+          </li>
+          <li>
+            <a href="/install" class="button button-dark" data-analytics='{"event": "Clicked download", "type": "button", "location": "header"}'>Installation</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .navbar -->
+</header>
+
+
+    <div class="page page-plugin">
+  
+  <header class="page-header">
+    <div class="container">
+      
+        <div class="page-header-icon">
+          <img src="/assets/images/icons/plugins/ldap-authentication.png" alt="" />
+        </div>
+      
+
+      <div class="page-header-title">
+        
+          <ul class="breadcrumbs">
+            
+              <li class="breadcrumb-item">
+                
+                <a href="/ecosystem">Ecosystem</a>
+                
+              </li>
+            
+          </ul>
+        
+
+        <h1>LDAP Authentication</h1>
+
+        
+      </div>
+
+      
+
+      
+    </div>
+  </header>
+
+
+
+  <div class="container">
+    <div class="content">
+      <ol>
+<li><p>Introduction
+This document gives the Technical Specifications for the Qordoba Demandware Link cartridge as well
+as the LINK implementation guide for setting up Qordoba on standard SiteGenesis 2.0.
+The Cartridge allows you to use Qordoba to translate products, categories and content assets from
+your Demandware catalogues.</p></li>
+<li><p>Cartridge Installation
+To install the Qordoba cartridge, go to Administration –&gt; Sites –&gt; Manage Sites –&gt; Sites-Site -
+Settings and add the cartridge <code>qordoba_integration</code> to the beginning of your cartridge path.
+Be sure to also add the cartridge to the Business Manager cartridge path by selecting &#39;Manage
+the Business Manager Site&#39;.</p></li>
+</ol>
+
+<p>System and Custom Object Extensions</p>
+
+<p>There are several metadata files that need to be imported into the site for the integration to function
+properly. Import the provided system object type extensions in file
+“metadata/system-objecttype-extensions.xml” by navigating to Site Development/Import &amp;
+Export/Metadata
+This will extend the SitePreferences object to include an attribute for the Qordoba configuration
+preferences.
+Upload the file from your local workspace via &#39;Upload&#39;, then select &#39;Import&#39; and choose your newly
+uploaded file.
+Follow the same process for the file &#39;metadata/custom-objecttypedefinitions.xml&#39;.</p>
+
+<p>This file creates two new system object definitions:</p>
+
+<ol>
+<li>QORDOBA_SUBMISSION – an object that stores the state of a translation submission. The
+scheduled jobs will use this object to query, send, and update batch information.</li>
+<li>QORDOBA_LOCALES – A custom object to store the relevant locales for this instance.
+Custom Object Data
+To populate the locales custom object, navigate to: Merchant Tools / Custom Objects / Import &amp;
+Export
+Select &#39;upload&#39; and choose the local file &#39;metadata/QORDOBA_LOCALES.xml&#39; from the cartridge
+installation package.
+Once this file is imported, all the locales supported by Qordoba will be loaded into the
+QORDOBA_LOCALE custom object definition.</li>
+</ol>
+
+<p>Job Schedule Definitions</p>
+
+<p>The Qordoba integration utilizes two scheduled jobs to send and receive batch communications to
+the Qordoba platform. Import the provided definitions by navigating to: Administration / Operations /
+Import &amp; Export
+Choose &#39;upload&#39; and upload the provided schedule definition file &#39;metadata/schedules.xml&#39;. After
+uploading, choose &#39;Import&#39; and select the newly uploaded file.
+This will result in two job configurations that will be discussed in detail below.</p>
+
+<p>Site Preferences</p>
+
+<p>The integration comes with a seeded set of base configurations for integration with Qordoba. These
+will need to be updated based on your integration specifics but are included here for ease of setup.
+Navigate to Site Preferences / Custom Preferences / QORDOBA</p>
+
+<p>In the Qordoba configuration, paste the following JSON:</p>
+
+<p>{
+&quot;api_url&quot; : &quot;<a href="https://app.qordoba.com/api/">https://app.qordoba.com/api/</a>&quot; ,
+&quot;project_id&quot; : &quot;{your_project_id&quot; ,
+&quot;api_key&quot; : &quot;{your_api_key}&quot; ,
+&quot;time_out&quot; : &quot;4500&quot; ,
+&quot;retrival_type&quot; : &quot;published&quot; ,
+&quot;source_locale&quot; : &quot;default&quot; ,
+&quot;auto_authorize_content&quot; : &quot;true&quot; ,
+&quot;target_locale&quot; : &quot;{\&quot;target_locale\&quot;: [{ \&quot;demandware\&quot;:\&quot;fr_FR\&quot; , \&quot;qordoba\&quot;:\&quot;fr-FR\&quot;
+},{ \&quot;demandware\&quot;:\&quot;de_DE\&quot; , \&quot;qordoba\&quot;:\&quot;de-DE\&quot; }]}&quot; ,
+&quot;product_attribute_json&quot; : &quot;{\&quot;product_attribute\&quot;:[{ \&quot;id\&quot;:\&quot;name\&quot; , \&quot;type\&quot;:\&quot;string\&quot; ,
+\&quot;custom\&quot;:\&quot;false\&quot; },{ \&quot;id\&quot;:\&quot;shortDescription\&quot; , \&quot;type\&quot;:\&quot;html\&quot; ,
+\&quot;custom\&quot;:\&quot;false\&quot;},{ \&quot;id\&quot;:\&quot;longDescription\&quot; , \&quot;type\&quot;:\&quot;html\&quot; ,
+\&quot;custom\&quot;:\&quot;false\&quot;},{ \&quot;id\&quot;:\&quot;pageDescription\&quot; , \&quot;type\&quot;:\&quot;string\&quot; ,
+\&quot;custom\&quot;:\&quot;false\&quot;},{ \&quot;id\&quot;:\&quot;pageTitle\&quot; , \&quot;type\&quot;:\&quot;string\&quot; , \&quot;custom\&quot;:\&quot;false\&quot;
+},{\&quot;id\&quot;:\&quot;pageKeywords\&quot; , \&quot;type\&quot;:\&quot;string\&quot; , \&quot;custom\&quot;:\&quot;false\&quot; }]}&quot; ,
+&quot;content_attribute_json&quot; : &quot;{\&quot;content_attribute\&quot;:[{ \&quot;id\&quot;:\&quot;name\&quot; , \&quot;type\&quot;:\&quot;string\&quot; ,
+\&quot;custom\&quot;:\&quot;false\&quot; },{ \&quot;id\&quot;:\&quot;description\&quot; , \&quot;type\&quot;:\&quot;string\&quot; , \&quot;custom\&quot;:\&quot;false\&quot;
+},{\&quot;id\&quot;:\&quot;pageDescription\&quot; , \&quot;type\&quot;:\&quot;string\&quot; , \&quot;custom\&quot;:\&quot;false\&quot; },{
+\&quot;id\&quot;:\&quot;pageTitle\&quot; , \&quot;type\&quot;:\&quot;string\&quot; , \&quot;custom\&quot;:\&quot;false\&quot; },{ \&quot;id\&quot;:\&quot;pageKeywords\&quot;
+, \&quot;type\&quot;:\&quot;string\&quot; , \&quot;custom\&quot;:\&quot;false\&quot; },{ \&quot;id\&quot;:\&quot;body\&quot; , \&quot;type\&quot;:\&quot;html\&quot; ,
+\&quot;custom\&quot;:\&quot;true\&quot; }]}&quot; ,
+&quot;category_attribute_json&quot; : &quot;{\&quot;category_attribute\&quot;:[{ \&quot;id\&quot;:\&quot;displayName\&quot; ,
+\&quot;type\&quot;:\&quot;string\&quot; , \&quot;custom\&quot;:\&quot;false\&quot; },{ \&quot;id\&quot;:\&quot;description\&quot; , \&quot;type\&quot;:\&quot;string\&quot; ,
+\&quot;custom\&quot;:\&quot;false\&quot; },{\&quot;id\&quot;:\&quot;pageDescription\&quot; , \&quot;type\&quot;:\&quot;string\&quot; ,
+\&quot;custom\&quot;:\&quot;false\&quot; },{ \&quot;id\&quot;:\&quot;pageTitle\&quot; , \&quot;type\&quot;:\&quot;string\&quot; , \&quot;custom\&quot;:\&quot;false\&quot; },{
+\&quot;id\&quot;:\&quot;pageKeywords\&quot; , \&quot;type\&quot;:\&quot;string\&quot; , \&quot;custom\&quot;:\&quot;false\&quot; }]}&quot; ,
+&quot;catalog_ids&quot; : &quot;apparel-catalog, electronics-catalog&quot;
+}</p>
+
+<ol>
+<li>External APIs List</li>
+</ol>
+
+<p>Name
+Endpoint
+Response 
+list languages
+<a href="https://api.qordoba.com/v2/languages">https://api.qordoba.com/v2/languages</a>
+{
+  &quot;languages&quot;: [
+    {
+      &quot;id&quot;: 94,
+      &quot;name&quot;: &quot;English - United States&quot;,
+      &quot;code&quot;: &quot;en-us&quot;,
+      &quot;direction&quot;: &quot;ltr&quot;,
+      &quot;override_order&quot;: &quot;aaa - aaa - English - United States&quot;
+    },</p>
+
+<p>list projects
+<a href="https://api.qordoba.com/v2/projects/list">https://api.qordoba.com/v2/projects/list</a>
+{
+  projectCount: 999,
+  projects [
+    {
+      &quot;id&quot;: 000,
+      &quot;name&quot;: &quot;Product Test&quot;,
+        &quot;creator&quot;: &quot;John Doe&quot;,
+        &quot;created&quot;: 1485366552000,
+        &quot;sourceCode&quot;: &quot;en-us&quot;,
+        &quot;sourceId&quot;: 94,
+        &quot;status&quot;: 1
+        },...
+    ]
+}
+show project status
+<a href="https://api.qordoba.com/v2/projects/status">https://api.qordoba.com/v2/projects/status</a>
+{
+  &quot;languages&quot;: [
+    {
+      &quot;id&quot;: 234,
+      &quot;code&quot;: &quot;es-es&quot;,
+      &quot;name&quot;: &quot;Spanish - Spain&quot;,
+      &quot;segments&quot;: 285,
+      &quot;words&quot;: 1052,
+      &quot;total&quot;: 285,
+      &quot;total_words&quot;: 1052,
+      &quot;milestones&quot;: [
+        {
+          &quot;id&quot;: -100,
+          &quot;name&quot;: &quot;Completed&quot;,
+          &quot;order&quot;: 1000,
+          &quot;count&quot;: 76,
+          &quot;words_count&quot;: 258,
+          &quot;percent&quot;: 26.67
+        },...
+      ]
+   ]
+}</p>
+
+<p>list files
+<a href="https://api.qordoba.com/v2/files/list">https://api.qordoba.com/v2/files/list</a></p>
+
+<p>[
+  {
+    &quot;id&quot;: 000000,
+    &quot;fileId&quot;: 000000,
+    &quot;enabled&quot;: true,
+    &quot;completed&quot;: false,
+    &quot;fileName&quot;: &quot;sample.json&quot;,
+    &quot;segmentCount&quot;: 2,
+    &quot;updated&quot;: 1485473148000,
+    &quot;preparing&quot;: false,
+    &quot;deleted&quot;: false,
+    &quot;versionTag&quot;: &quot;0.0&quot;
+  },</p>
+
+<p>upload file
+<a href="https://api.qordoba.com/v2/files/upload">https://api.qordoba.com/v2/files/upload</a>
+{
+    &quot;result&quot;: &quot;success&quot;,
+    &quot;files_ids&quot;:[
+      000000
+    ]
+  }</p>
+
+<p>export files
+<a href="https://api.qordoba.com/v2/files/export">https://api.qordoba.com/v2/files/export</a>
+{
+    &quot;downloadLink&quot;: &quot;<a href="https://app.qordoba.com/api/file/download?token=abc123def456&filename=sample.zip">https://app.qordoba.com/api/file/download?token=abc123def456&amp;filename=sample.zip</a>&quot;
+  }</p>
+
+<p>update file
+<a href="https://api.qordoba.com/v2/files/update">https://api.qordoba.com/v2/files/update</a>
+{
+    &quot;result&quot;: &quot;success&quot;,
+  }
+ value by key
+<a href="https://api.qordoba.com/v2/files/value_by_key">https://api.qordoba.com/v2/files/value_by_key</a>
+{
+    &quot;resultCount&quot;: 6,
+    &quot;sourceId&quot;: 94,
+    &quot;sourceCode&quot;: &quot;en-us&quot;,
+    &quot;targetId&quot;: 124,
+    &quot;targetCode&quot;: &quot;de-de&quot;,
+    &quot;segments&quot;:[
+      {
+        &quot;segmentId&quot;: 00000000,
+        &quot;segment&quot;: &quot;Cookie Cam!&quot;,
+        &quot;reference&quot;: null,
+        &quot;plurals&quot;: null,
+        &quot;translationId&quot;: 000000000,
+        &quot;translation&quot;: &quot;Keks Kam!&quot;,
+        &quot;pluralRule&quot;: null,
+        &quot;order&quot;: null,
+        &quot;stringKey&quot;: &quot;&quot;
+      },
+    {&quot;segmentId&quot;: 0000001, &quot;segment&quot;: &quot;sample.org&quot;, &quot;reference&quot;: null,…},…
+    ]
+  }</p>
+
+<ol>
+<li>Data Storage
+Qordoba using two types of custom object for saving data:
+● QORDOBA_SUBMISSION
+● QORDOBA_LOCALES</li>
+</ol>
+
+    </div>
+  </div>
+</div>
+
+
+    
+  <!-- section class="section subscribe-section" id="newsletter">
+  <div class="container">
+    <header class="section-header">
+      <h4>Keep up with the latest features</h4>
+    </header>
+
+    <div class="row">
+      <div class="one-half column offset-by-three">
+
+      </div>
+    </div>
+  </div>
+</section -->
+
+
+<footer class="marketing-footer--light-gray">
+  <section>
+    <ul>
+      <li class="logo-wrapper">
+        <div class="logo">
+          <img src="/assets/images/qordobalogoblue.png" alt="Qordoba" >
+        </div>
+      </li>
+      <li>
+        <nav>
+          <h4>Use Cases</h4>
+          <ul>
+            <li><a href="#">Strings Management</a></li>
+            <li><a href="#">Content AI</a></li>
+            <li><a href="#">Localization</a></li>
+            <li><a href="#">Persona Based Content</a></li>
+
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="https://support.qordoba.com/">Knowledge Base</a></li>
+            <li><a href="https://dev.qordoba.com/glossary/">Glossary of Qordoba Terms</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Webinars</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Tutorials</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Network Status</h4>
+          <ul>
+            <li><a href="https://status.qordoba.com/">APIs</a></li>
+            <li><a href="https://status.qordoba.com/">SmartSuggest</a></li>
+            <li><a href="https://status.qordoba.com/">Emotion and Tone</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </section>
+
+  <section class="legal">
+    <ul>
+      <li>
+        <span class="mashape-footer-content">&copy; Qordoba. 2018</span>
+      </li>
+      <li>
+        <div class="social-link">
+          <a href="https://github.com/Qordobacode" title="Github"><i aria-label="Github" class="fa fa-github" aria-hidden="true"></i></a></div>
+        <div class="social-link">
+          <a href="https://twitter.com/qordoba" title="Twitter"><i aria-label="Twitter" class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</footer>
+
+    <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.prepend(anchorForId(header.id));
+      }
+    }
+  };
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      console.log("here")
+      var contentBlock = document.getElementById("documentation");
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+    <script src="/assets/app.js?v=1544053565"></script>
+
+    <div id="fb-root"></div>
+
+    <script id="github-bjs" src="https://buttons.github.io/buttons.js" async defer></script>
+    <script id="twitter-wjs" type="text/javascript" src="https://platform.twitter.com/widgets.js" async defer></script>
+    <script id="facebook-jssdk" type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=842731852424506" async defer></script>
+
+    <script type="text/javascript">
+      piAId = '393112';
+      piCId = '48375';
+
+      (function() {
+        function async_load(){
+          var s = document.createElement('script'); s.type = 'text/javascript';
+          s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+          var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+        }
+        if(window.attachEvent) { window.attachEvent('onload', async_load); }
+        else { window.addEventListener('load', async_load, false); }
+      })();
+    </script>
+
+    <script type='text/javascript'>
+      var _vwo_code=(function(){
+      var account_id=125292,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=true,
+      // DO NOT EDIT BELOW THIS LINE
+      f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load("WDj0nSS7hpyxwL3evgbOzK755s0NUye6");
+        analytics.page()
+      }}();
+    </script>
+
+    <script type="text/javascript" src="//mashape.github.io/notification-bar/embed.js" async defer></script>
+  </body>
+</html>

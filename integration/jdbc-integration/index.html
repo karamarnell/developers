@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+  
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Qordoba - JDBC integration | Qordoba - Strings Intelligence Platform..</title>
+  <meta name="description" content="Create a fully automated strings management solution">
+  <meta name="author" content="Qordoba"/>
+  <meta property="og:title" content="Strings Intelligence Platform.."/>
+  <meta property="og:site_name" content="Qordoba"/>
+  <link rel="prefetch" href="/assets/images/qordoba-white-logo.png" /><link rel="prefetch" href="/assets/images/icons/plugins/jdbc-integration.png" /><link rel="prefetch" href="/assets/images/qordobalogoblue.png" /><link rel="dns-prefetch" href="https://buttons.github.io" /><link rel="dns-prefetch" href="https://platform.twitter.com" /><link rel="dns-prefetch" href="https://connect.facebook.net" /><link rel="dns-prefetch" href="//mashape.github.io" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png"/>
+  <link rel="stylesheet" href="/assets/styles.css?v=1544053565"/>
+</head>
+
+
+  <body id="page-plugin" >
+    <header class="site-header">
+  <div class="enterprise">
+        <div class="container">
+       <nav class="enterprise-sites one-half column">
+         <ul>
+           <li>
+             <a href="https://qordoba.com/customers/" target="_blank">Customers</a>
+           </li>
+           <li>
+             <a href="https://qordoba.com/partners/" target="_blank" >Partners</a>
+           </li>
+         </ul>
+       </nav>   
+      <nav class="enterprise-contact one-half column">
+        <ul>
+          <li>
+            <a href="https://support.qordoba.com/" target="_blank">Support</a>
+          </li>
+          <li>
+            <a href="http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html">Request Demo</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .enterprise -->
+  <div class="navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand">
+        <img src="/assets/images/qordoba-white-logo.png" alt="Qordoba" style="height: 35px;" >
+      </a>
+      <button data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar" class="navbar-toggle">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <nav id="navbar" class="navbar-nav">
+        <ul>
+          <li>
+            <a href="/docs/" >Docs</a>
+          </li>
+          <li>
+            <a href="/ecosystem" >Ecosystem</a>
+          </li>
+          <li>
+            <a href="/security/" >Security</a>
+          </li>
+          <li>
+            <a href="https://github.com/Qordobacode/" target="_blank">Code</a>
+          </li>
+           <li>
+            <a href="/api/" >API</a>
+          </li>
+          <li>
+            <a href="/install" class="button button-dark" data-analytics='{"event": "Clicked download", "type": "button", "location": "header"}'>Installation</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .navbar -->
+</header>
+
+
+    <div class="page page-plugin">
+  
+  <header class="page-header">
+    <div class="container">
+      
+        <div class="page-header-icon">
+          <img src="/assets/images/icons/plugins/jdbc-integration.png" alt="" />
+        </div>
+      
+
+      <div class="page-header-title">
+        
+          <ul class="breadcrumbs">
+            
+              <li class="breadcrumb-item">
+                
+                <a href="/ecosystem">Ecosystem</a>
+                
+              </li>
+            
+          </ul>
+        
+
+        <h1>Qordoba - JDBC integration</h1>
+
+        
+      </div>
+
+      
+
+      
+    </div>
+  </header>
+
+
+
+  <div class="container">
+    <div class="content">
+      <p>Qordoba can work with MySQL, MariaDB, and other SQL databases to get data and can send it back using the JDBC connector. This integration can be hosted or remotely accessed from our platform.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">Note: We recommend the hosted version
+</code></pre></div>
+<p>This integration executes the provided SQL select query. The query result will be converted to the Avro format. Streaming is used, so arbitrarily large result sets are supported.
+This processor can be scheduled to run on a timer or can be triggered by incoming data. 
+In the tables below, you can view which parameters you can use to customize your configuration with this particular system:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">'SQL select query' The SQL select query to execute. The query can be empty, a constant value, or built from attributes using Expression Language. If this property is specified, it will be used regardless of the content of incoming flowfiles. If this property is empty, the content of the incoming flow file is expected to contain a valid SQL select query, to be issued by the processor to the database. Note that Expression Language is not evaluated for flow file contents.
+'Normalize Table/Column Names' Whether to change non-Avro-compatible characters in column names to Avro-compatible characters. For example, colons and periods will be changed to underscores in order to build a valid Avro record. #the default value is false
+'Max Wait Time' The maximum amount of time allowed for a running SQL select query, zero means there is no limit. Max time less than 1 second will be equal to zero. #the default value is 0 seconds
+'Database Connection Pooling Service'   The Controller Service that is used to obtain connection to database
+</code></pre></div><div class="highlight"><pre><code class="language-" data-lang="">'JDBC Connection Pool'  Specifies the JDBC Connection Pool to use in order to convert the JSON message to a SQL statement. The Connection Pool is necessary in order to determine the appropriate database column types.
+'Support Fragmented Transactions'   If true, when a FlowFile is consumed by this Processor, the Processor will first check the fragment.identifier and fragment.count attributes of that FlowFile. If the fragment.count value is greater than 1, the Processor will not process any FlowFile with that fragment.identifier until all are available; at that point, it will process all FlowFiles with that fragment.identifier as a single transaction, in the order specified by the FlowFiles fragment.index attributes. This Provides atomicity of those SQL statements. If this value is false, these attributes will be ignored and the updates will occur independent of one another. #the default value is true
+'Transaction Timeout'   If the &lt;Support Fragmented Transactions&gt; property is set to true, specifies how long to wait for all FlowFiles for a particular fragment.identifier attribute to arrive before just transferring all of the FlowFiles with that identifier to the 'failure' relationship
+'Batch Size'    The preferred number of FlowFiles to put to the database in a single transaction #the default value is 100
+'Obtain Generated Keys' If true, any key that is automatically generated by the database will be added to the FlowFile that generated it using the sql.generate.key attribute. This may result in slightly slower performance and is not supported by all databases. #the default value is false
+</code></pre></div>
+    </div>
+  </div>
+</div>
+
+
+    
+  <!-- section class="section subscribe-section" id="newsletter">
+  <div class="container">
+    <header class="section-header">
+      <h4>Keep up with the latest features</h4>
+    </header>
+
+    <div class="row">
+      <div class="one-half column offset-by-three">
+
+      </div>
+    </div>
+  </div>
+</section -->
+
+
+<footer class="marketing-footer--light-gray">
+  <section>
+    <ul>
+      <li class="logo-wrapper">
+        <div class="logo">
+          <img src="/assets/images/qordobalogoblue.png" alt="Qordoba" >
+        </div>
+      </li>
+      <li>
+        <nav>
+          <h4>Use Cases</h4>
+          <ul>
+            <li><a href="#">Strings Management</a></li>
+            <li><a href="#">Content AI</a></li>
+            <li><a href="#">Localization</a></li>
+            <li><a href="#">Persona Based Content</a></li>
+
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="https://support.qordoba.com/">Knowledge Base</a></li>
+            <li><a href="https://dev.qordoba.com/glossary/">Glossary of Qordoba Terms</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Webinars</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Tutorials</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Network Status</h4>
+          <ul>
+            <li><a href="https://status.qordoba.com/">APIs</a></li>
+            <li><a href="https://status.qordoba.com/">SmartSuggest</a></li>
+            <li><a href="https://status.qordoba.com/">Emotion and Tone</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </section>
+
+  <section class="legal">
+    <ul>
+      <li>
+        <span class="mashape-footer-content">&copy; Qordoba. 2018</span>
+      </li>
+      <li>
+        <div class="social-link">
+          <a href="https://github.com/Qordobacode" title="Github"><i aria-label="Github" class="fa fa-github" aria-hidden="true"></i></a></div>
+        <div class="social-link">
+          <a href="https://twitter.com/qordoba" title="Twitter"><i aria-label="Twitter" class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</footer>
+
+    <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.prepend(anchorForId(header.id));
+      }
+    }
+  };
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      console.log("here")
+      var contentBlock = document.getElementById("documentation");
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+    <script src="/assets/app.js?v=1544053565"></script>
+
+    <div id="fb-root"></div>
+
+    <script id="github-bjs" src="https://buttons.github.io/buttons.js" async defer></script>
+    <script id="twitter-wjs" type="text/javascript" src="https://platform.twitter.com/widgets.js" async defer></script>
+    <script id="facebook-jssdk" type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=842731852424506" async defer></script>
+
+    <script type="text/javascript">
+      piAId = '393112';
+      piCId = '48375';
+
+      (function() {
+        function async_load(){
+          var s = document.createElement('script'); s.type = 'text/javascript';
+          s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+          var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+        }
+        if(window.attachEvent) { window.attachEvent('onload', async_load); }
+        else { window.addEventListener('load', async_load, false); }
+      })();
+    </script>
+
+    <script type='text/javascript'>
+      var _vwo_code=(function(){
+      var account_id=125292,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=true,
+      // DO NOT EDIT BELOW THIS LINE
+      f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load("WDj0nSS7hpyxwL3evgbOzK755s0NUye6");
+        analytics.page()
+      }}();
+    </script>
+
+    <script type="text/javascript" src="//mashape.github.io/notification-bar/embed.js" async defer></script>
+  </body>
+</html>

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+  
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Okta - v0.2.x | Qordoba - Strings Intelligence Platform..</title>
+  <meta name="description" content="Create a fully automated strings management solution">
+  <meta name="author" content="Qordoba"/>
+  <meta property="og:title" content="Strings Intelligence Platform.."/>
+  <meta property="og:site_name" content="Qordoba"/>
+  <link rel="prefetch" href="/assets/images/qordoba-white-logo.png" /><link rel="prefetch" href="/assets/images/icons/icn-documentation.svg" /><link rel="prefetch" href="/assets/images/qordobalogoblue.png" /><link rel="dns-prefetch" href="https://buttons.github.io" /><link rel="dns-prefetch" href="https://platform.twitter.com" /><link rel="dns-prefetch" href="https://connect.facebook.net" /><link rel="dns-prefetch" href="//mashape.github.io" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png"/>
+  <link rel="stylesheet" href="/assets/styles.css?v=1544053565"/>
+</head>
+
+
+  <body id="" >
+    <header class="site-header">
+  <div class="enterprise">
+        <div class="container">
+       <nav class="enterprise-sites one-half column">
+         <ul>
+           <li>
+             <a href="https://qordoba.com/customers/" target="_blank">Customers</a>
+           </li>
+           <li>
+             <a href="https://qordoba.com/partners/" target="_blank" >Partners</a>
+           </li>
+         </ul>
+       </nav>   
+      <nav class="enterprise-contact one-half column">
+        <ul>
+          <li>
+            <a href="https://support.qordoba.com/" target="_blank">Support</a>
+          </li>
+          <li>
+            <a href="http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html">Request Demo</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .enterprise -->
+  <div class="navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand">
+        <img src="/assets/images/qordoba-white-logo.png" alt="Qordoba" style="height: 35px;" >
+      </a>
+      <button data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar" class="navbar-toggle">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <nav id="navbar" class="navbar-nav">
+        <ul>
+          <li>
+            <a href="/docs/"  class="active" >Docs</a>
+          </li>
+          <li>
+            <a href="/ecosystem" >Ecosystem</a>
+          </li>
+          <li>
+            <a href="/security/" >Security</a>
+          </li>
+          <li>
+            <a href="https://github.com/Qordobacode/" target="_blank">Code</a>
+          </li>
+           <li>
+            <a href="/api/" >API</a>
+          </li>
+          <li>
+            <a href="/install" class="button button-dark" data-analytics='{"event": "Clicked download", "type": "button", "location": "header"}'>Installation</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .navbar -->
+</header>
+
+
+    <header class="page-header">
+  <div class="container">
+    <div class="page-header-icon">
+      <img src="/assets/images/icons/icn-documentation.svg" alt="Documentation" />
+    </div>
+    <div class="page-header-title">
+      <h1>Documentation</h1>
+      <p>Learn how Qordoba platform empowers your apps</p>
+    </div>
+
+    
+  </div>
+</header>
+
+<div class="container">
+  <aside class="page-navigation">
+    
+
+    
+    <nav>
+      
+      <h5>Getting Started</h5>
+      
+      <ul>
+        
+        
+        <li>
+          <a href="/docs/0.2.x/getting-started/introduction" >Introduction</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/0.2.x/getting-started/personas-definition" >Personas definition</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/0.2.x/getting-started/placeholders" >Placeholders</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/0.2.x/getting-started/api-libraries" >API libraries</a>
+          
+        </li>
+        
+      </ul>
+    </nav>
+    
+    <nav>
+      
+      <h5>CLI Reference</h5>
+      
+      <ul>
+        
+        
+        <li>
+          <a href="/docs/0.2.x/cli" >Commands</a>
+          
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/cli/#start" >Start</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/cli/#Push" >Push</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/cli/#Pull" >Pull</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/cli/#add" >Add key</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/cli/#reload" >Status</a>
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+      </ul>
+    </nav>
+    
+    <nav>
+      
+      <h5>API endpoints</h5>
+      
+      <ul>
+        
+        
+        <li>
+          <a href="/docs/0.2.x/api/" >Introduction</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/0.2.x/api/#supported-content-types" >Supported Content Types</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/0.2.x/admin-api/#api-object" >Workspaces</a>
+          
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#list" >List workspaces</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#details" >Workspace details</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#workflow" >Workspace workflow</a>
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/0.2.x/admin-api/#consumer-object" >File</a>
+          
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#create-consumer" >List files</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#retrieve-consumer" >Upload file</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#list-consumers" >Upload file</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#update-consumer" >Export file</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#update-or-create-consumer" >Delete file</a>
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/0.2.x/admin-api/#plugin-configuration-object" >Strings</a>
+          
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#create-plugin-configuration" >Create key</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#list-per-api-plugin-configurations" >List file strings</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#list-all-plugin-configurations" >Update string</a>
+            </li>
+            
+            
+            <li>
+              <a href="/docs/0.2.x/admin-api/#update-plugin-configuration" >Value by key</a>
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </aside>
+
+  <div class="page-content-container" id="documentation">
+    <div class="page-content">
+      <div class="content">
+        
+
+      <h1 id="setup-okta-with-qordoba-saml-sso">Setup Okta with Qordoba SAML SSO</h1>
+
+<p>You can make an API proxied by Qordoba use a <a href="/docs/0.2.x/loadbalancing#ring-balancer">ring-balancer</a>, configured
+by adding an <a href="/docs/0.2.x/loadbalancing#upstream">upstream</a> entity that contains one or more <a href="/docs/0.2.x/loadbalancing#target">target</a>
+entities, each target pointing to a different IP address (or hostname) and
+port. The ring-balancer will balance load among the various targets, and based
+on the <a href="/docs/0.2.x/loadbalancing#upstream">upstream</a> configuration, will perform health checks on the targets,
+making them as healthy or unhealthy whether they are responsive or not. The
+ring-balancer will then only route traffic to healthy targets.</p>
+
+<p>Qordoba supports two kinds of health checks, which can be used separately or in
+conjunction:</p>
+
+<ul>
+<li><p><strong>active checks</strong>, where a specific HTTP endpoint in the target is
+periodically requested and the health of the target is determined based on its
+response;</p></li>
+<li><p><strong>passive checks</strong> (also known as <strong>circuit breakers</strong>), where Qordoba analyzes
+the ongoing traffic being proxied and determines the health of targets based
+on their behavior responding requests.</p></li>
+</ul>
+
+<h3 id="table-of-contents">Table of Contents</h3>
+
+<ul>
+<li><a href="#healthy-and-unhealthy-targets">Healthy and unhealthy targets</a></li>
+<li><a href="#types-of-health-checks">Types of health checks</a>
+
+<ul>
+<li><a href="#active-health-checks">Active health checks</a></li>
+<li><a href="#passive-health-checks-circuit-breakers">Passive health checks (circuit breakers)</a></li>
+<li><a href="#summary-of-pros-and-cons">Summary of pros and cons</a></li>
+</ul></li>
+<li><a href="#enabling-and-disabling-health-checks">Enabling and disabling health checks</a>
+
+<ul>
+<li><a href="#enabling-active-health-checks">Enabling active health checks</a></li>
+<li><a href="#enabling-active-health-checks">Enabling active health checks</a></li>
+<li><a href="#disabling-health-checks">Disabling health checks</a></li>
+</ul></li>
+</ul>
+
+<h3 id="healthy-and-unhealthy-targets">Healthy and unhealthy targets</h3>
+
+<p>The objective of the health checks functionality is to dynamically mark
+targets as healthy or unhealthy, <strong>for a given Qordoba node</strong>. There is
+no cluster-wide synchronization of health information: each Qordoba node
+determines the health of its targets separately. This is desirable since at a
+given point one Qordoba node may be able to connect to a target successfully
+while another node is failing to reach it: the first node will consider
+it healthy, while the second will mark it as unhealthy and start routing
+traffic to other targets of the upstream.</p>
+
+<p>Either an active probe (on active health checks) or a proxied request
+(on passive health checks) produces data which is used to determine
+whether a target is healthy or unhealthy. A request may produce a TCP
+error, timeout, or produce an HTTP status code. Based on this
+information, the health checker updates a series of internal counters:</p>
+
+<ul>
+<li>If the returned status code is one configured as &quot;healthy&quot;, it will
+increment the &quot;Successes&quot; counter for the target and clear all its other
+counters;</li>
+<li>If it fails to connect, it will increment the &quot;TCP failures&quot; counter
+for the target and clear the &quot;Successes&quot; counter;</li>
+<li>If it times out, it will increment the &quot;timeouts&quot; counter
+for the target and clear the &quot;Successes&quot; counter;</li>
+<li>If the returned status code is one configured as &quot;unhealthy&quot;, it will
+increment the &quot;HTTP failures&quot; counter for the target and clear the &quot;Successes&quot; counter.</li>
+</ul>
+
+<p>If any of the &quot;TCP failures&quot;, &quot;HTTP failures&quot; or &quot;timeouts&quot; counters reaches
+their configured threshold, the target will be marked as unhealthy.</p>
+
+<p>If the &quot;Sucesses&quot; counter reaches its configured threshold, the target will be
+marked as healthy.</p>
+
+<p>The list of which HTTP status codes are &quot;healthy&quot; or &quot;unhealthy&quot;, and the
+individual thresholds for each of these counters are configurable on a
+per-upstream basis. Below, we have an example of a configuration for an
+Upstream entity, showcasing the default values of the various fields
+available for configuring health checks. A description of each
+field is included in the <a href="/docs/0.2.x/admin-api#add-upstream">Admin API</a> reference documentation.</p>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"service.v1.xyz"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"healthchecks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"concurrency"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"healthy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"http_statuses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">302</span><span class="w"> </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"successes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"http_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"unhealthy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"http_failures"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"http_statuses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">429</span><span class="p">,</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">501</span><span class="p">,</span><span class="w">
+                                   </span><span class="mi">502</span><span class="p">,</span><span class="w"> </span><span class="mi">503</span><span class="p">,</span><span class="w"> </span><span class="mi">504</span><span class="p">,</span><span class="w"> </span><span class="mi">505</span><span class="w"> </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"tcp_failures"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"timeouts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"passive"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"healthy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"http_statuses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w"> </span><span class="mi">203</span><span class="p">,</span><span class="w">
+                                   </span><span class="mi">204</span><span class="p">,</span><span class="w"> </span><span class="mi">205</span><span class="p">,</span><span class="w"> </span><span class="mi">206</span><span class="p">,</span><span class="w"> </span><span class="mi">207</span><span class="p">,</span><span class="w">
+                                   </span><span class="mi">208</span><span class="p">,</span><span class="w"> </span><span class="mi">226</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
+                                   </span><span class="mi">302</span><span class="p">,</span><span class="w"> </span><span class="mi">303</span><span class="p">,</span><span class="w"> </span><span class="mi">304</span><span class="p">,</span><span class="w"> </span><span class="mi">305</span><span class="p">,</span><span class="w">
+                                   </span><span class="mi">306</span><span class="p">,</span><span class="w"> </span><span class="mi">307</span><span class="p">,</span><span class="w"> </span><span class="mi">308</span><span class="w"> </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"successes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"unhealthy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"http_failures"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"http_statuses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">429</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">503</span><span class="w"> </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"tcp_failures"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"timeouts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"slots"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>If all targets of an upstream are unhealthy, Qordoba will respond to requests
+to the upstream with <code>503 Service Unavailable</code>.</p>
+
+<p>Note:</p>
+
+<ol>
+<li>health checks operate only on <a href="/docs/0.2.x/admin-api#target-object"><em>active</em> targets</a> and do not
+modify the <em>active</em> status of a target in the Qordoba database.</li>
+<li>unhealthy targets will not be removed from the loadbalancer, and hence will
+not have any impact on the balancer layout when using the hashing algorithm
+(they will just be skipped).</li>
+<li>The <a href="/docs/0.2.x/loadbalancing#dns-caveats">DNS caveats</a> and <a href="/docs/0.2.x/loadbalancing#balancing-caveats">balancer caveats</a>
+also apply to health checks. If using hostnames for the targets, then make
+sure the DNS server always returns the full set of IP addresses for a name,
+and does not limit the response. <em>Failing to do so might lead to health
+checks not being executed.</em></li>
+</ol>
+
+<h3 id="types-of-health-checks">Types of health checks</h3>
+
+<h4 id="active-health-checks">Active health checks</h4>
+
+<p>Active health checks, as the name implies, actively probe targets for
+their health. When active health checks are enabled in an upstream entity,
+Qordoba will periodically issue HTTP requests to a configured path at each target
+of the upstream. This allows Qordoba to automatically enable and disable targets
+in the balancer based on the <a href="#healthy-and-unhealthy-targets">probe results</a>.</p>
+
+<p>The periodicity of active health checks can be configured separately for
+when a target is healthy or unhealthy. If the <code>interval</code> value for either
+is set to zero, the checking is disabled at the corresponding scenario.
+When both are zero, active health checks are disabled altogether.</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h4 id="passive-health-checks-circuit-breakers">Passive health checks (circuit breakers)</h4>
+
+<p>Passive health checks, also known as circuit breakers, are
+checks performed based on the requests being proxied by Qordoba,
+with no additional traffic being generated. When a target becomes
+unresponsive, the passive health checker will detect that and mark
+the target as unhealthy. The ring-balancer will start skipping this
+target, so no more traffic will be routed to it. </p>
+
+<p>Once the problem with a target is solved and it is ready to receive
+traffic again, the Qordoba administrator can manually inform the
+health checker that the target should be enabled again, via an
+Admin API endpoint:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>curl -i -X POST http://localhost:8001/upstream/my_upstream/targets/10.1.2.3:1234/healthy
+HTTP/1.1 204 No Content
+</code></pre></div>
+<p>This command will broadcast a cluster-wide message so that the &quot;healthy&quot;
+status is propagated to the whole <a href="/docs/0.2.x/clustering">Qordoba cluster</a>. This will cause Qordoba nodes to
+reset the health counters of the health checkers running in all workers of the
+Qordoba node, allowing the ring-balancer to route traffic to the target again.</p>
+
+<p>Passive health checks have the advantage of not producing extra
+traffic, but they are unable to automatically mark a target as
+healthy again: the &quot;circuit is broken&quot;, and the target needs to
+be re-enabled again by the system administrator.</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+<h4 id="summary-of-pros-and-cons">Summary of pros and cons</h4>
+
+<ul>
+<li>Active health checks can automatically re-enable a target in the
+ring balancer as soon as it is healthy again. Passive health checks cannot.</li>
+<li>Passive health checks do not produce additional traffic to the 
+target. Active health checks do.</li>
+<li>An active health checker demands a known URL with a reliable status response
+in the target to be configured as a probe endpoint (which may be as
+simple as <code>&quot;/&quot;</code>). Passive health checks do not demand such configuration.</li>
+<li>By providing a custom probe endpoint for an active health checker,
+an application may determine its own health metrics and produce a status
+code to be consumed by Qordoba. Even though a target continues to serve
+traffic which looks healthy to the passive health checker,
+it would be able to respond to the active probe with a failure
+status, essentially requesting to be relieved from taking new traffic.</li>
+</ul>
+
+<p>It is possible to combine the two modes. For example, one can enable
+passive health checks to monitor the target health based solely on its
+traffic, and only use active health checks while the target is unhealthy,
+in order to re-enable it automatically.</p>
+
+<h3 id="enabling-and-disabling-health-checks">Enabling and disabling health checks</h3>
+
+<h4 id="enabling-active-health-checks">Enabling active health checks</h4>
+
+<p>To enable active health checks, you need to specify the configuration items
+under <code>healthchecks.active</code> in the <a href="/docs/0.2.x/admin-api#upstream-objects">Upstream object</a> configuration. You
+need to specify the necessary information so that Qordoba can perform periodic
+probing on the target, and how to interpret the resulting information.</p>
+
+<p>For configuring the probe, you need to specify:</p>
+
+<ul>
+<li><code>healthchecks.active.http_path</code> - The path that should be used when
+issuing the HTTP GET request to the target. The default value is <code>&quot;/&quot;</code>.</li>
+<li><code>healthchecks.active.timeout</code> - The connection timeout limit for the
+HTTP GET request of the probe. The default value is 1 second.</li>
+<li><code>healthchecks.active.concurrency</code> - The connection timeout limit for the
+HTTP GET request of the probe. The default value is 1 second.</li>
+</ul>
+
+<p>You also need to specify positive values for intervals, for running
+probes:</p>
+
+<ul>
+<li><code>healthchecks.active.healthy.interval</code> - Interval between active health
+checks for healthy targets (in seconds). A value of zero indicates that active
+probes for healthy targets should not be performed.</li>
+<li><code>healthchecks.active.unhealthy.interval</code> - Interval between active health
+checks for unhealthy targets (in seconds). A value of zero indicates that active
+probes for unhealthy targets should not be performed.</li>
+</ul>
+
+<p>This allows you to tune the behavior of the active health checks, whether you
+want probes for healthy and unhealthy targets to run at the same interval, or
+one to be more frequent than the other.</p>
+
+<p>Finally, you need to configure how Qordoba should interpret the probe, by setting
+the various thresholds on the <a href="#healthy-and-unhealthy-targets">health
+counters</a>, which, once reached will trigger a
+status change. The counter threshold fields are:</p>
+
+<ul>
+<li><code>healthchecks.active.healthy.successes</code> - Number of successes in active
+probes (as defined by <code>healthchecks.active.healthy.http_statuses</code>) to consider
+a target healthy.</li>
+<li><code>healthchecks.active.unhealthy.tcp_failures</code> - Number of TCP failures in
+active probes to consider a target unhealthy.</li>
+<li><code>healthchecks.active.unhealthy.timeouts</code> - Number of timeouts in active
+probes to consider a target unhealthy.</li>
+<li><code>healthchecks.active.unhealthy.http_failures</code> - Number of HTTP failures in
+active probes (as defined by <code>healthchecks.active.unhealthy.http_statuses</code>) to
+consider a target unhealthy.</li>
+</ul>
+
+<h4 id="enabling-passive-health-checks">Enabling passive health checks</h4>
+
+<p>Passive health checks do not feature a probe, as they work by interpreting
+the ongoing traffic that flows from a target. This means that to enable
+passive checks you only need to configure its counter thresholds:</p>
+
+<ul>
+<li><code>healthchecks.passive.healthy.successes</code> - Number of successes in proxied
+traffic (as defined by <code>healthchecks.passive.healthy.http_statuses</code>) to
+consider a target healthy, as observed by passive health checks. This needs to
+be positive when passive checks are enabled so that healthy traffic resets the
+unhealthy counters.</li>
+<li><code>healthchecks.passive.unhealthy.tcp_failures</code> - Number of TCP failures in
+proxied traffic to consider a target unhealthy, as observed by passive health
+checks.</li>
+<li><code>healthchecks.passive.unhealthy.timeouts</code> - Number of timeouts in proxied
+traffic to consider a target unhealthy, as observed by passive health checks.</li>
+<li><code>healthchecks.passive.unhealthy.http_failures</code> - Number of HTTP failures in
+proxied traffic (as defined by <code>healthchecks.passive.unhealthy.http_statuses</code>)
+to consider a target unhealthy, as observed by passive health checks.</li>
+</ul>
+
+<h4 id="disabling-health-checks">Disabling health checks</h4>
+
+<p>In all counter thresholds and intervals specified in the <code>healthchecks</code>
+configuration, setting a value to zero means that the functionality the field
+represents is disabled. Setting a probe interval to zero disables a probe.
+Likewise, you can disable certain types of checks by setting their counter
+thresholds to zero. For example, to not consider timeouts when performing
+healthchecks, you can set both <code>timeouts</code> fields (for active and passive
+checks) to zero. This gives you a fine-grained control of the behavior of the
+health checker.</p>
+
+<p>In summary, to completely disable active health checks for an upstream, you
+need to set both <code>healthchecks.active.healthy.interval</code> and
+<code>healthchecks.active.unhealthy.interval</code> to <code>0</code>.</p>
+
+<p>To completely disable passive health checks, you need to set all counter
+thresholds under <code>healthchecks.passive</code> for its various counters to zero.</p>
+
+<p>All counter thresholds and intervals in <code>healthchecks</code> are zero by default,
+meaning that health checks are completely disabled by default in newly created
+upstreams.</p>
+
+<p><a href="#table-of-contents">Back to TOC</a></p>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    
+  <!-- section class="section subscribe-section" id="newsletter">
+  <div class="container">
+    <header class="section-header">
+      <h4>Keep up with the latest features</h4>
+    </header>
+
+    <div class="row">
+      <div class="one-half column offset-by-three">
+
+      </div>
+    </div>
+  </div>
+</section -->
+
+
+<footer class="marketing-footer--light-gray">
+  <section>
+    <ul>
+      <li class="logo-wrapper">
+        <div class="logo">
+          <img src="/assets/images/qordobalogoblue.png" alt="Qordoba" >
+        </div>
+      </li>
+      <li>
+        <nav>
+          <h4>Use Cases</h4>
+          <ul>
+            <li><a href="#">Strings Management</a></li>
+            <li><a href="#">Content AI</a></li>
+            <li><a href="#">Localization</a></li>
+            <li><a href="#">Persona Based Content</a></li>
+
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="https://support.qordoba.com/">Knowledge Base</a></li>
+            <li><a href="https://dev.qordoba.com/glossary/">Glossary of Qordoba Terms</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Webinars</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Tutorials</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Network Status</h4>
+          <ul>
+            <li><a href="https://status.qordoba.com/">APIs</a></li>
+            <li><a href="https://status.qordoba.com/">SmartSuggest</a></li>
+            <li><a href="https://status.qordoba.com/">Emotion and Tone</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </section>
+
+  <section class="legal">
+    <ul>
+      <li>
+        <span class="mashape-footer-content">&copy; Qordoba. 2018</span>
+      </li>
+      <li>
+        <div class="social-link">
+          <a href="https://github.com/Qordobacode" title="Github"><i aria-label="Github" class="fa fa-github" aria-hidden="true"></i></a></div>
+        <div class="social-link">
+          <a href="https://twitter.com/qordoba" title="Twitter"><i aria-label="Twitter" class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</footer>
+
+    <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.prepend(anchorForId(header.id));
+      }
+    }
+  };
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      console.log("here")
+      var contentBlock = document.getElementById("documentation");
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+    <script src="/assets/app.js?v=1544053565"></script>
+
+    <div id="fb-root"></div>
+
+    <script id="github-bjs" src="https://buttons.github.io/buttons.js" async defer></script>
+    <script id="twitter-wjs" type="text/javascript" src="https://platform.twitter.com/widgets.js" async defer></script>
+    <script id="facebook-jssdk" type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=842731852424506" async defer></script>
+
+    <script type="text/javascript">
+      piAId = '393112';
+      piCId = '48375';
+
+      (function() {
+        function async_load(){
+          var s = document.createElement('script'); s.type = 'text/javascript';
+          s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+          var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+        }
+        if(window.attachEvent) { window.attachEvent('onload', async_load); }
+        else { window.addEventListener('load', async_load, false); }
+      })();
+    </script>
+
+    <script type='text/javascript'>
+      var _vwo_code=(function(){
+      var account_id=125292,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=true,
+      // DO NOT EDIT BELOW THIS LINE
+      f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load("WDj0nSS7hpyxwL3evgbOzK755s0NUye6");
+        analytics.page()
+      }}();
+    </script>
+
+    <script type="text/javascript" src="//mashape.github.io/notification-bar/embed.js" async defer></script>
+  </body>
+</html>

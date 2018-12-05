@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+  
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>CLI Commands | Qordoba - Strings Intelligence Platform..</title>
+  <meta name="description" content="Create a fully automated strings management solution">
+  <meta name="author" content="Qordoba"/>
+  <meta property="og:title" content="Strings Intelligence Platform.."/>
+  <meta property="og:site_name" content="Qordoba"/>
+  <link rel="prefetch" href="/assets/images/qordoba-white-logo.png" /><link rel="prefetch" href="/assets/images/qordobalogoblue.png" /><link rel="dns-prefetch" href="https://buttons.github.io" /><link rel="dns-prefetch" href="https://platform.twitter.com" /><link rel="dns-prefetch" href="https://connect.facebook.net" /><link rel="dns-prefetch" href="//mashape.github.io" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png"/>
+  <link rel="stylesheet" href="/assets/styles.css?v=1544053565"/>
+</head>
+
+
+  <body id="" >
+    <header class="site-header">
+  <div class="enterprise">
+        <div class="container">
+       <nav class="enterprise-sites one-half column">
+         <ul>
+           <li>
+             <a href="https://qordoba.com/customers/" target="_blank">Customers</a>
+           </li>
+           <li>
+             <a href="https://qordoba.com/partners/" target="_blank" >Partners</a>
+           </li>
+         </ul>
+       </nav>   
+      <nav class="enterprise-contact one-half column">
+        <ul>
+          <li>
+            <a href="https://support.qordoba.com/" target="_blank">Support</a>
+          </li>
+          <li>
+            <a href="http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html">Request Demo</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .enterprise -->
+  <div class="navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand">
+        <img src="/assets/images/qordoba-white-logo.png" alt="Qordoba" style="height: 35px;" >
+      </a>
+      <button data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar" class="navbar-toggle">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <nav id="navbar" class="navbar-nav">
+        <ul>
+          <li>
+            <a href="/docs/" >Docs</a>
+          </li>
+          <li>
+            <a href="/ecosystem" >Ecosystem</a>
+          </li>
+          <li>
+            <a href="/security/" >Security</a>
+          </li>
+          <li>
+            <a href="https://github.com/Qordobacode/" target="_blank">Code</a>
+          </li>
+           <li>
+            <a href="/api/" >API</a>
+          </li>
+          <li>
+            <a href="/install" class="button button-dark" data-analytics='{"event": "Clicked download", "type": "button", "location": "header"}'>Installation</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .navbar -->
+</header>
+
+
+    <div class="page ">
+  
+
+
+  <div class="container">
+    <div class="content">
+      <h1 id="commands-options">Commands-Options</h1>
+
+<p>The following options work with <code>qor</code> (qordoba) and any other command on this page.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ qor --help
+usage: qordoba [-h] {init,status,pull,push,ls,delete} ...
+
+$ qor init --help
+usage: qordoba init [-h] --organization-id ORGANIZATION_ID
+                                   --access-token ACCESS_TOKEN
+                                   [--project-id PROJECT_ID]
+                                   [--file-format {YAMLi18n,androidXML,macStrings}]
+                                   [--traceback] [--debug] [--force]
+
+positional arguments:
+  {init,status,pull,push,ls,delete}
+
+    init                creates a basic configuration page.
+    status              displays the status of localization work on the current project.             
+    pull                Use the pull command to download locale files from the project.
+    push                Use the push command to upload your local files to the project.
+    ls                                  lists remote 
+    delete              will not delete resources or languages that contain translations. To force the deletion, use the `-f`` option.
+
+optional arguments:
+  -h, --help            show this help message and exit.
+  --traceback           full tracebacks on errors from running a command.
+  --debug               enables debug messages for any command. 
+
+</code></pre></div>
+<h2 id="push">push</h2>
+
+<p>Use the push command to upload your local files to the project identified by project_id, matching the files de.yml and en.yml in the config/locales folder:</p>
+
+<p><strong>push--subparser</strong>
+``` 
+qor push
+Push all local source files to the Qordoba project. </p>
+
+<p>*files
+    (Optional). Lists the file paths to upload.
+--update
+    (Optional). Updates an existing file.
+--version
+    (Optional). Sets the version tag. Updates the file with version tag. Uploads a  file with the version tag.</p>
+
+<p>--file-path pushs entire (relative) file paths. Please review the commands documentation further down.
+```</p>
+
+<p><strong>.qordoba.yml</strong></p>
+<div class="highlight"><pre><code class="language-" data-lang="">push:
+  sources:
+    - "./source/*.json" push only json sources
+    - "./source/english.json"  push single json sources
+    - "./source/*" push sources in folder and subfolders   
+</code></pre></div>
+<h2 id="pull">pull</h2>
+
+<p>Downloads translations for registered source files.</p>
+
+<p><strong>pull -- subparser</strong>
+<code>
+-w --workflow               allow to download not completed translations. Will ask for feedback on workflowstep. By default - download only completed translations.
+-l --languages              Option to work only on specific (comma-separated) languages. example: `qor pull -l en-us, de-de`
+-f --force                  force to update local files by remote translations. Do not ask approval.
+--skip                      skip downloading if file exists. (default: False)
+--replace                   replace existing file. (default: False)
+--set-new                   ask to set new filename if file exists. (default: False)
+--bulk                      pulls translated files in bulk, including the source language. Will automatically create a directory &#39;bulk_download&#39;.
+-w --workflow               pulles files from specific workflow step/milestones. Opens a diaglog for each file.
+--workflow-all              pull all files from given workflowstep. workflowstep name is required. e.g. `--workflow-all &quot;review&quot;`
+--custom                    pull files and change their extension naming. custom extension defined within the config file.
+--distinct                  pull specific files, defined in your config
+--file-path-patterns        pull filepaths into local folder structure
+</code>
+Project files will be pulled file by file. The following options are available:</p>
+
+<p><strong>.qordoba.yml</strong>
+```
+pull:
+  targets:
+    - &quot;<filename>.<extension>&quot; pulls all files into same dir
+    - &quot;<language_name>/<filename>.<extension>&quot; pulls all files into a dir called &quot;english&quot;
+    - &quot;partials/<filename>.po&quot; use with --custom.
+    - &quot;topics/qorodoba.json&quot; use with --distinct. pulls the file qorodoba.json, creates a folder named &quot;topics&quot;</p>
+<div class="highlight"><pre><code class="language-" data-lang="">
+Available params in pattern:
+
+```&lt;language_code&gt;``` - en-us
+```&lt;language_lang_code&gt;``` - en
+```&lt;language_name&gt;``` - english
+```&lt;language_name_cap&gt;``` - English
+```&lt;language_name_allcap&gt;``` - ENGLISH
+```&lt;local_capitalized&gt;``` - US (as off version 1.5.5)
+
+Default pattern for pull:
+
+```&lt;language_code&gt;&lt;filename&gt;.&lt;extension&gt;```
+
+
+Examples:
+
+</code></pre></div>
+<p>i18n/<language_code>/translations.json  -&gt;  i18n/zh-cn/translations.json
+folder1/values-<language_lang_code>/strings.xml  -&gt;  folder1/values-en/strings.xml
+config/locales/server.<language_code>.yml  -&gt;  config/locales/server.fr-fr.yml
+folder2/<language_name>/strings.xml  -&gt;  folder2/Chinese/strings.xml
+folder3/strings.<language_name_cap>  -&gt;  folder3/strings.French
+<language_name_allcap>.locale  -&gt;  FRENCH.locale</p>
+<div class="highlight"><pre><code class="language-" data-lang="">
+## iOS project specifics
+
+Due to Apples naming convention for iOS we have implemented an additional feature.
+By configuring config pull as the bottom example, the exception folder names will be pulled with new names: zh-Hans, zh-Hant, pt-BR, zh-CN (before: zh-chs, zh-cht, pt-br, zh-cn)
+
+***.qordoba.yml for iOS strings files***
+</code></pre></div>
+<p>qordoba: 
+  access_token: 
+  organization_id: 1234
+  project_id: 12321
+  push:
+    sources:
+    - &quot;./*.Strings&quot;
+  pull:
+    targets:
+    - &quot;./<language_lang_code>.lproj/<filename>.<extension>&quot;
+```</p>
+
+<h2 id="delete">delete</h2>
+
+<p>Deletes any resource and its translations. Your user account must have admin privileges to run this command.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">
+***delete --subparser***
+
+`-f`   `--force`          Optional. Force deletion of the remote page and its translations. Do not ask for approval.
+a filename or filenames    Required. The filename or filenames to delete. Use commas to separate multiple filenames. Do not specify the translated files.
+
+`-l`                      Optional. Delete one or more translations. example `-l en, us`
+</code></pre></div>
+<p>For example:</p>
+
+<p><strong>delete</strong>
+<code>
+$ qor delete -l &lt;file paths or file ids&gt;
+</code></p>
+
+<p>The client will not delete resources or languages that contain translations. To force the deletion, use the <code>-f</code> option.</p>
+
+<p><strong>delete</strong></p>
+
+<p><code>$ qor delete -f &lt;file paths or file ids&gt;</code></p>
+
+<h2 id="init">Init</h2>
+
+<p>Creates a basic configuration file, <code>.qordoba.yml</code>, in the current directory. This file is required for the client to connect to the server and synchronize files.</p>
+
+<p>Execute the <code>qor init</code> command with the following option-value pairs from your project settings.</p>
+
+<p><strong>init --subparser</strong>
+<code>
+--project-id                  (Required) Save the *Project ID* to the configuration file.
+--access-token                (Required) Save the *Account Token* to the configuration file.
+--organization-id             (Required) Save the *Organization ID* to config file
+--force                       (Optional) Recreate config file, overwriting the previous one.
+</code></p>
+
+<p>Example:</p>
+
+<p><strong>qor init</strong>
+```
+$ qor init --organization-id 1234 --access-token 10c7f4cfrohzuseinbedarfeswenige2d --project-id 4422</p>
+
+<p>-&gt; Loading qordoba config...
+-&gt; Checking organization and project...
+-&gt; Config <code>/Users/Qordoba/localization/.qordoba.yml</code> successfully saved.
+```</p>
+
+<h2 id="add-single-key">add single key</h2>
+
+<p>To add a single key to a project, do as follows:</p>
+
+<p>step 1: get file id</p>
+
+<p><code>qor addkey --filelist FILENAME</code></p>
+
+<p><strong>response</strong>
+<code>
+  filename    version      page_id
+  | ----------  ---------  ---------
+  | test.json   3             988204
+  | test.json   2             988200
+  | test.json                 988197
+</code></p>
+
+<p>step 2: add new key-value pair to file</p>
+
+<p><code>qor addkey --key [KEY] --value &quot;[VALUE]&quot; --fileid [FILEID]</code></p>
+
+<h2 id="status">status</h2>
+
+<p>Displays the status of localization work on the current project. It lists the resources initialized under the local project and their associated translation files.</p>
+
+<p>use qor status --json if you want the output to be in json format instead of a table</p>
+
+<p><strong>status</strong>
+<code>
+$ qor status
+-&gt; Loading qordoba config...
++--------+--------+-----------+---------+--------------+-----------+
+| LOCALE | #WORDS | #SEGMENTS | EDITING | PROOFREADING | COMPLETED |
++--------+--------+-----------+---------+--------------+-----------+
+| ja-jp  | 94     | 32        | 0%      | 78.13%       | 21.88%    |
+| es-es  | 94     | 32        | 100%    | 0%           | 0%        |
++--------+--------+-----------+---------+--------------+-----------+
+</code></p>
+
+<p><strong>LOCALE:</strong> The language code and country code separated by a dash. See Languages
+<strong>#WORDS:</strong> The number of words per locale.
+<strong>#SEGMENTS:</strong> The number of segments per locale
+<strong>TRANSLATION:</strong> If proofreading is one of the steps in the project workflow, the percentage of work completed on the translation step.
+<strong>EDITING:</strong> If proofreading is one of the steps in the project workflow, the percentage of editing work completed.
+<strong>PROOFREADING:</strong> If proofreading is one of the steps in the project workflow, the percentage of proofreading work completed.
+<strong>COMPLETED:</strong> The percentage of all project work completed.</p>
+
+<h2 id="ls">ls</h2>
+
+<p>Lists remote files.</p>
+
+<p><strong>ls</strong>
+$ qor ls
+<code>
+-&gt; Loading qordoba config...
++--------+-----------------+-----------+---------------------+---------+
+| ID     | NAME            | #SEGMENTS | UPDATED_ON          | STATUS  |
++--------+-----------------+-----------+---------------------+---------+
+| 728068 | runtime.yaml    | 6         | 2017-01-20 10:19:27 | Enabled |
+| 725570 | TestFileMH.json | 26        | 2016-12-21 22:40:13 | Enabled |
++--------+-----------------+-----------+---------------------+---------+
+</code></p>
+
+<h3 id="help">--help</h3>
+
+<ul>
+<li><p>Optional. Displays help for any command and option.</p>
+
+<ul>
+<li>Example A: To display a list of commands, enter <code>qordoba --help</code>, as shown here.</li>
+<li>Example B: To display a list of options for any command, enter the command followed by <code>--help</code>, as shown here.</li>
+</ul></li>
+</ul>
+
+<h3 id="traceback"><strong>--traceback</strong></h3>
+<div class="highlight"><pre><code class="language-" data-lang="">- Optional. Displays full tracebacks on exceptions/errors from running a command. Helps identify mistakes in resource files.
+- Example: ```$ qor init --organization-id 1234 --access-token 10c7f4cb7e1df2d817a0e9e28391ad9c6f22d``` --project-id 4321 --traceback`
+</code></pre></div>
+<h3 id="debug"><strong>--debug</strong></h3>
+<div class="highlight"><pre><code class="language-" data-lang="">- Optional. Enables debug messages for any command.
+- Example: ```$ qor init --organization-id 1234 --access-token 10c7f4cb7e1df2d817a0e9e28391ad9c6f22d```
+</code></pre></div>
+<p>Generates a step-by-step report of the executed command. The report includes the contents of the files to be processed.</p>
+
+<h2 id="file-path-push-and-pull-alpha">File Path - push and pull (alpha)</h2>
+
+<h2 id="push-entire-file-paths">push entire file paths</h2>
+
+<p><code>qor push --file-path</code> uploads files and their relative path to Qordoba.</p>
+
+<p><strong><em>necessary condition: your file path need to contain a language_code</em></strong></p>
+
+<p><strong>filepath naming</strong></p>
+<div class="highlight"><pre><code class="language-" data-lang="">Make sure your file path contains one of the following source code patterns:
+
+&lt;language_code&gt; - en-us
+
+&lt;language_lang_code&gt; - en
+
+&lt;language_name&gt; - english
+
+&lt;language_name_cap&gt; - English
+
+&lt;language_name_allcap&gt; - ENGLISH
+
+&lt;local_capitalized&gt; - US (as off version 1.5.5)
+
+Example:
+"./folder/en/index.html"
+"./folder/en-us.proj/index.html"
+</code></pre></div>
+<h3 id="pull-file-paths-into-same-project">pull file paths into same project</h3>
+
+<p>Pulling file paths smoothly back into your local folder structure has two requirements:</p>
+
+<ol>
+<li><p><strong>configuration file:</strong> Your configuration file must be in the exact same location as it was for the push command.</p></li>
+<li><p><strong>file naming</strong>: </p>
+
+<p>Know the source code pattern.</p>
+
+<p>The pattern needs to be added as a flag <code>--file-path-pattern</code> to your pull command:</p>
+
+<p><language_code> - en-us</p>
+
+<p><language_lang_code> - en</p>
+
+<p><language_name> - english</p>
+
+<p><language_name_cap> - English</p>
+
+<p><language_name_allcap> - ENGLISH</p>
+
+<p><local_capitalized> - US</p>
+
+<p>Example:</p>
+
+<p>source file-path: &quot;./folder/en/index.html&quot;
+pattern: language_lang_code
+command: <code>$ qor pull --file-path-pattern language_lang_code</code></p>
+
+<p>the name of the source language will change accordingly</p>
+
+<p>Default:
+<code>qor pull --file-path-pattern default.</code></p></li>
+</ol>
+
+    </div>
+  </div>
+</div>
+
+
+    
+  <!-- section class="section subscribe-section" id="newsletter">
+  <div class="container">
+    <header class="section-header">
+      <h4>Keep up with the latest features</h4>
+    </header>
+
+    <div class="row">
+      <div class="one-half column offset-by-three">
+
+      </div>
+    </div>
+  </div>
+</section -->
+
+
+<footer class="marketing-footer--light-gray">
+  <section>
+    <ul>
+      <li class="logo-wrapper">
+        <div class="logo">
+          <img src="/assets/images/qordobalogoblue.png" alt="Qordoba" >
+        </div>
+      </li>
+      <li>
+        <nav>
+          <h4>Use Cases</h4>
+          <ul>
+            <li><a href="#">Strings Management</a></li>
+            <li><a href="#">Content AI</a></li>
+            <li><a href="#">Localization</a></li>
+            <li><a href="#">Persona Based Content</a></li>
+
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="https://support.qordoba.com/">Knowledge Base</a></li>
+            <li><a href="https://dev.qordoba.com/glossary/">Glossary of Qordoba Terms</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Webinars</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Tutorials</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Network Status</h4>
+          <ul>
+            <li><a href="https://status.qordoba.com/">APIs</a></li>
+            <li><a href="https://status.qordoba.com/">SmartSuggest</a></li>
+            <li><a href="https://status.qordoba.com/">Emotion and Tone</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </section>
+
+  <section class="legal">
+    <ul>
+      <li>
+        <span class="mashape-footer-content">&copy; Qordoba. 2018</span>
+      </li>
+      <li>
+        <div class="social-link">
+          <a href="https://github.com/Qordobacode" title="Github"><i aria-label="Github" class="fa fa-github" aria-hidden="true"></i></a></div>
+        <div class="social-link">
+          <a href="https://twitter.com/qordoba" title="Twitter"><i aria-label="Twitter" class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</footer>
+
+    <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.prepend(anchorForId(header.id));
+      }
+    }
+  };
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      console.log("here")
+      var contentBlock = document.getElementById("documentation");
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+    <script src="/assets/app.js?v=1544053565"></script>
+
+    <div id="fb-root"></div>
+
+    <script id="github-bjs" src="https://buttons.github.io/buttons.js" async defer></script>
+    <script id="twitter-wjs" type="text/javascript" src="https://platform.twitter.com/widgets.js" async defer></script>
+    <script id="facebook-jssdk" type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=842731852424506" async defer></script>
+
+    <script type="text/javascript">
+      piAId = '393112';
+      piCId = '48375';
+
+      (function() {
+        function async_load(){
+          var s = document.createElement('script'); s.type = 'text/javascript';
+          s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+          var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+        }
+        if(window.attachEvent) { window.attachEvent('onload', async_load); }
+        else { window.addEventListener('load', async_load, false); }
+      })();
+    </script>
+
+    <script type='text/javascript'>
+      var _vwo_code=(function(){
+      var account_id=125292,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=true,
+      // DO NOT EDIT BELOW THIS LINE
+      f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load("WDj0nSS7hpyxwL3evgbOzK755s0NUye6");
+        analytics.page()
+      }}();
+    </script>
+
+    <script type="text/javascript" src="//mashape.github.io/notification-bar/embed.js" async defer></script>
+  </body>
+</html>

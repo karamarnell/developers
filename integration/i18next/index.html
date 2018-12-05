@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+  
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Qordoba - i18next | Qordoba - Strings Intelligence Platform..</title>
+  <meta name="description" content="Create a fully automated strings management solution">
+  <meta name="author" content="Qordoba"/>
+  <meta property="og:title" content="Strings Intelligence Platform.."/>
+  <meta property="og:site_name" content="Qordoba"/>
+  <link rel="prefetch" href="/assets/images/qordoba-white-logo.png" /><link rel="prefetch" href="/assets/images/icons/plugins/GitHub-enterprise-integration.png" /><link rel="prefetch" href="/assets/images/qordobalogoblue.png" /><link rel="dns-prefetch" href="https://buttons.github.io" /><link rel="dns-prefetch" href="https://platform.twitter.com" /><link rel="dns-prefetch" href="https://connect.facebook.net" /><link rel="dns-prefetch" href="//mashape.github.io" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png"/>
+  <link rel="stylesheet" href="/assets/styles.css?v=1544053565"/>
+</head>
+
+
+  <body id="page-plugin" >
+    <header class="site-header">
+  <div class="enterprise">
+        <div class="container">
+       <nav class="enterprise-sites one-half column">
+         <ul>
+           <li>
+             <a href="https://qordoba.com/customers/" target="_blank">Customers</a>
+           </li>
+           <li>
+             <a href="https://qordoba.com/partners/" target="_blank" >Partners</a>
+           </li>
+         </ul>
+       </nav>   
+      <nav class="enterprise-contact one-half column">
+        <ul>
+          <li>
+            <a href="https://support.qordoba.com/" target="_blank">Support</a>
+          </li>
+          <li>
+            <a href="http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html">Request Demo</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .enterprise -->
+  <div class="navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand">
+        <img src="/assets/images/qordoba-white-logo.png" alt="Qordoba" style="height: 35px;" >
+      </a>
+      <button data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar" class="navbar-toggle">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <nav id="navbar" class="navbar-nav">
+        <ul>
+          <li>
+            <a href="/docs/" >Docs</a>
+          </li>
+          <li>
+            <a href="/ecosystem" >Ecosystem</a>
+          </li>
+          <li>
+            <a href="/security/" >Security</a>
+          </li>
+          <li>
+            <a href="https://github.com/Qordobacode/" target="_blank">Code</a>
+          </li>
+           <li>
+            <a href="/api/" >API</a>
+          </li>
+          <li>
+            <a href="/install" class="button button-dark" data-analytics='{"event": "Clicked download", "type": "button", "location": "header"}'>Installation</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .navbar -->
+</header>
+
+
+    <div class="page page-plugin">
+  
+  <header class="page-header">
+    <div class="container">
+      
+        <div class="page-header-icon">
+          <img src="/assets/images/icons/plugins/GitHub-enterprise-integration.png" alt="" />
+        </div>
+      
+
+      <div class="page-header-title">
+        
+          <ul class="breadcrumbs">
+            
+              <li class="breadcrumb-item">
+                
+                <a href="/ecosystem">Ecosystem</a>
+                
+              </li>
+            
+          </ul>
+        
+
+        <h1>Qordoba - i18next</h1>
+
+        
+      </div>
+
+      
+
+      
+    </div>
+  </header>
+
+
+
+  <div class="container">
+    <div class="content">
+      <p>The Qordoba i18next plugin makes it easy to sync locales files between any i18next project and Qordoba.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>To get started, clone or download the repo from GitHub. Use <code>npm</code> to install the repo in the root directory and download dependencies for the plugin. If you want to run the example app, <code>cd</code> into the <code>/example</code> directory and run <code>npm install</code>.</p>
+
+<p>Before starting, visit Qordoba.com, set up an account and create a new project. If you are running the example app, set English as the source language, and pick a few target languages. Select <strong>JSON</strong> (not <strong>JSON(custom)</strong>) as your file type. Set up translation memories, etc. </p>
+
+<p>Once the app is created, get values for the <code>consumerKey</code>, <code>organizationId</code>, and <code>projectId</code>.</p>
+
+<p>After setting up a project and getting your configuration keys you are ready to run the example app.</p>
+
+<h2 id="qordoba-i18next-plugin-file-structure">Qordoba-i18next-plugin file structure.</h2>
+
+<p>The plugin&#39;s file structure is as follows:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">├── root
+│   ├── example // example app for project
+│   ├── lib // transplied ES6 code
+│   ├── src
+│   │   ├── index.js // i18next-node-fs-backend (see below)
+│   │   ├── qordoba.js // main functionality, handles sync between qordoba and filesystem
+│   │   ├── utils.js // helper functions for i18next-node-fs-backend
+│   ├── test
+│   ├── gulpfile.js // handles 'gulp build' command
+│   ├── package.json
+</code></pre></div>
+<p>Example App File Structure.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">├── example
+│   ├── build  // compiled ES5 code
+│   ├── locales
+│   │   ├── en // i18next-node-fs-backend (see below)
+│   │   │   ├── namespace1.json // this is where keys are linked to translated strings
+│   │   │   ├── namespace2.json
+│   │   ├── qordoba // built by plugin
+│   │   │   ├── es, da, etc  // all your target languages
+│   │   │   ├── files
+│   │   │   │   ├── source.json // metadata for source files, timestamps, fileIds, etc
+│   │   │   │   ├── target.json // metadata for target files, timestamps
+│   ├── public
+│   ├── src
+│   │   ├── assets
+│   │   ├── components
+│   │   ├── index.js // main entry point for react app
+│   ├── style
+│   ├── server
+│   │   ├── server.js // main entry point for express server (CONFIG GOES HERE)
+│   ├── webpack.config.js
+│   ├── package.json
+</code></pre></div>
+<p>To run the example app, go into the server and add you keys.
+- ORGANIZATION_ID // id of your qordoba organization
+- PROJECT_ID // id qordoba give you when you create a new project
+- MILESTONE_ID // id of milestone (eg. &#39;Proofreading&#39; ) that you want to pull translations from
+- CONSUMER_KEY // secret key to access API</p>
+
+<p>Then &#39;npm run build&#39; to transplile your configuration into build directory.</p>
+
+<p>If you just created a new project, check for the qoroba folder in &#39;root/example/locales&#39;, delete this folder if it exists. The plugin handles synching your source keys / strings from &#39;i18next/[source language]&#39;. It will take all your source files, copy them over to the qordoba directory, then upload these files to qordoba and download and build folders and namespaces for all target languages.</p>
+
+<h3 id="scripts">Scripts</h3>
+
+<p>Root Directory
+- &#39;gulp build&#39; - transpliles ES6 code from src -&gt; lib into ES5. Provides runtime support for promises.
+- &#39;npm test&#39; - run mocha tests for plugin.</p>
+
+<p>Example app
+- &#39;npm run build&#39; - transpiles ES6 code from src -&gt; build. Builds production bundle for app.
+- &#39;npm start&#39; - starts express server in server/server.js. Serves example app to localhost:3000</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<ul>
+<li><p>Familiarity with the i18next internationalization framework.</p></li>
+<li><p>I18next-node-fs-backend. This is what handles loading the locales files into the i18next framework. </p></li>
+</ul>
+
+<h3 id="prerequisites-for-the-example-app">Prerequisites for the example app</h3>
+
+<ul>
+<li><p>React-18next internationalization plugin - a higher order component to provide the i18next functionality to react components.</p></li>
+<li><p>I18next-express-middleware - middleware to use i18next in express.js. Supports multiloading of backend routes, etc.</p></li>
+</ul>
+
+<h2 id="running-the-tests">Running the tests</h2>
+
+<p>&#39;npm test&#39; in the root directory</p>
+
+<h2 id="built-with">Built With</h2>
+
+<ul>
+<li><a href="http://i18next.com/">i18next</a> - Internationalization ecosystem</li>
+<li><a href="https://github.com/i18next/i18next-node-fs-backend/">i18next-node-fs-backend</a> - I18next node backend for node.js</li>
+<li><a href="https://github.com/i18next/react-i18next">react-i18next</a> - Internationalization for react done right.</li>
+<li><a href="https://github.com/i18next/i18next-express-middleware">i18next-express-middleware</a> - express middleware for i18next</li>
+</ul>
+
+<h2 id="versioning">Versioning</h2>
+
+<p>// to do once published to npm</p>
+
+<h2 id="authors">Authors</h2>
+
+<ul>
+<li><strong>Erik Suddath</strong> -</li>
+</ul>
+
+<h2 id="license">License</h2>
+
+<p>This project is licensed under the MIT License - see the <a href="LICENSE.md">LICENSE.md</a> file for details</p>
+
+<p>Qordoba-Node-Backend-Plugin for i18next using Qordoba files API
+  * Source can be loaded via npm
+  * Will sync the data source (source language files) between i18next and Qordoba
+  * Will handle checking Qordoba for updates, downloading updated files and writing translations to file system
+  * Will serve files from Qordoba locales folder in fs</p>
+
+<h3 id="run-options">Run options</h3>
+
+<h2 id="pull">Pull</h2>
+
+<ul>
+<li>Download the latest translations manually from the command line (gulp)</li>
+<li>Download the latest translations real time from Qordoba Files API
+a) Plugin will check timestamps from Qordoba files API on every incoming request 
+b) Will download any updated files, write them to the fs, and update the resource bundle in i18next</li>
+<li>Load the latest translation on a preset interval
+a) Will check Qordoba for file updates on specified interval</li>
+</ul>
+
+<h2 id="push">Push</h2>
+
+<ul>
+<li>Upload the latest source language files manually from the command line (gulp)</li>
+<li>Will upload files to Qordoba web app via the Files API so the translations can be created, edited, proofread, and pushed (deployed) for use by the qordoba-nodejs-plugin </li>
+</ul>
+<div class="highlight"><pre><code class="language-" data-lang=""><span class="p">{</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Qordoba</span><span class="w"> </span><span class="err">organization</span><span class="w"> </span><span class="err">id</span><span class="w">
+  </span><span class="err">organization_id:</span><span class="w"> </span><span class="err">'[ORGANIZATION</span><span class="w"> </span><span class="err">ID]',</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Qordoba</span><span class="w"> </span><span class="err">project</span><span class="w"> </span><span class="err">id</span><span class="w">
+  </span><span class="err">project_id:</span><span class="w"> </span><span class="err">'[PROJECT</span><span class="w"> </span><span class="err">ID]',</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Qordoba</span><span class="w"> </span><span class="err">consumer</span><span class="w"> </span><span class="err">key</span><span class="w">
+  </span><span class="err">key:</span><span class="w"> </span><span class="err">'[KEY]',</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Path</span><span class="w"> </span><span class="err">To</span><span class="w"> </span><span class="err">Save</span><span class="w"> </span><span class="err">Qordoba</span><span class="w"> </span><span class="err">Keys</span><span class="w"> </span><span class="err">To</span><span class="w">
+  </span><span class="err">qordobaLocalesPath:</span><span class="w"> </span><span class="err">'[PATH</span><span class="w"> </span><span class="err">TO</span><span class="w"> </span><span class="err">QORDOBA</span><span class="w"> </span><span class="err">KEYS]',</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Download</span><span class="w"> </span><span class="err">Options</span><span class="w">
+  </span><span class="err">download:</span><span class="w"> </span><span class="err">'[COMMAND</span><span class="w"> </span><span class="err">LINE</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">REAL</span><span class="w"> </span><span class="err">TIME</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">INTERVAL</span><span class="w"> </span><span class="err">]',</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Upload</span><span class="w"> </span><span class="err">Options</span><span class="w"> </span><span class="err">(Source</span><span class="w"> </span><span class="err">Language,</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="err">version:</span><span class="w"> </span><span class="err">‘’</span><span class="w"> </span><span class="p">}</span><span class="err">)</span><span class="w">
+  </span><span class="err">upload:</span><span class="w"> </span><span class="err">'</span><span class="p">[</span><span class="err">COMMAND</span><span class="w"> </span><span class="err">LINE</span><span class="p">]</span><span class="err">'</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre></div>
+    </div>
+  </div>
+</div>
+
+
+    
+  <!-- section class="section subscribe-section" id="newsletter">
+  <div class="container">
+    <header class="section-header">
+      <h4>Keep up with the latest features</h4>
+    </header>
+
+    <div class="row">
+      <div class="one-half column offset-by-three">
+
+      </div>
+    </div>
+  </div>
+</section -->
+
+
+<footer class="marketing-footer--light-gray">
+  <section>
+    <ul>
+      <li class="logo-wrapper">
+        <div class="logo">
+          <img src="/assets/images/qordobalogoblue.png" alt="Qordoba" >
+        </div>
+      </li>
+      <li>
+        <nav>
+          <h4>Use Cases</h4>
+          <ul>
+            <li><a href="#">Strings Management</a></li>
+            <li><a href="#">Content AI</a></li>
+            <li><a href="#">Localization</a></li>
+            <li><a href="#">Persona Based Content</a></li>
+
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="https://support.qordoba.com/">Knowledge Base</a></li>
+            <li><a href="https://dev.qordoba.com/glossary/">Glossary of Qordoba Terms</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Webinars</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Tutorials</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Network Status</h4>
+          <ul>
+            <li><a href="https://status.qordoba.com/">APIs</a></li>
+            <li><a href="https://status.qordoba.com/">SmartSuggest</a></li>
+            <li><a href="https://status.qordoba.com/">Emotion and Tone</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </section>
+
+  <section class="legal">
+    <ul>
+      <li>
+        <span class="mashape-footer-content">&copy; Qordoba. 2018</span>
+      </li>
+      <li>
+        <div class="social-link">
+          <a href="https://github.com/Qordobacode" title="Github"><i aria-label="Github" class="fa fa-github" aria-hidden="true"></i></a></div>
+        <div class="social-link">
+          <a href="https://twitter.com/qordoba" title="Twitter"><i aria-label="Twitter" class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</footer>
+
+    <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.prepend(anchorForId(header.id));
+      }
+    }
+  };
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      console.log("here")
+      var contentBlock = document.getElementById("documentation");
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+    <script src="/assets/app.js?v=1544053565"></script>
+
+    <div id="fb-root"></div>
+
+    <script id="github-bjs" src="https://buttons.github.io/buttons.js" async defer></script>
+    <script id="twitter-wjs" type="text/javascript" src="https://platform.twitter.com/widgets.js" async defer></script>
+    <script id="facebook-jssdk" type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=842731852424506" async defer></script>
+
+    <script type="text/javascript">
+      piAId = '393112';
+      piCId = '48375';
+
+      (function() {
+        function async_load(){
+          var s = document.createElement('script'); s.type = 'text/javascript';
+          s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+          var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+        }
+        if(window.attachEvent) { window.attachEvent('onload', async_load); }
+        else { window.addEventListener('load', async_load, false); }
+      })();
+    </script>
+
+    <script type='text/javascript'>
+      var _vwo_code=(function(){
+      var account_id=125292,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=true,
+      // DO NOT EDIT BELOW THIS LINE
+      f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load("WDj0nSS7hpyxwL3evgbOzK755s0NUye6");
+        analytics.page()
+      }}();
+    </script>
+
+    <script type="text/javascript" src="//mashape.github.io/notification-bar/embed.js" async defer></script>
+  </body>
+</html>

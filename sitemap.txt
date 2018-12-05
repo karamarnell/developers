@@ -1,319 +1,333 @@
 
-/integration/Braze-Appboy-translation-integration.html
+/integration/Braze-Appboy-translation-integration/
 
-/integration/Eloqua-integration.html
+/integration/Eloqua-integration/
 
-/integration/GitHub-Enterprise-App-Integration.html
+/integration/GitHub-Enterprise-App-Integration/
 
-/integration/GitHub-app-configuration.html
+/integration/GitHub-app-configuration/
 
-/integration/GitHub-enterprise-integration.html
+/integration/GitHub-enterprise-integration/
 
-/integration/GitHub-integration.html
+/integration/GitHub-integration/
 
-/integration/Github-Configuration.html
+/integration/Github-Configuration/
 
-/integration/JavaScript-SDK-Domains.html
+/integration/JavaScript-SDK-Domains/
 
-/integration/JavaScript-SDK-FAQ.html
+/integration/JavaScript-SDK-FAQ/
 
-/integration/JavaScript-SDK-Language-Switcher.html
+/integration/JavaScript-SDK-Language-Switcher/
 
-/integration/JavaScript-SDK-SEO.html
+/integration/JavaScript-SDK-SEO/
 
-/integration/JavaScript-i18n-SDK-Initialize.html
+/integration/JavaScript-i18n-SDK-Initialize/
 
-/integration/JavaScript-i18n-SDK-Parameters.html
+/integration/JavaScript-i18n-SDK-Parameters/
 
-/integration/JavaScript-i18n-SDK.html
+/integration/JavaScript-i18n-SDK/
 
-/integration/Marketo-integration.html
+/integration/Marketo-integration/
 
-/docs/0.2.x/teams-and-users/Okta-sso-setup.html
+/docs/0.2.x/teams-and-users/Okta-sso-setup/
 
-/security/Reporting-a-bug.html
+/security/Reporting-a-bug/
 
-/resources/SmartSuggest.html
+/resources/SmartSuggest/
 
-/integration/Switch-WPML-to-Polylang.html
+/integration/Switch-WPML-to-Polylang/
 
-/integration/WPML-Compatibility.html
+/integration/WPML-Compatibility/
 
-/integration/WPML-One-menu-per-language.html
+/integration/WPML-One-menu-per-language/
 
-/integration/WPML-language-configuration-file.html
+/integration/WPML-language-configuration-file/
 
-/integration/WPML-to-Polylang.html
+/integration/WPML-to-Polylang/
 
-/integration/WebSocket-integration.html
+/integration/WebSocket-integration/
 
-/integration/Wordpress-multilingual-plugin.html
+/integration/Wordpress-multilingual-plugin/
 
-/integration/Zendesk-integration.html
+/integration/Zendesk-integration/
 
-/docs/0.2.x/teams-and-users/addOrRemoveUsers.html
+/docs/0.2.x/workspaces/actionsMenu/
 
-/docs/0.2.x/notifications-and-weebhook/addingWebhooks.html
+/docs/0.2.x/teams-and-users/addOrRemoveUsers/
 
-/docs/0.2.x/content-memory/addingtoCM.html
+/docs/0.2.x/workspaces/addingPersona/
 
-/docs/0.2.x/terms-anagement/addtoglossary.html
+/docs/0.2.x/notifications-and-weebhook/addingWebhooks/
 
-/integration/amazon-simple-queue-service-SQS-integration.html
+/docs/0.2.x/content-memory/addingtoCM/
 
-/integration/amqp-integration.html
+/docs/0.2.x/terms-anagement/addtoglossary/
 
-/resources/files/android-xml.html
+/integration/amazon-simple-queue-service-SQS-integration/
 
-/docs/0.2.x/file-support/android-xml.html
+/integration/amqp-integration/
 
-/integration/apache-Solr-integration.html
+/docs/0.2.x/file-support/android-xml/
 
-/docs/0.2.x/api.html
+/resources/files/android-xml/
 
-/docs/0.2.x/workflows-and-automation/automateWorkflows.html
+/integration/apache-Solr-integration/
 
-/install/bitbucket-application-strings-manager.html
+/docs/0.2.x/api/
 
-/docs/0.2.x/bitbucket-flow.html
+/docs/0.2.x/workflows-and-automation/automateWorkflows/
 
-/getting-started-guides/bitbucket-flow.html
+/install/bitbucket-application-strings-manager/
 
-/integration/bitbucket-integration.html
+/docs/0.2.x/bitbucket-flow/
 
-/integration/cassandra-integration.html
+/getting-started-guides/bitbucket-flow/
 
-/getting-started-guides/cli.html
+/integration/bitbucket-integration/
 
-/docs/0.2.x/cli.html
+/integration/cassandra-integration/
 
-/docs/0.2.x/content-memory/cmMatch.html
+/docs/0.2.x/cli/
 
-/docs/0.2.x/content-memory/confidenceInterval.html
+/getting-started-guides/cli/
 
-/getting-started-guides/content-ai.html
+/getting-started-guides/cliCommands/
 
-/resources/content-memory.html
+/docs/0.2.x/content-memory/cmMatch/
 
-/docs/0.2.x/history/contenthistory.html
+/docs/0.2.x/content-memory/confidenceInterval/
 
-/integration/couchbase-integration.html
+/getting-started-guides/content-ai/
 
-/docs/0.2.x/content-memory/createCM.html
+/resources/content-memory/
 
-/docs/0.2.x/file-support/csv.html
+/docs/0.2.x/history/contenthistory/
 
-/docs/0.2.x/teams-and-users/customroles.html
+/integration/couchbase-integration/
 
-/integration/demandware-integration.html
+/docs/0.2.x/content-memory/createCM/
 
-/install/developer-integrations.html
+/docs/0.2.x/file-support/csv/
 
-/integration/drupal-7-integration.html
+/docs/0.2.x/teams-and-users/customroles/
 
-/integration/drupal-8-integration.html
+/docs/0.2.x/workspaces/deleteFiles/
 
-/integration/dynamodb-integration.html
+/integration/demandware-integration/
 
-/integration/elasticsearch-elastic-integration.html
+/install/developer-integrations/
 
-/docs/0.2.x/notifications-and-weebhook/emailNotifications.html
+/integration/drupal-7-integration/
 
-/docs/0.2.x/history/filehistory.html
+/integration/drupal-8-integration/
 
-/integration/ftp-ftps-integration.html
+/integration/dynamodb-integration/
 
-/security/gdpr.html
+/integration/elasticsearch-elastic-integration/
 
-/docs/0.2.x/file-support/gettext_classicstandard.html
+/docs/0.2.x/notifications-and-weebhook/emailNotifications/
 
-/docs/0.2.x/file-support/gettexttemplate_classicstandard.html
+/docs/0.2.x/history/filehistory/
 
-/install/github-application-strings-manager.html
+/docs/0.2.x/live-editor/format/
 
-/docs/0.2.x/github-flow.html
+/integration/ftp-ftps-integration/
 
-/getting-started-guides/github-flow.html
+/security/gdpr/
 
-/integration/google-cloud-integration.html
+/docs/0.2.x/file-support/gettext_classicstandard/
 
-/docs/0.2.x/teams-and-users/google-sso-setup.html
+/docs/0.2.x/file-support/gettexttemplate_classicstandard/
 
-/integration/hbase-integration.html
+/install/github-application-strings-manager/
 
-/integration/hdfs-integration.html
+/docs/0.2.x/github-flow/
 
-/integration/hmac-authentication.html
+/getting-started-guides/github-flow/
 
-/integration/hosted-proxy-integration-strings-manager.html
+/getting-started-guides/githubApps/
 
-/docs/0.2.x/file-support/i18nJavaProperties.html
+/getting-started-guides/githubEnterprise/
 
-/integration/i18next-plugin-integration.html
+/integration/google-cloud-integration/
 
-/integration/i18next.html
+/docs/0.2.x/teams-and-users/google-sso-setup/
 
-/integration/imap-integration.html
+/integration/hbase-integration/
 
-/docs/0.2.x/api-reference/modules/index.dao.html
+/integration/hdfs-integration/
+
+/integration/hmac-authentication/
+
+/integration/hosted-proxy-integration-strings-manager/
+
+/docs/0.2.x/file-support/i18nJavaProperties/
+
+/integration/i18next-plugin-integration/
+
+/integration/i18next/
+
+/integration/imap-integration/
+
+/docs/0.2.x/api-reference/modules/index.dao/
+
+/docs/0.2.x/api-reference/
 
 /install/
-
-/security/
 
 /community/
 
 /integration/
 
+/security/
+
 /
 
-/docs/0.2.x/api-reference/
+/docs/0.2.x/terms-anagement/
+
+/resources/
+
+/docs/
 
 /resources/files/
 
 /getting-started-guides/
 
-/resources/
-
-/docs/0.2.x/terms-anagement/
-
 /docs/0.2.x/file-support/
 
-/docs/0.2.x/
+/docs/0.2.x/file-support/iosStringsFile/
 
-/docs/0.2.x/file-support/iosStringsFile.html
+/docs/0.2.x/file-support/iosStringsdict/
 
-/docs/0.2.x/file-support/iosStringsdict.html
+/docs/0.2.x/file-support/javaProperties/
 
-/docs/0.2.x/file-support/javaProperties.html
+/install/javascript-sdk-application-strings-manager/
 
-/install/javascript-sdk-application-strings-manager.html
+/getting-started-guides/javascript-sdk/
 
-/getting-started-guides/javascript-sdk.html
+/integration/jdbc-integration/
 
-/integration/jdbc-integration.html
+/integration/jms-integration/
 
-/integration/jms-integration.html
+/docs/0.2.x/file-support/json/
 
-/docs/0.2.x/file-support/json.html
+/integration/kafka-integration/
 
-/integration/kafka-integration.html
+/resources/key-reference/
 
-/resources/key-reference.html
+/resources/language-plural-rules/
 
-/resources/language-plural-rules.html
+/resources/language-resource-dev/
 
-/resources/language-resource-dev.html
+/docs/0.2.x/reporting/leveragereport/
 
-/docs/0.2.x/reporting/leveragereport.html
+/docs/0.2.x/content-memory/linkingCM/
 
-/docs/0.2.x/content-memory/linkingCM.html
+/docs/0.2.x/terms-anagement/linkingtermsbank/
 
-/docs/0.2.x/terms-anagement/linkingtermsbank.html
+/getting-started-guides/localization/
 
-/getting-started-guides/localization.html
+/integration/magento-1-integration/
 
-/integration/magento-1-integration.html
+/integration/magento-2-integration/
 
-/integration/magento-2-integration.html
+/docs/0.2.x/file-support/markdown/
 
-/docs/0.2.x/file-support/markdown.html
+/integration/mongodb-integration/
 
-/integration/mongodb-integration.html
+/integration/mqtt-integration/
 
-/integration/mqtt-integration.html
+/docs/0.2.x/file-support/openOfficeXML/
 
-/docs/0.2.x/file-support/openOfficeXML.html
+/docs/0.2.x/teams-and-users/permissions/
 
-/docs/0.2.x/teams-and-users/permissions.html
+/resources/personas/
 
-/docs/0.2.x/personas.html
+/docs/0.2.x/personas/
 
-/resources/personas.html
+/docs/0.2.x/content-ai/plagiarism-qordoba/
 
-/docs/0.2.x/content-ai/plagiarism-qordoba.html
+/docs/0.2.x/plugin-development/
 
-/docs/0.2.x/plugin-development.html
+/docs/0.2.x/file-support/poMsgidAsKey/
 
-/docs/0.2.x/file-support/poMsgidAsKey.html
+/docs/0.2.x/reporting/progressreport/
 
-/docs/0.2.x/reporting/progressreport.html
+/install/qordoba-cli-jenkins-application-strings-manager/
 
-/install/qordoba-cli-jenkins-application-strings-manager.html
+/docs/0.2.x/content-ai/qordoba-content-scoring/
 
-/docs/0.2.x/content-ai/qordoba-content-scoring.html
+/getting-started-guides/qordoba-extract/
 
-/getting-started-guides/qordoba-extract.html
+/docs/0.2.x/qordoba-styleguides/
 
-/docs/0.2.x/qordoba-styleguides.html
-
-/security/redact-sensitive-data.html
+/security/redact-sensitive-data/
 
 /robots.txt
 
-/integration/s3-integration.html
+/integration/s3-integration/
 
-/integration/secure-proxy-integration-strings-manager.html
+/integration/secure-proxy-integration-strings-manager/
 
-/resources/segmentation.html
+/resources/segmentation/
 
-/integration/service-cloud-salesforce-integration.html
+/integration/service-cloud-salesforce-integration/
 
-/install/sketch-application-strings-manager.html
+/install/sketch-application-strings-manager/
 
-/docs/0.2.x/notifications-and-weebhook/slackIntegration.html
+/docs/0.2.x/notifications-and-weebhook/slackIntegration/
 
-/docs/0.2.x/content-ai/smartsuggest.html
+/docs/0.2.x/content-ai/smartsuggest/
 
-/integration/smtp-integration.html
+/integration/smtp-integration/
 
-/security/soc-2.html
+/security/soc-2/
 
-/docs/0.2.x/api-reference/modules/spec.helpers.html
+/docs/0.2.x/api-reference/modules/spec.helpers/
 
-/docs/0.2.x/file-support/srt.html
+/docs/0.2.x/file-support/srt/
 
-/getting-started-guides/strings-management.html
+/getting-started-guides/strings-management/
 
-/resources/territory_language_information.html
+/resources/territory_language_information/
 
-/docs/0.2.x/general/tmp.html
+/docs/0.2.x/notifications-and-weebhook/tmp/
 
-/docs/0.2.x/notifications-and-weebhook/tmp.html
+/docs/0.2.x/workflows-and-automation/tmp/
 
-/docs/0.2.x/history/tmp.html
+/docs/0.2.x/general/tmp/
 
-/docs/0.2.x/content-editor/tmp.html
+/docs/0.2.x/reporting/tmp/
 
-/docs/0.2.x/faqs/tmp.html
+/docs/0.2.x/history/tmp/
 
-/docs/0.2.x/workspaces/tmp.html
+/docs/0.2.x/content-editor/tmp/
 
-/docs/0.2.x/reporting/tmp.html
+/docs/0.2.x/faqs/tmp/
 
-/docs/0.2.x/content-memory/tmp.html
+/docs/0.2.x/workspaces/tmp/
 
-/docs/0.2.x/live-editor/tmp.html
+/docs/0.2.x/content-memory/tmp/
 
-/docs/0.2.x/workflows-and-automation/tmp.html
+/docs/0.2.x/live-editor/tmp/
 
-/docs/0.2.x/reporting/velocityreport.html
+/docs/0.2.x/reporting/velocityreport/
 
-/docs/0.2.x/file-support/visualStudio.html
+/docs/0.2.x/file-support/visualStudio/
 
-/install/websocket-application-strings-manager.html
+/install/websocket-application-strings-manager/
 
-/integration/windows-azure-event-hub-integration.html
+/integration/windows-azure-event-hub-integration/
 
-/integration/wordpress-polylang-integration.html
+/integration/wordpress-polylang-integration/
 
-/integration/wpml-integration.html
+/docs/0.2.x/file-support/xliff12/
 
-/docs/0.2.x/file-support/xliff12.html
+/docs/0.2.x/file-support/xliff2/
 
-/docs/0.2.x/file-support/xliff2.html
+/docs/0.2.x/file-support/yaml/
 
-/docs/0.2.x/file-support/yaml.html
+/docs/0.2.x/file-support/yamli18n/
 
-/docs/0.2.x/file-support/yamli18n.html
+/redirects.json
 
