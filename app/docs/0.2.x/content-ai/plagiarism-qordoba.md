@@ -14,3 +14,7 @@ Plagiarism detection is the process of locating instances of plagiarism within a
 - Result of average similarity of all URL's is stored in output text file.
 
 All results displayed in a real time, you can compare your content with any of the matched url with just one click. 
+
+
+
+![detection methods](https://github.com/Qordobacode/developers/blob/images/app/_assets/images/plagiarism.png)
