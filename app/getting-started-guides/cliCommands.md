@@ -163,6 +163,7 @@ $ qor delete -l <file paths or file ids>
 The client will not delete resources or languages that contain translations. To force the deletion, use the ```-f``` option.
 
 **delete**
+
 ```$ qor delete -f <file paths or file ids>```
 
 
