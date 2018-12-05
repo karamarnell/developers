@@ -311,7 +311,7 @@ Pulling file paths smoothly back into your local folder structure has two requir
 1. **configuration file:** Your configuration file must be in the exact same location as it was for the push command.
 
 2. **file naming**: 
-```
+
 	Know the source code pattern.
 
 	The pattern needs to be added as a flag ```--file-path-pattern``` to your pull command:
@@ -338,4 +338,4 @@ Pulling file paths smoothly back into your local folder structure has two requir
 
 	Default:
 	```qor pull --file-path-pattern default.```
-```
+
