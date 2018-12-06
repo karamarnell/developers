@@ -14,9 +14,8 @@ dist
 
 # deploy
 .gh-pages
-_site
 
 # package managers
 node_modules
 
-package.json
+#package.json
