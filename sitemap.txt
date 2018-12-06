@@ -1,33 +1,33 @@
 
-/integration/Braze-Appboy-translation-integration/
+/ecosystem/Braze-Appboy-translation-integration/
 
-/integration/Eloqua-integration/
+/ecosystem/Eloqua-integration/
 
-/integration/GitHub-Enterprise-App-Integration/
+/ecosystem/GitHub-Enterprise-App-Integration/
 
-/integration/GitHub-app-configuration/
+/ecosystem/GitHub-app-configuration/
 
-/integration/GitHub-enterprise-integration/
+/ecosystem/GitHub-enterprise-integration/
 
-/integration/GitHub-integration/
+/ecosystem/GitHub-integration/
 
-/integration/Github-Configuration/
+/ecosystem/Github-Configuration/
 
-/integration/JavaScript-SDK-Domains/
+/ecosystem/JavaScript-SDK-Domains/
 
-/integration/JavaScript-SDK-FAQ/
+/ecosystem/JavaScript-SDK-FAQ/
 
-/integration/JavaScript-SDK-Language-Switcher/
+/ecosystem/JavaScript-SDK-Language-Switcher/
 
-/integration/JavaScript-SDK-SEO/
+/ecosystem/JavaScript-SDK-SEO/
 
-/integration/JavaScript-i18n-SDK-Initialize/
+/ecosystem/JavaScript-i18n-SDK-Initialize/
 
-/integration/JavaScript-i18n-SDK-Parameters/
+/ecosystem/JavaScript-i18n-SDK-Parameters/
 
-/integration/JavaScript-i18n-SDK/
+/ecosystem/JavaScript-i18n-SDK/
 
-/integration/Marketo-integration/
+/ecosystem/Marketo-integration/
 
 /docs/0.2.x/teams-and-users/Okta-sso-setup/
 
@@ -35,21 +35,21 @@
 
 /resources/SmartSuggest/
 
-/integration/Switch-WPML-to-Polylang/
+/ecosystem/Switch-WPML-to-Polylang/
 
-/integration/WPML-Compatibility/
+/ecosystem/WPML-Compatibility/
 
-/integration/WPML-One-menu-per-language/
+/ecosystem/WPML-One-menu-per-language/
 
-/integration/WPML-language-configuration-file/
+/ecosystem/WPML-language-configuration-file/
 
-/integration/WPML-to-Polylang/
+/ecosystem/WPML-to-Polylang/
 
-/integration/WebSocket-integration/
+/ecosystem/WebSocket-integration/
 
-/integration/Wordpress-multilingual-plugin/
+/ecosystem/Wordpress-multilingual-plugin/
 
-/integration/Zendesk-integration/
+/ecosystem/Zendesk-integration/
 
 /docs/0.2.x/workspaces/actionsMenu/
 
@@ -63,15 +63,15 @@
 
 /docs/0.2.x/terms-anagement/addtoglossary/
 
-/integration/amazon-simple-queue-service-SQS-integration/
+/ecosystem/amazon-simple-queue-service-SQS-integration/
 
-/integration/amqp-integration/
+/ecosystem/amqp-integration/
 
 /docs/0.2.x/file-support/android-xml/
 
 /resources/files/android-xml/
 
-/integration/apache-Solr-integration/
+/ecosystem/apache-Solr-integration/
 
 /docs/0.2.x/api/
 
@@ -83,9 +83,9 @@
 
 /getting-started-guides/bitbucket-flow/
 
-/integration/bitbucket-integration/
+/ecosystem/bitbucket-integration/
 
-/integration/cassandra-integration/
+/ecosystem/cassandra-integration/
 
 /docs/0.2.x/cli/
 
@@ -103,7 +103,7 @@
 
 /docs/0.2.x/history/contenthistory/
 
-/integration/couchbase-integration/
+/ecosystem/couchbase-integration/
 
 /docs/0.2.x/content-memory/createCM/
 
@@ -113,17 +113,17 @@
 
 /docs/0.2.x/workspaces/deleteFiles/
 
-/integration/demandware-integration/
+/ecosystem/demandware-integration/
 
 /install/developer-integrations/
 
-/integration/drupal-7-integration/
+/ecosystem/drupal-7-integration/
 
-/integration/drupal-8-integration/
+/ecosystem/drupal-8-integration/
 
-/integration/dynamodb-integration/
+/ecosystem/dynamodb-integration/
 
-/integration/elasticsearch-elastic-integration/
+/ecosystem/elasticsearch-elastic-integration/
 
 /docs/0.2.x/notifications-and-weebhook/emailNotifications/
 
@@ -131,7 +131,7 @@
 
 /docs/0.2.x/live-editor/format/
 
-/integration/ftp-ftps-integration/
+/ecosystem/ftp-ftps-integration/
 
 /security/gdpr/
 
@@ -149,51 +149,51 @@
 
 /getting-started-guides/githubEnterprise/
 
-/integration/google-cloud-integration/
+/ecosystem/google-cloud-integration/
 
 /docs/0.2.x/teams-and-users/google-sso-setup/
 
-/integration/hbase-integration/
+/ecosystem/hbase-integration/
 
-/integration/hdfs-integration/
+/ecosystem/hdfs-integration/
 
-/integration/hmac-authentication/
+/ecosystem/hmac-authentication/
 
-/integration/hosted-proxy-integration-strings-manager/
+/ecosystem/hosted-proxy-integration-strings-manager/
 
 /docs/0.2.x/file-support/i18nJavaProperties/
 
-/integration/i18next-plugin-integration/
+/ecosystem/i18next-plugin-integration/
 
-/integration/i18next/
+/ecosystem/i18next/
 
-/integration/imap-integration/
+/ecosystem/imap-integration/
 
 /docs/0.2.x/api-reference/modules/index.dao/
 
-/docs/0.2.x/api-reference/
-
-/install/
-
-/community/
-
-/integration/
+/
 
 /security/
 
-/
+/install/
 
-/docs/0.2.x/terms-anagement/
+/docs/0.2.x/api-reference/
 
-/resources/
+/ecosystem/
 
-/docs/
-
-/resources/files/
+/community/
 
 /getting-started-guides/
 
+/resources/files/
+
+/resources/
+
 /docs/0.2.x/file-support/
+
+/docs/
+
+/docs/0.2.x/terms-anagement/
 
 /docs/0.2.x/file-support/iosStringsFile/
 
@@ -205,13 +205,13 @@
 
 /getting-started-guides/javascript-sdk/
 
-/integration/jdbc-integration/
+/ecosystem/jdbc-integration/
 
-/integration/jms-integration/
+/ecosystem/jms-integration/
 
 /docs/0.2.x/file-support/json/
 
-/integration/kafka-integration/
+/ecosystem/kafka-integration/
 
 /resources/key-reference/
 
@@ -227,23 +227,23 @@
 
 /getting-started-guides/localization/
 
-/integration/magento-1-integration/
+/ecosystem/magento-1-integration/
 
-/integration/magento-2-integration/
+/ecosystem/magento-2-integration/
 
 /docs/0.2.x/file-support/markdown/
 
-/integration/mongodb-integration/
+/ecosystem/mongodb-integration/
 
-/integration/mqtt-integration/
+/ecosystem/mqtt-integration/
 
 /docs/0.2.x/file-support/openOfficeXML/
 
 /docs/0.2.x/teams-and-users/permissions/
 
-/resources/personas/
-
 /docs/0.2.x/personas/
+
+/resources/personas/
 
 /docs/0.2.x/content-ai/plagiarism-qordoba/
 
@@ -265,13 +265,13 @@
 
 /robots.txt
 
-/integration/s3-integration/
+/ecosystem/s3-integration/
 
-/integration/secure-proxy-integration-strings-manager/
+/ecosystem/secure-proxy-integration-strings-manager/
 
 /resources/segmentation/
 
-/integration/service-cloud-salesforce-integration/
+/ecosystem/service-cloud-salesforce-integration/
 
 /install/sketch-application-strings-manager/
 
@@ -279,7 +279,7 @@
 
 /docs/0.2.x/content-ai/smartsuggest/
 
-/integration/smtp-integration/
+/ecosystem/smtp-integration/
 
 /security/soc-2/
 
@@ -291,13 +291,13 @@
 
 /resources/territory_language_information/
 
+/docs/0.2.x/live-editor/tmp/
+
+/docs/0.2.x/reporting/tmp/
+
 /docs/0.2.x/notifications-and-weebhook/tmp/
 
 /docs/0.2.x/workflows-and-automation/tmp/
-
-/docs/0.2.x/general/tmp/
-
-/docs/0.2.x/reporting/tmp/
 
 /docs/0.2.x/history/tmp/
 
@@ -309,7 +309,7 @@
 
 /docs/0.2.x/content-memory/tmp/
 
-/docs/0.2.x/live-editor/tmp/
+/docs/0.2.x/general/tmp/
 
 /docs/0.2.x/reporting/velocityreport/
 
@@ -317,9 +317,9 @@
 
 /install/websocket-application-strings-manager/
 
-/integration/windows-azure-event-hub-integration/
+/ecosystem/windows-azure-event-hub-integration/
 
-/integration/wordpress-polylang-integration/
+/ecosystem/wordpress-polylang-integration/
 
 /docs/0.2.x/file-support/xliff12/
 

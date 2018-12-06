@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+  
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Qordoba - JavaScript i18n SDK Parameters | Qordoba - Strings Intelligence Platform..</title>
+  <meta name="description" content="Create a fully automated strings management solution">
+  <meta name="author" content="Qordoba"/>
+  <meta property="og:title" content="Strings Intelligence Platform.."/>
+  <meta property="og:site_name" content="Qordoba"/>
+  <link rel="prefetch" href="/assets/images/qordoba-white-logo.png" /><link rel="prefetch" href="/assets/images/icons/plugins/GitHub-enterprise-integration.png" /><link rel="prefetch" href="/assets/images/qordobalogoblue.png" /><link rel="dns-prefetch" href="https://buttons.github.io" /><link rel="dns-prefetch" href="https://platform.twitter.com" /><link rel="dns-prefetch" href="https://connect.facebook.net" /><link rel="dns-prefetch" href="//mashape.github.io" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png"/>
+  <link rel="stylesheet" href="/assets/styles.css?v=1544055052"/>
+</head>
+
+
+  <body id="page-plugin" >
+    <header class="site-header">
+  <div class="enterprise">
+        <div class="container">
+       <nav class="enterprise-sites one-half column">
+         <ul>
+           <li>
+             <a href="https://qordoba.com/customers/" target="_blank">Customers</a>
+           </li>
+           <li>
+             <a href="https://qordoba.com/partners/" target="_blank" >Partners</a>
+           </li>
+         </ul>
+       </nav>   
+      <nav class="enterprise-contact one-half column">
+        <ul>
+          <li>
+            <a href="https://support.qordoba.com/" target="_blank">Support</a>
+          </li>
+          <li>
+            <a href="http://go.qordoba.com/WF-Request-A-Demo__LP-DevDocs-Header.html">Request Demo</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .enterprise -->
+  <div class="navbar">
+    <div class="container">
+      <a href="/" class="navbar-brand">
+        <img src="/assets/images/qordoba-white-logo.png" alt="Qordoba" style="height: 35px;" >
+      </a>
+      <button data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar" class="navbar-toggle">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <nav id="navbar" class="navbar-nav">
+        <ul>
+          <li>
+            <a href="/docs/" >Docs</a>
+          </li>
+          <li>
+            <a href="/ecosystem/" >Ecosystem</a>
+          </li>
+          <li>
+            <a href="/security/" >Security</a>
+          </li>
+          <li>
+            <a href="https://github.com/Qordobacode/" target="_blank">Code</a>
+          </li>
+           <li>
+            <a href="/api/" >API</a>
+          </li>
+          <li>
+            <a href="/install/" class="button button-dark" data-analytics='{"event": "Clicked download", "type": "button", "location": "header"}'>Installation</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- .navbar -->
+</header>
+
+
+    <div class="page page-plugin">
+  
+  <header class="page-header">
+    <div class="container">
+      
+        <div class="page-header-icon">
+          <img src="/assets/images/icons/plugins/GitHub-enterprise-integration.png" alt="" />
+        </div>
+      
+
+      <div class="page-header-title">
+        
+          <ul class="breadcrumbs">
+            
+              <li class="breadcrumb-item">
+                
+                <a href="/ecosystem">Ecosystem</a>
+                
+              </li>
+            
+          </ul>
+        
+
+        <h1>Qordoba - JavaScript i18n SDK Parameters</h1>
+
+        
+      </div>
+
+      
+
+      
+    </div>
+  </header>
+
+
+
+  <div class="container">
+    <div class="content">
+      <p>All the ways you can customize the JavaScript SDK to suit your needs. With no additional parameters to the basic installation, the SDK will save all text segments, images, CSS and SEO on all source pages to which the SDK is applied. You can customize this set up as outlined below. To add parameters list them below the siteKey in the SDK (and make sure you are using camelCase!)</p>
+
+<h3 id="customdomain">customDomain</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customDomain</td>
+<td>null</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> Use this parameter when you want to pull content from a domain that is different than the one provided when you created your project in Qordoba.</p>
+
+<p><strong>Why use it:</strong> Can be used to save content from URLs that are still in a staging environment, even if they do not match the project name in Qordoba (<em>i.e.</em>, the production domain.) Should be used with projectDomain as shown below. Value should be the URL of the staging environment.
+<code>
+Qordoba.init({
+            siteKey: &#39;123.abc&#39;,
+            customDomain: &#39;staging.yoursite.com&#39;,
+            projectDomain: &#39;yoursite.com&#39;,
+});
+</code></p>
+
+<h3 id="livesyncpages">liveSyncPages</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>liveSyncPages</td>
+<td>false</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to false, content will only be pulled into your Qordoba project when the <code>force-collect=true</code> parameter is applied to the URL. Load the desired page while <code>force-collect=true</code> is included as a URL querystring parameter, and content will be sent to Qordoba.</p>
+
+<p>If you&#39;d like your content to be &quot;automatically&quot; collected every time the page is visited without having to include the <code>force-collect=true</code> querystring parameter, simply add <code>liveSyncPages: true</code> as a property on the <code>Qordoba.init</code> object in your SDK settings.</p>
+
+<p><strong>Why use it:</strong> This is a great customization for customers who want to create microsites of select content for different locales, rather than all pages :golf:. Content can be added as the project scope grows.</p>
+
+<h3 id="liveeditor">liveEditor</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>liveEditor</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, will apply the design resources set from the visual Live Editor feature in the Qordoba web application. The default is that this is on, so that if one of your team members expands a text box so that the German word for &quot;Company&quot; can fit (Unternehmen), this will go live.</p>
+
+<p><strong>Why use it:</strong> You can turn off the Live Editor if you&#39;d prefer to make the box longer via code instead of the visual Live Editor. Your team would still see the Live Editor in the Qordoba web application, but their changes there would not go live.</p>
+
+<h3 id="blacklist">blackList</h3>
+
+<p><strong>What it does:</strong> A filter applied to DOM node collection results to ignore content whose node path contains a forbidden value.</p>
+
+<p><strong>Why use it:</strong> Determines CSS-like selectors (as well as elements nested inside them) that the Qordoba scraper should ignore. You can prevent scraping unneeded or unwanted content with this option. Customers who have injected third-party widgets or other code often end up with various content being generated that they don&#39;t want to be copied over to localized versions of the page. With this parameter, this pesky occurrence is banished. :hammer:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">blackList:[
+'[notranslate=true]',
+'.gm-style',
+'.twitter-video',
+'#q-ext-root',
+'.twitter-tweet',
+'^script',
+'^qwts',
+'^style',
+'^iframe',
+'^svg',
+'^canvas',
+'^noscript',
+'#comment$'
+]   
+</code></pre></div>
+<h3 id="overridecss">overrideCss</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>overrideCss</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, will add the CSS rules that were declared in the CSS settings of your project in the Qordoba web application.</p>
+
+<p><strong>Why use it:</strong> By default, you can add CSS rules in Qordoba to fix issues caused by language. You can do this by locale. If you don&#39;t want anyone to use this feature, you can set this parameter to false.</p>
+
+<h3 id="projectdomain">projectDomain</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>projectDomain</td>
+<td>null</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> Can be used in combination with customDomain to save and replace URLs that do not match the project name in Qordoba (<em>i.e.</em>, the production domain).</p>
+
+<p><strong>Why use it:</strong> Can be used to save content from URLs that are still in a staging environment, even if they do not match the project name in Qordoba (<em>i.e.</em>, the production domain). Should be used with customDomain above. Value should be the URL of the production domain.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">Qordoba.init({
+            siteKey: '123.abc',
+            customDomain: 'staging.yoursite.com',
+            projectDomain: 'yoursite.com',
+});
+
+</code></pre></div>
+<h3 id="rewriteabsolutelinks">rewriteAbsoluteLinks</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rewriteAbsoluteLinks</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, will rewrite all absolute &quot;href&quot; attributes on <code>&lt;a&gt;</code> tags that reference the project domain to link to their localized versions.</p>
+
+<p><strong>Why use it:</strong> The default behavior of the SDK is that all internal links in the pages where the SDK is applied are automatically changed to the localized versions. For example, if your German visitor is sent to the German homepage, whether by browser language detection, geolocation or manual switch, clicking to the blog from there will send her to the German blog. However, if you are using the SDK to create local content on only some pages, or only on parts of pages, then you wouldn&#39;t want your visitor to see <code>lang=de</code> in the blog URL even though it is in English. Whew.</p>
+
+<h3 id="savenewattributes">saveNewAttributes</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>saveNewAttributes</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, the SDK will detect and save new <code>&lt;a&gt;</code> &quot;title&quot; or <code>&lt;input&gt;</code> &quot;placeholder&quot; and &quot;value&quot; attributes on the page. When set to false, new attributes will not be saved.</p>
+
+<p><strong>Why use it:</strong> If you don&#39;t want to save attributes at all or want to prevent the SDK from saving new content, you can set this property to false.</p>
+
+<h3 id="savenewimages">saveNewImages</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>saveNewImages</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, the SDK will detect and save new images on the page. When set to false, new images will not be saved.</p>
+
+<p><strong>Why use it:</strong> This is useful if you are using a third-party tool to manage images on your site (<em>i.e.</em>, a PIM.)</p>
+
+<h3 id="savenewsegments">saveNewSegments</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>saveNewSegments</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, the SDK will detect and save text segments on the page. When set to false, segments will not be saved.</p>
+
+<p><strong>Why use it:</strong> If you don&#39;t want to save text segments at all or want to prevent the SDK from saving new segments, you can set this property to false.</p>
+
+<h3 id="saveseo">saveSeo</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>saveSeo</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to false, will not save any of the <code>title</code>, <code>meta</code>, <code>content</code>, and <code>description</code> values for your pages.</p>
+
+<p><strong>Why use it:</strong> We don&#39;t know. Don&#39;t you want more organic traffic?!? j/k. Maybe your marketing team decides to not pull in any of the SEO until they develop more strategy around global SEO.</p>
+
+<h3 id="selectlastlanguage">selectLastLanguage</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>selectLastLanguage</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, this parameter saves the language that was last visited by the user and serves the same language the next time she accesses the site.</p>
+
+<p><strong>Why use it:</strong> It&#39;s good karma to remember user preferences, but there may be reasons why you&#39;d want to turn off this behavior and send a user to the main domain each time (<em>i.e.</em>, a global landing page.)</p>
+
+<h3 id="translatesegments">translateSegments</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>translateSegments</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, allows content published in Qordoba&#39;s web application to appear on your pages. If false, will not change any source content.</p>
+
+<p><strong>Why use it:</strong> This parameter is used by customers who want to review a project&#39;s content in staging or test environments before publishing to the production environment. To set up this workflow, the TranslateSegments parameter is kept as true in the staging environment, but false in the production environment, until all of the &quot;Publish&quot; actions in the Qordoba web application have been reviewed in staging.</p>
+
+<h3 id="translateattributes">translateAttributes</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>translateAttributes</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, will replace all <code>&lt;a&gt;</code> &quot;title&quot; attributes and <code>&lt;input&gt;</code> &quot;placeholder&quot; and &quot;value&quot; attributes with the translations published from the Qordoba web application project. If set to false, original values will stay the same.</p>
+
+<p><strong>Why use it:</strong> This parameter can be used by customers who don&#39;t want to translate content attributes.</p>
+
+<h3 id="translateimages">translateImages</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>translateImages</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, will replace all images with the values published from the Qordoba web application project. If set to false, original images will stay the same.</p>
+
+<p><strong>Why use it:</strong> Admin users in your Qordoba project are able to swap out images for the localized pages, replacing an image of the Golden Gate bridge :bridge_at_night: with the Tokyo Tower :tokyo_tower:, for example. Customers who don&#39;t want anyone to change images, ever, will use this parameter to turn off this feature.</p>
+
+<h3 id="translateseo">translateSeo</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>translateSeo</td>
+<td>true</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to true, will localize <code>&lt;title&gt;</code> and <code>&lt;meta&gt;</code> &quot;content&quot; and &quot;description&quot; for your pages based on the content for these fields in the Qordoba platform. If false, will leave as original source value.</p>
+
+<p><strong>Why use it:</strong> You may want to turn this off if you&#39;d prefer to handle SEO for your pages differently (<em>e.g.</em>, manually.)</p>
+
+<h3 id="sitekey">siteKey</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>siteKey</td>
+<td>null</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> This required parameter determines which project in the Qordoba web application to associate with your website content.</p>
+
+<p><strong>Why use it:</strong> You&#39;ll need to include this in your SDK at all times.</p>
+
+<h3 id="showloaderwhenswitchinglanguage">showLoaderWhenSwitchingLanguage</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>showloaderwhenswitchinglanguage</td>
+<td>false</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When user changes a language, by default the page goes blank for a moment until the SDK gets translations (so it seems like page refresh.) For SPA that might not always be desired, so this option changes this behavior to show loader instead.</p>
+
+<p><strong>Why use it:</strong> If you want to prevent the page flashing, you can set this option to true, instead of blank page there will be a loader shown.</p>
+
+<h3 id="loadercustomhtml">loaderCustomHTML</h3>
+
+<p>loaderCustomHTML will allow to change you loader to whatever fits your style.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>loaderCustomHTML:</td>
+<td></td>
+<td>HTML string</td>
+</tr>
+</tbody></table>
+
+<p>Example:</p>
+
+<p>[block:image]
+{
+  &quot;images&quot;: [
+    {
+      &quot;image&quot;: [
+        &quot;<a href="https://files.readme.io/76bbaf1-Screen_Shot_2017-06-28_at_2.10.49_PM.png">https://files.readme.io/76bbaf1-Screen_Shot_2017-06-28_at_2.10.49_PM.png</a>&quot;,
+        &quot;Screen Shot 2017-06-28 at 2.10.49 PM.png&quot;,
+        600,
+        304,
+        &quot;#f9f9f8&quot;
+      ],
+      &quot;sizing&quot;: &quot;80&quot;
+    }
+  ]
+}
+[/block]</p>
+
+<h3 id="pagenotfound">pageNotFound</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pageNotFound</td>
+<td>null</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> Use this parameter to identify the absolute URL of the page you&#39;d like to re-direct users to when a translated page cannot be found. If you&#39;d like to serve a localized <code>/404</code> page, make sure you have a page in your project titled <code>/404</code> and that page is completed and published. You may then use our URL path mapping conventions to serve the localized page.</p>
+
+<p><strong>Why use it:</strong> Can be leveraged to help users effectively navigate your localized site.</p>
+
+<h3 id="prefercanonicalurls">preferCanonicalUrls</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>preferCanonicalUrls</td>
+<td>false</td>
+<td>boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When set to <code>true</code>, this parameter forces Qordoba to use the canonical URL for the page instead of the URL in the address bar. </p>
+
+<p><strong>Why use it:</strong> Some websites have multiple URL endpoints that all land on the same page, and each of these URL endpoints have the same canonical URL. If this parameter is <code>false</code>, Qordoba will re-collect the same page once for each URL endpoint. Since we only want one version of each page in Qordoba, we could set this parameter to <code>true</code>, and Qordoba would only collect one page for each canonical URL, regardless of what you see in the address bar.</p>
+
+<h3 id="ignoredompath">ignoreDomPath</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ignoreDomPath</td>
+<td>true</td>
+<td>boolean</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> When we apply translations to a foreign language website, we use a number of factors to determine where on the page a given segment should be applied. One of these factors is &quot;DOM path&quot;, which is the actual &quot;location&quot; of the segment on the page.</p>
+
+<p>When set to &quot;true&quot;, this parameter will tell Qordoba to ignore location and apply translations solely by looking for the &quot;source&quot; segment from Qordoba on the webpage.</p>
+
+<p><strong>Why use it:</strong> If you are planning to change the layout of your website but not the content and you want your translations to persist, you should change this to &quot;true&quot;. That way, Qordoba will continue to translate the segments in the same way even though their location on the page has changed.</p>
+
+<h3 id="collectdelay">collectDelay</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Accepts</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>collectDelay</td>
+<td>3000</td>
+<td>number</td>
+</tr>
+</tbody></table>
+
+<p><strong>What it does:</strong> Delays the SDK running on your page for the number of milliseconds specified.</p>
+
+<p><strong>Why use it:</strong> If some of your page content takes a while to load, our SDK may run before all content is loaded. Use this parameter to introduce a delay and allow the content to fully load.</p>
+
+    </div>
+  </div>
+</div>
+
+
+    
+  <!-- section class="section subscribe-section" id="newsletter">
+  <div class="container">
+    <header class="section-header">
+      <h4>Keep up with the latest features</h4>
+    </header>
+
+    <div class="row">
+      <div class="one-half column offset-by-three">
+
+      </div>
+    </div>
+  </div>
+</section -->
+
+
+<footer class="marketing-footer--light-gray">
+  <section>
+    <ul>
+      <li class="logo-wrapper">
+        <div class="logo">
+          <img src="/assets/images/qordobalogoblue.png" alt="Qordoba" >
+        </div>
+      </li>
+      <li>
+        <nav>
+          <h4>Use Cases</h4>
+          <ul>
+            <li><a href="#">Strings Management</a></li>
+            <li><a href="#">Content AI</a></li>
+            <li><a href="#">Localization</a></li>
+            <li><a href="#">Persona Based Content</a></li>
+
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="https://support.qordoba.com/">Knowledge Base</a></li>
+            <li><a href="https://dev.qordoba.com/glossary/">Glossary of Qordoba Terms</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Webinars</a></li>
+            <li><a href="https://www.youtube.com/channel/UC_ZMLcfNI1XQnV8frpeFsgA">Tutorials</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Network Status</h4>
+          <ul>
+            <li><a href="https://status.qordoba.com/">APIs</a></li>
+            <li><a href="https://status.qordoba.com/">SmartSuggest</a></li>
+            <li><a href="https://status.qordoba.com/">Emotion and Tone</a></li>
+          </ul>
+        </nav>
+      </li>
+      <li>
+        <nav>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </section>
+
+  <section class="legal">
+    <ul>
+      <li>
+        <span class="mashape-footer-content">&copy; Qordoba. 2018</span>
+      </li>
+      <li>
+        <div class="social-link">
+          <a href="https://github.com/Qordobacode" title="Github"><i aria-label="Github" class="fa fa-github" aria-hidden="true"></i></a></div>
+        <div class="social-link">
+          <a href="https://twitter.com/qordoba" title="Twitter"><i aria-label="Twitter" class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</footer>
+
+    <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.prepend(anchorForId(header.id));
+      }
+    }
+  };
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      console.log("here")
+      var contentBlock = document.getElementById("documentation");
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+    <script src="/assets/app.js?v=1544055052"></script>
+
+    <div id="fb-root"></div>
+
+    <script id="github-bjs" src="https://buttons.github.io/buttons.js" async defer></script>
+    <script id="twitter-wjs" type="text/javascript" src="https://platform.twitter.com/widgets.js" async defer></script>
+    <script id="facebook-jssdk" type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=842731852424506" async defer></script>
+
+    <script type="text/javascript">
+      piAId = '393112';
+      piCId = '48375';
+
+      (function() {
+        function async_load(){
+          var s = document.createElement('script'); s.type = 'text/javascript';
+          s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+          var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+        }
+        if(window.attachEvent) { window.attachEvent('onload', async_load); }
+        else { window.addEventListener('load', async_load, false); }
+      })();
+    </script>
+
+    <script type='text/javascript'>
+      var _vwo_code=(function(){
+      var account_id=125292,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=true,
+      // DO NOT EDIT BELOW THIS LINE
+      f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load("WDj0nSS7hpyxwL3evgbOzK755s0NUye6");
+        analytics.page()
+      }}();
+    </script>
+
+    <script type="text/javascript" src="//mashape.github.io/notification-bar/embed.js" async defer></script>
+  </body>
+</html>
