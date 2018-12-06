@@ -7,7 +7,7 @@ breadcrumbs:
 ---
 
 <div class="alert alert-success">
-  <center><stromg>Qordoba’s SOC 2 Type IIcompliance is proof of our commitment to security and data integrity throughout our operations and services.</stromg></center>
+  <center><strong>Qordoba’s SOC 2 Type II compliance is proof of our commitment to security and data integrity throughout our operations and services.</strong></center>
 </div>
 
 As companies increasingly use outside vendors to perform activities that are core to their business operations and strategy, there is a need for more trust and transparency into cloud software providers’ operations, processes and results.
@@ -17,7 +17,7 @@ The Service Organization Control (SOC) 2 verifies that Qordoba passed a rigorous
 
 #### What does this mean for your business? 
 
-Along with the added rigor that SOC 2 requires, our SOC 2 Type I compliance means that you can communicate to your customers that your realtime app is built on a SOC 2 compliant infrastructure.
+Along with the added rigor that SOC 2 requires, our SOC 2 Type II compliance means that you can communicate to your customers that your realtime app is built on a SOC 2 compliant infrastructure.
 
 In addition to SOC 2 compliance, Qordoba has developed and maintains a suite of audited processes that reinforce the security of our service delivery environment:
 
