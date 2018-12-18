@@ -2,23 +2,62 @@
   title: Getting Started
   items:
     -
-      text: Introduction
+      text: Workspace types
       url: /getting-started/introduction
     -
-      text: Personas definition
-      url: /getting-started/personas-definition
+      text: Qordoba Scoring
+      url: /content-ai/qordoba-content-scoring
     -
-      text: Placeholders
+      text: Sketch plugin
       url: /getting-started/placeholders
     -
-      text: API libraries
+      text: GitHub intgration
       url: /getting-started/api-libraries
-
+    -
+      text: Plagiarism 
+      url: /content-ai/plagiarism-qordoba
+    -
+      text: Terms management
+      url: /terms-management/
+    -
+      text: Workflows/Automation
+      url: /workflows-and-automation/automateWorkflows
+    -
+      text: SmartSuggest
+      url: /content-ai/smartsuggest     
+    -
+      text: Content Editor
+      url: /content-editor/index          
+    -
+      text: Content Memory
+      url: /content-ai/smartsuggest 
+    -
+      text: History
+      url: /content-ai/smartsuggest 
+    -
+      text: Notifications
+      url: /content-ai/smartsuggest 
+    -
+      text: Slack WebHooks
+      url: /content-ai/smartsuggest 
+    -
+      text: Teams and users
+      url: /content-ai/smartsuggest       
 -
-  title: CLI Reference
+  title: References
   items:
     -
-      text: Commands
+      text: API access
+      url: /api-reference/access
+    -
+      text: API Quotas and limits
+      url: //api-reference/quotas
+    -
+      text: File type & parsing
+      url: /file-support/index
+
+    -
+      text: Cli Commands
       url: /cli
       items:
         -
@@ -36,60 +75,3 @@
         -
           text: Status
           url: /cli/#reload
--
-  title: API endpoints
-  items:
-    -
-      text: Introduction
-      url: /api/
-    -
-      text: Supported Content Types
-      url: /api/#supported-content-types
-    -
-      text: Workspaces
-      url: /admin-api/#api-object
-      items:
-        -
-          text: List workspaces
-          url: /admin-api/#list
-        -
-          text: Workspace details
-          url: /admin-api/#details
-        -
-          text: Workspace workflow
-          url: /admin-api/#workflow
-    -
-      text: File
-      url: /admin-api/#consumer-object
-      items:
-        -
-          text: List files
-          url: /admin-api/#create-consumer
-        -
-          text: Upload file
-          url: /admin-api/#retrieve-consumer
-        -
-          text: Upload file
-          url: /admin-api/#list-consumers
-        -
-          text: Export file
-          url: /admin-api/#update-consumer
-        -
-          text: Delete file
-          url: /admin-api/#update-or-create-consumer
-    -
-      text: Strings 
-      url: /admin-api/#plugin-configuration-object
-      items:
-        -
-          text: Create key
-          url: /admin-api/#create-plugin-configuration
-        -
-          text: List file strings
-          url: /admin-api/#list-per-api-plugin-configurations
-        -
-          text: Update string
-          url: /admin-api/#list-all-plugin-configurations
-        -
-          text: Value by key
-          url: /admin-api/#update-plugin-configuration
