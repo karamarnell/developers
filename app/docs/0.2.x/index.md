@@ -4,15 +4,15 @@ title: Documentation for Qordoba strings manager
 
 <div class="docs-grid">
   <div class="docs-grid-block">
-    <h3><img src="/assets/images/icons/documentation/icn-window.svg" /><a href="/docs/{{page.qordoba_version}}/term-management">How-to Guides</a></h3>
+    <h3><img src="/assets/images/icons/documentation/icn-window.svg" /><a href="/docs/{{page.qordoba_version}}/how-to-guides">How-to Guides</a></h3>
     <p>description How-to Guides perform specific tasks</p>
-    <a href="/docs/{{page.qordoba_version}}/term-management">Read more &rarr;</a>
+    <a href="/docs/{{page.qordoba_version}}/how-to-guides">Read more &rarr;</a>
   </div>
 
   <div class="docs-grid-block">
-    <h3><img src="/assets/images/icons/documentation/icn-window.svg" /><a href="/docs/{{page.qordoba_version}}/qordoba-content-scoring">FAQ</a></h3>
+    <h3><img src="/assets/images/icons/documentation/icn-window.svg" /><a href="/docs/{{page.qordoba_version}}/faq">FAQ</a></h3>
     <p>Qordoba content scoring (How it works)</p>
-    <a href="/docs/{{page.qordoba_version}}/qordoba-content-scoring">Read more &rarr;</a>
+    <a href="/docs/{{page.qordoba_version}}/faq">Read more &rarr;</a>
   </div>
   
   <div class="docs-grid-block">
@@ -22,9 +22,9 @@ title: Documentation for Qordoba strings manager
   </div>
   
   <div class="docs-grid-block">
-    <h3><img src="/assets/images/icons/documentation/icn-quickstart.svg" /><a href="/install">Reference</a></h3>
+    <h3><img src="/assets/images/icons/documentation/icn-quickstart.svg" /><a href="/docs/{{page.qordoba_version}}/reference">Reference</a></h3>
     <p>Learn how to start using Qordoba GitHub integration, You will receive and sync all the new / updated keys and strings as PR</p>
-    <a href="/docs/{{page.qordoba_version}}/github-flow">Read more &rarr;</a>
+    <a href="/docs/{{page.qordoba_version}}/reference">Read more &rarr;</a>
   </div>
   
   <div class="docs-grid-block">
