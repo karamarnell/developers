@@ -1,9 +1,9 @@
 {
   "private": true,
   "version": "1.0.0",
-  "name": "developers.qordoba.com",
-  "homepage": "https://developers.qordoba.com",
-  "repository": "Qordobacode/developers",
+  "name": "docs.konghq.com",
+  "homepage": "https://docs.konghq.com",
+  "repository": "Kong/docs.konghq.com",
   "license": "proprietary",
   "scripts": {
     "deploy": "gulp deploy",
