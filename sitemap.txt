@@ -61,15 +61,15 @@
 
 /docs/0.2.x/content-memory/addingtoCM/
 
-/docs/0.2.x/terms-anagement/addtoglossary/
+/docs/0.2.x/terms-management/addtoglossary/
 
 /ecosystem/amazon-simple-queue-service-SQS-integration/
 
 /ecosystem/amqp-integration/
 
-/docs/0.2.x/file-support/android-xml/
-
 /resources/files/android-xml/
+
+/docs/0.2.x/file-support/android-xml/
 
 /ecosystem/apache-Solr-integration/
 
@@ -87,9 +87,9 @@
 
 /ecosystem/cassandra-integration/
 
-/docs/0.2.x/cli/
-
 /getting-started-guides/cli/
+
+/docs/0.2.x/cli/
 
 /getting-started-guides/cliCommands/
 
@@ -161,6 +161,8 @@
 
 /ecosystem/hosted-proxy-integration-strings-manager/
 
+/docs/0.2.x/how-to-guides/
+
 /docs/0.2.x/file-support/i18nJavaProperties/
 
 /ecosystem/i18next-plugin-integration/
@@ -171,29 +173,29 @@
 
 /docs/0.2.x/api-reference/modules/index.dao/
 
-/
-
 /security/
-
-/install/
-
-/docs/0.2.x/api-reference/
 
 /ecosystem/
 
+/install/
+
+/
+
 /community/
 
-/getting-started-guides/
-
-/resources/files/
-
-/resources/
+/docs/0.2.x/api-reference/
 
 /docs/0.2.x/file-support/
 
+/getting-started-guides/
+
+/resources/
+
 /docs/
 
-/docs/0.2.x/terms-anagement/
+/resources/files/
+
+/docs/0.2.x/terms-management/
 
 /docs/0.2.x/file-support/iosStringsFile/
 
@@ -223,7 +225,7 @@
 
 /docs/0.2.x/content-memory/linkingCM/
 
-/docs/0.2.x/terms-anagement/linkingtermsbank/
+/docs/0.2.x/terms-management/linkingtermsbank/
 
 /getting-started-guides/localization/
 
@@ -291,25 +293,15 @@
 
 /resources/territory_language_information/
 
-/docs/0.2.x/live-editor/tmp/
-
-/docs/0.2.x/reporting/tmp/
-
-/docs/0.2.x/notifications-and-weebhook/tmp/
+/docs/0.2.x/general/tmp/
 
 /docs/0.2.x/workflows-and-automation/tmp/
 
-/docs/0.2.x/history/tmp/
-
-/docs/0.2.x/content-editor/tmp/
-
 /docs/0.2.x/faqs/tmp/
 
-/docs/0.2.x/workspaces/tmp/
+/docs/0.2.x/history/tmp/
 
-/docs/0.2.x/content-memory/tmp/
-
-/docs/0.2.x/general/tmp/
+/docs/0.2.x/notifications-and-weebhook/tmp/
 
 /docs/0.2.x/reporting/velocityreport/
 
