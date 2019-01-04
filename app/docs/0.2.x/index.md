@@ -5,7 +5,7 @@ title: Documentation for Qordoba strings manager
 <div class="docs-grid">
   <div class="docs-grid-block">
     <h3><img src="/assets/images/icons/documentation/icn-window.svg" /><a href="/docs/{{page.qordoba_version}}/how-to-guides">How-to Guides</a></h3>
-    <p>Learn how the Qordoba platform empowers your Content</p>
+    <p>Learn how the Qordoba platform empowers Your Content</p>
     <a href="/docs/{{page.qordoba_version}}/how-to-guides">Read more &rarr;</a>
   </div>
 
